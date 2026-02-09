@@ -908,7 +908,8 @@ This will install all required dependencies including:
 
 **Expected output:**
 ```
-added 1500+ packages in 2m
+added ~1250 packages in 2-3m
+(Actual package count and time may vary)
 ```
 
 #### Step 3: Start Development Server
