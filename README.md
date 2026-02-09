@@ -2,6 +2,8 @@
 
 **Enterprise-Grade AI-Powered Security Analysis Platform**
 
+> **🚀 New to Code Guardian?** Check out our [Quick Start Guide](QUICKSTART.md) to get running in under 2 minutes!
+
 [![CI/CD Pipeline](https://github.com/Xenonesis/code-guardian-report/workflows/Code%20Guardian%20Enterprise%20CI%2FCD%20Pipeline/badge.svg)](https://github.com/Xenonesis/code-guardian-report/actions)
 [![Security Audit](https://github.com/Xenonesis/code-guardian-report/workflows/Security%20Audit/badge.svg)](https://github.com/Xenonesis/code-guardian-report/actions)
 [![CodeQL](https://github.com/Xenonesis/code-guardian-report/workflows/CodeQL/badge.svg)](https://github.com/Xenonesis/code-guardian-report/security/code-scanning)
@@ -825,6 +827,28 @@ code-guardian-report/
 
 ## Getting Started
 
+### 🚀 Quick Start (3 Steps)
+
+**Want to try Code Guardian immediately?** Follow these three simple steps:
+
+```bash
+# 1. Clone the repository
+git clone https://github.com/Xenonesis/code-guardian-report.git
+cd code-guardian-report
+
+# 2. Install dependencies
+npm install
+
+# 3. Start the development server
+npm run dev
+```
+
+**That's it!** 🎉 Open http://localhost:3000 in your browser.
+
+> **Note:** The application works out-of-the-box with **NO environment configuration required**. All features work locally with mock services for development. See [Optional Configuration](#optional-configuration) below to enable advanced features like GitHub integration, AI analysis, and Firebase sync.
+
+---
+
 ### Prerequisites
 
 Before you begin, ensure you have the following installed on your system:
@@ -840,15 +864,6 @@ Before you begin, ensure you have the following installed on your system:
   - Download from: https://git-scm.com/
   - Verify installation: `git --version`
 
-#### Optional Software
-
-- **Docker**: For containerized deployment
-  - Download from: https://www.docker.com/
-- **Firebase CLI**: For Firebase deployment
-  - Install: `npm install -g firebase-tools`
-- **Vercel CLI**: For Vercel deployment
-  - Install: `npm install -g vercel`
-
 #### System Requirements
 
 - **Operating System**: Windows 10+, macOS 10.15+, or Linux
@@ -856,9 +871,11 @@ Before you begin, ensure you have the following installed on your system:
 - **Disk Space**: Minimum 500MB free space
 - **Browser**: Chrome 90+, Firefox 88+, Safari 14+, or Edge 90+
 
+---
+
 ### Installation
 
-#### 1. Clone the Repository
+#### Step 1: Clone the Repository
 
 ```bash
 # Clone via HTTPS
@@ -871,13 +888,13 @@ git clone git@github.com:Xenonesis/code-guardian-report.git
 cd code-guardian-report
 ```
 
-#### 2. Install Dependencies
+#### Step 2: Install Dependencies
 
 ```bash
 # Install all dependencies
 npm install
 
-# Or use clean install for reproducible builds
+# Or use clean install for reproducible builds (recommended for CI/CD)
 npm ci
 ```
 
@@ -889,105 +906,191 @@ This will install all required dependencies including:
 - Analysis libraries (Babel, parsers)
 - Development tools (ESLint, Prettier, testing frameworks)
 
-#### 3. Environment Configuration
-
-Create a `.env.local` file in the root directory:
-
-```bash
-# Copy the example environment file
-cp .env.example .env.local
+**Expected output:**
+```
+added 1500+ packages in 2m
 ```
 
-Edit `.env.local` with your configuration:
-
-```env
-# Application
-NEXT_PUBLIC_APP_URL=http://localhost:3000
-NODE_ENV=development
-
-# GitHub OAuth (Optional - for GitHub integration)
-NEXT_PUBLIC_GITHUB_CLIENT_ID=your_github_client_id
-GITHUB_CLIENT_SECRET=your_github_client_secret
-NEXT_PUBLIC_GITHUB_REDIRECT_URI=http://localhost:3000/api/auth/github/callback
-
-# Firebase (Optional - for cloud features)
-NEXT_PUBLIC_FIREBASE_API_KEY=your_firebase_api_key
-NEXT_PUBLIC_FIREBASE_AUTH_DOMAIN=your_project_id.firebaseapp.com
-NEXT_PUBLIC_FIREBASE_PROJECT_ID=your_project_id
-NEXT_PUBLIC_FIREBASE_STORAGE_BUCKET=your_project_id.appspot.com
-NEXT_PUBLIC_FIREBASE_MESSAGING_SENDER_ID=your_messaging_sender_id
-NEXT_PUBLIC_FIREBASE_APP_ID=your_app_id
-NEXT_PUBLIC_FIREBASE_MEASUREMENT_ID=your_measurement_id
-
-# AI Configuration (Optional - for AI features)
-OPENAI_API_KEY=your_openai_api_key
-ANTHROPIC_API_KEY=your_anthropic_api_key
-GOOGLE_AI_API_KEY=your_google_ai_api_key
-
-# Analytics (Optional)
-NEXT_PUBLIC_GA_MEASUREMENT_ID=your_ga_id
-NEXT_PUBLIC_VERCEL_ANALYTICS_ID=your_vercel_analytics_id
-
-# Feature Flags
-NEXT_PUBLIC_ENABLE_AI=true
-NEXT_PUBLIC_ENABLE_FIREBASE=false
-NEXT_PUBLIC_ENABLE_PWA=true
-NEXT_PUBLIC_ENABLE_ANALYTICS=true
-```
-
-#### 4. Configure Firebase (Optional)
-
-If you want to use Firebase features:
-
-1. Create a Firebase project at https://console.firebase.google.com/
-2. Enable Authentication with GitHub provider
-3. Enable Firestore Database
-4. Enable Storage
-5. Copy configuration to `.env.local`
-
-```bash
-# Initialize Firebase in your project
-firebase init
-
-# Select the following features:
-# - Firestore
-# - Functions
-# - Hosting
-# - Storage
-```
-
-#### 5. Configure GitHub OAuth (Optional)
-
-To enable GitHub repository analysis:
-
-1. Go to GitHub Settings > Developer settings > OAuth Apps
-2. Click "New OAuth App"
-3. Fill in the application details:
-   - Application name: Code Guardian (or your preferred name)
-   - Homepage URL: http://localhost:3000
-   - Authorization callback URL: http://localhost:3000/api/auth/github/callback
-4. Copy Client ID and Client Secret to `.env.local`
-
-### Development
-
-#### Start Development Server
+#### Step 3: Start Development Server
 
 ```bash
 # Start the development server
 npm run dev
+```
 
-# Or use Turbopack for faster development (experimental)
+**Expected output:**
+```
+▲ Next.js 16.1.5
+- Local:        http://localhost:3000
+- Ready in 3.2s
+```
+
+🎉 **Success!** The application is now running at http://localhost:3000
+
+You can now:
+- Upload code files for analysis (drag & drop or file picker)
+- Analyze entire ZIP archives
+- View detailed security reports
+- Export results as PDF or JSON
+
+---
+
+### Optional Configuration
+
+The application works perfectly without any environment variables for local development. However, you can enable advanced features by configuring the following:
+
+#### 🔧 Environment Variables (All Optional)
+
+All environment variables are optional. The app uses intelligent fallbacks and mock services in development mode.
+
+##### Option 1: Start with Minimal Config
+
+Create a `.env.local` file (optional, but useful for customization):
+
+```bash
+# Copy the example file
+cp .env.example .env.local
+```
+
+##### Option 2: Use Default Behavior
+
+Simply run `npm run dev` without any `.env.local` file. The app will:
+- Use mock Firebase services (no cloud features needed)
+- Run all code analysis locally in your browser
+- Work completely offline as a Progressive Web App
+
+#### 🌐 GitHub Integration (Optional)
+
+**When to configure:** If you want to analyze GitHub repositories directly without cloning them.
+
+**Steps:**
+1. Go to GitHub Settings → Developer settings → OAuth Apps
+2. Click "New OAuth App"
+3. Configure:
+   - **Application name:** Code Guardian Local Dev
+   - **Homepage URL:** `http://localhost:3000`
+   - **Authorization callback URL:** `http://localhost:3000/api/auth/github/callback`
+4. Copy the Client ID and Client Secret
+5. Add to `.env.local`:
+
+```env
+NEXT_PUBLIC_GITHUB_CLIENT_ID=your_github_client_id_here
+GITHUB_CLIENT_SECRET=your_github_client_secret_here
+NEXT_PUBLIC_GITHUB_REDIRECT_URI=http://localhost:3000/api/auth/github/callback
+```
+
+#### 🤖 AI-Powered Features (Optional)
+
+**When to configure:** If you want AI-generated fix suggestions and natural language explanations.
+
+**Choose one or more AI providers:**
+
+```env
+# OpenAI (GPT-4, GPT-3.5)
+OPENAI_API_KEY=sk-...your_key_here
+
+# Anthropic Claude (Claude 3 Opus, Sonnet)
+ANTHROPIC_API_KEY=sk-ant-...your_key_here
+
+# Google Gemini (Gemini Pro)
+GEMINI_API_KEY=AI...your_key_here
+```
+
+**Get API keys:**
+- OpenAI: https://platform.openai.com/api-keys
+- Anthropic: https://console.anthropic.com/
+- Google Gemini: https://makersuite.google.com/app/apikey
+
+#### ☁️ Firebase Configuration (Optional)
+
+**When to configure:** If you want cloud storage, authentication, and cross-device sync.
+
+**Steps:**
+1. Create a Firebase project at https://console.firebase.google.com/
+2. Go to Project Settings → General → Your apps
+3. Click "Add app" → Web (</>) icon
+4. Copy the configuration values
+5. Add to `.env.local`:
+
+```env
+NEXT_PUBLIC_FIREBASE_API_KEY=AIza...your_key_here
+NEXT_PUBLIC_FIREBASE_AUTH_DOMAIN=your-project.firebaseapp.com
+NEXT_PUBLIC_FIREBASE_PROJECT_ID=your-project-id
+NEXT_PUBLIC_FIREBASE_STORAGE_BUCKET=your-project.appspot.com
+NEXT_PUBLIC_FIREBASE_MESSAGING_SENDER_ID=123456789
+NEXT_PUBLIC_FIREBASE_APP_ID=1:123456789:web:abc123
+```
+
+**Enable Firebase services (optional):**
+```bash
+# Install Firebase CLI
+npm install -g firebase-tools
+
+# Login and initialize
+firebase login
+firebase init
+
+# Select features you want:
+# ☑ Firestore (cloud database)
+# ☑ Storage (file storage)
+# ☑ Hosting (deployment)
+```
+
+#### 📊 Analytics (Optional)
+
+**When to configure:** If you want to track usage analytics.
+
+```env
+# Google Analytics
+NEXT_PUBLIC_GA_MEASUREMENT_ID=G-XXXXXXXXXX
+
+# Vercel Analytics (automatically enabled on Vercel deployments)
+NEXT_PUBLIC_ANALYTICS_ENABLED=true
+```
+
+#### Complete `.env.local` Example
+
+See the included `.env.example` file for a comprehensive list of all 140+ configurable options with detailed comments. Copy and customize as needed:
+
+```bash
+cp .env.example .env.local
+# Edit .env.local with your preferred text editor
+```
+
+---
+
+### Development
+
+#### Running the Development Server
+
+```bash
+# Standard development server (recommended)
+npm run dev
+
+# Faster development with Turbopack (experimental)
 npm run dev:turbo
 ```
 
-The application will be available at: http://localhost:3000
+**Access the application:**
+- **Local:** http://localhost:3000
+- **Network:** Will be displayed in terminal (e.g., http://192.168.1.100:3000)
 
 #### Development Features
 
 - **Hot Module Replacement (HMR)**: Instant updates without page reload
 - **Fast Refresh**: Preserves component state during edits
-- **TypeScript Type Checking**: Real-time type error detection
-- **ESLint Integration**: Code quality warnings in the terminal
+- **TypeScript Type Checking**: Real-time type error detection in terminal
+- **ESLint Integration**: Code quality warnings and errors
+- **Error Overlay**: Detailed error messages in browser
+- **Source Maps**: Debug original TypeScript code in browser DevTools
+
+#### Development Workflow
+
+1. **Make changes** to any file in `src/`, `app/`, or `components/`
+2. **Save the file** - changes appear instantly in browser
+3. **Check terminal** for any TypeScript or linting errors
+4. **Test in browser** - use DevTools for debugging
+5. **Run tests** with `npm run test:watch` in a separate terminal
 
 #### Available Scripts
 
@@ -1088,6 +1191,166 @@ npm run start
 # Or with custom port
 PORT=3001 npm run start
 ```
+
+---
+
+### Troubleshooting
+
+#### Common Setup Issues
+
+##### 1. `npm install` fails with permission errors
+
+**Problem:** Permission denied when installing packages
+
+**Solution:**
+```bash
+# On Linux/Mac - DO NOT use sudo with npm
+# Instead, fix npm permissions:
+mkdir ~/.npm-global
+npm config set prefix '~/.npm-global'
+export PATH=~/.npm-global/bin:$PATH
+
+# Add to your shell profile (~/.bashrc or ~/.zshrc):
+echo 'export PATH=~/.npm-global/bin:$PATH' >> ~/.bashrc
+source ~/.bashrc
+
+# On Windows - Run terminal as Administrator or check folder permissions
+```
+
+##### 2. Port 3000 already in use
+
+**Problem:** `Error: listen EADDRINUSE: address already in use :::3000`
+
+**Solution:**
+```bash
+# Option 1: Kill process using port 3000
+# On Mac/Linux:
+lsof -ti:3000 | xargs kill -9
+
+# On Windows:
+netstat -ano | findstr :3000
+taskkill /PID <PID> /F
+
+# Option 2: Use a different port
+PORT=3001 npm run dev
+```
+
+##### 3. Module not found errors after `git pull`
+
+**Problem:** `Module not found: Can't resolve 'package-name'`
+
+**Solution:**
+```bash
+# Clean install dependencies
+rm -rf node_modules package-lock.json
+npm install
+```
+
+##### 4. TypeScript errors during development
+
+**Problem:** Type errors in terminal or IDE
+
+**Solution:**
+```bash
+# Run type check to see all errors
+npm run type-check
+
+# Restart TypeScript server in VS Code
+# Press: Cmd/Ctrl + Shift + P
+# Type: "TypeScript: Restart TS Server"
+```
+
+##### 5. App shows blank page or crashes on load
+
+**Problem:** White screen or error boundary in browser
+
+**Solution:**
+```bash
+# 1. Check browser console for errors (F12)
+# 2. Clear Next.js cache
+npm run clean
+
+# 3. Rebuild
+npm run dev
+
+# 4. Check if you have the correct Node.js version
+node --version  # Should be 22.x
+
+# 5. Try in a different browser
+```
+
+##### 6. Firebase/GitHub features not working
+
+**Problem:** Firebase or GitHub integration shows errors
+
+**Solution:**
+```bash
+# For Firebase - Check if all variables are set in .env.local
+# The app works without Firebase - it uses mock services in development
+
+# For GitHub - Verify OAuth credentials
+# Check that callback URL matches: http://localhost:3000/api/auth/github/callback
+
+# Both features are OPTIONAL - the core app works without them
+```
+
+##### 7. Build fails with "out of memory" error
+
+**Problem:** `FATAL ERROR: Reached heap limit Allocation failed`
+
+**Solution:**
+```bash
+# Increase Node.js memory limit
+export NODE_OPTIONS="--max-old-space-size=4096"
+npm run build
+
+# Or add to package.json scripts:
+# "build": "NODE_OPTIONS='--max-old-space-size=4096' next build"
+```
+
+##### 8. ESLint or Prettier conflicts
+
+**Problem:** Formatting or linting errors
+
+**Solution:**
+```bash
+# Auto-fix most issues
+npm run lint:fix
+npm run format
+
+# If conflicts persist, check IDE settings
+# VS Code: Ensure ESLint and Prettier extensions are installed
+```
+
+#### Getting Help
+
+If you encounter issues not covered here:
+
+1. **Check existing issues:** https://github.com/Xenonesis/code-guardian-report/issues
+2. **Search discussions:** https://github.com/Xenonesis/code-guardian-report/discussions
+3. **Open a new issue:** Use our issue templates with:
+   - Your Node.js version (`node --version`)
+   - Your npm version (`npm --version`)
+   - Operating system
+   - Complete error message
+   - Steps to reproduce
+4. **Read the docs:** Check the [complete documentation](#table-of-contents)
+
+#### Verification Checklist
+
+Use this checklist to verify your setup is working correctly:
+
+- [ ] Node.js 22.x is installed (`node --version`)
+- [ ] npm 9+ is installed (`npm --version`)
+- [ ] Dependencies installed successfully (`npm install` completed without errors)
+- [ ] Development server starts (`npm run dev` shows "Ready")
+- [ ] App loads at http://localhost:3000 (home page displays)
+- [ ] Can upload a file for analysis (drag & drop or file picker works)
+- [ ] Analysis completes and shows results
+- [ ] No errors in browser console (F12)
+- [ ] No errors in terminal where `npm run dev` is running
+
+✅ **All checked?** You're ready to start using Code Guardian!
 
 ---
 
