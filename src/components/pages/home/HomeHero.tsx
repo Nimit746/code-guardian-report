@@ -41,7 +41,7 @@ export const HomeHero: React.FC<HomeHeroProps> = ({ onStartAnalysis }) => {
           <Button
             onClick={onStartAnalysis}
             size="lg"
-            className="w-full rounded-md bg-primary px-8 py-3 text-base font-medium text-primary-foreground transition-opacity hover:opacity-90 sm:w-auto"
+            className="btn-ultra-primary w-full shadow-lg shadow-primary/20 sm:w-auto"
           >
             Start Analysis
             <ArrowRight className="ml-2 h-4 w-4" />
@@ -50,7 +50,7 @@ export const HomeHero: React.FC<HomeHeroProps> = ({ onStartAnalysis }) => {
           <Button
             variant="outline"
             size="lg"
-            className="w-full rounded-md border-border px-8 py-3 text-base font-medium transition-colors hover:bg-muted sm:w-auto"
+            className="btn-ultra-glass w-full border-border/50 bg-background/50 hover:bg-background/80 sm:w-auto"
           >
             Live Demo
           </Button>

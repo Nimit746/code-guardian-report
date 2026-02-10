@@ -115,17 +115,17 @@ export const Navigation: React.FC<NavigationProps> = ({
   const navContent = (
     <nav
       className={cn(
-        "transition-all duration-200",
+        "transition-all duration-300",
         isScrolled
-          ? "border-b border-border bg-background/95 backdrop-blur-sm"
-          : "border-b border-transparent bg-background"
+          ? "border-b border-border/50 bg-background/80 backdrop-blur-md supports-[backdrop-filter]:bg-background/60"
+          : "border-b border-transparent bg-background/0"
       )}
       style={{
         position: "fixed",
         top: 0,
         left: 0,
         right: 0,
-        zIndex: 10000,
+        zIndex: 50,
         width: "100%",
         paddingTop: "env(safe-area-inset-top)",
       }}
@@ -299,14 +299,16 @@ export const Navigation: React.FC<NavigationProps> = ({
         {/* Mobile Menu */}
         <div
           className={cn(
-            "fixed inset-x-0 bg-background transition-all duration-200 md:hidden",
+            "fixed inset-x-0 bg-background/90 backdrop-blur-xl transition-all duration-300 md:hidden",
             isMobileMenuOpen
               ? "pointer-events-auto translate-y-0 opacity-100"
               : "pointer-events-none -translate-y-2 opacity-0"
           )}
           style={{
-            top: "calc(56px + env(safe-area-inset-top))",
-            height: "calc(100vh - 56px - env(safe-area-inset-top))",
+            top: "0",
+            paddingTop: "calc(56px + env(safe-area-inset-top))",
+            height: "100vh",
+            zIndex: 40, 
           }}
         >
           <div className="h-full overflow-y-auto border-t border-border px-4 py-4">

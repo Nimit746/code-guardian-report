@@ -107,7 +107,7 @@ export const StorageStatus: React.FC<StorageStatusProps> = ({
   };
 
   return (
-    <Card className="bg-card/95 w-full border-0 shadow-lg backdrop-blur-sm">
+    <Card className="glass-card-ultra w-full border-0">
       <CardHeader className="pb-4">
         <CardTitle className="flex items-center gap-2 text-lg">
           <Database className="h-5 w-5 text-primary" />
