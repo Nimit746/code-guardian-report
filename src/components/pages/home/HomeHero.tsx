@@ -13,14 +13,14 @@ export const HomeHero: React.FC<HomeHeroProps> = ({ onStartAnalysis }) => {
       title=""
       description=""
       variant="gradient"
-      className="relative flex items-center justify-center px-4 sm:px-6"
+      className="section-glow relative flex items-center justify-center px-4 sm:px-6"
     >
       <div className="relative z-10 mx-auto max-w-3xl space-y-8 text-center sm:space-y-10">
         {/* Tagline */}
         <div className="animate-fade-in space-y-5">
-          <div className="inline-flex items-center gap-2 rounded-full border border-border bg-card px-4 py-1.5">
-            <Shield className="h-3.5 w-3.5 text-primary" />
-            <span className="text-xs font-medium tracking-wide text-muted-foreground uppercase">
+          <div className="border-primary/20 bg-card shadow-primary/5 inline-flex items-center gap-2 rounded-full border px-4 py-1.5 shadow-sm">
+            <Shield className="text-primary h-3.5 w-3.5" />
+            <span className="text-muted-foreground text-xs font-medium tracking-wide uppercase">
               Security Analysis Platform
             </span>
           </div>
@@ -30,7 +30,7 @@ export const HomeHero: React.FC<HomeHeroProps> = ({ onStartAnalysis }) => {
             <span className="text-primary">before it ships</span>
           </h1>
 
-          <p className="mx-auto max-w-xl text-base leading-relaxed text-muted-foreground sm:text-lg">
+          <p className="text-muted-foreground mx-auto max-w-xl text-base leading-relaxed sm:text-lg">
             Enterprise-grade static analysis powered by AI. Detects
             vulnerabilities, bugs, and quality issues in real-time.
           </p>
@@ -41,7 +41,7 @@ export const HomeHero: React.FC<HomeHeroProps> = ({ onStartAnalysis }) => {
           <Button
             onClick={onStartAnalysis}
             size="lg"
-            className="btn-ultra-primary w-full shadow-lg shadow-primary/20 sm:w-auto"
+            className="btn-ultra-primary shadow-primary/25 hover:shadow-primary/35 w-full shadow-lg sm:w-auto"
           >
             Start Analysis
             <ArrowRight className="ml-2 h-4 w-4" />
@@ -50,17 +50,26 @@ export const HomeHero: React.FC<HomeHeroProps> = ({ onStartAnalysis }) => {
           <Button
             variant="outline"
             size="lg"
-            className="btn-ultra-glass w-full border-border/50 bg-background/50 hover:bg-background/80 sm:w-auto"
+            className="border-border bg-background text-foreground hover:bg-muted w-full sm:w-auto"
           >
             Live Demo
           </Button>
         </div>
 
         {/* Social proof — minimal */}
-        <p className="animate-fade-in-delay-2 text-sm text-muted-foreground">
+        <p className="animate-fade-in-delay-2 text-muted-foreground text-sm">
           Trusted by 10,000+ developers worldwide
         </p>
       </div>
+
+      {/* Gradient divider */}
+      <div
+        className="absolute right-0 bottom-0 left-0 h-px"
+        style={{
+          background:
+            "linear-gradient(90deg, transparent, hsl(var(--glow) / 0.15), transparent)",
+        }}
+      />
     </HeroSection>
   );
 };

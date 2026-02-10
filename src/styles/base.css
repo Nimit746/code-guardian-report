@@ -21,6 +21,8 @@
     --input: 0 0% 90%;
     --ring: 160 84% 39%;
     --radius: 0.5rem;
+    --glow: 160 84% 39%;
+    --card-hover: 0 0% 99%;
     --chart-1: 160 84% 39%;
     --chart-2: 160 60% 50%;
     --chart-3: 0 0% 55%;
@@ -32,7 +34,7 @@
     /* Refined Editorial — Dark Mode */
     --background: 0 0% 4%;
     --foreground: 0 0% 98%;
-    --card: 0 0% 7%;
+    --card: 0 0% 6%;
     --card-foreground: 0 0% 98%;
     --popover: 0 0% 7%;
     --popover-foreground: 0 0% 98%;
@@ -46,9 +48,11 @@
     --accent-foreground: 0 0% 98%;
     --destructive: 0 62% 50%;
     --destructive-foreground: 0 0% 98%;
-    --border: 0 0% 16%;
-    --input: 0 0% 16%;
+    --border: 0 0% 14%;
+    --input: 0 0% 14%;
     --ring: 160 84% 39%;
+    --glow: 160 84% 45%;
+    --card-hover: 0 0% 8%;
     --chart-1: 160 84% 39%;
     --chart-2: 160 60% 50%;
     --chart-3: 0 0% 55%;
@@ -67,6 +71,8 @@
     color: hsl(var(--foreground));
     -webkit-font-smoothing: antialiased;
     -moz-osx-font-smoothing: grayscale;
-    font-feature-settings: "rlig" 1, "calt" 1;
+    font-feature-settings:
+      "rlig" 1,
+      "calt" 1;
   }
 }

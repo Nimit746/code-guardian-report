@@ -45,21 +45,24 @@
 
   .prose strong {
     @apply font-semibold;
+
     color: hsl(var(--foreground));
   }
 
   .prose a {
     @apply underline;
+
     color: hsl(var(--primary));
   }
 
   .prose a:hover {
-    color: hsl(var(--primary) / 0.8);
+    color: hsl(var(--primary) / 80%);
   }
 
   /* Enhanced Card Styles */
   .enhanced-card {
     @apply rounded-xl p-6 shadow-sm transition-all duration-200 hover:shadow-md;
+
     border: 1px solid hsl(var(--border));
     background-color: hsl(var(--card));
   }
@@ -80,16 +83,18 @@
   /* Enhanced Button Styles */
   .btn-primary {
     @apply rounded-lg px-6 py-3 font-medium shadow-sm transition-all duration-200;
+
     background-color: hsl(var(--primary));
     color: hsl(var(--primary-foreground));
   }
 
   .btn-primary:hover {
-    background-color: hsl(var(--primary) / 0.9);
+    background-color: hsl(var(--primary) / 90%);
   }
 
   .btn-secondary {
     @apply rounded-lg px-6 py-3 font-medium shadow-sm transition-all duration-200;
+
     border: 1px solid hsl(var(--border));
     background-color: hsl(var(--card));
     color: hsl(var(--foreground));
@@ -106,17 +111,20 @@
 
   .feature-card {
     @apply relative rounded-xl p-6 shadow-sm transition-all duration-200 hover:shadow-md sm:p-8;
+
     border: 1px solid hsl(var(--border));
     background-color: hsl(var(--card));
   }
 
   .feature-card:hover {
     @apply -translate-y-0.5;
-    border-color: hsl(var(--primary) / 0.3);
+
+    border-color: hsl(var(--primary) / 30%);
   }
 
   .feature-icon {
     @apply mb-4 h-12 w-12 transition-transform duration-200 sm:mb-6 sm:h-16 sm:w-16;
+
     color: hsl(var(--primary));
   }
 
@@ -131,17 +139,20 @@
 
   .stat-card {
     @apply rounded-xl p-4 text-center shadow-sm transition-all duration-200 hover:shadow-md sm:p-6;
+
     border: 1px solid hsl(var(--border));
     background-color: hsl(var(--card));
   }
 
   .stat-number {
     @apply mb-2 text-2xl font-bold sm:text-3xl lg:text-4xl;
+
     color: hsl(var(--primary));
   }
 
   .stat-label {
     @apply text-sm font-medium sm:text-base;
+
     color: hsl(var(--muted-foreground));
   }
 
@@ -152,11 +163,13 @@
 
   .hero-subtitle {
     @apply text-lg leading-relaxed sm:text-xl lg:text-2xl;
+
     color: hsl(var(--muted-foreground));
   }
 
   .hero-description {
     @apply max-w-3xl text-base leading-relaxed sm:text-lg;
+
     color: hsl(var(--muted-foreground));
   }
 
@@ -189,6 +202,7 @@
     opacity: 0;
     transform: translateY(12px);
   }
+
   to {
     opacity: 1;
     transform: translateY(0);
@@ -200,6 +214,7 @@
     opacity: 0;
     transform: translateY(24px);
   }
+
   to {
     opacity: 1;
     transform: translateY(0);
@@ -211,6 +226,7 @@
     opacity: 0;
     transform: scale(0.95);
   }
+
   to {
     opacity: 1;
     transform: scale(1);
@@ -219,12 +235,24 @@
 
 /* Responsive Enhancements */
 @media (width <= 768px) {
-  .feature-grid { @apply grid-cols-1; }
-  .stats-grid { @apply grid-cols-2 gap-3; }
-  .hero-title { @apply text-3xl sm:text-4xl; }
-  .hero-subtitle { @apply text-lg; }
-  .feature-card { @apply p-4 sm:p-6; }
-  .stat-card { @apply p-3 sm:p-4; }
+  .feature-grid {
+    @apply grid-cols-1;
+  }
+  .stats-grid {
+    @apply grid-cols-2 gap-3;
+  }
+  .hero-title {
+    @apply text-3xl sm:text-4xl;
+  }
+  .hero-subtitle {
+    @apply text-lg;
+  }
+  .feature-card {
+    @apply p-4 sm:p-6;
+  }
+  .stat-card {
+    @apply p-3 sm:p-4;
+  }
 }
 
 /* Accessibility Enhancements */
@@ -250,7 +278,7 @@
 .btn-primary:focus,
 .btn-secondary:focus {
   outline: none;
-  box-shadow: 0 0 0 2px hsl(var(--primary) / 0.5);
+  box-shadow: 0 0 0 2px hsl(var(--primary) / 50%);
 }
 
 /* High Contrast Mode Support */

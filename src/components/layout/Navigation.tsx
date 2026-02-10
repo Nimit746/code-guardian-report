@@ -117,8 +117,8 @@ export const Navigation: React.FC<NavigationProps> = ({
       className={cn(
         "transition-all duration-300",
         isScrolled
-          ? "border-b border-border/50 bg-background/80 backdrop-blur-md supports-[backdrop-filter]:bg-background/60"
-          : "border-b border-transparent bg-background/0"
+          ? "border-border/40 bg-background/75 supports-[backdrop-filter]:bg-background/60 border-b shadow-[0_1px_0_0_hsl(var(--glow)/0.08)] backdrop-blur-xl"
+          : "bg-background/0 border-b border-transparent"
       )}
       style={{
         position: "fixed",
@@ -137,7 +137,7 @@ export const Navigation: React.FC<NavigationProps> = ({
             onClick={() => handleNavigate("home")}
             className="flex items-center gap-2 transition-opacity hover:opacity-80"
           >
-            <Shield className="h-5 w-5 text-primary" />
+            <Shield className="text-primary h-5 w-5" />
             <span className="font-display text-lg">Code Guardian</span>
           </button>
 
@@ -157,7 +157,7 @@ export const Navigation: React.FC<NavigationProps> = ({
                 >
                   <span>{item.label}</span>
                   {item.badge && (
-                    <span className="rounded bg-primary/10 px-1.5 py-0.5 text-[10px] font-semibold text-primary uppercase">
+                    <span className="bg-primary/10 text-primary rounded px-1.5 py-0.5 text-[10px] font-semibold uppercase">
                       {item.badge}
                     </span>
                   )}
@@ -192,7 +192,7 @@ export const Navigation: React.FC<NavigationProps> = ({
               <div className="relative hidden md:block" ref={userDropdownRef}>
                 <button
                   onClick={() => setShowUserDropdown(!showUserDropdown)}
-                  className="flex items-center gap-2 rounded-md px-2.5 py-1.5 text-sm transition-colors hover:bg-muted"
+                  className="hover:bg-muted flex items-center gap-2 rounded-md px-2.5 py-1.5 text-sm transition-colors"
                 >
                   {getGithubAvatarUrl() ? (
                     <img
@@ -209,7 +209,7 @@ export const Navigation: React.FC<NavigationProps> = ({
                   </span>
                   <ChevronDown
                     className={cn(
-                      "hidden h-3.5 w-3.5 text-muted-foreground transition-transform duration-150 lg:block",
+                      "text-muted-foreground hidden h-3.5 w-3.5 transition-transform duration-150 lg:block",
                       showUserDropdown && "rotate-180"
                     )}
                   />
@@ -217,14 +217,14 @@ export const Navigation: React.FC<NavigationProps> = ({
 
                 {/* Dropdown */}
                 {showUserDropdown && (
-                  <div className="absolute right-0 z-50 mt-1 w-52 rounded-md border border-border bg-card py-1 shadow-lg">
-                    <div className="border-b border-border px-3 py-2.5">
+                  <div className="border-border bg-card absolute right-0 z-50 mt-1 w-52 rounded-md border py-1 shadow-lg">
+                    <div className="border-border border-b px-3 py-2.5">
                       <p className="truncate text-sm font-medium">
                         {userProfile?.displayName ||
                           userProfile?.githubUsername ||
                           "User"}
                       </p>
-                      <p className="truncate text-xs text-muted-foreground">
+                      <p className="text-muted-foreground truncate text-xs">
                         {user?.email}
                       </p>
                     </div>
@@ -233,18 +233,18 @@ export const Navigation: React.FC<NavigationProps> = ({
                         handleNavigate("history");
                         setShowUserDropdown(false);
                       }}
-                      className="flex w-full items-center gap-2.5 px-3 py-2 text-sm text-foreground transition-colors hover:bg-muted"
+                      className="text-foreground hover:bg-muted flex w-full items-center gap-2.5 px-3 py-2 text-sm transition-colors"
                     >
                       <History className="h-4 w-4" />
                       Scan History
                     </button>
-                    <div className="border-t border-border">
+                    <div className="border-border border-t">
                       <button
                         onClick={() => {
                           logout();
                           setShowUserDropdown(false);
                         }}
-                        className="flex w-full items-center gap-2.5 px-3 py-2 text-sm text-destructive transition-colors hover:bg-destructive/10"
+                        className="text-destructive hover:bg-destructive/10 flex w-full items-center gap-2.5 px-3 py-2 text-sm transition-colors"
                       >
                         <LogOut className="h-4 w-4" />
                         Sign Out
@@ -259,14 +259,14 @@ export const Navigation: React.FC<NavigationProps> = ({
                   variant="ghost"
                   size="sm"
                   onClick={() => setShowAuthModal(true)}
-                  className="rounded-md px-3 py-1.5 text-sm font-medium text-muted-foreground hover:text-foreground"
+                  className="text-muted-foreground hover:text-foreground rounded-md px-3 py-1.5 text-sm font-medium"
                 >
                   Sign In
                 </Button>
                 <Button
                   size="sm"
                   onClick={() => setShowAuthModal(true)}
-                  className="rounded-md bg-primary px-4 py-1.5 text-sm font-medium text-primary-foreground hover:bg-primary/90"
+                  className="bg-primary text-primary-foreground hover:bg-primary/90 rounded-md px-4 py-1.5 text-sm font-medium"
                 >
                   Get Started
                 </Button>
@@ -275,16 +275,16 @@ export const Navigation: React.FC<NavigationProps> = ({
 
             <ThemeToggle />
 
-            <NotificationCenter className="h-8 w-8 rounded-md text-muted-foreground transition-colors hover:bg-muted hover:text-foreground sm:h-9 sm:w-9" />
+            <NotificationCenter className="text-muted-foreground hover:bg-muted hover:text-foreground h-8 w-8 rounded-md transition-colors sm:h-9 sm:w-9" />
 
-            <PWAQuickActions className="hidden h-8 w-8 rounded-md text-muted-foreground transition-colors hover:bg-muted hover:text-foreground sm:flex sm:h-9 sm:w-9" />
+            <PWAQuickActions className="text-muted-foreground hover:bg-muted hover:text-foreground hidden h-8 w-8 rounded-md transition-colors sm:flex sm:h-9 sm:w-9" />
 
             {/* Mobile Toggle */}
             <Button
               variant="ghost"
               size="sm"
               onClick={() => setIsMobileMenuOpen(!isMobileMenuOpen)}
-              className="flex h-8 w-8 items-center justify-center rounded-md p-0 text-muted-foreground hover:text-foreground sm:h-9 sm:w-9 lg:hidden"
+              className="text-muted-foreground hover:text-foreground flex h-8 w-8 items-center justify-center rounded-md p-0 sm:h-9 sm:w-9 lg:hidden"
               aria-label="Toggle mobile menu"
             >
               {isMobileMenuOpen ? (
@@ -299,7 +299,7 @@ export const Navigation: React.FC<NavigationProps> = ({
         {/* Mobile Menu */}
         <div
           className={cn(
-            "fixed inset-x-0 bg-background/90 backdrop-blur-xl transition-all duration-300 md:hidden",
+            "bg-background/90 fixed inset-x-0 backdrop-blur-xl transition-all duration-300 md:hidden",
             isMobileMenuOpen
               ? "pointer-events-auto translate-y-0 opacity-100"
               : "pointer-events-none -translate-y-2 opacity-0"
@@ -308,10 +308,10 @@ export const Navigation: React.FC<NavigationProps> = ({
             top: "0",
             paddingTop: "calc(56px + env(safe-area-inset-top))",
             height: "100vh",
-            zIndex: 40, 
+            zIndex: 40,
           }}
         >
-          <div className="h-full overflow-y-auto border-t border-border px-4 py-4">
+          <div className="border-border h-full overflow-y-auto border-t px-4 py-4">
             {/* Nav Items */}
             <div className="space-y-0.5">
               {navItems.map((item) => (
@@ -328,7 +328,7 @@ export const Navigation: React.FC<NavigationProps> = ({
                   {item.icon}
                   <span>{item.label}</span>
                   {item.badge && (
-                    <span className="rounded bg-primary/10 px-1.5 py-0.5 text-[10px] font-semibold text-primary uppercase">
+                    <span className="bg-primary/10 text-primary rounded px-1.5 py-0.5 text-[10px] font-semibold uppercase">
                       {item.badge}
                     </span>
                   )}
@@ -337,7 +337,7 @@ export const Navigation: React.FC<NavigationProps> = ({
             </div>
 
             {/* Mobile Auth */}
-            <div className="mt-6 border-t border-border pt-4">
+            <div className="border-border mt-6 border-t pt-4">
               {user ? (
                 <div className="space-y-1">
                   <div className="flex items-center gap-3 rounded-md px-3 py-2.5">
@@ -354,7 +354,7 @@ export const Navigation: React.FC<NavigationProps> = ({
                           userProfile?.githubUsername ||
                           "User"}
                       </p>
-                      <p className="truncate text-xs text-muted-foreground">
+                      <p className="text-muted-foreground truncate text-xs">
                         {user?.email}
                       </p>
                     </div>
@@ -364,7 +364,7 @@ export const Navigation: React.FC<NavigationProps> = ({
                       logout();
                       setIsMobileMenuOpen(false);
                     }}
-                    className="flex w-full items-center gap-3 rounded-md px-3 py-2.5 text-sm font-medium text-destructive transition-colors hover:bg-destructive/10"
+                    className="text-destructive hover:bg-destructive/10 flex w-full items-center gap-3 rounded-md px-3 py-2.5 text-sm font-medium transition-colors"
                   >
                     <LogOut className="h-4 w-4" />
                     Sign Out
@@ -377,7 +377,7 @@ export const Navigation: React.FC<NavigationProps> = ({
                       setShowAuthModal(true);
                       setIsMobileMenuOpen(false);
                     }}
-                    className="flex w-full items-center gap-3 rounded-md px-3 py-2.5 text-sm font-medium text-muted-foreground transition-colors hover:bg-muted hover:text-foreground"
+                    className="text-muted-foreground hover:bg-muted hover:text-foreground flex w-full items-center gap-3 rounded-md px-3 py-2.5 text-sm font-medium transition-colors"
                   >
                     <User className="h-4 w-4" />
                     Sign In
@@ -387,7 +387,7 @@ export const Navigation: React.FC<NavigationProps> = ({
                       setShowAuthModal(true);
                       setIsMobileMenuOpen(false);
                     }}
-                    className="flex w-full items-center gap-3 rounded-md bg-primary px-3 py-2.5 text-sm font-medium text-primary-foreground transition-opacity hover:opacity-90"
+                    className="bg-primary text-primary-foreground flex w-full items-center gap-3 rounded-md px-3 py-2.5 text-sm font-medium transition-opacity hover:opacity-90"
                   >
                     <Shield className="h-4 w-4" />
                     Get Started
@@ -397,8 +397,8 @@ export const Navigation: React.FC<NavigationProps> = ({
             </div>
 
             {/* Mobile footer */}
-            <div className="mt-6 border-t border-border pt-4 text-center">
-              <p className="text-xs text-muted-foreground">
+            <div className="border-border mt-6 border-t pt-4 text-center">
+              <p className="text-muted-foreground text-xs">
                 © {new Date().getFullYear()} Code Guardian
               </p>
             </div>
