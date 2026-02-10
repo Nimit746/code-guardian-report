@@ -44,7 +44,7 @@ export const GitHubNavigationTabs: React.FC<GitHubNavigationTabsProps> = ({
   ];
 
   return (
-    <div className="scrollbar-hide mt-12 flex items-center gap-1 overflow-x-auto border-b border-slate-200 pb-0 dark:border-slate-800">
+    <div className="scrollbar-hide mt-12 flex items-center gap-1 overflow-x-auto border-b border-border pb-0">
       <div className="flex gap-2">
         {tabs.map((tab) => (
           <button
@@ -53,16 +53,16 @@ export const GitHubNavigationTabs: React.FC<GitHubNavigationTabsProps> = ({
             className={cn(
               "group relative flex items-center gap-2 rounded-t-lg border-b-2 px-4 py-3 text-sm font-medium whitespace-nowrap transition-all",
               selectedTab === tab.id
-                ? "border-blue-500 bg-slate-50/50 text-blue-600 dark:border-blue-400 dark:bg-slate-800/30 dark:text-blue-400"
-                : "border-transparent text-slate-500 hover:border-slate-300 hover:bg-slate-50 hover:text-slate-700 dark:text-slate-400 dark:hover:border-slate-700 dark:hover:bg-slate-800/50 dark:hover:text-slate-300"
+                ? "border-primary bg-muted/50 text-primary dark:border-blue-400/30 dark:text-primary"
+                : "border-transparent text-muted-foreground hover:border-border hover:bg-muted hover:text-foreground/80 dark:hover:border-border/50 dark:hover:text-muted-foreground"
             )}
           >
             <tab.icon
               className={cn(
                 "h-4 w-4 transition-colors",
                 selectedTab === tab.id
-                  ? "text-blue-600 dark:text-blue-400"
-                  : "text-slate-400 group-hover:text-slate-500 dark:text-slate-500 dark:group-hover:text-slate-400"
+                  ? "text-primary dark:text-primary"
+                  : "text-muted-foreground group-hover:text-muted-foreground dark:group-hover:text-muted-foreground"
               )}
             />
             {tab.label}
@@ -71,14 +71,14 @@ export const GitHubNavigationTabs: React.FC<GitHubNavigationTabsProps> = ({
 
         {analysisResults && (
           <>
-            <div className="mx-2 my-auto h-6 w-px bg-slate-200 dark:bg-slate-700" />
+            <div className="mx-2 my-auto h-6 w-px bg-muted dark:bg-slate-700" />
             <button
               onClick={() => setSelectedTab("results")}
               className={cn(
                 "group relative flex items-center gap-2 rounded-t-lg border-b-2 px-4 py-3 text-sm font-medium whitespace-nowrap transition-all",
                 selectedTab === "results"
                   ? "border-emerald-500 bg-emerald-50/50 text-emerald-600 dark:border-emerald-400 dark:bg-emerald-900/10 dark:text-emerald-400"
-                  : "border-transparent text-slate-500 hover:border-emerald-300 hover:bg-emerald-50/30 hover:text-emerald-700 dark:text-slate-400 dark:hover:border-emerald-700 dark:hover:bg-emerald-900/10 dark:hover:text-emerald-300"
+                  : "border-transparent text-muted-foreground hover:border-emerald-300 hover:bg-emerald-50/30 hover:text-emerald-700 dark:hover:border-emerald-700 dark:hover:bg-emerald-900/10 dark:hover:text-emerald-300"
               )}
             >
               <FileCode
@@ -86,7 +86,7 @@ export const GitHubNavigationTabs: React.FC<GitHubNavigationTabsProps> = ({
                   "h-4 w-4 transition-colors",
                   selectedTab === "results"
                     ? "text-emerald-600 dark:text-emerald-400"
-                    : "text-slate-400 group-hover:text-emerald-500"
+                    : "text-muted-foreground group-hover:text-emerald-500"
                 )}
               />
               Results
@@ -95,7 +95,7 @@ export const GitHubNavigationTabs: React.FC<GitHubNavigationTabsProps> = ({
                   "ml-1 rounded px-1.5 py-0.5 text-[10px] font-bold",
                   selectedTab === "results"
                     ? "bg-emerald-100 text-emerald-700 dark:bg-emerald-900/50 dark:text-emerald-300"
-                    : "bg-slate-100 text-slate-600 group-hover:bg-emerald-100 group-hover:text-emerald-700 dark:bg-slate-800 dark:text-slate-400 dark:group-hover:text-emerald-300"
+                    : "bg-muted text-muted-foreground group-hover:bg-emerald-100 group-hover:text-emerald-700 dark:group-hover:text-emerald-300"
                 )}
               >
                 {analysisResults.issues.length}

@@ -4,39 +4,24 @@
 @layer components {
   /* Professional Navigation Styles */
   .professional-nav {
-    @apply border-b shadow-sm backdrop-blur-xl;
+    background-color: hsl(var(--background));
+    border-bottom: 1px solid hsl(var(--border));
   }
 
   .professional-nav-item {
-    @apply relative rounded-lg px-4 py-2.5 text-sm font-medium transition-all duration-300;
+    @apply relative rounded-lg px-4 py-2.5 text-sm font-medium transition-all duration-200;
   }
 
   .professional-nav-item:hover {
-    @apply bg-slate-100 dark:bg-slate-800;
+    background-color: hsl(var(--muted));
   }
 
   .professional-nav-item.active {
-    @apply bg-slate-900 text-white shadow-lg dark:bg-slate-700;
-  }
-
-  /* Professional Color Palette - Dark Mode (Always Active) */
-  :root {
-    --color-primary: #1e293b;
-    --color-primary-hover: #334155;
-    --color-secondary: #475569;
-    --color-accent: #3b82f6;
-    --color-success: #10b981;
-    --color-warning: #f59e0b;
-    --color-error: #ef4444;
-    --color-surface: #0f172a;
-    --color-border: #334155;
+    background-color: hsl(var(--primary));
+    color: hsl(var(--primary-foreground));
   }
 
   /* Legal Page Enhancements */
-  .prose {
-    @apply max-w-none;
-  }
-
   .prose h2 {
     @apply mt-8 mb-6 text-2xl font-bold first:mt-0 sm:text-3xl;
   }
@@ -59,38 +44,59 @@
   }
 
   .prose strong {
-    @apply font-semibold text-slate-900 dark:text-slate-100;
+    @apply font-semibold;
+    color: hsl(var(--foreground));
   }
 
   .prose a {
-    @apply text-blue-600 underline hover:text-blue-800 dark:text-blue-400 dark:hover:text-blue-300;
+    @apply underline;
+    color: hsl(var(--primary));
+  }
+
+  .prose a:hover {
+    color: hsl(var(--primary) / 0.8);
   }
 
   /* Enhanced Card Styles */
   .enhanced-card {
-    @apply rounded-xl border border-slate-200/50 bg-white/80 shadow-lg backdrop-blur-sm transition-all duration-300 hover:shadow-xl dark:border-slate-700/50 dark:bg-slate-900/80;
+    @apply rounded-xl p-6 shadow-sm transition-all duration-200 hover:shadow-md;
+    border: 1px solid hsl(var(--border));
+    background-color: hsl(var(--card));
   }
 
   .enhanced-card:hover {
-    @apply -translate-y-1 transform shadow-2xl;
+    @apply -translate-y-0.5 shadow-md;
   }
 
-  /* Gradient Text Effects */
+  /* Gradient Text Effects — flattened to solid */
   .gradient-text {
-    @apply bg-gradient-to-r from-blue-600 via-purple-600 to-indigo-600 bg-clip-text text-transparent;
+    color: hsl(var(--foreground));
   }
 
   .gradient-text-secondary {
-    @apply bg-gradient-to-r from-slate-600 via-slate-700 to-slate-800 bg-clip-text text-transparent dark:from-slate-300 dark:via-slate-200 dark:to-slate-100;
+    color: hsl(var(--muted-foreground));
   }
 
   /* Enhanced Button Styles */
   .btn-primary {
-    @apply transform rounded-lg bg-gradient-to-r from-blue-600 to-indigo-600 px-6 py-3 font-medium text-white shadow-lg transition-all duration-300 hover:-translate-y-0.5 hover:from-blue-700 hover:to-indigo-700 hover:shadow-xl;
+    @apply rounded-lg px-6 py-3 font-medium shadow-sm transition-all duration-200;
+    background-color: hsl(var(--primary));
+    color: hsl(var(--primary-foreground));
+  }
+
+  .btn-primary:hover {
+    background-color: hsl(var(--primary) / 0.9);
   }
 
   .btn-secondary {
-    @apply transform rounded-lg border border-slate-300 bg-white px-6 py-3 font-medium text-slate-900 shadow-md transition-all duration-300 hover:-translate-y-0.5 hover:shadow-lg dark:border-slate-600 dark:bg-slate-800 dark:text-slate-100;
+    @apply rounded-lg px-6 py-3 font-medium shadow-sm transition-all duration-200;
+    border: 1px solid hsl(var(--border));
+    background-color: hsl(var(--card));
+    color: hsl(var(--foreground));
+  }
+
+  .btn-secondary:hover {
+    background-color: hsl(var(--muted));
   }
 
   /* Feature Grid Enhancements */
@@ -99,19 +105,23 @@
   }
 
   .feature-card {
-    @apply relative rounded-2xl border border-slate-200/50 bg-white/90 p-6 shadow-lg backdrop-blur-sm transition-all duration-500 hover:shadow-2xl sm:p-8 dark:border-slate-700/50 dark:bg-slate-900/90;
+    @apply relative rounded-xl p-6 shadow-sm transition-all duration-200 hover:shadow-md sm:p-8;
+    border: 1px solid hsl(var(--border));
+    background-color: hsl(var(--card));
   }
 
   .feature-card:hover {
-    @apply -translate-y-2 transform border-blue-300/50 dark:border-blue-600/50;
+    @apply -translate-y-0.5;
+    border-color: hsl(var(--primary) / 0.3);
   }
 
   .feature-icon {
-    @apply mb-4 h-12 w-12 text-blue-600 transition-transform duration-300 sm:mb-6 sm:h-16 sm:w-16 dark:text-blue-400;
+    @apply mb-4 h-12 w-12 transition-transform duration-200 sm:mb-6 sm:h-16 sm:w-16;
+    color: hsl(var(--primary));
   }
 
   .feature-card:hover .feature-icon {
-    @apply scale-110;
+    @apply scale-105;
   }
 
   /* Stats Grid */
@@ -120,15 +130,19 @@
   }
 
   .stat-card {
-    @apply rounded-xl border border-slate-200/50 bg-white/80 p-4 text-center shadow-md backdrop-blur-sm transition-all duration-300 hover:shadow-lg sm:p-6 dark:border-slate-700/50 dark:bg-slate-900/80;
+    @apply rounded-xl p-4 text-center shadow-sm transition-all duration-200 hover:shadow-md sm:p-6;
+    border: 1px solid hsl(var(--border));
+    background-color: hsl(var(--card));
   }
 
   .stat-number {
-    @apply mb-2 text-2xl font-bold text-blue-600 sm:text-3xl lg:text-4xl dark:text-blue-400;
+    @apply mb-2 text-2xl font-bold sm:text-3xl lg:text-4xl;
+    color: hsl(var(--primary));
   }
 
   .stat-label {
-    @apply text-sm font-medium text-slate-600 sm:text-base dark:text-slate-400;
+    @apply text-sm font-medium sm:text-base;
+    color: hsl(var(--muted-foreground));
   }
 
   /* Hero Section Enhancements */
@@ -137,40 +151,35 @@
   }
 
   .hero-subtitle {
-    @apply text-lg leading-relaxed text-slate-600 sm:text-xl lg:text-2xl dark:text-slate-300;
+    @apply text-lg leading-relaxed sm:text-xl lg:text-2xl;
+    color: hsl(var(--muted-foreground));
   }
 
   .hero-description {
-    @apply max-w-3xl text-base leading-relaxed text-slate-500 sm:text-lg dark:text-slate-400;
+    @apply max-w-3xl text-base leading-relaxed sm:text-lg;
+    color: hsl(var(--muted-foreground));
   }
 
   /* Animation Classes */
   .animate-fade-in {
-    animation: fadeIn 0.6s ease-out;
+    animation: fadeIn 0.5s ease-out;
   }
 
   .animate-slide-up {
-    animation: slideUp 0.8s ease-out;
+    animation: slideUp 0.6s ease-out;
   }
 
   .animate-scale-in {
-    animation: scaleIn 0.5s ease-out;
+    animation: scaleIn 0.4s ease-out;
   }
 
-  /* Background Effects */
+  /* Background Effects — stripped to clean */
   .bg-gradient-radial {
-    background: radial-gradient(
-      circle at center,
-      rgb(59 130 246 / 10%) 0%,
-      transparent 70%
-    );
+    background: transparent;
   }
 
   .bg-mesh-pattern {
-    background-image:
-      linear-gradient(rgb(59 130 246 / 3%) 1px, transparent 1px),
-      linear-gradient(90deg, rgb(59 130 246 / 3%) 1px, transparent 1px);
-    background-size: 20px 20px;
+    background: transparent;
   }
 }
 
@@ -178,9 +187,8 @@
 @keyframes fadeIn {
   from {
     opacity: 0;
-    transform: translateY(20px);
+    transform: translateY(12px);
   }
-
   to {
     opacity: 1;
     transform: translateY(0);
@@ -190,9 +198,8 @@
 @keyframes slideUp {
   from {
     opacity: 0;
-    transform: translateY(40px);
+    transform: translateY(24px);
   }
-
   to {
     opacity: 1;
     transform: translateY(0);
@@ -202,9 +209,8 @@
 @keyframes scaleIn {
   from {
     opacity: 0;
-    transform: scale(0.9);
+    transform: scale(0.95);
   }
-
   to {
     opacity: 1;
     transform: scale(1);
@@ -213,44 +219,12 @@
 
 /* Responsive Enhancements */
 @media (width <= 768px) {
-  .feature-grid {
-    @apply grid-cols-1;
-  }
-
-  .stats-grid {
-    @apply grid-cols-2 gap-3;
-  }
-
-  .hero-title {
-    @apply text-3xl sm:text-4xl;
-  }
-
-  .hero-subtitle {
-    @apply text-lg;
-  }
-
-  .feature-card {
-    @apply p-4 sm:p-6;
-  }
-
-  .stat-card {
-    @apply p-3 sm:p-4;
-  }
-}
-
-/* Dark Mode Specific Enhancements */
-@media (prefers-color-scheme: dark) {
-  .enhanced-card {
-    @apply border-slate-700/50 bg-slate-900/90;
-  }
-
-  .feature-card {
-    @apply border-slate-700/50 bg-slate-900/90;
-  }
-
-  .stat-card {
-    @apply border-slate-700/50 bg-slate-900/90;
-  }
+  .feature-grid { @apply grid-cols-1; }
+  .stats-grid { @apply grid-cols-2 gap-3; }
+  .hero-title { @apply text-3xl sm:text-4xl; }
+  .hero-subtitle { @apply text-lg; }
+  .feature-card { @apply p-4 sm:p-6; }
+  .stat-card { @apply p-3 sm:p-4; }
 }
 
 /* Accessibility Enhancements */
@@ -275,7 +249,8 @@
 /* Focus Styles for Accessibility */
 .btn-primary:focus,
 .btn-secondary:focus {
-  @apply ring-4 ring-blue-500/50 outline-none;
+  outline: none;
+  box-shadow: 0 0 0 2px hsl(var(--primary) / 0.5);
 }
 
 /* High Contrast Mode Support */
@@ -283,11 +258,12 @@
   .enhanced-card,
   .feature-card,
   .stat-card {
-    @apply border-2 border-slate-900 dark:border-slate-100;
+    border-width: 2px;
+    border-color: hsl(var(--foreground));
   }
 
   .gradient-text,
   .gradient-text-secondary {
-    @apply bg-none text-slate-900 dark:text-slate-100;
+    color: hsl(var(--foreground));
   }
 }

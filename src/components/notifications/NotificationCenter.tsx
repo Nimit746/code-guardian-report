@@ -122,7 +122,7 @@ const NotificationCenter: React.FC<NotificationCenterProps> = ({
         return "text-orange-600 bg-orange-50 dark:bg-orange-950";
       case "info":
       default:
-        return "text-blue-600 bg-blue-50 dark:bg-blue-950";
+        return "text-primary bg-muted dark:bg-blue-950";
     }
   };
 
@@ -130,8 +130,8 @@ const NotificationCenter: React.FC<NotificationCenterProps> = ({
     const colors = {
       urgent: "bg-red-500",
       high: "bg-orange-500",
-      normal: "bg-blue-500",
-      low: "bg-gray-500",
+      normal: "bg-muted0",
+      low: "bg-muted-foreground",
     };
 
     if (priority === "normal") return null; // Don't show badge for normal priority
@@ -232,7 +232,7 @@ const NotificationCenter: React.FC<NotificationCenterProps> = ({
                 <div className="text-muted-foreground text-xs">Total</div>
               </div>
               <div className="bg-muted rounded-lg p-2 text-center">
-                <div className="text-2xl font-bold text-blue-600">
+                <div className="text-2xl font-bold text-primary">
                   {stats.byType.info}
                 </div>
                 <div className="text-muted-foreground text-xs">Info</div>

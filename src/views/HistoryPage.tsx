@@ -400,24 +400,24 @@ export const HistoryPage = ({
   }
 
   return (
-    <div className="relative min-h-screen overflow-hidden bg-slate-50 dark:bg-slate-950">
+    <div className="relative min-h-screen overflow-hidden bg-muted">
       {}
 
       <div className="relative z-10 container mx-auto space-y-8 py-12">
         {}
         <div className="mb-8">
-          <div className="rounded-lg border border-slate-200 bg-white p-6 shadow-sm dark:border-slate-800 dark:bg-slate-900">
+          <div className="rounded-lg border border-border bg-card p-6 shadow-sm">
             <div className="flex flex-col gap-6 lg:flex-row lg:items-center lg:justify-between">
               <div className="space-y-3">
                 <div className="flex items-center gap-4">
-                  <div className="rounded-md bg-blue-600 p-3 text-white shadow-sm">
+                  <div className="rounded-md bg-primary p-3 text-white shadow-sm">
                     <History className="h-6 w-6" />
                   </div>
                   <div>
-                    <h1 className="text-3xl font-bold tracking-tight text-slate-900 dark:text-white">
+                    <h1 className="text-3xl font-bold tracking-tight text-foreground dark:text-white">
                       Analysis History
                     </h1>
-                    <p className="mt-1 text-base text-slate-500 dark:text-slate-400">
+                    <p className="mt-1 text-base text-muted-foreground">
                       Your personal security analysis results & statistics
                     </p>
                   </div>
@@ -429,14 +429,14 @@ export const HistoryPage = ({
                   <Button
                     variant="outline"
                     onClick={onNavigateBack}
-                    className="border-slate-200 text-slate-700 hover:bg-slate-50 dark:border-slate-700 dark:text-slate-300 dark:hover:bg-slate-800"
+                    className="border-border text-foreground/80 hover:bg-muted"
                   >
                     Back to Home
                   </Button>
                 )}
                 <Button
                   onClick={exportAnalysisHistory}
-                  className="bg-blue-600 text-white shadow-sm hover:bg-blue-700"
+                  className="bg-primary text-white shadow-sm hover:bg-primary/90"
                 >
                   <Download className="mr-2 h-4 w-4" />
                   Export History
@@ -479,17 +479,17 @@ export const HistoryPage = ({
             ].map((stat, index) => (
               <div
                 key={index}
-                className="rounded-lg border border-slate-200 bg-white p-6 shadow-sm dark:border-slate-800 dark:bg-slate-900"
+                className="rounded-lg border border-border bg-card p-6 shadow-sm"
               >
                 <div className="flex items-center gap-4">
-                  <div className="rounded-md bg-slate-100 p-2.5 text-slate-600 dark:bg-slate-800 dark:text-slate-400">
+                  <div className="rounded-md bg-muted p-2.5 text-muted-foreground">
                     <stat.icon className="h-5 w-5" />
                   </div>
                   <div>
-                    <p className="text-sm font-medium text-slate-500 dark:text-slate-400">
+                    <p className="text-sm font-medium text-muted-foreground">
                       {stat.label}
                     </p>
-                    <p className="text-2xl font-bold text-slate-900 dark:text-white">
+                    <p className="text-2xl font-bold text-foreground dark:text-white">
                       {stat.value}
                     </p>
                   </div>
@@ -500,11 +500,11 @@ export const HistoryPage = ({
         )}
 
         {}
-        <div className="rounded-lg border border-slate-200 bg-white p-6 shadow-sm dark:border-slate-800 dark:bg-slate-900">
+        <div className="rounded-lg border border-border bg-card p-6 shadow-sm">
           <div className="mb-5 flex items-center justify-between gap-3">
             <div className="flex items-center gap-3">
-              <Filter className="h-5 w-5 text-slate-500" />
-              <span className="font-semibold text-slate-900 dark:text-white">
+              <Filter className="h-5 w-5 text-muted-foreground" />
+              <span className="font-semibold text-foreground dark:text-white">
                 Filters & Search
               </span>
             </div>
@@ -519,7 +519,7 @@ export const HistoryPage = ({
                   setSelectedTimeRange("all");
                   setSelectedSeverity("all");
                 }}
-                className="h-8 rounded-lg text-slate-400 hover:bg-white/5 hover:text-white"
+                className="h-8 rounded-lg text-muted-foreground hover:bg-white/5 hover:text-white"
               >
                 <X className="mr-2 h-3 w-3" />
                 Clear Filters
@@ -528,7 +528,7 @@ export const HistoryPage = ({
           </div>
           <div className="grid grid-cols-1 gap-4 sm:grid-cols-2 lg:grid-cols-12">
             <div className="relative lg:col-span-4">
-              <Search className="absolute top-1/2 left-3 h-4 w-4 -translate-y-1/2 text-slate-500" />
+              <Search className="absolute top-1/2 left-3 h-4 w-4 -translate-y-1/2 text-muted-foreground" />
               <Input
                 placeholder="Search by filename, tags, or issue..."
                 value={searchTerm}
@@ -583,7 +583,7 @@ export const HistoryPage = ({
             <div className="lg:col-span-2">
               <Button
                 onClick={loadAnalysisHistory}
-                className="h-10 w-full bg-blue-600 text-white hover:bg-blue-700"
+                className="h-10 w-full bg-primary text-white hover:bg-primary/90"
               >
                 <Filter className="mr-2 h-4 w-4" />
                 Refresh
@@ -593,20 +593,20 @@ export const HistoryPage = ({
         </div>
 
         {}
-        <div className="rounded-lg border border-slate-200 bg-white shadow-sm dark:border-slate-800 dark:bg-slate-900">
+        <div className="rounded-lg border border-border bg-card shadow-sm">
           {}
-          <div className="border-b border-slate-200 px-6 py-4 dark:border-slate-800">
+          <div className="border-b border-border px-6 py-4">
             <div className="flex items-center justify-between">
               <div>
-                <h2 className="flex items-center gap-3 text-xl font-bold text-slate-900 dark:text-white">
-                  <div className="h-6 w-1.5 rounded-full bg-blue-600" />
+                <h2 className="flex items-center gap-3 text-xl font-bold text-foreground dark:text-white">
+                  <div className="h-6 w-1.5 rounded-full bg-primary" />
                   Your Analysis Results
-                  <span className="ml-2 rounded-full bg-slate-100 px-2.5 py-0.5 text-sm font-medium text-slate-600 dark:bg-slate-800 dark:text-slate-400">
+                  <span className="ml-2 rounded-full bg-muted px-2.5 py-0.5 text-sm font-medium text-muted-foreground">
                     {filteredHistory.length}
                   </span>
                 </h2>
                 {filteredHistory.length !== analysisHistory.length && (
-                  <p className="mt-1 text-sm text-slate-500">
+                  <p className="mt-1 text-sm text-muted-foreground">
                     Showing {filteredHistory.length} of {analysisHistory.length}{" "}
                     analyses
                   </p>
@@ -629,7 +629,7 @@ export const HistoryPage = ({
                     }}
                   />
                 </div>
-                <span className="mt-4 text-slate-400">
+                <span className="mt-4 text-muted-foreground">
                   Loading your analysis history...
                 </span>
               </div>
@@ -638,7 +638,7 @@ export const HistoryPage = ({
                 <div className="relative inline-block">
                   <div className="absolute inset-0 rounded-full bg-gradient-to-br from-violet-500/20 to-fuchsia-500/20 blur-2xl" />
                   <div className="relative rounded-full border border-white/10 bg-white/5 p-6">
-                    <History className="h-16 w-16 text-slate-600" />
+                    <History className="h-16 w-16 text-muted-foreground" />
                   </div>
                 </div>
                 <h3 className="mt-6 mb-2 text-xl font-semibold text-white">
@@ -646,7 +646,7 @@ export const HistoryPage = ({
                     ? "No Analysis History Yet"
                     : "No Results Found"}
                 </h3>
-                <p className="mx-auto max-w-md text-slate-500">
+                <p className="mx-auto max-w-md text-muted-foreground">
                   {analysisHistory.length === 0
                     ? "Start analyzing your code to see results here. Your analysis history will appear once you upload and scan some code."
                     : "Try adjusting your search filters to find what you're looking for."}
@@ -657,14 +657,14 @@ export const HistoryPage = ({
                 {filteredHistory.map((analysis) => (
                   <div
                     key={analysis.id}
-                    className="group cursor-pointer border-b border-slate-200 p-6 last:border-0 hover:bg-slate-50 dark:border-slate-800 dark:hover:bg-slate-800/50"
+                    className="group cursor-pointer border-b border-border p-6 last:border-0 hover:bg-muted/50"
                     onClick={(e) => handleViewAnalysis(analysis, e)}
                   >
                     <div className="flex flex-col gap-5 lg:flex-row lg:items-center lg:justify-between">
                       <div className="flex-1 space-y-4">
                         {}
                         <div className="flex flex-wrap items-center gap-3">
-                          <h3 className="text-lg font-bold text-slate-900 dark:text-white">
+                          <h3 className="text-lg font-bold text-foreground dark:text-white">
                             {analysis.fileName}
                           </h3>
                           <span
@@ -681,7 +681,7 @@ export const HistoryPage = ({
                               {analysis.tags.map((tag, idx) => (
                                 <span
                                   key={idx}
-                                  className="rounded-md bg-slate-100 px-2 py-0.5 text-xs text-slate-600 dark:bg-slate-800 dark:text-slate-400"
+                                  className="rounded-md bg-muted px-2 py-0.5 text-xs text-muted-foreground"
                                 >
                                   {tag}
                                 </span>
@@ -712,9 +712,9 @@ export const HistoryPage = ({
                           ].map((item, idx) => (
                             <div
                               key={idx}
-                              className="flex items-center gap-2 text-sm text-slate-500 dark:text-slate-400"
+                              className="flex items-center gap-2 text-sm text-muted-foreground"
                             >
-                              <item.icon className="h-4 w-4 text-slate-400" />
+                              <item.icon className="h-4 w-4 text-muted-foreground" />
                               <span>{item.value}</span>
                             </div>
                           ))}
@@ -763,7 +763,7 @@ export const HistoryPage = ({
                       <div className="flex items-center gap-2 lg:flex-col lg:gap-2">
                         <Button
                           onClick={(e) => handleViewAnalysis(analysis, e)}
-                          className="w-full bg-blue-600 text-white hover:bg-blue-700"
+                          className="w-full bg-primary text-white hover:bg-primary/90"
                           size="sm"
                         >
                           <Eye className="mr-1.5 h-4 w-4" />
@@ -772,7 +772,7 @@ export const HistoryPage = ({
                         <Button
                           onClick={(e) => confirmDelete(analysis.id, e)}
                           variant="outline"
-                          className="w-full border-slate-200 text-slate-700 hover:bg-red-50 hover:text-red-600 dark:border-slate-700 dark:text-slate-300 dark:hover:bg-red-900/20 dark:hover:text-red-400"
+                          className="w-full border-border text-foreground/80 hover:bg-red-50 hover:text-red-600 dark:hover:bg-red-900/20 dark:hover:text-red-400"
                           size="sm"
                         >
                           <Trash2 className="h-4 w-4" />

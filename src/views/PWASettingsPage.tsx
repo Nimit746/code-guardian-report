@@ -10,7 +10,7 @@ export function PWASettingsPage() {
   const { navigateTo } = useNavigation();
 
   return (
-    <div className="relative min-h-screen overflow-hidden bg-white dark:bg-slate-950">
+    <div className="relative min-h-screen overflow-hidden bg-background">
       <AnimatedBackground />
       <PageLayout>
         <div className="relative z-10 container mx-auto px-4 py-8">

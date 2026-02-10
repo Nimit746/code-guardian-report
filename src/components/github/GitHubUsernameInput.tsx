@@ -75,11 +75,11 @@ const GitHubUsernameInput: React.FC<GitHubUsernameInputProps> = ({
 
   return (
     <div className="fixed inset-0 z-50 flex items-center justify-center bg-black/70 backdrop-blur-sm">
-      <div className="relative mx-4 w-full max-w-md rounded-xl border border-gray-700 bg-gradient-to-br from-[#1e1e2f] to-[#2a2a3d] shadow-2xl">
+      <div className="relative mx-4 w-full max-w-md rounded-xl border border-border bg-gradient-to-br from-[#1e1e2f] to-[#2a2a3d] shadow-2xl">
         {/* Close button */}
         <button
           onClick={onClose}
-          className="absolute top-4 right-4 text-gray-400 transition-colors hover:text-white"
+          className="absolute top-4 right-4 text-muted-foreground transition-colors hover:text-white"
           aria-label="Close"
         >
           <X className="h-5 w-5" />
@@ -100,13 +100,13 @@ const GitHubUsernameInput: React.FC<GitHubUsernameInputProps> = ({
 
           {/* Description */}
           <div className="mb-6 space-y-4">
-            <p className="text-center text-sm text-gray-300">
+            <p className="text-center text-sm text-muted-foreground">
               We couldn't automatically detect a GitHub account for{" "}
               <span className="font-semibold text-white">{email}</span>
             </p>
 
-            <div className="rounded-lg border border-gray-700 bg-[#252538] p-4">
-              <p className="mb-3 text-sm text-gray-300">
+            <div className="rounded-lg border border-border bg-[#252538] p-4">
+              <p className="mb-3 text-sm text-muted-foreground">
                 If you have a GitHub account, enter your username below to
                 access your repositories:
               </p>
@@ -115,7 +115,7 @@ const GitHubUsernameInput: React.FC<GitHubUsernameInputProps> = ({
                 <div>
                   <label
                     htmlFor="github-username"
-                    className="mb-1 block text-xs font-medium text-gray-400"
+                    className="mb-1 block text-xs font-medium text-muted-foreground"
                   >
                     GitHub Username
                   </label>
@@ -126,7 +126,7 @@ const GitHubUsernameInput: React.FC<GitHubUsernameInputProps> = ({
                     onChange={(e) => setUsername(e.target.value)}
                     onKeyPress={handleKeyPress}
                     placeholder="e.g., octocat"
-                    className="w-full rounded-md border border-gray-600 bg-[#2c2c3e] px-3 py-2 text-white focus:ring-2 focus:ring-purple-500 focus:outline-none"
+                    className="w-full rounded-md border border-border bg-[#2c2c3e] px-3 py-2 text-white focus:ring-2 focus:ring-purple-500 focus:outline-none"
                     disabled={verifying}
                   />
                 </div>
@@ -162,13 +162,13 @@ const GitHubUsernameInput: React.FC<GitHubUsernameInputProps> = ({
           {/* Skip button */}
           <button
             onClick={onSkip}
-            className="w-full text-sm text-gray-400 transition-colors hover:text-white"
+            className="w-full text-sm text-muted-foreground transition-colors hover:text-white"
           >
             Skip for now
           </button>
 
           {/* Privacy note */}
-          <p className="mt-4 text-center text-xs text-gray-500">
+          <p className="mt-4 text-center text-xs text-muted-foreground">
             We'll only access your public repositories
           </p>
         </div>

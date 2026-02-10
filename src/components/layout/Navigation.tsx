@@ -15,7 +15,6 @@ import {
   History,
   Github,
   ChevronDown,
-  Sparkles,
 } from "lucide-react";
 import { Button } from "@/components/ui/button";
 import { cn } from "@/lib/utils";
@@ -37,7 +36,6 @@ export const Navigation: React.FC<NavigationProps> = ({
   const [isScrolled, setIsScrolled] = useState(false);
   const [mounted, setMounted] = useState(false);
   const [showAuthModal, setShowAuthModal] = useState(false);
-  const [activeHover, setActiveHover] = useState<string | null>(null);
   const [showUserDropdown, setShowUserDropdown] = useState(false);
   const userDropdownRef = useRef<HTMLDivElement>(null);
 
@@ -60,7 +58,6 @@ export const Navigation: React.FC<NavigationProps> = ({
     );
   };
 
-  // Close dropdown when clicking outside
   useEffect(() => {
     const handleClickOutside = (event: MouseEvent) => {
       if (
@@ -74,88 +71,54 @@ export const Navigation: React.FC<NavigationProps> = ({
     return () => document.removeEventListener("mousedown", handleClickOutside);
   }, []);
 
-  // Mount detection and scroll detection for navbar styling
   useEffect(() => {
     setMounted(true);
     const handleScroll = () => {
       setIsScrolled(window.scrollY > 10);
     };
-
     window.addEventListener("scroll", handleScroll);
     return () => window.removeEventListener("scroll", handleScroll);
   }, []);
 
-  // Navigate to section
   const handleNavigate = (sectionId: string) => {
     navigateTo(sectionId);
     setIsMobileMenuOpen(false);
-
-    // Instant scroll - Lenis handles smooth animation
-    window.scrollTo({
-      top: 0,
-      behavior: "instant",
-    });
+    window.scrollTo({ top: 0, behavior: "instant" });
   };
 
   const navItems = [
-    {
-      id: "home",
-      label: "Home",
-      icon: <Home className="h-4 w-4" />,
-      description: "Back to main page",
-    },
-    {
-      id: "about",
-      label: "About",
-      icon: <Info className="h-4 w-4" />,
-      description: "Learn more about us",
-    },
-    // Show History only for authenticated users
+    { id: "home", label: "Home", icon: <Home className="h-4 w-4" /> },
+    { id: "about", label: "About", icon: <Info className="h-4 w-4" /> },
     ...(user
       ? [
           {
             id: "history",
             label: "History",
             icon: <History className="h-4 w-4" />,
-            description: "View scan history",
           },
         ]
       : []),
-    // Show GitHub Analysis for all users (will prompt non-GitHub users to sign in)
     {
       id: "github-analysis",
       label: "GitHub",
       icon: <Github className="h-4 w-4" />,
-      description: "Analyze repositories",
       badge: "Pro",
     },
-    {
-      id: "privacy",
-      label: "Privacy",
-      icon: <Lock className="h-4 w-4" />,
-      description: "Privacy policy",
-    },
-    {
-      id: "terms",
-      label: "Terms",
-      icon: <Award className="h-4 w-4" />,
-      description: "Terms of service",
-    },
+    { id: "privacy", label: "Privacy", icon: <Lock className="h-4 w-4" /> },
+    { id: "terms", label: "Terms", icon: <Award className="h-4 w-4" /> },
   ];
 
-  const isActive = (sectionId: string) => {
-    return currentSection === sectionId;
-  };
+  const isActive = (sectionId: string) => currentSection === sectionId;
 
   if (!mounted) return null;
 
   const navContent = (
     <nav
       className={cn(
-        "portal-navbar transition-all duration-400 ease-out",
+        "transition-all duration-200",
         isScrolled
-          ? "border-b border-slate-200/60 bg-white/95 shadow-lg shadow-slate-900/5 backdrop-blur-xl dark:border-slate-800/60 dark:bg-slate-950/95 dark:shadow-black/20"
-          : "border-b border-slate-200/40 bg-white/80 backdrop-blur-lg dark:border-slate-800/40 dark:bg-slate-950/80"
+          ? "border-b border-border bg-background/95 backdrop-blur-sm"
+          : "border-b border-transparent bg-background"
       )}
       style={{
         position: "fixed",
@@ -167,75 +130,34 @@ export const Navigation: React.FC<NavigationProps> = ({
         paddingTop: "env(safe-area-inset-top)",
       }}
     >
-      <div className="xs:px-4 mx-auto max-w-7xl px-3 sm:px-6 lg:px-8">
-        <div className="xs:h-15 flex h-14 items-center justify-between sm:h-16 md:h-[64px] lg:h-[68px]">
-          {/* Code Guardian Logo - Enhanced */}
+      <div className="mx-auto max-w-7xl px-4 sm:px-6 lg:px-8">
+        <div className="flex h-14 items-center justify-between sm:h-16">
+          {/* Logo */}
           <button
             onClick={() => handleNavigate("home")}
-            className="xs:gap-2 group flex min-w-0 flex-shrink-0 items-center gap-1.5 transition-all duration-300 hover:scale-[1.02] active:scale-[0.98] sm:gap-3"
+            className="flex items-center gap-2 transition-opacity hover:opacity-80"
           >
-            {/* Shield Icon with Glow Effect */}
-            <div className="relative flex-shrink-0">
-              <div className="absolute inset-0 rounded-xl bg-gradient-to-br from-blue-500 to-violet-600 opacity-30 blur-xl transition-all duration-400 group-hover:opacity-50 group-hover:blur-2xl"></div>
-              <div className="xs:p-2 relative rounded-xl bg-gradient-to-br from-blue-500 via-blue-600 to-violet-600 p-1.5 shadow-lg shadow-blue-500/25 transition-all duration-300 group-hover:shadow-xl group-hover:shadow-blue-500/35 sm:p-2.5">
-                <Shield
-                  className="xs:h-5 xs:w-5 h-4 w-4 text-white drop-shadow-sm sm:h-6 sm:w-6"
-                  strokeWidth={2.5}
-                />
-                <div className="absolute inset-0 rounded-xl bg-gradient-to-br from-white/20 to-transparent"></div>
-              </div>
-            </div>
-
-            {/* Brand Text - Enhanced */}
-            <div className="flex min-w-0 flex-col">
-              <div className="xs:gap-1.5 flex items-center gap-1">
-                <h1 className="xs:text-base truncate bg-gradient-to-r from-slate-900 via-blue-800 to-indigo-900 bg-clip-text text-sm font-bold tracking-tight text-transparent sm:text-lg lg:text-xl dark:from-white dark:via-blue-100 dark:to-indigo-100">
-                  Code Guardian
-                </h1>
-                <Sparkles className="xs:h-3 xs:w-3 h-2.5 w-2.5 flex-shrink-0 text-amber-500 opacity-0 transition-opacity duration-300 group-hover:opacity-100 sm:h-3.5 sm:w-3.5" />
-              </div>
-              <div className="xs:block hidden">
-                <h1 className="bg-gradient-to-r from-slate-900 to-slate-700 bg-clip-text text-base font-extrabold tracking-tight text-transparent transition-all duration-300 group-hover:to-blue-600 sm:text-lg md:text-xl lg:text-2xl dark:from-white dark:to-slate-300 dark:group-hover:to-blue-400">
-                  Code Guardian
-                </h1>
-              </div>
-              <p className="xs:text-[10px] hidden truncate text-[9px] font-medium tracking-wide text-slate-500 sm:block sm:text-xs dark:text-slate-400">
-                Security Analysis Platform
-              </p>
-            </div>
+            <Shield className="h-5 w-5 text-primary" />
+            <span className="font-display text-lg">Code Guardian</span>
           </button>
 
-          {/* Desktop Navigation - Enhanced */}
-          <div className="hidden flex-1 items-center justify-center px-4 lg:flex">
-            <div className="flex items-center gap-0.5 rounded-full border border-slate-200/60 bg-slate-100/80 p-1 shadow-inner shadow-slate-900/5 dark:border-slate-700/40 dark:bg-slate-800/60 dark:shadow-black/20">
+          {/* Desktop Nav */}
+          <div className="hidden flex-1 items-center justify-center lg:flex">
+            <div className="flex items-center gap-1">
               {navItems.map((item) => (
                 <button
                   key={item.id}
                   onClick={() => handleNavigate(item.id)}
-                  onMouseEnter={() => setActiveHover(item.id)}
-                  onMouseLeave={() => setActiveHover(null)}
                   className={cn(
-                    "group relative flex items-center gap-1.5 rounded-full px-3 py-2 text-xs font-medium transition-all duration-300 xl:px-4 xl:text-sm",
+                    "flex items-center gap-1.5 rounded-md px-3 py-1.5 text-sm font-medium transition-colors",
                     isActive(item.id)
-                      ? "bg-gradient-to-r from-blue-600 to-violet-600 text-white shadow-lg shadow-blue-500/30 dark:shadow-blue-500/20"
-                      : "text-slate-600 hover:bg-white/80 hover:text-slate-900 hover:shadow-sm dark:text-slate-400 dark:hover:bg-slate-700/60 dark:hover:text-white"
+                      ? "bg-muted text-foreground"
+                      : "text-muted-foreground hover:text-foreground"
                   )}
                 >
-                  <span
-                    className={cn(
-                      "flex-shrink-0 transition-transform duration-200",
-                      activeHover === item.id &&
-                        !isActive(item.id) &&
-                        "scale-110"
-                    )}
-                  >
-                    {item.icon}
-                  </span>
-                  <span className="whitespace-nowrap">{item.label}</span>
-
-                  {/* Pro Badge */}
+                  <span>{item.label}</span>
                   {item.badge && (
-                    <span className="ml-0.5 flex-shrink-0 rounded-full bg-gradient-to-r from-amber-400 to-orange-500 px-1.5 py-0.5 text-[9px] font-bold tracking-wider text-white uppercase shadow-sm">
+                    <span className="rounded bg-primary/10 px-1.5 py-0.5 text-[10px] font-semibold text-primary uppercase">
                       {item.badge}
                     </span>
                   )}
@@ -244,42 +166,42 @@ export const Navigation: React.FC<NavigationProps> = ({
             </div>
           </div>
 
-          {/* Tablet Navigation (md breakpoint) */}
-          <div className="hidden flex-1 items-center justify-center gap-0.5 px-2 md:flex lg:hidden">
+          {/* Tablet Nav */}
+          <div className="hidden flex-1 items-center justify-center gap-1 md:flex lg:hidden">
             {navItems.slice(0, 3).map((item) => (
               <button
                 key={item.id}
                 onClick={() => handleNavigate(item.id)}
                 className={cn(
-                  "relative flex items-center gap-1 rounded-lg px-2.5 py-1.5 text-xs font-medium transition-all duration-200",
+                  "flex items-center gap-1 rounded-md px-2.5 py-1.5 text-xs font-medium transition-colors",
                   isActive(item.id)
-                    ? "bg-blue-50 text-blue-600 dark:bg-blue-900/30 dark:text-blue-400"
-                    : "text-slate-600 hover:bg-slate-100 hover:text-slate-900 dark:text-slate-300 dark:hover:bg-slate-800 dark:hover:text-white"
+                    ? "bg-muted text-foreground"
+                    : "text-muted-foreground hover:text-foreground"
                 )}
               >
                 <span className="flex-shrink-0">{item.icon}</span>
-                <span className="hidden truncate md:inline">{item.label}</span>
+                <span className="hidden md:inline">{item.label}</span>
               </button>
             ))}
           </div>
 
-          {/* Right side actions - Enhanced */}
-          <div className="xs:gap-1.5 flex flex-shrink-0 items-center gap-1 sm:gap-2 md:gap-3">
-            {/* Authentication Section - Desktop */}
+          {/* Right Actions */}
+          <div className="flex items-center gap-2 sm:gap-3">
+            {/* Auth — Desktop */}
             {user ? (
               <div className="relative hidden md:block" ref={userDropdownRef}>
                 <button
                   onClick={() => setShowUserDropdown(!showUserDropdown)}
-                  className="group flex items-center gap-2 rounded-full bg-slate-100/80 px-3 py-2 transition-all duration-200 hover:bg-slate-200/80 dark:bg-slate-800/50 dark:hover:bg-slate-700/50"
+                  className="flex items-center gap-2 rounded-md px-2.5 py-1.5 text-sm transition-colors hover:bg-muted"
                 >
                   {getGithubAvatarUrl() ? (
                     <img
                       src={getGithubAvatarUrl() as string}
                       alt="Profile"
-                      className="h-7 w-7 rounded-full object-cover shadow-inner"
+                      className="h-6 w-6 rounded-full object-cover"
                     />
                   ) : null}
-                  <span className="hidden max-w-[100px] truncate text-sm font-medium text-slate-700 lg:block dark:text-slate-300">
+                  <span className="hidden max-w-[100px] truncate text-sm font-medium lg:block">
                     {userProfile?.displayName ||
                       userProfile?.githubUsername ||
                       user?.email?.split("@")[0] ||
@@ -287,299 +209,195 @@ export const Navigation: React.FC<NavigationProps> = ({
                   </span>
                   <ChevronDown
                     className={cn(
-                      "hidden h-4 w-4 text-slate-400 transition-transform duration-200 lg:block",
+                      "hidden h-3.5 w-3.5 text-muted-foreground transition-transform duration-150 lg:block",
                       showUserDropdown && "rotate-180"
                     )}
                   />
                 </button>
 
-                {/* User Dropdown */}
+                {/* Dropdown */}
                 {showUserDropdown && (
-                  <div className="animate-in fade-in slide-in-from-top-2 border-border absolute right-0 z-50 mt-2 w-56 rounded-xl border bg-white/95 py-2 shadow-xl backdrop-blur duration-200 supports-[backdrop-filter]:bg-white/80 dark:bg-slate-900/95 dark:supports-[backdrop-filter]:bg-slate-900/80">
-                    <div className="border-b border-slate-100 px-4 py-3 dark:border-slate-800">
-                      <p className="text-foreground truncate text-sm font-semibold">
+                  <div className="absolute right-0 z-50 mt-1 w-52 rounded-md border border-border bg-card py-1 shadow-lg">
+                    <div className="border-b border-border px-3 py-2.5">
+                      <p className="truncate text-sm font-medium">
                         {userProfile?.displayName ||
                           userProfile?.githubUsername ||
                           "User"}
                       </p>
-                      <p className="truncate text-xs text-slate-500 dark:text-slate-400">
+                      <p className="truncate text-xs text-muted-foreground">
                         {user?.email}
                       </p>
                     </div>
-                    <div className="py-1">
-                      <button
-                        onClick={() => {
-                          handleNavigate("history");
-                          setShowUserDropdown(false);
-                        }}
-                        className="flex w-full items-center gap-3 px-4 py-2.5 text-sm text-slate-700 transition-colors hover:bg-slate-50 dark:text-slate-300 dark:hover:bg-slate-800"
-                      >
-                        <History className="h-4 w-4" />
-                        <span>Scan History</span>
-                      </button>
-                    </div>
-                    <div className="border-t border-slate-100 pt-1 dark:border-slate-800">
+                    <button
+                      onClick={() => {
+                        handleNavigate("history");
+                        setShowUserDropdown(false);
+                      }}
+                      className="flex w-full items-center gap-2.5 px-3 py-2 text-sm text-foreground transition-colors hover:bg-muted"
+                    >
+                      <History className="h-4 w-4" />
+                      Scan History
+                    </button>
+                    <div className="border-t border-border">
                       <button
                         onClick={() => {
                           logout();
                           setShowUserDropdown(false);
                         }}
-                        className="flex w-full items-center gap-3 px-4 py-2.5 text-sm text-red-600 transition-colors hover:bg-red-50 dark:text-red-400 dark:hover:bg-red-900/20"
+                        className="flex w-full items-center gap-2.5 px-3 py-2 text-sm text-destructive transition-colors hover:bg-destructive/10"
                       >
                         <LogOut className="h-4 w-4" />
-                        <span>Sign Out</span>
+                        Sign Out
                       </button>
                     </div>
                   </div>
                 )}
               </div>
             ) : (
-              <div className="hidden items-center gap-1.5 md:flex lg:gap-2">
+              <div className="hidden items-center gap-2 md:flex">
                 <Button
                   variant="ghost"
                   size="sm"
                   onClick={() => setShowAuthModal(true)}
-                  className="rounded-full px-3 py-1.5 text-xs font-medium text-slate-600 transition-all duration-200 hover:bg-slate-100 hover:text-slate-900 lg:px-4 lg:py-2 lg:text-sm dark:text-slate-300 dark:hover:bg-slate-800 dark:hover:text-white"
+                  className="rounded-md px-3 py-1.5 text-sm font-medium text-muted-foreground hover:text-foreground"
                 >
                   Sign In
                 </Button>
                 <Button
                   size="sm"
                   onClick={() => setShowAuthModal(true)}
-                  className="text-primary-foreground hover:bg-primary/90 rounded-full px-3.5 py-1.5 text-xs font-semibold shadow-md transition-all duration-300 hover:shadow-lg lg:px-5 lg:py-2 lg:text-sm"
-                  style={{
-                    backgroundColor: "hsl(var(--primary))",
-                    color: "hsl(var(--primary-foreground))",
-                  }}
+                  className="rounded-md bg-primary px-4 py-1.5 text-sm font-medium text-primary-foreground hover:bg-primary/90"
                 >
                   Get Started
                 </Button>
               </div>
             )}
 
-            {/* Theme Toggle */}
             <ThemeToggle />
 
-            {/* Notification Center */}
-            <NotificationCenter className="xs:h-9 xs:w-9 h-8 w-8 rounded-full bg-slate-100/80 transition-all duration-200 hover:bg-slate-200/80 sm:h-10 sm:w-10 dark:bg-slate-800/50 dark:hover:bg-slate-700/50" />
+            <NotificationCenter className="h-8 w-8 rounded-md text-muted-foreground transition-colors hover:bg-muted hover:text-foreground sm:h-9 sm:w-9" />
 
-            {/* PWA Quick Actions */}
-            <PWAQuickActions className="xs:h-9 xs:w-9 hidden h-8 w-8 rounded-full bg-slate-100/80 transition-all duration-200 hover:bg-slate-200/80 sm:flex sm:h-10 sm:w-10 dark:bg-slate-800/50 dark:hover:bg-slate-700/50" />
+            <PWAQuickActions className="hidden h-8 w-8 rounded-md text-muted-foreground transition-colors hover:bg-muted hover:text-foreground sm:flex sm:h-9 sm:w-9" />
 
-            {/* Mobile Menu Toggle - Enhanced */}
+            {/* Mobile Toggle */}
             <Button
               variant="ghost"
               size="sm"
               onClick={() => setIsMobileMenuOpen(!isMobileMenuOpen)}
-              className={cn(
-                "xs:h-9 xs:w-9 flex h-8 w-8 items-center justify-center rounded-full p-0 transition-all duration-300 sm:h-10 sm:w-10 lg:hidden",
-                isMobileMenuOpen
-                  ? "rotate-90 bg-slate-900 text-white shadow-lg dark:bg-white dark:text-slate-900"
-                  : "bg-slate-100/80 text-slate-600 hover:bg-slate-200/80 dark:bg-slate-800/50 dark:text-slate-400 dark:hover:bg-slate-700/50"
-              )}
+              className="flex h-8 w-8 items-center justify-center rounded-md p-0 text-muted-foreground hover:text-foreground sm:h-9 sm:w-9 lg:hidden"
               aria-label="Toggle mobile menu"
             >
               {isMobileMenuOpen ? (
-                <X className="xs:h-5 xs:w-5 h-4 w-4" />
+                <X className="h-5 w-5" />
               ) : (
-                <Menu className="xs:h-5 xs:w-5 h-4 w-4" />
+                <Menu className="h-5 w-5" />
               )}
             </Button>
           </div>
         </div>
 
-        {/* Mobile Menu - Enhanced Full Screen Overlay */}
+        {/* Mobile Menu */}
         <div
           className={cn(
-            "fixed inset-0 bg-white/95 backdrop-blur-3xl transition-all duration-300 ease-out md:hidden dark:bg-slate-950/95",
+            "fixed inset-x-0 bg-background transition-all duration-200 md:hidden",
             isMobileMenuOpen
               ? "pointer-events-auto translate-y-0 opacity-100"
-              : "pointer-events-none -translate-y-4 opacity-0"
+              : "pointer-events-none -translate-y-2 opacity-0"
           )}
           style={{
             top: "calc(56px + env(safe-area-inset-top))",
             height: "calc(100vh - 56px - env(safe-area-inset-top))",
           }}
         >
-          <div className="xs:px-4 xs:py-6 h-full overflow-y-auto px-3 py-4">
-            {/* Navigation Items */}
-            <div className="space-y-1">
-              <p className="xs:text-xs xs:px-4 xs:mb-3 mb-2 px-3 text-[10px] font-semibold tracking-wider text-slate-400 uppercase dark:text-slate-500">
-                Navigation
-              </p>
-              {navItems.map((item, index) => (
+          <div className="h-full overflow-y-auto border-t border-border px-4 py-4">
+            {/* Nav Items */}
+            <div className="space-y-0.5">
+              {navItems.map((item) => (
                 <button
                   key={item.id}
                   onClick={() => handleNavigate(item.id)}
                   className={cn(
-                    "xs:gap-4 xs:px-4 xs:py-4 xs:rounded-2xl group flex w-full items-center gap-3 rounded-xl px-3 py-3 text-left font-medium transition-all duration-300",
+                    "flex w-full items-center gap-3 rounded-md px-3 py-2.5 text-sm font-medium transition-colors",
                     isActive(item.id)
-                      ? "bg-gradient-to-r from-blue-600 to-indigo-600 text-white shadow-lg shadow-blue-500/25"
-                      : "text-slate-700 hover:bg-slate-100 active:bg-slate-200 dark:text-slate-300 dark:hover:bg-slate-800/50 dark:active:bg-slate-800"
+                      ? "bg-muted text-foreground"
+                      : "text-muted-foreground hover:bg-muted hover:text-foreground"
                   )}
-                  style={{
-                    animationName: isMobileMenuOpen ? "slideIn" : "none",
-                    animationDuration: isMobileMenuOpen ? "0.3s" : undefined,
-                    animationTimingFunction: isMobileMenuOpen
-                      ? "ease-out"
-                      : undefined,
-                    animationFillMode: isMobileMenuOpen
-                      ? "forwards"
-                      : undefined,
-                    animationDelay: `${index * 50}ms`,
-                  }}
                 >
-                  <div
-                    className={cn(
-                      "xs:p-2.5 xs:rounded-xl flex-shrink-0 rounded-lg p-2 transition-all duration-200",
-                      isActive(item.id)
-                        ? "bg-white/30 dark:bg-slate-700"
-                        : "bg-slate-100 group-hover:bg-slate-200 dark:bg-slate-800 dark:group-hover:bg-slate-700"
-                    )}
-                  >
-                    <span
-                      className={cn(
-                        "xs:[&>svg]:h-5 xs:[&>svg]:w-5 block transition-transform duration-200 group-hover:scale-110 [&>svg]:h-4 [&>svg]:w-4",
-                        isActive(item.id)
-                          ? "text-white"
-                          : "text-slate-600 dark:text-slate-400"
-                      )}
-                    >
-                      {item.icon}
+                  {item.icon}
+                  <span>{item.label}</span>
+                  {item.badge && (
+                    <span className="rounded bg-primary/10 px-1.5 py-0.5 text-[10px] font-semibold text-primary uppercase">
+                      {item.badge}
                     </span>
-                  </div>
-                  <div className="min-w-0 flex-1">
-                    <div className="flex items-center gap-2">
-                      <span className="xs:text-base text-sm font-semibold">
-                        {item.label}
-                      </span>
-                      {item.badge && (
-                        <span className="xs:px-2 xs:text-[10px] rounded-full bg-gradient-to-r from-amber-400 to-orange-500 px-1.5 py-0.5 text-[9px] font-bold tracking-wider text-white uppercase">
-                          {item.badge}
-                        </span>
-                      )}
-                    </div>
-                    <p
-                      className={cn(
-                        "xs:text-sm mt-0.5 text-xs",
-                        isActive(item.id)
-                          ? "text-white/70"
-                          : "text-slate-500 dark:text-slate-400"
-                      )}
-                    >
-                      {item.description}
-                    </p>
-                  </div>
-                  <div
-                    className={cn(
-                      "xs:w-2 xs:h-2 h-1.5 w-1.5 flex-shrink-0 rounded-full transition-all duration-200",
-                      isActive(item.id) ? "bg-foreground" : "bg-transparent"
-                    )}
-                  ></div>
+                  )}
                 </button>
               ))}
             </div>
 
-            {/* Mobile Authentication Section - Enhanced */}
-            <div className="xs:mt-8 xs:pt-6 mt-6 border-t border-slate-200 pt-4 dark:border-slate-800">
-              <p className="xs:text-xs xs:px-4 xs:mb-3 mb-2 px-3 text-[10px] font-semibold tracking-wider text-slate-400 uppercase dark:text-slate-500">
-                Account
-              </p>
+            {/* Mobile Auth */}
+            <div className="mt-6 border-t border-border pt-4">
               {user ? (
-                <div className="xs:space-y-3 space-y-2">
-                  {/* User Profile Card */}
-                  <div className="xs:gap-4 xs:px-4 xs:py-4 xs:rounded-2xl flex items-center gap-3 rounded-xl bg-gradient-to-r from-slate-100 to-slate-50 px-3 py-3 dark:from-slate-800/50 dark:to-slate-900/50">
+                <div className="space-y-1">
+                  <div className="flex items-center gap-3 rounded-md px-3 py-2.5">
                     {getGithubAvatarUrl() ? (
                       <img
                         src={getGithubAvatarUrl() as string}
                         alt="Profile"
-                        className="xs:w-12 xs:h-12 h-10 w-10 flex-shrink-0 rounded-full object-cover shadow-lg"
+                        className="h-8 w-8 rounded-full object-cover"
                       />
                     ) : null}
-                    <div className="min-w-0 flex-1">
-                      <p className="xs:text-base text-foreground truncate text-sm font-semibold">
+                    <div className="min-w-0">
+                      <p className="truncate text-sm font-medium">
                         {userProfile?.displayName ||
                           userProfile?.githubUsername ||
                           "User"}
                       </p>
-                      <p className="xs:text-sm truncate text-xs text-slate-500 dark:text-slate-400">
+                      <p className="truncate text-xs text-muted-foreground">
                         {user?.email}
                       </p>
                     </div>
                   </div>
-
                   <button
                     onClick={() => {
                       logout();
                       setIsMobileMenuOpen(false);
                     }}
-                    className="xs:gap-4 xs:px-4 xs:py-4 xs:rounded-2xl flex w-full items-center gap-3 rounded-xl px-3 py-3 text-left font-medium text-red-600 transition-all duration-200 hover:bg-red-50 active:bg-red-100 dark:text-red-400 dark:hover:bg-red-900/20 dark:active:bg-red-900/30"
+                    className="flex w-full items-center gap-3 rounded-md px-3 py-2.5 text-sm font-medium text-destructive transition-colors hover:bg-destructive/10"
                   >
-                    <div className="xs:p-2.5 xs:rounded-xl flex-shrink-0 rounded-lg bg-red-50 p-2 dark:bg-red-900/20">
-                      <LogOut className="xs:h-5 xs:w-5 h-4 w-4" />
-                    </div>
-                    <div className="min-w-0">
-                      <span className="xs:text-base text-sm font-semibold">
-                        Sign Out
-                      </span>
-                      <p className="xs:text-sm mt-0.5 truncate text-xs text-red-500/70 dark:text-red-400/70">
-                        Log out of your account
-                      </p>
-                    </div>
+                    <LogOut className="h-4 w-4" />
+                    Sign Out
                   </button>
                 </div>
               ) : (
-                <div className="xs:space-y-3 space-y-2">
+                <div className="space-y-2">
                   <button
                     onClick={() => {
                       setShowAuthModal(true);
                       setIsMobileMenuOpen(false);
                     }}
-                    className="xs:gap-4 xs:px-4 xs:py-4 xs:rounded-2xl flex w-full items-center gap-3 rounded-xl px-3 py-3 text-left font-medium text-slate-700 transition-all duration-200 hover:bg-slate-100 active:bg-slate-200 dark:text-slate-300 dark:hover:bg-slate-800/50 dark:active:bg-slate-800"
+                    className="flex w-full items-center gap-3 rounded-md px-3 py-2.5 text-sm font-medium text-muted-foreground transition-colors hover:bg-muted hover:text-foreground"
                   >
-                    <div className="xs:p-2.5 xs:rounded-xl flex-shrink-0 rounded-lg bg-slate-100 p-2 dark:bg-slate-800">
-                      <User className="xs:h-5 xs:w-5 h-4 w-4 text-slate-600 dark:text-slate-400" />
-                    </div>
-                    <div className="min-w-0">
-                      <span className="xs:text-base text-sm font-semibold">
-                        Sign In
-                      </span>
-                      <p className="xs:text-sm mt-0.5 truncate text-xs text-slate-500 dark:text-slate-400">
-                        Access your account
-                      </p>
-                    </div>
+                    <User className="h-4 w-4" />
+                    Sign In
                   </button>
-
                   <button
                     onClick={() => {
                       setShowAuthModal(true);
                       setIsMobileMenuOpen(false);
                     }}
-                    className="xs:gap-4 xs:px-4 xs:py-4 xs:rounded-2xl flex w-full items-center gap-3 rounded-xl bg-gradient-to-r from-blue-600 to-indigo-600 px-3 py-3 text-left font-semibold text-white shadow-lg shadow-blue-500/25 transition-all duration-300 hover:from-blue-700 hover:to-indigo-700 hover:shadow-xl hover:shadow-blue-500/30"
+                    className="flex w-full items-center gap-3 rounded-md bg-primary px-3 py-2.5 text-sm font-medium text-primary-foreground transition-opacity hover:opacity-90"
                   >
-                    <div className="xs:p-2.5 xs:rounded-xl bg-background/20 flex-shrink-0 rounded-lg p-2">
-                      <Sparkles className="xs:h-5 xs:w-5 h-4 w-4" />
-                    </div>
-                    <div className="min-w-0">
-                      <span className="xs:text-base text-sm font-semibold">
-                        Get Started
-                      </span>
-                      <p className="xs:text-sm mt-0.5 truncate text-xs text-white/70">
-                        Create a free account
-                      </p>
-                    </div>
+                    <Shield className="h-4 w-4" />
+                    Get Started
                   </button>
                 </div>
               )}
             </div>
 
-            {/* Footer in mobile menu */}
-            <div className="xs:mt-8 xs:pt-6 mt-6 border-t border-slate-200 pt-4 text-center dark:border-slate-800">
-              <div className="mb-4 flex justify-center">
-                <ThemeToggle />
-              </div>
-              <p className="xs:text-xs text-[10px] text-slate-400 dark:text-slate-500">
-                © 2024 Code Guardian. All rights reserved.
+            {/* Mobile footer */}
+            <div className="mt-6 border-t border-border pt-4 text-center">
+              <p className="text-xs text-muted-foreground">
+                © {new Date().getFullYear()} Code Guardian
               </p>
             </div>
           </div>

@@ -49,7 +49,7 @@ export class ErrorBoundary extends Component<Props, State> {
 
       // Default fallback UI
       return (
-        <div className="flex min-h-screen items-center justify-center bg-gray-50">
+        <div className="flex min-h-screen items-center justify-center bg-muted/50">
           <div className="w-full max-w-md rounded-lg bg-white p-6 shadow-lg">
             <div className="mx-auto mb-4 flex h-12 w-12 items-center justify-center rounded-full bg-red-100">
               <svg
@@ -66,7 +66,7 @@ export class ErrorBoundary extends Component<Props, State> {
                 />
               </svg>
             </div>
-            <h2 className="mb-2 text-center text-xl font-semibold text-gray-900">
+            <h2 className="mb-2 text-center text-xl font-semibold text-foreground">
               Something went wrong
             </h2>
             <p className="mb-4 text-center text-gray-600">
@@ -76,7 +76,7 @@ export class ErrorBoundary extends Component<Props, State> {
             <div className="flex space-x-3">
               <button
                 onClick={() => window.location.reload()}
-                className="flex-1 rounded-md bg-blue-600 px-4 py-2 text-white transition-colors hover:bg-blue-700"
+                className="flex-1 rounded-md bg-primary px-4 py-2 text-white transition-colors hover:bg-primary/90"
               >
                 Refresh Page
               </button>
@@ -84,13 +84,13 @@ export class ErrorBoundary extends Component<Props, State> {
                 onClick={() =>
                   this.setState({ hasError: false, error: undefined })
                 }
-                className="flex-1 rounded-md bg-gray-200 px-4 py-2 text-gray-800 transition-colors hover:bg-gray-300"
+                className="flex-1 rounded-md bg-muted px-4 py-2 text-foreground transition-colors hover:bg-muted"
               >
                 Try Again
               </button>
             </div>
             {process.env.NODE_ENV === "development" && this.state.error && (
-              <details className="mt-4 rounded bg-gray-100 p-3 text-xs">
+              <details className="mt-4 rounded bg-muted p-3 text-xs">
                 <summary className="cursor-pointer font-medium">
                   Error Details
                 </summary>

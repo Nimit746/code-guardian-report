@@ -11,9 +11,9 @@ const Card = React.forwardRef<
   const variants = {
     default: "rounded-lg border bg-card text-card-foreground shadow-sm",
     modern:
-      "rounded-2xl bg-white/90 dark:bg-slate-800/90 backdrop-blur-sm border-0 shadow-xl hover:shadow-2xl transition-all duration-300",
+      "rounded-2xl bg-card/90/90 backdrop-blur-sm border-0 shadow-xl hover:shadow-2xl transition-all duration-300",
     glass:
-      "rounded-2xl backdrop-blur-xl bg-white/10 dark:bg-black/10 border border-white/20 dark:border-white/10 shadow-2xl",
+      "rounded-2xl backdrop-blur-xl bg-muted/20 dark:bg-black/10 border border-border/20 dark:border-border/10 shadow-2xl",
     gradient:
       "rounded-2xl bg-gradient-to-br from-white to-slate-50 dark:from-slate-800 dark:to-slate-900 border-0 shadow-xl",
     elevated:

@@ -111,7 +111,7 @@ export const DetailedInfo: React.FC = () => {
             <h2 className="mb-6 bg-gradient-to-r from-slate-900 via-blue-700 to-purple-700 bg-clip-text text-4xl font-bold text-transparent sm:text-5xl dark:from-white dark:via-blue-300 dark:to-purple-300">
               About Code Guardian
             </h2>
-            <p className="mx-auto mb-8 max-w-3xl text-xl leading-relaxed text-slate-600 dark:text-slate-400">
+            <p className="mx-auto mb-8 max-w-3xl text-xl leading-relaxed text-muted-foreground">
               Code Guardian is a next-generation AI-powered security analysis
               platform that combines advanced static analysis with cutting-edge
               AI insights to identify security vulnerabilities, code quality
@@ -119,19 +119,19 @@ export const DetailedInfo: React.FC = () => {
               write more secure, maintainable, and efficient code.
             </p>
             <div className="mb-12 flex flex-wrap justify-center gap-6">
-              <div className="group flex cursor-pointer items-center gap-3 rounded-2xl border border-green-200/50 bg-gradient-to-r from-green-100/80 to-emerald-100/80 px-6 py-3 backdrop-blur-sm transition-all duration-300 hover:scale-105 hover:shadow-lg hover:shadow-green-500/20 dark:border-green-700/50 dark:from-green-900/40 dark:to-emerald-900/40">
+              <div className="group flex cursor-pointer items-center gap-3 rounded-2xl border border-green-200/50 bg-gradient-to-r from-green-100/80 to-emerald-100/80 px-6 py-3 backdrop-blur-sm transition-all duration-300  hover:shadow-lg hover:shadow-green-500/20 dark:border-green-700/50 dark:from-green-900/40 dark:to-emerald-900/40">
                 <CheckCircle className="h-5 w-5 text-green-600 transition-transform duration-300 group-hover:scale-110 dark:text-green-400" />
                 <span className="text-sm font-semibold text-green-800 dark:text-green-200">
                   Free to Use
                 </span>
               </div>
-              <div className="group flex cursor-pointer items-center gap-3 rounded-2xl border border-blue-200/50 bg-gradient-to-r from-blue-100/80 to-cyan-100/80 px-6 py-3 backdrop-blur-sm transition-all duration-300 hover:scale-105 hover:shadow-lg hover:shadow-blue-500/20 dark:border-blue-700/50 dark:from-blue-900/40 dark:to-cyan-900/40">
-                <Star className="h-5 w-5 text-blue-600 transition-transform duration-300 group-hover:scale-110 dark:text-blue-400" />
+              <div className="group flex cursor-pointer items-center gap-3 rounded-2xl border border-border/50 bg-gradient-to-r from-blue-100/80 to-cyan-100/80 px-6 py-3 backdrop-blur-sm transition-all duration-300  hover:shadow-lg hover:shadow-primary/10 dark:border-blue-700/50 dark:from-blue-900/40 dark:to-cyan-900/40">
+                <Star className="h-5 w-5 text-primary transition-transform duration-300 group-hover:scale-110 dark:text-primary" />
                 <span className="text-sm font-semibold text-blue-800 dark:text-blue-200">
                   AI-Powered
                 </span>
               </div>
-              <div className="group flex cursor-pointer items-center gap-3 rounded-2xl border border-purple-200/50 bg-gradient-to-r from-purple-100/80 to-pink-100/80 px-6 py-3 backdrop-blur-sm transition-all duration-300 hover:scale-105 hover:shadow-lg hover:shadow-purple-500/20 dark:border-purple-700/50 dark:from-purple-900/40 dark:to-pink-900/40">
+              <div className="group flex cursor-pointer items-center gap-3 rounded-2xl border border-purple-200/50 bg-gradient-to-r from-purple-100/80 to-pink-100/80 px-6 py-3 backdrop-blur-sm transition-all duration-300  hover:shadow-lg hover:shadow-purple-500/20 dark:border-purple-700/50 dark:from-purple-900/40 dark:to-pink-900/40">
                 <Globe className="h-5 w-5 text-purple-600 transition-transform duration-300 group-hover:scale-110 dark:text-purple-400" />
                 <span className="text-sm font-semibold text-purple-800 dark:text-purple-200">
                   Multi-Language
@@ -154,14 +154,14 @@ export const DetailedInfo: React.FC = () => {
                   <div className="flex-shrink-0 text-green-600 dark:text-green-400">
                     {feature.icon}
                   </div>
-                  <span className="text-sm text-slate-700 dark:text-slate-300">
+                  <span className="text-sm text-foreground/80">
                     {feature.text}
                   </span>
                 </div>
               ))}
             </div>
 
-            <div className="mt-8 rounded-lg border border-blue-200 bg-gradient-to-r from-blue-50 to-indigo-50 p-6 dark:border-blue-800 dark:from-blue-950 dark:to-indigo-950">
+            <div className="mt-8 rounded-lg border border-border bg-muted p-6 dark:border-border dark:from-blue-950 dark:to-indigo-950">
               <h4 className="mb-3 flex items-center gap-2 font-semibold text-blue-900 dark:text-blue-100">
                 <Rocket className="h-4 w-4" />
                 What Makes Us Different

@@ -123,7 +123,7 @@ const HowToUseSection = () => {
         },
         {
           level: "Low",
-          color: "bg-blue-500",
+          color: "bg-muted0",
           description: "Minor improvements",
         },
       ],
@@ -199,16 +199,16 @@ const HowToUseSection = () => {
       <div className="container mx-auto px-4">
         {/* Section Header */}
         <div className="mb-12 text-center">
-          <h2 className="mb-4 text-3xl font-bold text-slate-900 sm:text-4xl lg:text-5xl dark:text-white">
+          <h2 className="mb-4 text-3xl font-bold text-foreground sm:text-4xl lg:text-5xl dark:text-white">
             How to Use This Platform
           </h2>
-          <p className="mx-auto mb-8 max-w-3xl text-lg text-slate-600 dark:text-slate-400">
+          <p className="mx-auto mb-8 max-w-3xl text-lg text-muted-foreground">
             Follow these simple steps to analyze your code and get actionable
             security insights
           </p>
 
           {/* Quick Start */}
-          <Card className="mx-auto mb-12 max-w-2xl border-blue-200 bg-gradient-to-r from-blue-50 to-indigo-50 dark:border-blue-800 dark:from-blue-950 dark:to-indigo-950">
+          <Card className="mx-auto mb-12 max-w-2xl border-border bg-muted dark:border-border dark:from-blue-950 dark:to-indigo-950">
             <CardHeader>
               <CardTitle className="flex items-center gap-2 text-blue-900 dark:text-blue-100">
                 <CheckCircle className="h-5 w-5" />
@@ -257,7 +257,7 @@ const HowToUseSection = () => {
           <Card className="mb-8">
             <CardHeader>
               <div className="mb-4 flex items-center gap-4">
-                <div className="rounded-lg bg-blue-100 p-3 dark:bg-blue-900">
+                <div className="rounded-lg bg-teal-100 p-3 dark:bg-teal-900">
                   {steps[activeStep].icon}
                 </div>
                 <div>
@@ -279,7 +279,7 @@ const HowToUseSection = () => {
                 <ul className="space-y-2">
                   {steps[activeStep].details.map((detail, index) => (
                     <li key={index} className="flex items-start gap-2">
-                      <ChevronRight className="mt-0.5 h-4 w-4 flex-shrink-0 text-blue-500" />
+                      <ChevronRight className="mt-0.5 h-4 w-4 flex-shrink-0 text-primary" />
                       <span className="text-sm">{detail}</span>
                     </li>
                   ))}
@@ -312,7 +312,7 @@ const HowToUseSection = () => {
                             {type.name}
                           </span>
                         </div>
-                        <p className="text-xs text-slate-600 dark:text-slate-400">
+                        <p className="text-xs text-muted-foreground">
                           Typical time: {type.time}
                         </p>
                       </Card>
@@ -336,7 +336,7 @@ const HowToUseSection = () => {
                         <span className="text-sm font-medium">
                           {severity.level}
                         </span>
-                        <span className="text-sm text-slate-600 dark:text-slate-400">
+                        <span className="text-sm text-muted-foreground">
                           - {severity.description}
                         </span>
                       </div>
@@ -354,9 +354,9 @@ const HowToUseSection = () => {
                     {steps[activeStep].promptTypes.map((type) => (
                       <div
                         key={type}
-                        className="flex items-center gap-2 rounded bg-slate-50 p-2 dark:bg-slate-800"
+                        className="flex items-center gap-2 rounded bg-muted p-2"
                       >
-                        <Wand2 className="h-4 w-4 text-purple-500" />
+                        <Wand2 className="h-4 w-4 text-muted-foreground" />
                         <span className="text-sm">{type}</span>
                       </div>
                     ))}
@@ -376,7 +376,7 @@ const HowToUseSection = () => {
                             {format.format}
                           </span>
                         </div>
-                        <p className="text-xs text-slate-600 dark:text-slate-400">
+                        <p className="text-xs text-muted-foreground">
                           {format.description}
                         </p>
                       </Card>

@@ -192,7 +192,7 @@ export function PWADashboard() {
             {isInstalled && (
               <Badge
                 variant="secondary"
-                className="bg-blue-100 text-blue-800 dark:bg-blue-900/30 dark:text-blue-300"
+                className="bg-teal-100 text-blue-800 dark:bg-teal-900/30 dark:text-teal-300"
               >
                 <Smartphone className="mr-1 h-3 w-3" />
                 Installed
@@ -259,7 +259,7 @@ export function PWADashboard() {
             {/* Quick Actions */}
             <div className="space-y-3">
               <h3 className="flex items-center gap-2 text-sm font-semibold">
-                <Zap className="h-4 w-4 text-blue-600" />
+                <Zap className="h-4 w-4 text-primary" />
                 Quick Actions
               </h3>
               <div className="grid grid-cols-2 gap-3 sm:grid-cols-4">
@@ -363,8 +363,8 @@ export function PWADashboard() {
             <div className="bg-muted/50 space-y-4 rounded-lg p-4">
               <div className="flex items-center justify-between">
                 <div className="flex items-center gap-3">
-                  <div className="rounded-lg bg-blue-100 p-2 dark:bg-blue-900">
-                    <HardDrive className="h-5 w-5 text-blue-600" />
+                  <div className="rounded-lg bg-teal-100 p-2 dark:bg-teal-900">
+                    <HardDrive className="h-5 w-5 text-primary" />
                   </div>
                   <div>
                     <p className="font-medium">Cache Storage</p>
@@ -512,13 +512,13 @@ export function PWADashboard() {
                       "rounded-lg p-2",
                       hasNotificationPermission
                         ? "bg-green-100 dark:bg-green-900"
-                        : "bg-gray-100 dark:bg-gray-800"
+                        : "bg-muted dark:bg-foreground"
                     )}
                   >
                     {hasNotificationPermission ? (
                       <Bell className="h-5 w-5 text-green-600" />
                     ) : (
-                      <BellOff className="h-5 w-5 text-gray-500" />
+                      <BellOff className="h-5 w-5 text-muted-foreground" />
                     )}
                   </div>
                   <div>
@@ -544,8 +544,8 @@ export function PWADashboard() {
               <div className="bg-muted/50 rounded-lg p-4">
                 <div className="flex items-center justify-between">
                   <div className="flex items-center gap-3">
-                    <div className="rounded-lg bg-blue-100 p-2 dark:bg-blue-900">
-                      <TestTube className="h-5 w-5 text-blue-600" />
+                    <div className="rounded-lg bg-teal-100 p-2 dark:bg-teal-900">
+                      <TestTube className="h-5 w-5 text-primary" />
                     </div>
                     <div>
                       <p className="font-medium">Test Notification</p>
@@ -597,11 +597,11 @@ export function PWADashboard() {
             <div className="bg-muted/50 space-y-4 rounded-lg p-4">
               <div className="flex items-center justify-between">
                 <div className="flex items-center gap-3">
-                  <div className="rounded-lg bg-blue-100 p-2 dark:bg-blue-900">
+                  <div className="rounded-lg bg-teal-100 p-2 dark:bg-teal-900">
                     {isInstalled ? (
-                      <Smartphone className="h-5 w-5 text-blue-600" />
+                      <Smartphone className="h-5 w-5 text-primary" />
                     ) : (
-                      <Monitor className="h-5 w-5 text-blue-600" />
+                      <Monitor className="h-5 w-5 text-primary" />
                     )}
                   </div>
                   <div>
@@ -688,7 +688,7 @@ export function PWADashboard() {
                       "rounded-lg p-2",
                       status.backgroundSyncSupported
                         ? "bg-green-100 dark:bg-green-900"
-                        : "bg-gray-100 dark:bg-gray-800"
+                        : "bg-muted dark:bg-foreground"
                     )}
                   >
                     <Cloud
@@ -696,7 +696,7 @@ export function PWADashboard() {
                         "h-5 w-5",
                         status.backgroundSyncSupported
                           ? "text-green-600"
-                          : "text-gray-500"
+                          : "text-muted-foreground"
                       )}
                     />
                   </div>
@@ -745,14 +745,14 @@ function StatusCard({
       "bg-orange-50 border-orange-200 dark:bg-orange-900/20 dark:border-orange-800",
     error: "bg-red-50 border-red-200 dark:bg-red-900/20 dark:border-red-800",
     neutral:
-      "bg-gray-50 border-gray-200 dark:bg-gray-800/50 dark:border-gray-700",
+      "bg-muted/50 border-border dark:bg-foreground/50 dark:border-border",
   };
 
   const iconColors = {
     success: "text-green-600",
     warning: "text-orange-600",
     error: "text-red-600",
-    neutral: "text-gray-500",
+    neutral: "text-muted-foreground",
   };
 
   return (
@@ -778,7 +778,7 @@ function ActionButton({
   const variantStyles = {
     default: "bg-muted hover:bg-muted/80",
     primary:
-      "bg-blue-100 hover:bg-blue-200 text-blue-700 dark:bg-blue-900/30 dark:text-blue-300",
+      "bg-teal-100 hover:bg-blue-200 text-teal-600 dark:bg-teal-900/30 dark:text-teal-300",
     warning:
       "bg-orange-100 hover:bg-orange-200 text-orange-700 dark:bg-orange-900/30 dark:text-orange-300",
   };
@@ -810,7 +810,7 @@ function CapabilityBadge({
         "flex items-center gap-2 rounded-lg px-3 py-2 text-xs",
         enabled
           ? "bg-green-50 text-green-700 dark:bg-green-900/20 dark:text-green-300"
-          : "bg-gray-50 text-gray-500 dark:bg-gray-800/50 dark:text-gray-400"
+          : "bg-muted/50 text-muted-foreground dark:bg-foreground/50 dark:text-muted-foreground"
       )}
     >
       {enabled ? (

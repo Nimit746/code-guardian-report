@@ -55,11 +55,11 @@ export const RepositoryActivityAnalytics: React.FC<
           {Array.from({ length: 4 }).map((_, i) => (
             <Card
               key={i}
-              className="border-slate-200 p-6 dark:border-slate-800"
+              className="border-border p-6"
             >
-              <div className="mb-4 h-10 w-10 animate-pulse rounded-lg bg-slate-100 dark:bg-slate-800"></div>
-              <div className="mb-2 h-8 w-16 animate-pulse rounded bg-slate-100 dark:bg-slate-800"></div>
-              <div className="h-4 w-28 animate-pulse rounded bg-slate-100 dark:bg-slate-800"></div>
+              <div className="mb-4 h-10 w-10 animate-pulse rounded-lg bg-muted"></div>
+              <div className="mb-2 h-8 w-16 animate-pulse rounded bg-muted"></div>
+              <div className="h-4 w-28 animate-pulse rounded bg-muted"></div>
             </Card>
           ))}
         </div>
@@ -75,18 +75,18 @@ export const RepositoryActivityAnalytics: React.FC<
             <Activity className="h-6 w-6 text-purple-600 dark:text-purple-400" />
             Repository Activity
           </h2>
-          <p className="text-slate-600 dark:text-slate-400">
+          <p className="text-muted-foreground">
             Insights into your repository analysis patterns and language usage
           </p>
         </div>
-        <Card className="border-2 border-dashed border-slate-200 bg-slate-50/50 p-12 text-center dark:border-slate-800 dark:bg-slate-900/50">
+        <Card className="border-2 border-dashed border-border bg-muted/50 p-12 text-center/50">
           <div className="mx-auto mb-4 flex h-16 w-16 items-center justify-center rounded-full bg-purple-100 dark:bg-purple-900/30">
             <Activity className="h-8 w-8 text-purple-600 dark:text-purple-400" />
           </div>
           <h3 className="text-foreground mb-2 text-xl font-semibold">
             No Activity Data Yet
           </h3>
-          <p className="mx-auto max-w-md text-slate-500 dark:text-slate-400">
+          <p className="mx-auto max-w-md text-muted-foreground">
             Start analyzing repositories to see your activity patterns and
             language distribution.
           </p>
@@ -101,38 +101,38 @@ export const RepositoryActivityAnalytics: React.FC<
           <Activity className="h-6 w-6 text-purple-600 dark:text-purple-400" />
           Repository Activity
         </h2>
-        <p className="text-slate-600 dark:text-slate-400">
+        <p className="text-muted-foreground">
           Insights into your repository analysis patterns and language usage
         </p>
       </div>
 
       {/* Activity Stats */}
       <div className="grid grid-cols-1 gap-4 sm:grid-cols-2 sm:gap-6 lg:grid-cols-4">
-        <Card className="group border-border p-6 transition-all duration-300 hover:shadow-lg dark:border-slate-800">
+        <Card className="group border-border p-6 transition-all duration-300 hover:shadow-lg">
           <div className="mb-4 w-fit rounded-xl bg-purple-50 p-3 transition-transform duration-300 group-hover:scale-110 dark:bg-purple-900/20">
             <BarChart2 className="h-6 w-6 text-purple-600 dark:text-purple-400" />
           </div>
           <div className="text-foreground mb-1 text-3xl font-bold tracking-tight">
             {activityStats.totalAnalyses.toLocaleString()}
           </div>
-          <div className="text-sm font-medium text-slate-500 dark:text-slate-400">
+          <div className="text-sm font-medium text-muted-foreground">
             Total Analyses
           </div>
         </Card>
 
-        <Card className="group border-border p-6 transition-all duration-300 hover:shadow-lg dark:border-slate-800">
-          <div className="mb-4 w-fit rounded-xl bg-blue-50 p-3 transition-transform duration-300 group-hover:scale-110 dark:bg-blue-900/20">
-            <Zap className="h-6 w-6 text-blue-600 dark:text-blue-400" />
+        <Card className="group border-border p-6 transition-all duration-300 hover:shadow-lg">
+          <div className="mb-4 w-fit rounded-xl bg-muted p-3 transition-transform duration-300 group-hover:scale-110 dark:bg-teal-900/20">
+            <Zap className="h-6 w-6 text-primary dark:text-primary" />
           </div>
           <div className="text-foreground mb-1 text-3xl font-bold tracking-tight">
             {activityStats.averageDuration}s
           </div>
-          <div className="text-sm font-medium text-slate-500 dark:text-slate-400">
+          <div className="text-sm font-medium text-muted-foreground">
             Avg. Analysis Time
           </div>
         </Card>
 
-        <Card className="group border-border p-6 transition-all duration-300 hover:shadow-lg dark:border-slate-800">
+        <Card className="group border-border p-6 transition-all duration-300 hover:shadow-lg">
           <div className="mb-4 w-fit rounded-xl bg-green-50 p-3 transition-transform duration-300 group-hover:scale-110 dark:bg-green-900/20">
             <GitBranch className="h-6 w-6 text-green-600 dark:text-green-400" />
           </div>
@@ -142,19 +142,19 @@ export const RepositoryActivityAnalytics: React.FC<
           >
             {activityStats.mostAnalyzedRepo || "N/A"}
           </div>
-          <div className="text-sm font-medium text-slate-500 dark:text-slate-400">
+          <div className="text-sm font-medium text-muted-foreground">
             Most Analyzed Repo
           </div>
         </Card>
 
-        <Card className="group border-border p-6 transition-all duration-300 hover:shadow-lg dark:border-slate-800">
+        <Card className="group border-border p-6 transition-all duration-300 hover:shadow-lg">
           <div className="mb-4 w-fit rounded-xl bg-orange-50 p-3 transition-transform duration-300 group-hover:scale-110 dark:bg-orange-900/20">
             <Code className="h-6 w-6 text-orange-600 dark:text-orange-400" />
           </div>
           <div className="text-foreground mb-1 truncate text-xl font-bold">
             {activityStats.mostCommonLanguage || "N/A"}
           </div>
-          <div className="text-sm font-medium text-slate-500 dark:text-slate-400">
+          <div className="text-sm font-medium text-muted-foreground">
             Most Common Language
           </div>
         </Card>
@@ -162,27 +162,27 @@ export const RepositoryActivityAnalytics: React.FC<
 
       {/* Language Distribution */}
       {detailed && languageDistribution.length > 0 && (
-        <Card className="border-border p-8 dark:border-slate-800">
+        <Card className="border-border p-8">
           <h3 className="text-foreground mb-6 flex items-center gap-2 text-lg font-bold">
-            <Code className="h-5 w-5 text-slate-500" />
+            <Code className="h-5 w-5 text-muted-foreground" />
             Language Distribution
           </h3>
           <div className="space-y-6">
             {languageDistribution.map((lang, index) => (
               <div key={index} className="group">
                 <div className="mb-2 flex items-center justify-between">
-                  <span className="flex items-center gap-2 text-sm font-semibold text-slate-700 dark:text-slate-300">
+                  <span className="flex items-center gap-2 text-sm font-semibold text-foreground/80">
                     {lang.language}
                   </span>
-                  <span className="text-sm font-medium text-slate-500 dark:text-slate-400">
+                  <span className="text-sm font-medium text-muted-foreground">
                     {lang.count} repos{" "}
-                    <span className="mx-1 text-slate-300 dark:text-slate-600">
+                    <span className="mx-1 text-muted-foreground">
                       |
                     </span>{" "}
                     {lang.percentage.toFixed(1)}%
                   </span>
                 </div>
-                <div className="h-3 w-full overflow-hidden rounded-full bg-slate-100 dark:bg-slate-800">
+                <div className="h-3 w-full overflow-hidden rounded-full bg-muted">
                   <div
                     className={cn(
                       "relative h-full rounded-full transition-all duration-1000 ease-out",

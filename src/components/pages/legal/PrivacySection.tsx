@@ -13,7 +13,7 @@ export const PrivacySection: React.FC = () => {
   return (
     <section
       id="privacy"
-      className="relative min-h-screen overflow-hidden bg-white dark:bg-slate-950"
+      className="relative min-h-screen overflow-hidden bg-background"
     >
       <AnimatedBackground />
       <div className="relative z-10 pt-12 sm:pt-16">
@@ -21,8 +21,8 @@ export const PrivacySection: React.FC = () => {
           <div className="mx-auto max-w-4xl">
             {/* Privacy Header */}
             <div className="mb-8 text-center sm:mb-12 lg:mb-16">
-              <div className="mb-4 inline-flex h-12 w-12 items-center justify-center rounded-full bg-blue-100 sm:mb-6 sm:h-16 sm:w-16 dark:bg-blue-900/30">
-                <Shield className="h-6 w-6 text-blue-600 sm:h-8 sm:w-8 dark:text-blue-400" />
+              <div className="mb-4 inline-flex h-12 w-12 items-center justify-center rounded-full bg-teal-100 sm:mb-6 sm:h-16 sm:w-16 dark:bg-teal-900/30">
+                <Shield className="h-6 w-6 text-primary sm:h-8 sm:w-8 dark:text-primary" />
               </div>
               <h1 className="text-foreground mb-3 px-4 text-2xl font-bold sm:mb-4 sm:text-3xl lg:text-4xl">
                 Privacy Policy
@@ -111,16 +111,16 @@ export const PrivacySection: React.FC = () => {
                   If you have questions about this Privacy Policy or our data
                   practices, please contact us:
                 </p>
-                <div className="mt-6 rounded-xl border border-blue-200 bg-blue-50 p-6 dark:border-blue-800 dark:bg-blue-900/20">
+                <div className="mt-6 rounded-xl border border-border bg-muted p-6 dark:border-border dark:bg-teal-900/20">
                   <div className="space-y-3">
                     <div className="flex items-center gap-3">
-                      <Mail className="h-5 w-5 text-blue-600" />
+                      <Mail className="h-5 w-5 text-primary" />
                       <span className="font-medium">
                         Email: itisaddy7@gmail.com
                       </span>
                     </div>
                     <div className="flex items-center gap-3">
-                      <Globe className="h-5 w-5 text-blue-600" />
+                      <Globe className="h-5 w-5 text-primary" />
                       <span className="font-medium">
                         Website: Code Guardian Platform
                       </span>

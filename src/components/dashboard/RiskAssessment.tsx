@@ -80,11 +80,11 @@ export const RiskAssessment: React.FC<RiskAssessmentProps> = ({ metrics }) => {
                 Review {metrics.securityIssues} security vulnerabilities
               </p>
             </div>
-            <div className="rounded-lg border border-blue-200 bg-blue-50 p-3 dark:border-blue-800 dark:bg-blue-950/20">
+            <div className="rounded-lg border border-border bg-muted p-3 dark:border-border dark:bg-blue-950/20">
               <h4 className="font-medium text-blue-800 dark:text-blue-200">
                 Low Priority
               </h4>
-              <p className="text-sm text-blue-600 dark:text-blue-400">
+              <p className="text-sm text-primary dark:text-primary">
                 Improve code quality and reduce technical debt
               </p>
             </div>

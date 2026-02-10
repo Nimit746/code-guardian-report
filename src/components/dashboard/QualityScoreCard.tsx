@@ -44,30 +44,30 @@ export const QualityScoreCard: React.FC<QualityScoreCardProps> = ({
     <UITooltip>
       <TooltipTrigger asChild>
         <Card
-          className={`${getScoreBgColor(score)} cursor-help border-0 ring-2 ring-blue-200 dark:ring-blue-800 ${className}`}
+          className={`${getScoreBgColor(score)} cursor-help border-0 ring-2 ring-border dark:ring-border ${className}`}
         >
           <CardContent className="p-4">
             <div className="flex items-center justify-between">
               <div>
-                <p className="text-sm font-medium text-slate-600 dark:text-slate-400">
+                <p className="text-sm font-medium text-muted-foreground">
                   Code Quality Score
                 </p>
                 <p className={`text-2xl font-bold ${getScoreColor(score)}`}>
                   {Math.round(score)}/100
                 </p>
-                <p className="text-xs text-slate-500 dark:text-slate-400">
+                <p className="text-xs text-muted-foreground">
                   {getQualityRating(score)}
                 </p>
               </div>
               <div className="flex flex-col items-center">
                 <Code className={`h-8 w-8 ${getScoreColor(score)}`} />
-                <span className="mt-1 text-xs font-medium text-slate-600 dark:text-slate-400">
+                <span className="mt-1 text-xs font-medium text-muted-foreground">
                   Quality
                 </span>
               </div>
             </div>
             <Progress value={score} className="mt-3 h-3" />
-            <div className="mt-1 flex justify-between text-xs text-slate-500 dark:text-slate-400">
+            <div className="mt-1 flex justify-between text-xs text-muted-foreground">
               <span>Poor</span>
               <span>Excellent</span>
             </div>
@@ -86,7 +86,7 @@ export const QualityScoreCard: React.FC<QualityScoreCardProps> = ({
             <li>• Maintainability index</li>
             <li>• Best practices adherence</li>
           </ul>
-          <p className="mt-2 text-xs text-slate-400">
+          <p className="mt-2 text-xs text-muted-foreground">
             Higher scores indicate better code quality
           </p>
         </div>

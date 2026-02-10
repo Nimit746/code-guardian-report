@@ -120,14 +120,14 @@ export function GitHubCopilotManager() {
   // Memoize status icon to avoid re-renders
   const statusIcon = useMemo(() => {
     if (verificationStatus === "verifying") {
-      return <Loader2 className="h-5 w-5 animate-spin text-blue-600" />;
+      return <Loader2 className="h-5 w-5 animate-spin text-primary" />;
     }
     if (authState.isAuthenticated) {
       return (
         <CheckCircle className="h-5 w-5 text-green-600 dark:text-green-400" />
       );
     }
-    return <XCircle className="h-5 w-5 text-gray-400" />;
+    return <XCircle className="h-5 w-5 text-muted-foreground" />;
   }, [verificationStatus, authState.isAuthenticated]);
 
   // Memoize status text
@@ -142,8 +142,8 @@ export function GitHubCopilotManager() {
     return (
       <Card className="border-2 bg-gradient-to-br from-slate-50 to-slate-100 p-6 transition-all duration-300 hover:shadow-lg dark:from-slate-900 dark:to-slate-800">
         <div className="flex flex-col items-center space-y-4 text-center">
-          <div className="animate-pulse rounded-full bg-blue-100 p-4 dark:bg-blue-900/30">
-            <Sparkles className="h-8 w-8 text-blue-600 dark:text-blue-400" />
+          <div className="animate-pulse rounded-full bg-teal-100 p-4 dark:bg-teal-900/30">
+            <Sparkles className="h-8 w-8 text-primary dark:text-primary" />
           </div>
           <div>
             <h3 className="mb-2 text-xl font-semibold">
@@ -156,7 +156,7 @@ export function GitHubCopilotManager() {
           </div>
           <Button
             onClick={handleSignIn}
-            className="transform bg-gradient-to-r from-blue-600 to-purple-600 transition-all duration-300 hover:scale-105 hover:from-blue-700 hover:to-purple-700"
+            className="transform bg-primary transition-all duration-300  hover:bg-primary/90"
           >
             <Sparkles className="mr-2 h-4 w-4" />
             Sign in with GitHub
@@ -176,7 +176,7 @@ export function GitHubCopilotManager() {
               className={`rounded-full p-2 transition-all duration-300 ${
                 authState.isAuthenticated
                   ? "bg-green-100 dark:bg-green-900/30"
-                  : "bg-gray-100 dark:bg-gray-800"
+                  : "bg-muted dark:bg-foreground"
               }`}
             >
               {statusIcon}
@@ -204,7 +204,7 @@ export function GitHubCopilotManager() {
                   size="sm"
                   onClick={handleTestConnection}
                   disabled={isTesting || verificationStatus === "verifying"}
-                  className="transition-all duration-300 hover:scale-105"
+                  className="transition-all duration-300 "
                 >
                   {isTesting || verificationStatus === "verifying" ? (
                     <Loader2 className="h-4 w-4 animate-spin" />
@@ -217,7 +217,7 @@ export function GitHubCopilotManager() {
                   variant="outline"
                   size="sm"
                   onClick={handleDisconnect}
-                  className="transition-all duration-300 hover:scale-105"
+                  className="transition-all duration-300 "
                 >
                   <LogOut className="h-4 w-4" />
                   <span className="ml-2">Disconnect</span>
@@ -240,8 +240,8 @@ export function GitHubCopilotManager() {
         {authState.isAuthenticated &&
           verificationStatus === "verifying" &&
           !isLoading && (
-            <Alert className="animate-in fade-in border-blue-200 bg-blue-50 duration-500 dark:border-blue-800 dark:bg-blue-900/20">
-              <Loader2 className="h-4 w-4 animate-spin text-blue-600" />
+            <Alert className="animate-in fade-in border-border bg-muted duration-500 dark:border-border dark:bg-teal-900/20">
+              <Loader2 className="h-4 w-4 animate-spin text-primary" />
               <p className="ml-2 text-sm text-blue-800 dark:text-blue-200">
                 Verifying Copilot subscription...
               </p>
@@ -277,8 +277,8 @@ export function GitHubCopilotManager() {
                     key={model.id}
                     className={`relative transform cursor-pointer rounded-lg border-2 p-4 transition-all duration-300 hover:scale-102 ${
                       isSelected
-                        ? "border-blue-500 bg-blue-50 shadow-md dark:bg-blue-950/30"
-                        : "border-gray-200 hover:border-blue-300 hover:shadow-sm dark:border-gray-700 dark:hover:border-blue-700"
+                        ? "border-primary bg-muted shadow-md dark:bg-blue-950/30"
+                        : "border-border hover:border-teal-300 hover:shadow-sm dark:border-border dark:hover:border-blue-700"
                     }`}
                     onClick={() => handleModelSelect(model.id)}
                     role="button"
@@ -291,7 +291,7 @@ export function GitHubCopilotManager() {
                   >
                     {isSelected && (
                       <div className="animate-in zoom-in absolute top-2 right-2 duration-300">
-                        <CheckCircle className="h-5 w-5 text-blue-600 dark:text-blue-400" />
+                        <CheckCircle className="h-5 w-5 text-primary dark:text-primary" />
                       </div>
                     )}
 
@@ -312,7 +312,7 @@ export function GitHubCopilotManager() {
                           <Badge
                             key={capability}
                             variant="secondary"
-                            className="flex items-center space-x-1 text-xs transition-all duration-200 hover:scale-105"
+                            className="flex items-center space-x-1 text-xs transition-all duration-200 "
                           >
                             {getCapabilityIcon(capability)}
                             <span>{capability}</span>
@@ -320,7 +320,7 @@ export function GitHubCopilotManager() {
                         ))}
                     </div>
 
-                    <div className="text-muted-foreground mt-2 flex items-center justify-between border-t border-gray-200 pt-2 text-xs dark:border-gray-700">
+                    <div className="text-muted-foreground mt-2 flex items-center justify-between border-t border-border pt-2 text-xs dark:border-border">
                       <span>
                         Max tokens: {model.maxTokens.toLocaleString()}
                       </span>
@@ -334,9 +334,9 @@ export function GitHubCopilotManager() {
             </div>
 
             {selectedModel && (
-              <div className="animate-in slide-in-from-bottom mt-4 rounded-lg border border-blue-200 bg-gradient-to-r from-blue-50 to-purple-50 p-4 duration-500 dark:border-blue-800 dark:from-blue-950/20 dark:to-purple-950/20">
+              <div className="animate-in slide-in-from-bottom mt-4 rounded-lg border border-border bg-gradient-to-r from-blue-50 to-purple-50 p-4 duration-500 dark:border-border dark:from-blue-950/20 dark:to-purple-950/20">
                 <div className="flex items-center space-x-2">
-                  <Sparkles className="h-5 w-5 text-blue-600 dark:text-blue-400" />
+                  <Sparkles className="h-5 w-5 text-primary dark:text-primary" />
                   <div>
                     <p className="text-sm font-semibold">
                       Currently using: {selectedModel.name}
@@ -354,7 +354,7 @@ export function GitHubCopilotManager() {
       {/* Loading State */}
       {isLoading && !authState.isAuthenticated && (
         <div className="flex items-center justify-center p-8">
-          <Loader2 className="h-6 w-6 animate-spin text-blue-600" />
+          <Loader2 className="h-6 w-6 animate-spin text-primary" />
           <span className="text-muted-foreground ml-2 text-sm">
             Loading GitHub Copilot...
           </span>

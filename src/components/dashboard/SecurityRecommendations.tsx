@@ -109,13 +109,13 @@ export const SecurityRecommendations: React.FC<
           ))}
 
           {recommendations.length === 0 && (
-            <div className="flex items-start gap-3 rounded-lg bg-blue-50 p-3 dark:bg-blue-900/20">
-              <CheckCircle className="mt-0.5 h-5 w-5 text-blue-600" />
+            <div className="flex items-start gap-3 rounded-lg bg-muted p-3 dark:bg-teal-900/20">
+              <CheckCircle className="mt-0.5 h-5 w-5 text-primary" />
               <div>
                 <p className="font-medium text-blue-800 dark:text-blue-200">
                   No immediate recommendations
                 </p>
-                <p className="text-sm text-blue-600 dark:text-blue-400">
+                <p className="text-sm text-primary dark:text-primary">
                   Your code appears to be in good shape. Continue following
                   security best practices.
                 </p>

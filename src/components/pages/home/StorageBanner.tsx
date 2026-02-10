@@ -26,10 +26,10 @@ export const StorageBanner = ({
 
   return (
     <div className="mx-auto mb-6 max-w-6xl">
-      <div className="rounded-lg border border-blue-200 bg-gradient-to-r from-blue-50 to-indigo-50 p-4 dark:border-blue-800 dark:from-blue-950/30 dark:to-indigo-950/30">
+      <div className="rounded-lg border border-border bg-muted p-4 dark:border-border dark:from-blue-950/30 dark:to-indigo-950/30">
         <div className="flex items-center justify-between">
           <div className="flex items-center gap-3">
-            <div className="h-2 w-2 animate-pulse rounded-full bg-blue-500"></div>
+            <div className="h-2 w-2 animate-pulse rounded-full bg-muted0"></div>
             <span className="text-sm font-medium text-blue-900 dark:text-blue-100">
               {hasStoredData
                 ? storedAnalysis
@@ -40,7 +40,7 @@ export const StorageBanner = ({
           </div>
           <button
             onClick={onToggleStorageStatus}
-            className="text-sm text-blue-700 underline hover:text-blue-800 dark:text-blue-300 dark:hover:text-blue-200"
+            className="text-sm text-teal-600 underline hover:text-blue-800 dark:text-teal-300 dark:hover:text-blue-200"
           >
             {showStorageStatus ? "Hide Details" : "View Details"}
           </button>

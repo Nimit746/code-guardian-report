@@ -53,7 +53,7 @@ export const LegalNavigation: React.FC<LegalNavigationProps> = ({
 
       <button
         onClick={() => scrollToSection(otherPage.id)}
-        className="glass-card-ultra enhanced-card-hover glow-on-hover group block w-full rounded-2xl p-6 text-left"
+        className="rounded-lg border border-border bg-card glow-on-hover group block w-full rounded-2xl p-6 text-left"
       >
         <div className="flex items-center gap-4">
           <div
@@ -63,7 +63,7 @@ export const LegalNavigation: React.FC<LegalNavigationProps> = ({
           </div>
 
           <div className="flex-1">
-            <h4 className="text-foreground mb-1 text-lg font-semibold transition-colors duration-300 group-hover:text-blue-600">
+            <h4 className="text-foreground mb-1 text-lg font-semibold transition-colors duration-300 group-hover:text-primary">
               {otherPage.title}
             </h4>
             <p className="text-muted-foreground group-hover:text-foreground/80 transition-colors duration-300">
@@ -71,7 +71,7 @@ export const LegalNavigation: React.FC<LegalNavigationProps> = ({
             </p>
           </div>
 
-          <ArrowRight className="text-muted-foreground h-5 w-5 transition-all duration-300 group-hover:translate-x-1 group-hover:text-blue-500" />
+          <ArrowRight className="text-muted-foreground h-5 w-5 transition-all duration-300 group-hover:translate-x-1 group-hover:text-primary" />
         </div>
       </button>
     </div>

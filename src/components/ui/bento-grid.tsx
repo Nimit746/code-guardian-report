@@ -25,7 +25,7 @@ export function BentoGrid({ items }: BentoGridProps) {
           key={index}
           className={cn(
             "group relative overflow-hidden rounded-xl p-4 transition-all duration-300",
-            "border border-gray-100/80 bg-white dark:border-white/10 dark:bg-black",
+            "border border-border/80 bg-white dark:border-border/10 dark:bg-black",
             "hover:shadow-[0_2px_12px_rgba(0,0,0,0.03)] dark:hover:shadow-[0_2px_12px_rgba(255,255,255,0.03)]",
             "will-change-transform hover:-translate-y-0.5",
             item.colSpan || "col-span-1",
@@ -50,14 +50,14 @@ export function BentoGrid({ items }: BentoGridProps) {
 
           <div className="relative flex flex-col space-y-3">
             <div className="flex items-center justify-between">
-              <div className="flex h-8 w-8 items-center justify-center rounded-lg bg-black/5 transition-all duration-300 group-hover:bg-gradient-to-br dark:bg-white/10">
+              <div className="flex h-8 w-8 items-center justify-center rounded-lg bg-black/5 transition-all duration-300 group-hover:bg-muted dark:bg-muted/20">
                 {item.icon}
               </div>
               <span
                 className={cn(
                   "rounded-lg px-2 py-1 text-xs font-medium backdrop-blur-sm",
-                  "bg-black/5 text-gray-600 dark:bg-white/10 dark:text-gray-300",
-                  "transition-colors duration-300 group-hover:bg-black/10 dark:group-hover:bg-white/20"
+                  "bg-black/5 text-muted-foreground dark:bg-muted/20 dark:text-muted-foreground",
+                  "transition-colors duration-300 group-hover:bg-black/10 dark:group-hover:bg-muted/30"
                 )}
               >
                 {item.status || "Active"}
@@ -65,29 +65,29 @@ export function BentoGrid({ items }: BentoGridProps) {
             </div>
 
             <div className="space-y-2">
-              <h3 className="text-[15px] font-medium tracking-tight text-gray-900 dark:text-gray-100">
+              <h3 className="text-[15px] font-medium tracking-tight text-foreground dark:text-muted-foreground">
                 {item.title}
-                <span className="ml-2 text-xs font-normal text-gray-500 dark:text-gray-400">
+                <span className="ml-2 text-xs font-normal text-muted-foreground dark:text-muted-foreground">
                   {item.meta}
                 </span>
               </h3>
-              <p className="text-sm leading-snug font-[425] text-gray-600 dark:text-gray-300">
+              <p className="text-sm leading-snug font-[425] text-muted-foreground dark:text-muted-foreground">
                 {item.description}
               </p>
             </div>
 
             <div className="mt-2 flex items-center justify-between">
-              <div className="flex items-center space-x-2 text-xs text-gray-500 dark:text-gray-400">
+              <div className="flex items-center space-x-2 text-xs text-muted-foreground dark:text-muted-foreground">
                 {item.tags?.map((tag, i) => (
                   <span
                     key={i}
-                    className="rounded-md bg-black/5 px-2 py-1 backdrop-blur-sm transition-all duration-200 hover:bg-black/10 dark:bg-white/10 dark:hover:bg-white/20"
+                    className="rounded-md bg-black/5 px-2 py-1 backdrop-blur-sm transition-all duration-200 hover:bg-black/10 dark:bg-muted/20 dark:hover:bg-muted/30"
                   >
                     #{tag}
                   </span>
                 ))}
               </div>
-              <span className="text-xs text-gray-500 opacity-0 transition-opacity group-hover:opacity-100 dark:text-gray-400">
+              <span className="text-xs text-muted-foreground opacity-0 transition-opacity group-hover:opacity-100 dark:text-muted-foreground">
                 {item.cta || "Explore →"}
               </span>
             </div>

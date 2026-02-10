@@ -511,7 +511,7 @@ const DataExport: React.FC<DataExportProps> = ({ data, className = "" }) => {
       <CardContent className="space-y-6">
         {/* Format Selection */}
         <div>
-          <label className="mb-3 block text-sm font-medium text-slate-700 dark:text-slate-300">
+          <label className="mb-3 block text-sm font-medium text-foreground/80">
             Export Format
           </label>
           <Select
@@ -530,7 +530,7 @@ const DataExport: React.FC<DataExportProps> = ({ data, className = "" }) => {
                     {format.icon}
                     <div>
                       <div className="font-medium">{format.label}</div>
-                      <div className="text-xs text-slate-500">
+                      <div className="text-xs text-muted-foreground">
                         {format.description}
                       </div>
                     </div>
@@ -543,7 +543,7 @@ const DataExport: React.FC<DataExportProps> = ({ data, className = "" }) => {
 
         {/* Export Options */}
         <div className="space-y-4">
-          <h4 className="text-sm font-medium text-slate-700 dark:text-slate-300">
+          <h4 className="text-sm font-medium text-foreground/80">
             Export Options
           </h4>
 
@@ -617,7 +617,7 @@ const DataExport: React.FC<DataExportProps> = ({ data, className = "" }) => {
 
         {/* Severity Filter */}
         <div>
-          <h4 className="mb-3 text-sm font-medium text-slate-700 dark:text-slate-300">
+          <h4 className="mb-3 text-sm font-medium text-foreground/80">
             Filter by Severity (optional)
           </h4>
           <div className="flex flex-wrap gap-2">
@@ -637,7 +637,7 @@ const DataExport: React.FC<DataExportProps> = ({ data, className = "" }) => {
             ))}
           </div>
           {options.filterBySeverity.length > 0 && (
-            <p className="mt-2 text-xs text-slate-500">
+            <p className="mt-2 text-xs text-muted-foreground">
               {filteredIssueCount} of {data.issues.length} issues will be
               exported
             </p>
@@ -657,7 +657,7 @@ const DataExport: React.FC<DataExportProps> = ({ data, className = "" }) => {
 
         {/* Last Export Info */}
         {lastExport && !isExporting && (
-          <div className="flex items-center gap-2 text-sm text-slate-600 dark:text-slate-400">
+          <div className="flex items-center gap-2 text-sm text-muted-foreground">
             <CheckCircle className="h-4 w-4 text-green-600" />
             <span>
               Last exported as {lastExport.format} on{" "}
@@ -687,7 +687,7 @@ const DataExport: React.FC<DataExportProps> = ({ data, className = "" }) => {
         </Button>
 
         {data.issues.length === 0 && (
-          <p className="text-center text-sm text-slate-500">
+          <p className="text-center text-sm text-muted-foreground">
             No analysis results available to export.
           </p>
         )}

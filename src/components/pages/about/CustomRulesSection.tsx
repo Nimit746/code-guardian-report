@@ -27,7 +27,7 @@ export const CustomRulesSection: React.FC = () => {
     <div className="space-y-8">
       {/* Section Header */}
       <div className="text-center">
-        <h2 className="mb-4 bg-gradient-to-r from-green-600 to-blue-600 bg-clip-text text-3xl font-bold text-transparent md:text-4xl">
+        <h2 className="mb-4 bg-primary bg-clip-text text-3xl font-bold text-transparent md:text-4xl">
           Custom Rules Engine
         </h2>
         <p className="text-muted-foreground mx-auto max-w-3xl text-lg">
@@ -51,9 +51,9 @@ export const CustomRulesSection: React.FC = () => {
           </CardContent>
         </Card>
 
-        <Card className="border-2 transition-colors duration-300 hover:border-blue-500">
+        <Card className="border-2 transition-colors duration-300 hover:border-primary">
           <CardHeader>
-            <Target className="mb-2 h-8 w-8 text-blue-600" />
+            <Target className="mb-2 h-8 w-8 text-primary" />
             <CardTitle>Company Policies</CardTitle>
           </CardHeader>
           <CardContent>
@@ -214,7 +214,7 @@ export const CustomRulesSection: React.FC = () => {
 
             <div>
               <h4 className="text-foreground mb-2 flex items-center gap-2 font-semibold">
-                <CheckCircle2 className="h-4 w-4 text-blue-600" />
+                <CheckCircle2 className="h-4 w-4 text-primary" />
                 Best Practices
               </h4>
               <ul className="text-muted-foreground space-y-1 text-sm">
@@ -227,7 +227,7 @@ export const CustomRulesSection: React.FC = () => {
 
             <div>
               <h4 className="text-foreground mb-2 flex items-center gap-2 font-semibold">
-                <Building2 className="h-4 w-4 text-slate-600" />
+                <Building2 className="h-4 w-4 text-muted-foreground" />
                 Compliance
               </h4>
               <ul className="text-muted-foreground space-y-1 text-sm">

@@ -56,7 +56,7 @@ export function CopilotAnalyticsDashboard() {
   if (!analytics) {
     return (
       <div className="flex items-center justify-center p-8">
-        <RefreshCw className="h-6 w-6 animate-spin text-blue-600" />
+        <RefreshCw className="h-6 w-6 animate-spin text-primary" />
         <span className="text-muted-foreground ml-2 text-sm">
           Loading analytics...
         </span>
@@ -103,8 +103,8 @@ export function CopilotAnalyticsDashboard() {
                 <p className="text-muted-foreground text-sm">Total Requests</p>
                 <p className="text-2xl font-bold">{analytics.totalRequests}</p>
               </div>
-              <div className="rounded-full bg-blue-100 p-3 dark:bg-blue-900/30">
-                <BarChart3 className="h-6 w-6 text-blue-600 dark:text-blue-400" />
+              <div className="rounded-full bg-teal-100 p-3 dark:bg-teal-900/30">
+                <BarChart3 className="h-6 w-6 text-primary dark:text-primary" />
               </div>
             </div>
             <div className="text-muted-foreground mt-2 flex items-center text-xs">
@@ -180,7 +180,7 @@ export function CopilotAnalyticsDashboard() {
         </CardHeader>
         <CardContent className="space-y-4">
           <div className="grid grid-cols-1 gap-4 md:grid-cols-3">
-            <div className="rounded-lg border border-blue-200 bg-blue-50 p-4 dark:border-blue-800 dark:bg-blue-950/20">
+            <div className="rounded-lg border border-border bg-muted p-4 dark:border-border dark:bg-blue-950/20">
               <p className="text-muted-foreground mb-1 text-xs">
                 Fastest Model
               </p>
@@ -227,7 +227,7 @@ export function CopilotAnalyticsDashboard() {
             {Object.values(analytics.modelStats).map((stats) => (
               <div
                 key={stats.modelId}
-                className="rounded-lg border p-4 transition-colors hover:bg-gray-50 dark:hover:bg-gray-800/50"
+                className="rounded-lg border p-4 transition-colors hover:bg-muted/50 dark:hover:bg-foreground/50"
               >
                 <div className="mb-3 flex items-center justify-between">
                   <div>

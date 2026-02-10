@@ -60,23 +60,23 @@ export const SecurityAnalyticsSection: React.FC<
           {Array.from({ length: 4 }).map((_, i) => (
             <Card key={i} className="border-border p-6">
               <div className="mb-4 flex items-start justify-between">
-                <div className="h-10 w-10 animate-pulse rounded-lg bg-slate-100 dark:bg-slate-800"></div>
-                <div className="h-4 w-4 animate-pulse rounded bg-slate-100 dark:bg-slate-800"></div>
+                <div className="h-10 w-10 animate-pulse rounded-lg bg-muted"></div>
+                <div className="h-4 w-4 animate-pulse rounded bg-muted"></div>
               </div>
-              <div className="mb-2 h-8 w-16 animate-pulse rounded bg-slate-100 dark:bg-slate-800"></div>
-              <div className="h-4 w-28 animate-pulse rounded bg-slate-100 dark:bg-slate-800"></div>
+              <div className="mb-2 h-8 w-16 animate-pulse rounded bg-muted"></div>
+              <div className="h-4 w-28 animate-pulse rounded bg-muted"></div>
             </Card>
           ))}
         </div>
         {detailed && (
           <Card className="border-border p-6">
-            <div className="mb-6 h-6 w-48 animate-pulse rounded bg-slate-100 dark:bg-slate-800"></div>
+            <div className="mb-6 h-6 w-48 animate-pulse rounded bg-muted"></div>
             <div className="space-y-4">
               {Array.from({ length: 5 }).map((_, i) => (
                 <div key={i} className="flex items-center gap-4">
-                  <div className="h-4 w-24 animate-pulse rounded bg-slate-100 dark:bg-slate-800"></div>
-                  <div className="h-3 flex-1 animate-pulse rounded-full bg-slate-100 dark:bg-slate-800"></div>
-                  <div className="h-4 w-12 animate-pulse rounded bg-slate-100 dark:bg-slate-800"></div>
+                  <div className="h-4 w-24 animate-pulse rounded bg-muted"></div>
+                  <div className="h-3 flex-1 animate-pulse rounded-full bg-muted"></div>
+                  <div className="h-4 w-12 animate-pulse rounded bg-muted"></div>
                 </div>
               ))}
             </div>
@@ -91,21 +91,21 @@ export const SecurityAnalyticsSection: React.FC<
       <div className="space-y-8">
         <div>
           <h2 className="text-foreground mb-2 flex items-center gap-2 text-2xl font-bold">
-            <Shield className="h-6 w-6 text-blue-600 dark:text-blue-400" />
+            <Shield className="h-6 w-6 text-primary dark:text-primary" />
             Security Analytics
           </h2>
-          <p className="text-slate-600 dark:text-slate-400">
+          <p className="text-muted-foreground">
             Comprehensive overview of your security posture and trends
           </p>
         </div>
-        <Card className="border-2 border-dashed border-slate-200 bg-slate-50/50 p-12 text-center dark:border-slate-800 dark:bg-slate-900/50">
-          <div className="mx-auto mb-4 flex h-16 w-16 items-center justify-center rounded-full bg-blue-100 dark:bg-blue-900/30">
-            <Shield className="h-8 w-8 text-blue-600 dark:text-blue-400" />
+        <Card className="border-2 border-dashed border-border bg-muted/50 p-12 text-center/50">
+          <div className="mx-auto mb-4 flex h-16 w-16 items-center justify-center rounded-full bg-teal-100 dark:bg-teal-900/30">
+            <Shield className="h-8 w-8 text-primary dark:text-primary" />
           </div>
           <h3 className="text-foreground mb-2 text-xl font-semibold">
             No Security Data Yet
           </h3>
-          <p className="mx-auto max-w-md text-slate-500 dark:text-slate-400">
+          <p className="mx-auto max-w-md text-muted-foreground">
             Analyze your first repository to see security analytics. Go to the
             Repositories tab and analyze a GitHub repository to get started.
           </p>
@@ -117,20 +117,20 @@ export const SecurityAnalyticsSection: React.FC<
     <div className="space-y-8">
       <div>
         <h2 className="text-foreground mb-2 flex items-center gap-2 text-2xl font-bold">
-          <Shield className="h-6 w-6 text-blue-600 dark:text-blue-400" />
+          <Shield className="h-6 w-6 text-primary dark:text-primary" />
           Security Analytics
         </h2>
-        <p className="text-slate-600 dark:text-slate-400">
+        <p className="text-muted-foreground">
           Comprehensive overview of your security posture and trends
         </p>
       </div>
 
       {/* Stats Cards */}
       <div className="grid grid-cols-1 gap-4 sm:grid-cols-2 sm:gap-6 lg:grid-cols-4">
-        <Card className="group border-border p-6 transition-all duration-300 hover:shadow-lg dark:border-slate-800">
+        <Card className="group border-border p-6 transition-all duration-300 hover:shadow-lg">
           <div className="mb-4 flex items-center justify-between">
-            <div className="rounded-xl bg-blue-50 p-3 transition-transform duration-300 group-hover:scale-110 dark:bg-blue-900/20">
-              <Activity className="h-6 w-6 text-blue-600 dark:text-blue-400" />
+            <div className="rounded-xl bg-muted p-3 transition-transform duration-300 group-hover:scale-110 dark:bg-teal-900/20">
+              <Activity className="h-6 w-6 text-primary dark:text-primary" />
             </div>
             {stats.trend === "up" ? (
               <div className="flex items-center rounded-full bg-green-50 px-2 py-1 text-sm font-medium text-green-600 dark:bg-green-900/20">
@@ -147,12 +147,12 @@ export const SecurityAnalyticsSection: React.FC<
           <div className="text-foreground mb-1 text-3xl font-bold tracking-tight">
             {stats.averageScore.toFixed(1)}
           </div>
-          <div className="text-sm font-medium text-slate-500 dark:text-slate-400">
+          <div className="text-sm font-medium text-muted-foreground">
             Average Security Score
           </div>
         </Card>
 
-        <Card className="group border-border p-6 transition-all duration-300 hover:shadow-lg dark:border-slate-800">
+        <Card className="group border-border p-6 transition-all duration-300 hover:shadow-lg">
           <div className="mb-4 flex items-center justify-between">
             <div className="rounded-xl bg-yellow-50 p-3 transition-transform duration-300 group-hover:scale-110 dark:bg-yellow-900/20">
               <AlertTriangle className="h-6 w-6 text-yellow-600 dark:text-yellow-400" />
@@ -161,12 +161,12 @@ export const SecurityAnalyticsSection: React.FC<
           <div className="text-foreground mb-1 text-3xl font-bold tracking-tight">
             {stats.totalIssues.toLocaleString()}
           </div>
-          <div className="text-sm font-medium text-slate-500 dark:text-slate-400">
+          <div className="text-sm font-medium text-muted-foreground">
             Total Issues Found
           </div>
         </Card>
 
-        <Card className="group border-border p-6 transition-all duration-300 hover:shadow-lg dark:border-slate-800">
+        <Card className="group border-border p-6 transition-all duration-300 hover:shadow-lg">
           <div className="mb-4 flex items-center justify-between">
             <div className="rounded-xl bg-red-50 p-3 transition-transform duration-300 group-hover:scale-110 dark:bg-red-900/20">
               <Shield className="h-6 w-6 text-red-600 dark:text-red-400" />
@@ -175,12 +175,12 @@ export const SecurityAnalyticsSection: React.FC<
           <div className="text-foreground mb-1 text-3xl font-bold tracking-tight">
             {stats.criticalIssues.toLocaleString()}
           </div>
-          <div className="text-sm font-medium text-slate-500 dark:text-slate-400">
+          <div className="text-sm font-medium text-muted-foreground">
             Critical Issues
           </div>
         </Card>
 
-        <Card className="group border-border p-6 transition-all duration-300 hover:shadow-lg dark:border-slate-800">
+        <Card className="group border-border p-6 transition-all duration-300 hover:shadow-lg">
           <div className="mb-4 flex items-center justify-between">
             <div className="rounded-xl bg-green-50 p-3 transition-transform duration-300 group-hover:scale-110 dark:bg-green-900/20">
               <CheckCircle className="h-6 w-6 text-green-600 dark:text-green-400" />
@@ -189,7 +189,7 @@ export const SecurityAnalyticsSection: React.FC<
           <div className="text-foreground mb-1 text-3xl font-bold tracking-tight">
             {trends.length.toLocaleString()}
           </div>
-          <div className="text-sm font-medium text-slate-500 dark:text-slate-400">
+          <div className="text-sm font-medium text-muted-foreground">
             Analyses Completed
           </div>
         </Card>
@@ -203,20 +203,20 @@ export const SecurityAnalyticsSection: React.FC<
               <h3 className="text-foreground mb-1 text-lg font-bold">
                 Security Score Trend
               </h3>
-              <p className="text-sm text-slate-500">
+              <p className="text-sm text-muted-foreground">
                 Historical performance of your repository security scores
               </p>
             </div>
             <div className="flex gap-2">
-              <div className="flex items-center text-xs text-slate-500">
+              <div className="flex items-center text-xs text-muted-foreground">
                 <div className="mr-1 h-2 w-2 rounded-full bg-green-500"></div>{" "}
                 Excellent
               </div>
-              <div className="flex items-center text-xs text-slate-500">
+              <div className="flex items-center text-xs text-muted-foreground">
                 <div className="mr-1 h-2 w-2 rounded-full bg-yellow-500"></div>{" "}
                 Good
               </div>
-              <div className="flex items-center text-xs text-slate-500">
+              <div className="flex items-center text-xs text-muted-foreground">
                 <div className="mr-1 h-2 w-2 rounded-full bg-red-500"></div>{" "}
                 Poor
               </div>
@@ -227,19 +227,19 @@ export const SecurityAnalyticsSection: React.FC<
             {trends.slice(0, 10).map((trend, index) => (
               <div key={index} className="group">
                 <div className="mb-2 flex items-end justify-between text-sm">
-                  <span className="font-medium text-slate-700 dark:text-slate-300">
+                  <span className="font-medium text-foreground/80">
                     {new Date(trend.date).toLocaleDateString(undefined, {
                       month: "short",
                       day: "numeric",
                       year: "numeric",
                     })}
                   </span>
-                  <span className="text-slate-500">
+                  <span className="text-muted-foreground">
                     {trend.issues} issues found
                   </span>
                 </div>
                 <div className="flex items-center gap-4">
-                  <div className="h-3 flex-1 overflow-hidden rounded-full bg-slate-100 dark:bg-slate-800">
+                  <div className="h-3 flex-1 overflow-hidden rounded-full bg-muted">
                     <div
                       className={cn(
                         "relative h-full rounded-full transition-all duration-1000 ease-out",

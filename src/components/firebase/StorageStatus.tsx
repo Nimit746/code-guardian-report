@@ -110,7 +110,7 @@ export const StorageStatus: React.FC<StorageStatusProps> = ({
     <Card className="bg-card/95 w-full border-0 shadow-lg backdrop-blur-sm">
       <CardHeader className="pb-4">
         <CardTitle className="flex items-center gap-2 text-lg">
-          <Database className="h-5 w-5 text-blue-600" />
+          <Database className="h-5 w-5 text-primary" />
           Analysis Storage Status
         </CardTitle>
       </CardHeader>
@@ -118,7 +118,7 @@ export const StorageStatus: React.FC<StorageStatusProps> = ({
         {/* Current Analysis Info */}
         {hasStoredData && storedAnalysis ? (
           <div className="space-y-4">
-            <Alert className="border-l-4 border-l-blue-500 bg-blue-50 dark:bg-blue-950/20">
+            <Alert className="border-l-4 border-l-blue-500 bg-muted dark:bg-blue-950/20">
               <FileText className="h-4 w-4" />
               <AlertDescription>
                 <div className="space-y-2">
@@ -145,7 +145,7 @@ export const StorageStatus: React.FC<StorageStatusProps> = ({
                   {storedAnalysis.compressed && (
                     <Badge
                       variant="outline"
-                      className="border-blue-600 text-blue-600"
+                      className="border-blue-600 text-primary"
                     >
                       <Zap className="mr-1 h-3 w-3" />
                       Compressed
@@ -156,9 +156,9 @@ export const StorageStatus: React.FC<StorageStatusProps> = ({
             </Alert>
           </div>
         ) : (
-          <Alert className="border-l-4 border-l-gray-400 bg-gray-50 dark:bg-gray-950/20">
+          <Alert className="border-l-4 border-l-gray-400 bg-muted/50 dark:bg-gray-950/20">
             <FileText className="h-4 w-4" />
-            <AlertDescription className="text-gray-700 dark:text-gray-300">
+            <AlertDescription className="text-foreground dark:text-muted-foreground">
               No analysis data currently stored. Upload and analyze a file to
               enable persistent storage.
             </AlertDescription>
@@ -169,7 +169,7 @@ export const StorageStatus: React.FC<StorageStatusProps> = ({
         <div className="space-y-4">
           <div className="flex items-center justify-between">
             <div className="flex items-center gap-2">
-              <HardDrive className="h-4 w-4 text-slate-600" />
+              <HardDrive className="h-4 w-4 text-muted-foreground" />
               <span className="font-medium">Storage Usage</span>
             </div>
             {getStorageStatusBadge(storageStats.usagePercentage)}
@@ -177,7 +177,7 @@ export const StorageStatus: React.FC<StorageStatusProps> = ({
 
           <div className="space-y-2">
             <div className="flex justify-between text-sm">
-              <span className="text-slate-600 dark:text-slate-400">
+              <span className="text-muted-foreground">
                 {formatBytes(storageStats.currentSize)} /{" "}
                 {formatBytes(storageStats.maxSize)}
               </span>
@@ -191,20 +191,20 @@ export const StorageStatus: React.FC<StorageStatusProps> = ({
           </div>
 
           <div className="grid grid-cols-2 gap-4 pt-2">
-            <div className="rounded-lg bg-slate-50 p-3 text-center dark:bg-slate-700/50">
+            <div className="rounded-lg bg-muted p-3 text-center dark:bg-slate-700/50">
               <div className="text-foreground text-2xl font-bold">
                 {storageStats.historyCount}
               </div>
-              <div className="text-sm text-slate-600 dark:text-slate-400">
+              <div className="text-sm text-muted-foreground">
                 History Items
               </div>
             </div>
             {storageStats.compressionRatio && (
-              <div className="rounded-lg bg-slate-50 p-3 text-center dark:bg-slate-700/50">
+              <div className="rounded-lg bg-muted p-3 text-center dark:bg-slate-700/50">
                 <div className="text-foreground text-2xl font-bold">
                   {(storageStats.compressionRatio * 100).toFixed(0)}%
                 </div>
-                <div className="text-sm text-slate-600 dark:text-slate-400">
+                <div className="text-sm text-muted-foreground">
                   Compression
                 </div>
               </div>
@@ -217,7 +217,7 @@ export const StorageStatus: React.FC<StorageStatusProps> = ({
           <div className="grid grid-cols-1 gap-3 md:grid-cols-2">
             {/* Export Options */}
             <div className="space-y-2">
-              <label className="text-sm font-medium text-slate-700 dark:text-slate-300">
+              <label className="text-sm font-medium text-foreground/80">
                 Export Analysis
               </label>
               <div className="flex gap-2">
@@ -246,7 +246,7 @@ export const StorageStatus: React.FC<StorageStatusProps> = ({
 
             {/* Import Option */}
             <div className="space-y-2">
-              <label className="text-sm font-medium text-slate-700 dark:text-slate-300">
+              <label className="text-sm font-medium text-foreground/80">
                 Import Analysis
               </label>
               <div className="relative">

@@ -26,9 +26,9 @@ export function CopilotModelSelector() {
       <PopoverTrigger asChild>
         <Button
           variant="outline"
-          className="flex items-center space-x-2 border-blue-200 bg-gradient-to-r from-blue-50 to-purple-50 hover:from-blue-100 hover:to-purple-100 dark:border-blue-800 dark:from-blue-950/30 dark:to-purple-950/30 dark:hover:from-blue-950/50 dark:hover:to-purple-950/50"
+          className="flex items-center space-x-2 border-border bg-gradient-to-r from-blue-50 to-purple-50 hover:from-blue-100 hover:to-purple-100 dark:border-border dark:from-blue-950/30 dark:to-purple-950/30 dark:hover:from-blue-950/50 dark:hover:to-purple-950/50"
         >
-          <Sparkles className="h-4 w-4 text-blue-600 dark:text-blue-400" />
+          <Sparkles className="h-4 w-4 text-primary dark:text-primary" />
           <span className="text-sm font-medium">
             {selectedModel?.name || "Select Model"}
           </span>
@@ -53,8 +53,8 @@ export function CopilotModelSelector() {
                   onClick={() => selectModel(model.id)}
                   className={`w-full rounded-lg border p-3 text-left transition-all ${
                     isSelected
-                      ? "border-blue-500 bg-blue-50 dark:bg-blue-950/30"
-                      : "border-gray-200 hover:border-blue-300 hover:bg-gray-50 dark:border-gray-700 dark:hover:border-blue-700 dark:hover:bg-gray-800"
+                      ? "border-primary bg-muted dark:bg-blue-950/30"
+                      : "border-border hover:border-teal-300 hover:bg-muted/50 dark:border-border dark:hover:border-blue-700 dark:hover:bg-foreground"
                   }`}
                 >
                   <div className="flex items-start justify-between">
@@ -64,7 +64,7 @@ export function CopilotModelSelector() {
                           {model.name}
                         </span>
                         {isSelected && (
-                          <CheckCircle className="h-4 w-4 text-blue-600 dark:text-blue-400" />
+                          <CheckCircle className="h-4 w-4 text-primary dark:text-primary" />
                         )}
                       </div>
                       <p className="text-muted-foreground line-clamp-2 text-xs">

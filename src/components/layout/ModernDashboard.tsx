@@ -48,7 +48,7 @@ export const ModernDashboard: React.FC<ModernDashboardProps> = ({
         <h2 className="gradient-text-blue text-3xl font-bold sm:text-4xl">
           Analysis Dashboard
         </h2>
-        <p className="mx-auto max-w-2xl text-slate-600 dark:text-slate-400">
+        <p className="mx-auto max-w-2xl text-muted-foreground">
           Comprehensive overview of your code analysis results with AI-powered
           insights
         </p>
@@ -149,7 +149,7 @@ export const ModernDashboard: React.FC<ModernDashboardProps> = ({
             <EnhancedCardTitle gradient={true} size="lg">
               Issue Breakdown
             </EnhancedCardTitle>
-            <p className="text-slate-600 dark:text-slate-400">
+            <p className="text-muted-foreground">
               Distribution of issues by severity level
             </p>
           </EnhancedCardHeader>
@@ -193,21 +193,21 @@ export const ModernDashboard: React.FC<ModernDashboardProps> = ({
                 </span>
               </div>
 
-              <div className="flex items-center justify-between rounded-xl bg-blue-50 p-4 dark:bg-blue-900/20">
+              <div className="flex items-center justify-between rounded-xl bg-muted p-4 dark:bg-teal-900/20">
                 <div className="flex items-center gap-3">
-                  <div className="rounded-lg bg-blue-100 p-2 dark:bg-blue-900/40">
-                    <CheckCircle className="h-5 w-5 text-blue-600 dark:text-blue-400" />
+                  <div className="rounded-lg bg-teal-100 p-2 dark:bg-teal-900/40">
+                    <CheckCircle className="h-5 w-5 text-primary dark:text-primary" />
                   </div>
                   <div>
                     <p className="font-semibold text-blue-900 dark:text-blue-100">
                       Info
                     </p>
-                    <p className="text-sm text-blue-600 dark:text-blue-400">
+                    <p className="text-sm text-primary dark:text-primary">
                       Minor improvements
                     </p>
                   </div>
                 </div>
-                <span className="text-2xl font-bold text-blue-600 dark:text-blue-400">
+                <span className="text-2xl font-bold text-primary dark:text-primary">
                   {metrics.infoIssues}
                 </span>
               </div>
@@ -226,7 +226,7 @@ export const ModernDashboard: React.FC<ModernDashboardProps> = ({
             <EnhancedCardTitle gradient={true} size="lg">
               Performance Insights
             </EnhancedCardTitle>
-            <p className="text-slate-600 dark:text-slate-400">
+            <p className="text-muted-foreground">
               Analysis performance and optimization metrics
             </p>
           </EnhancedCardHeader>
@@ -239,7 +239,7 @@ export const ModernDashboard: React.FC<ModernDashboardProps> = ({
                   </div>
                   <div>
                     <p className="font-semibold">Analysis Speed</p>
-                    <p className="text-sm text-slate-600 dark:text-slate-400">
+                    <p className="text-sm text-muted-foreground">
                       Lines per second
                     </p>
                   </div>
@@ -256,7 +256,7 @@ export const ModernDashboard: React.FC<ModernDashboardProps> = ({
                   </div>
                   <div>
                     <p className="font-semibold">Memory Usage</p>
-                    <p className="text-sm text-slate-600 dark:text-slate-400">
+                    <p className="text-sm text-muted-foreground">
                       Peak consumption
                     </p>
                   </div>
@@ -268,12 +268,12 @@ export const ModernDashboard: React.FC<ModernDashboardProps> = ({
 
               <div className="flex items-center justify-between">
                 <div className="flex items-center gap-3">
-                  <div className="rounded-lg bg-blue-100 p-2 dark:bg-blue-900/40">
-                    <TrendingUp className="h-5 w-5 text-blue-600 dark:text-blue-400" />
+                  <div className="rounded-lg bg-teal-100 p-2 dark:bg-teal-900/40">
+                    <TrendingUp className="h-5 w-5 text-primary dark:text-primary" />
                   </div>
                   <div>
                     <p className="font-semibold">Efficiency Score</p>
-                    <p className="text-sm text-slate-600 dark:text-slate-400">
+                    <p className="text-sm text-muted-foreground">
                       Overall performance
                     </p>
                   </div>

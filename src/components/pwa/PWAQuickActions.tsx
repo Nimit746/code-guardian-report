@@ -90,7 +90,7 @@ export function PWAQuickActions({
 
   // Status indicator color
   const getStatusColor = () => {
-    if (!status.serviceWorkerReady) return "bg-gray-400";
+    if (!status.serviceWorkerReady) return "bg-muted";
     if (!isOnline) return "bg-orange-500";
     return "bg-green-500";
   };
@@ -115,14 +115,14 @@ export function PWAQuickActions({
       </PopoverTrigger>
 
       <PopoverContent
-        className="w-72 border-slate-200 bg-white p-3 shadow-xl dark:border-slate-800 dark:bg-slate-950"
+        className="w-72 border-border bg-card p-3 shadow-xl"
         align="end"
       >
         <div className="space-y-3">
           {/* Header */}
           <div className="flex items-center justify-between">
             <h4 className="flex items-center gap-2 text-sm font-semibold">
-              <Zap className="h-4 w-4 text-blue-600" />
+              <Zap className="h-4 w-4 text-primary" />
               Quick Actions
             </h4>
             <Badge
@@ -200,12 +200,12 @@ export function PWAQuickActions({
               <span className="flex items-center gap-1">
                 {status.serviceWorkerReady ? (
                   <>
-                    <Cloud className="h-3 w-3 text-green-500" />
+                    <Cloud className="h-3 w-3 text-primary" />
                     Service Worker Ready
                   </>
                 ) : (
                   <>
-                    <CloudOff className="h-3 w-3 text-gray-400" />
+                    <CloudOff className="h-3 w-3 text-muted-foreground" />
                     Initializing...
                   </>
                 )}
@@ -213,7 +213,7 @@ export function PWAQuickActions({
 
               {status.backgroundSyncSupported && (
                 <span className="flex items-center gap-1">
-                  <RefreshCw className="h-3 w-3 text-blue-500" />
+                  <RefreshCw className="h-3 w-3 text-primary" />
                   Sync Available
                 </span>
               )}
@@ -257,7 +257,7 @@ function ActionButton({
   const variantStyles = {
     default: "bg-muted hover:bg-muted/80",
     primary:
-      "bg-blue-100 hover:bg-blue-200 text-blue-700 dark:bg-blue-900/30 dark:hover:bg-blue-900/50 dark:text-blue-300",
+      "bg-teal-100 hover:bg-blue-200 text-teal-600 dark:bg-teal-900/30 dark:hover:bg-teal-900/50 dark:text-teal-300",
     success:
       "bg-green-100 text-green-700 dark:bg-green-900/30 dark:text-green-300",
   };

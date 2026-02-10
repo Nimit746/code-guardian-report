@@ -19,7 +19,7 @@ export const AboutSection: React.FC = () => {
   return (
     <section
       id="about"
-      className="relative min-h-screen overflow-hidden bg-white dark:bg-slate-950"
+      className="relative min-h-screen overflow-hidden bg-background"
     >
       <AnimatedBackground />
 

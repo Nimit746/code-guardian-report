@@ -17,18 +17,18 @@ export const MetricsCards: React.FC<MetricsCardsProps> = ({
 }) => {
   return (
     <div className="grid grid-cols-2 gap-3 sm:gap-4 lg:grid-cols-4">
-      <Card className="card-hover border-blue-200 bg-gradient-to-br from-blue-50 to-indigo-50 dark:border-blue-800 dark:from-blue-950/20 dark:to-indigo-950/20">
+      <Card className="card-hover border-border bg-muted/50 dark:border-border dark:from-blue-950/20 dark:to-indigo-950/20">
         <CardContent className="p-3 sm:p-4">
           <div className="flex items-center justify-between">
             <div>
               <p className="text-lg font-bold text-blue-800 sm:text-2xl dark:text-blue-200">
                 {totalIssues}
               </p>
-              <p className="text-xs text-blue-600 sm:text-sm dark:text-blue-400">
+              <p className="text-xs text-primary sm:text-sm dark:text-primary">
                 Total Issues
               </p>
             </div>
-            <AlertTriangle className="h-6 w-6 text-blue-600 sm:h-8 sm:w-8 dark:text-blue-400" />
+            <AlertTriangle className="h-6 w-6 text-primary sm:h-8 sm:w-8 dark:text-primary" />
           </div>
         </CardContent>
       </Card>

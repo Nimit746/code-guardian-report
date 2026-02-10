@@ -53,14 +53,14 @@ const SUPPORTED_LANGUAGES = [
     name: "TypeScript",
     iconLabel: "TS",
     extensions: [".ts", ".tsx", ".d.ts"],
-    color: "bg-blue-500",
+    color: "bg-muted0",
     ecosystem: "Web",
   },
   {
     name: "Python",
     iconLabel: "PY",
     extensions: [".py", ".pyw", ".pyi"],
-    color: "bg-blue-600",
+    color: "bg-primary",
     ecosystem: "Backend / Data Science",
   },
   {
@@ -81,7 +81,7 @@ const SUPPORTED_LANGUAGES = [
     name: "C",
     iconLabel: "C",
     extensions: [".c", ".h"],
-    color: "bg-gray-600",
+    color: "bg-muted-foreground",
     ecosystem: "Systems / Embedded",
   },
   {
@@ -222,17 +222,17 @@ export const MultiLanguageSupportDisplay: React.FC<
         </CardHeader>
         <CardContent>
           <div className="grid grid-cols-1 gap-4 md:grid-cols-3">
-            <div className="rounded-lg bg-blue-50 p-4 dark:bg-blue-950">
+            <div className="rounded-lg bg-muted p-4 dark:bg-blue-950">
               <div className="mb-2 flex items-center gap-2">
-                <Code2 className="h-5 w-5 text-blue-600" />
+                <Code2 className="h-5 w-5 text-primary" />
                 <span className="font-semibold text-blue-900 dark:text-blue-100">
                   Supported Languages
                 </span>
               </div>
-              <p className="text-3xl font-bold text-blue-600">
+              <p className="text-3xl font-bold text-primary">
                 {SUPPORTED_LANGUAGES.length}
               </p>
-              <p className="mt-1 text-sm text-blue-700 dark:text-blue-300">
+              <p className="mt-1 text-sm text-teal-600 dark:text-teal-300">
                 JavaScript, TypeScript, Python, Java, C++, C, Go, Rust, PHP, C#,
                 Ruby, Swift, Kotlin
               </p>
@@ -410,7 +410,7 @@ export const MultiLanguageSupportDisplay: React.FC<
                           )}
                         </div>
                       </div>
-                      <CheckCircle2 className="h-5 w-5 text-green-500" />
+                      <CheckCircle2 className="h-5 w-5 text-primary" />
                     </div>
                   </div>
                 );
@@ -429,7 +429,7 @@ export const MultiLanguageSupportDisplay: React.FC<
           <div className="grid grid-cols-1 gap-6 md:grid-cols-3">
             <div>
               <div className="mb-2 flex items-center gap-2">
-                <TrendingUp className="h-6 w-6 text-blue-600" />
+                <TrendingUp className="h-6 w-6 text-primary" />
                 <h4 className="font-semibold">Broader Market Appeal</h4>
               </div>
               <p className="text-muted-foreground text-sm">

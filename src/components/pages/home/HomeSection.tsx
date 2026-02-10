@@ -127,7 +127,7 @@ export const HomeSection: React.FC = () => {
   return (
     <section
       id="home"
-      className="relative min-h-screen overflow-hidden bg-white dark:bg-slate-950"
+      className="relative min-h-screen overflow-hidden bg-background"
     >
       <AnimatedBackground />
       <PageLayout showNavigation={false}>
@@ -147,7 +147,7 @@ export const HomeSection: React.FC = () => {
           <div className="mx-auto mb-6 max-w-6xl">
             <Suspense
               fallback={
-                <div className="h-32 animate-pulse rounded-lg bg-gray-100 dark:bg-gray-800"></div>
+                <div className="h-32 animate-pulse rounded-lg bg-muted dark:bg-foreground"></div>
               }
             >
               <StorageStatus

@@ -66,7 +66,7 @@ export const SecuritySummaryCards: React.FC<SecuritySummaryCardsProps> = ({
                     >
                       {results.summary.securityScore}
                     </p>
-                    <p className="truncate text-sm text-slate-600 dark:text-slate-400">
+                    <p className="truncate text-sm text-muted-foreground">
                       Security Score
                     </p>
                   </div>
@@ -114,17 +114,17 @@ export const SecuritySummaryCards: React.FC<SecuritySummaryCardsProps> = ({
 
         <Tooltip>
           <TooltipTrigger asChild>
-            <Card className="cursor-help border-blue-200 bg-gradient-to-br from-blue-50 to-blue-100 transition-shadow duration-200 hover:shadow-md dark:border-blue-800 dark:from-blue-950/20 dark:to-blue-900/20">
+            <Card className="cursor-help border-border bg-muted/50 transition-shadow duration-200 hover:shadow-md dark:border-border dark:from-blue-950/20 dark:to-blue-900/20">
               <CardContent className="p-4">
                 <div className="flex items-center gap-3">
-                  <div className="rounded-lg bg-blue-500 p-2">
+                  <div className="rounded-lg bg-muted0 p-2">
                     <Target className="h-5 w-5 text-white" />
                   </div>
                   <div>
                     <p className="text-2xl font-bold text-blue-800 dark:text-blue-200">
                       {results.metrics.vulnerabilityDensity}
                     </p>
-                    <p className="text-sm text-blue-600 dark:text-blue-400">
+                    <p className="text-sm text-primary dark:text-primary">
                       Vuln/1000 Lines
                     </p>
                   </div>
@@ -206,7 +206,7 @@ export const SecuritySummaryCards: React.FC<SecuritySummaryCardsProps> = ({
                     >
                       {results.summary.qualityScore}
                     </p>
-                    <p className="text-sm text-slate-600 dark:text-slate-400">
+                    <p className="text-sm text-muted-foreground">
                       Quality Score
                     </p>
                   </div>

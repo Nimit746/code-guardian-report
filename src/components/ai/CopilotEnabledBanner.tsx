@@ -16,10 +16,10 @@ export function CopilotEnabledBanner() {
   }
 
   return (
-    <Alert className="border-2 border-blue-200 bg-gradient-to-r from-blue-50 to-purple-50 dark:border-blue-800 dark:from-blue-950/30 dark:to-purple-950/30">
+    <Alert className="border-2 border-border bg-gradient-to-r from-blue-50 to-purple-50 dark:border-border dark:from-blue-950/30 dark:to-purple-950/30">
       <div className="flex items-start space-x-3">
-        <div className="rounded-full bg-blue-100 p-2 dark:bg-blue-900/30">
-          <Sparkles className="h-5 w-5 text-blue-600 dark:text-blue-400" />
+        <div className="rounded-full bg-teal-100 p-2 dark:bg-teal-900/30">
+          <Sparkles className="h-5 w-5 text-primary dark:text-primary" />
         </div>
         <div className="flex-1">
           <div className="mb-2 flex items-center space-x-2">

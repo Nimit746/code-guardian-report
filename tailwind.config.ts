@@ -101,6 +101,11 @@ const config: Config = {
         md: "0.375rem",
         sm: "0.25rem",
       },
+      fontFamily: {
+        display: ['"Instrument Serif"', 'Georgia', 'serif'],
+        body: ['"Geist Sans"', '"Geist"', 'system-ui', '-apple-system', 'sans-serif'],
+        mono: ['"JetBrains Mono"', '"Fira Code"', 'monospace'],
+      },
       keyframes: {
         "accordion-down": {
           from: { height: "0" },
@@ -110,21 +115,15 @@ const config: Config = {
           from: { height: "var(--radix-accordion-content-height)" },
           to: { height: "0" },
         },
-
-        fade: {
-          "0%": { opacity: "0" },
-          "100%": { opacity: "1" },
-        },
-        slideUp: {
-          "0%": { transform: "translateY(10px)", opacity: "0" },
-          "100%": { transform: "translateY(0)", opacity: "1" },
+        "fade-in": {
+          from: { opacity: "0", transform: "translateY(8px)" },
+          to: { opacity: "1", transform: "translateY(0)" },
         },
       },
       animation: {
         "accordion-down": "accordion-down 0.2s ease-out",
         "accordion-up": "accordion-up 0.2s ease-out",
-        fade: "fade 0.5s ease-out",
-        slideUp: "slideUp 0.5s ease-out",
+        "fade-in": "fade-in 0.6s ease-out both",
       },
       boxShadow: {
         "3xl":

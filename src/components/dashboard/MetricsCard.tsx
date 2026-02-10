@@ -36,8 +36,8 @@ export const MetricsCard: React.FC<MetricsCardProps> = ({
 }) => {
   const colorSchemes = {
     blue: {
-      icon: "text-blue-600 dark:text-blue-400",
-      bg: "bg-blue-50 dark:bg-blue-900/20",
+      icon: "text-primary dark:text-primary",
+      bg: "bg-muted dark:bg-teal-900/20",
       gradient: "from-blue-500 to-indigo-500",
     },
     green: {
@@ -81,7 +81,7 @@ export const MetricsCard: React.FC<MetricsCardProps> = ({
                       ? "bg-emerald-100 text-emerald-700 dark:bg-emerald-900/30 dark:text-emerald-400"
                       : trend === "down"
                         ? "bg-red-100 text-red-700 dark:bg-red-900/30 dark:text-red-400"
-                        : "bg-slate-100 text-slate-700 dark:bg-slate-800 dark:text-slate-400"
+                        : "bg-muted text-foreground/80"
                   )}
                 >
                   {trend === "up" ? (
@@ -95,7 +95,7 @@ export const MetricsCard: React.FC<MetricsCardProps> = ({
             </div>
             <p
               className={cn(
-                "mb-1 text-3xl font-bold transition-all duration-300 group-hover:scale-105",
+                "mb-1 text-3xl font-bold transition-all duration-300 group-",
                 valueClassName || "text-foreground"
               )}
             >

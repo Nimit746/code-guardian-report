@@ -165,7 +165,7 @@
 }
 
 .hover-glow:hover {
-  box-shadow: 0 0 30px rgb(59 130 246 / 30%);
+  box-shadow: 0 4px 16px rgb(0 0 0 / 8%);
   transform: translateY(-2px);
 }
 
@@ -333,7 +333,7 @@
 .modern-card:hover {
   backdrop-filter: blur(20px);
   backdrop-filter: blur(20px);
-  border-color: rgb(59 130 246 / 30%);
+  border-color: rgb(0 0 0 / 10%);
 }
 
 /* Responsive text sizing */

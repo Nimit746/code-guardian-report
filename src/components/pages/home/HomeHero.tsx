@@ -1,138 +1,65 @@
-import React, { useState } from "react";
+import React from "react";
 import { Button } from "@/components/ui/button";
 import { HeroSection } from "@/components/layout/HeroSection";
-import {
-  Shield,
-  Zap,
-  ArrowRight,
-  Sparkles,
-  Brain,
-  Rocket,
-  Globe,
-  ChevronDown,
-  ChevronUp,
-} from "lucide-react";
+import { ArrowRight, Shield } from "lucide-react";
 
 interface HomeHeroProps {
   onStartAnalysis: () => void;
 }
 
 export const HomeHero: React.FC<HomeHeroProps> = ({ onStartAnalysis }) => {
-  const [showFeatures, setShowFeatures] = useState(false);
-
   return (
     <HeroSection
       title=""
-      description="Transform your development workflow with enterprise-grade security analysis that detects vulnerabilities, bugs, and quality issues in real-time with unprecedented accuracy."
+      description=""
       variant="gradient"
-      className="relative flex min-h-[50vh] items-center justify-center px-4 sm:min-h-[55vh] sm:px-6"
+      className="relative flex items-center justify-center px-4 sm:px-6"
     >
-      {/* Revolutionary Background Effects */}
-      <div className="pointer-events-none absolute inset-0 z-0 overflow-hidden">
-        {/* Dynamic Animated Grid */}
-        <div className="bg-grid-slate-100 dark:bg-grid-slate-800 animate-pulse-slow absolute inset-0 opacity-40" />
-      </div>
+      <div className="relative z-10 mx-auto max-w-3xl space-y-8 text-center sm:space-y-10">
+        {/* Tagline */}
+        <div className="animate-fade-in space-y-5">
+          <div className="inline-flex items-center gap-2 rounded-full border border-border bg-card px-4 py-1.5">
+            <Shield className="h-3.5 w-3.5 text-primary" />
+            <span className="text-xs font-medium tracking-wide text-muted-foreground uppercase">
+              Security Analysis Platform
+            </span>
+          </div>
 
-      {/* Premium Gradient Orbs - Refined */}
-      <div className="animate-float-slow absolute top-1/4 left-1/4 h-[28rem] w-[28rem] rounded-full bg-gradient-to-r from-blue-400/25 via-violet-400/25 to-fuchsia-400/20 blur-3xl" />
-      <div className="animate-float-delayed absolute right-1/4 bottom-1/4 h-[24rem] w-[24rem] rounded-full bg-gradient-to-r from-emerald-400/20 via-teal-400/20 to-cyan-400/20 blur-3xl" />
-      <div className="animate-pulse-slow absolute top-1/2 left-1/2 h-[20rem] w-[20rem] -translate-x-1/2 -translate-y-1/2 transform rounded-full bg-gradient-to-r from-amber-400/15 to-rose-400/15 blur-3xl" />
-      <div className="animate-float-gentle absolute top-1/3 right-1/3 h-[22rem] w-[22rem] rounded-full bg-gradient-to-r from-violet-400/20 via-purple-400/20 to-blue-400/15 blur-3xl" />
+          <h1 className="font-display text-4xl leading-[1.1] tracking-tight sm:text-5xl md:text-6xl lg:text-7xl">
+            Protect your code{" "}
+            <span className="text-primary">before it ships</span>
+          </h1>
 
-      {/* Premium Main Content */}
-      <div className="relative z-10 mx-auto max-w-5xl space-y-4 text-center sm:space-y-6">
-        {/* Revolutionary CTA Buttons */}
-        <div className="flex flex-col items-center justify-center gap-4 sm:flex-row sm:gap-6">
+          <p className="mx-auto max-w-xl text-base leading-relaxed text-muted-foreground sm:text-lg">
+            Enterprise-grade static analysis powered by AI. Detects
+            vulnerabilities, bugs, and quality issues in real-time.
+          </p>
+        </div>
+
+        {/* CTA */}
+        <div className="animate-fade-in-delay-1 flex flex-col items-center justify-center gap-3 sm:flex-row sm:gap-4">
           <Button
             onClick={onStartAnalysis}
             size="lg"
-            className="group relative w-full min-w-[280px] overflow-hidden rounded-2xl border border-white/10 px-10 py-5 text-lg font-semibold transition-all duration-400 hover:shadow-2xl sm:w-auto sm:min-w-[320px] sm:rounded-3xl sm:px-12 sm:py-6 sm:text-xl"
-            style={{ backgroundColor: "hsl(var(--primary))" }}
+            className="w-full rounded-md bg-primary px-8 py-3 text-base font-medium text-primary-foreground transition-opacity hover:opacity-90 sm:w-auto"
           >
-            <div className="bg-primary absolute inset-0 opacity-100 transition-opacity duration-400" />
-            <div className="bg-primary/90 absolute inset-0 opacity-0 transition-opacity duration-400 group-hover:opacity-100" />
-            <div className="absolute inset-0 bg-gradient-to-b from-white/15 to-transparent" />
-            <div className="absolute inset-0 shadow-[inset_0_1px_0_0_rgba(255,255,255,0.2)]" />
-            <div
-              className="text-primary-foreground relative flex items-center justify-center gap-3 sm:gap-4"
-              style={{ color: "hsl(var(--primary-foreground))" }}
-            >
-              <Brain className="h-6 w-6 transition-transform duration-300 group-hover:scale-110 sm:h-7 sm:w-7" />
-              <span className="tracking-tight whitespace-nowrap">
-                Start AI Analysis
-              </span>
-              <ArrowRight className="h-6 w-6 transition-transform duration-300 group-hover:translate-x-2 sm:h-7 sm:w-7" />
-            </div>
+            Start Analysis
+            <ArrowRight className="ml-2 h-4 w-4" />
           </Button>
 
           <Button
-            variant="ghost"
+            variant="outline"
             size="lg"
-            className="group relative w-full min-w-[280px] overflow-hidden rounded-2xl border border-slate-300/50 bg-white/60 px-10 py-5 text-lg font-semibold shadow-lg backdrop-blur-xl transition-all duration-400 hover:translate-y-[-2px] hover:border-slate-300/70 hover:bg-white/80 hover:shadow-xl sm:w-auto sm:min-w-[320px] sm:rounded-3xl sm:px-12 sm:py-6 sm:text-xl dark:border-white/20 dark:bg-white/5 dark:hover:border-white/30 dark:hover:bg-white/10"
+            className="w-full rounded-md border-border px-8 py-3 text-base font-medium transition-colors hover:bg-muted sm:w-auto"
           >
-            <div className="relative flex items-center justify-center gap-3 sm:gap-4">
-              <Rocket className="h-6 w-6 text-violet-600 transition-transform duration-300 group-hover:scale-110 sm:h-7 sm:w-7 dark:text-violet-400" />
-              <span className="bg-gradient-to-r from-slate-800 to-slate-600 bg-clip-text tracking-tight whitespace-nowrap text-transparent dark:from-white dark:to-slate-300">
-                Live Demo
-              </span>
-            </div>
+            Live Demo
           </Button>
         </div>
 
-        {/* Revolutionary Feature Badges */}
-        <div className="mb-10 flex flex-col items-center gap-4 sm:mb-14">
-          <button
-            onClick={() => setShowFeatures(!showFeatures)}
-            className="group flex items-center gap-3 rounded-2xl border border-slate-200/60 bg-white/70 px-6 py-3.5 shadow-lg backdrop-blur-xl transition-all duration-300 hover:translate-y-[-2px] hover:bg-white/90 hover:shadow-xl dark:border-white/20 dark:bg-white/5 dark:hover:bg-white/10"
-          >
-            <Sparkles className="h-5 w-5 text-amber-500 transition-transform duration-300 group-hover:scale-110 group-hover:rotate-12" />
-            <span className="bg-gradient-to-r from-slate-800 to-slate-600 bg-clip-text font-semibold whitespace-nowrap text-transparent dark:from-white dark:to-slate-300">
-              Explore Features
-            </span>
-            {showFeatures ? (
-              <ChevronUp className="h-5 w-5 text-slate-500 transition-transform duration-200 dark:text-slate-400" />
-            ) : (
-              <ChevronDown className="h-5 w-5 text-slate-500 transition-transform duration-200 dark:text-slate-400" />
-            )}
-          </button>
-
-          <div
-            className={`overflow-visible transition-all duration-700 ease-in-out ${
-              showFeatures
-                ? "mt-6 max-h-[1000px] opacity-100"
-                : "max-h-0 opacity-0"
-            }`}
-          >
-            {showFeatures && (
-              <div className="xs:grid-cols-2 xs:gap-4 mt-8 grid grid-cols-1 gap-3 sm:grid-cols-2 sm:gap-4 lg:grid-cols-2">
-                <div className="group xs:px-5 xs:py-3.5 flex items-center gap-3 rounded-xl border border-slate-200/60 bg-white/70 px-4 py-3 shadow-md backdrop-blur-xl transition-all duration-300 hover:translate-y-[-2px] hover:bg-white/90 hover:shadow-lg dark:border-white/15 dark:bg-white/5 dark:hover:bg-white/10">
-                  <Shield className="xs:h-5 xs:w-5 h-4 w-4 text-blue-500 transition-transform duration-300 group-hover:scale-110" />
-                  <span className="xs:text-base bg-gradient-to-r from-blue-600 to-blue-500 bg-clip-text text-sm font-semibold text-transparent">
-                    Enterprise Security
-                  </span>
-                </div>
-                <div className="group xs:px-5 xs:py-3.5 flex items-center gap-3 rounded-xl border border-slate-200/60 bg-white/70 px-4 py-3 shadow-md backdrop-blur-xl transition-all duration-300 hover:translate-y-[-2px] hover:bg-white/90 hover:shadow-lg dark:border-white/15 dark:bg-white/5 dark:hover:bg-white/10">
-                  <Brain className="xs:h-5 xs:w-5 h-4 w-4 text-violet-500 transition-transform duration-300 group-hover:scale-110" />
-                  <span className="xs:text-base bg-gradient-to-r from-violet-600 to-violet-500 bg-clip-text text-sm font-semibold text-transparent">
-                    AI-Powered
-                  </span>
-                </div>
-                <div className="group xs:px-5 xs:py-3.5 flex items-center gap-3 rounded-xl border border-slate-200/60 bg-white/70 px-4 py-3 shadow-md backdrop-blur-xl transition-all duration-300 hover:translate-y-[-2px] hover:bg-white/90 hover:shadow-lg dark:border-white/15 dark:bg-white/5 dark:hover:bg-white/10">
-                  <Zap className="xs:h-5 xs:w-5 h-4 w-4 text-amber-500 transition-transform duration-300 group-hover:scale-110" />
-                  <span className="xs:text-base bg-gradient-to-r from-amber-600 to-amber-500 bg-clip-text text-sm font-semibold text-transparent">
-                    Real-Time Analysis
-                  </span>
-                </div>
-                <div className="group xs:px-5 xs:py-3.5 flex items-center gap-3 rounded-xl border border-slate-200/60 bg-white/70 px-4 py-3 shadow-md backdrop-blur-xl transition-all duration-300 hover:translate-y-[-2px] hover:bg-white/90 hover:shadow-lg dark:border-white/15 dark:bg-white/5 dark:hover:bg-white/10">
-                  <Globe className="xs:h-5 xs:w-5 h-4 w-4 text-emerald-500 transition-transform duration-300 group-hover:scale-110" />
-                  <span className="xs:text-base bg-gradient-to-r from-emerald-600 to-emerald-500 bg-clip-text text-sm font-semibold text-transparent">
-                    Global Scale
-                  </span>
-                </div>
-              </div>
-            )}
-          </div>
-        </div>
+        {/* Social proof — minimal */}
+        <p className="animate-fade-in-delay-2 text-sm text-muted-foreground">
+          Trusted by 10,000+ developers worldwide
+        </p>
       </div>
     </HeroSection>
   );

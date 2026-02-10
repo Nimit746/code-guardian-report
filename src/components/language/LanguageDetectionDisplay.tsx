@@ -32,8 +32,8 @@ const getLanguageBadge = (language: string) => {
   const normalized = language.toLowerCase();
   const map: Record<string, { label: string; color: string }> = {
     javascript: { label: "JS", color: "bg-yellow-500" },
-    typescript: { label: "TS", color: "bg-blue-600" },
-    python: { label: "PY", color: "bg-blue-500" },
+    typescript: { label: "TS", color: "bg-primary" },
+    python: { label: "PY", color: "bg-muted0" },
     java: { label: "JAVA", color: "bg-red-600" },
     php: { label: "PHP", color: "bg-indigo-600" },
     ruby: { label: "RB", color: "bg-red-500" },
@@ -41,11 +41,11 @@ const getLanguageBadge = (language: string) => {
     rust: { label: "RS", color: "bg-orange-600" },
     csharp: { label: "C#", color: "bg-purple-600" },
     cpp: { label: "C++", color: "bg-purple-700" },
-    c: { label: "C", color: "bg-gray-600" },
+    c: { label: "C", color: "bg-muted-foreground" },
   };
   const { label, color } = map[normalized] ?? {
     label: "CODE",
-    color: "bg-slate-500",
+    color: "bg-muted0",
   };
 
   return (
@@ -61,7 +61,7 @@ const getFrameworkBadge = (framework: string) => {
   const normalized = framework.toLowerCase();
   const map: Record<string, { label: string; color: string }> = {
     react: { label: "React", color: "bg-cyan-600" },
-    "next.js": { label: "Next", color: "bg-slate-900" },
+    "next.js": { label: "Next", color: "bg-card" },
     "vue.js": { label: "Vue", color: "bg-emerald-600" },
     "nuxt.js": { label: "Nuxt", color: "bg-emerald-700" },
     angular: { label: "Ng", color: "bg-red-600" },
@@ -75,12 +75,12 @@ const getFrameworkBadge = (framework: string) => {
     nestjs: { label: "Nest", color: "bg-red-500" },
     laravel: { label: "Laravel", color: "bg-red-700" },
     "react native": { label: "RN", color: "bg-indigo-600" },
-    flutter: { label: "Flutter", color: "bg-blue-600" },
+    flutter: { label: "Flutter", color: "bg-primary" },
     ionic: { label: "Ionic", color: "bg-blue-700" },
   };
   const { label, color } = map[normalized] ?? {
     label: "FW",
-    color: "bg-slate-500",
+    color: "bg-muted0",
   };
 
   return (
@@ -119,7 +119,7 @@ const getConfidenceColor = (confidence: number) => {
 const getProjectTypeColor = (type: string) => {
   switch (type) {
     case "web":
-      return "bg-blue-100 text-blue-800 dark:bg-blue-900 dark:text-blue-300";
+      return "bg-teal-100 text-blue-800 dark:bg-teal-900 dark:text-teal-300";
     case "mobile":
       return "bg-green-100 text-green-800 dark:bg-green-900 dark:text-green-300";
     case "desktop":
@@ -131,7 +131,7 @@ const getProjectTypeColor = (type: string) => {
     case "monorepo":
       return "bg-indigo-100 text-indigo-800 dark:bg-indigo-900 dark:text-indigo-300";
     default:
-      return "bg-gray-100 text-gray-800 dark:bg-gray-900 dark:text-gray-300";
+      return "bg-muted text-foreground dark:bg-foreground dark:text-muted-foreground";
   }
 };
 
@@ -163,18 +163,18 @@ export const LanguageDetectionDisplay: React.FC<
                 Language Detection Results
               </span>
             </CardTitle>
-            <div className="flex items-center gap-4 text-sm font-semibold text-slate-600 dark:text-slate-400">
-              <div className="flex items-center gap-2 rounded-full bg-white/60 px-3 py-1 dark:bg-slate-800/60">
+            <div className="flex items-center gap-4 text-sm font-semibold text-muted-foreground">
+              <div className="flex items-center gap-2 rounded-full bg-white/60 px-3 py-1/60">
                 <FileCode className="h-4 w-4" />
                 <span>{totalFiles} files</span>
               </div>
-              <div className="flex items-center gap-2 rounded-full bg-white/60 px-3 py-1 dark:bg-slate-800/60">
+              <div className="flex items-center gap-2 rounded-full bg-white/60 px-3 py-1/60">
                 <Zap className="h-4 w-4" />
                 <span>{analysisTime}ms</span>
               </div>
             </div>
           </div>
-          <CardDescription className="text-base text-slate-700 dark:text-slate-300">
+          <CardDescription className="text-base text-foreground/80">
             Advanced pattern recognition and file analysis completed
             successfully
           </CardDescription>

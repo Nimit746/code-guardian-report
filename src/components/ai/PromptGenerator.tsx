@@ -866,11 +866,11 @@ Provide complete, copy-paste ready code fixes that I can implement immediately i
       case "security":
         return "bg-red-100 text-red-800 dark:bg-red-900 dark:text-red-200";
       case "quality":
-        return "bg-blue-100 text-blue-800 dark:bg-blue-900 dark:text-blue-200";
+        return "bg-teal-100 text-blue-800 dark:bg-teal-900 dark:text-blue-200";
       case "performance":
         return "bg-green-100 text-green-800 dark:bg-green-900 dark:text-green-200";
       default:
-        return "bg-gray-100 text-gray-800 dark:bg-gray-900 dark:text-gray-200";
+        return "bg-muted text-foreground dark:bg-foreground dark:text-muted-foreground";
     }
   };
 
@@ -889,18 +889,18 @@ Provide complete, copy-paste ready code fixes that I can implement immediately i
         </CardHeader>
         <CardContent>
           <div className="mb-6">
-            <Card className="border-blue-200 bg-gradient-to-r from-blue-50 to-indigo-50 dark:border-blue-800 dark:from-blue-950 dark:to-indigo-950">
+            <Card className="border-border bg-muted dark:border-border dark:from-blue-950 dark:to-indigo-950">
               <CardContent className="p-4">
                 <div className="flex flex-wrap items-center justify-between gap-4">
                   <div className="flex items-center gap-3">
-                    <div className="rounded-lg bg-blue-100 p-2 dark:bg-blue-900">
-                      <Wand2 className="h-5 w-5 text-blue-600 dark:text-blue-400" />
+                    <div className="rounded-lg bg-teal-100 p-2 dark:bg-teal-900">
+                      <Wand2 className="h-5 w-5 text-primary dark:text-primary" />
                     </div>
                     <div>
                       <h3 className="font-semibold text-blue-900 dark:text-blue-100">
                         Smart Prompt Generator
                       </h3>
-                      <p className="text-sm text-blue-700 dark:text-blue-300">
+                      <p className="text-sm text-teal-600 dark:text-teal-300">
                         {analysisResults
                           ? `Generate custom prompt based on your ${analysisResults.issues.length} code issues`
                           : "Generate prompt for general code analysis"}
@@ -912,14 +912,14 @@ Provide complete, copy-paste ready code fixes that I can implement immediately i
                       onClick={() => setShowFilters(!showFilters)}
                       variant="outline"
                       size="sm"
-                      className="border-blue-300 dark:border-blue-700"
+                      className="border-teal-300 dark:border-blue-700"
                     >
                       <Filter className="mr-2 h-4 w-4" />
                       Filters
                     </Button>
                     <Button
                       onClick={generateCodebasePrompt}
-                      className="bg-blue-600 hover:bg-blue-700 disabled:cursor-not-allowed disabled:bg-gray-400"
+                      className="bg-primary hover:bg-primary/90 disabled:cursor-not-allowed disabled:bg-muted"
                       disabled={
                         !analysisResults ||
                         !analysisResults.issues ||
@@ -934,7 +934,7 @@ Provide complete, copy-paste ready code fixes that I can implement immediately i
 
                 {/* Filters Section */}
                 {showFilters && analysisResults && (
-                  <div className="mt-4 rounded-lg border border-blue-200 bg-white p-4 dark:border-blue-800 dark:bg-gray-900">
+                  <div className="mt-4 rounded-lg border border-border bg-white p-4 dark:border-border dark:bg-foreground">
                     <h4 className="mb-3 text-sm font-semibold text-blue-900 dark:text-blue-100">
                       Filter by Severity
                     </h4>
@@ -944,8 +944,8 @@ Provide complete, copy-paste ready code fixes that I can implement immediately i
                           key={severity}
                           className={`cursor-pointer transition-all ${
                             severityFilter.includes(severity)
-                              ? "bg-blue-600 text-white hover:bg-blue-700"
-                              : "bg-gray-200 text-gray-700 hover:bg-gray-300 dark:bg-gray-700 dark:text-gray-300"
+                              ? "bg-primary text-white hover:bg-primary/90"
+                              : "bg-muted text-foreground hover:bg-muted dark:bg-muted-foreground dark:text-muted-foreground"
                           }`}
                           onClick={() => {
                             setSeverityFilter((prev) =>
@@ -959,7 +959,7 @@ Provide complete, copy-paste ready code fixes that I can implement immediately i
                         </Badge>
                       ))}
                     </div>
-                    <p className="mt-2 text-xs text-gray-600 dark:text-gray-400">
+                    <p className="mt-2 text-xs text-gray-600 dark:text-muted-foreground">
                       {severityFilter.length === 4
                         ? "All severities selected"
                         : `${severityFilter.length} severity level(s) selected`}
@@ -1150,9 +1150,9 @@ Provide complete, copy-paste ready code fixes that I can implement immediately i
                 {generatedPrompt}
               </pre>
             </div>
-            <div className="rounded-lg bg-blue-50 p-4 dark:bg-blue-950">
+            <div className="rounded-lg bg-muted p-4 dark:bg-blue-950">
               <h4 className="mb-2 text-sm font-semibold">Ready to use:</h4>
-              <ol className="list-inside list-decimal space-y-1 text-sm text-gray-600 dark:text-gray-300">
+              <ol className="list-inside list-decimal space-y-1 text-sm text-gray-600 dark:text-muted-foreground">
                 <li>Copy the prompt above</li>
                 <li>Open Cursor, Windsurf, or Copilot</li>
                 <li>Paste the prompt + your code</li>
@@ -1218,14 +1218,14 @@ Provide complete, copy-paste ready code fixes that I can implement immediately i
             <CardDescription>{selectedTemplate.description}</CardDescription>
           </CardHeader>
           <CardContent>
-            <div className="mb-4 rounded-lg bg-gray-50 p-4 dark:bg-gray-900">
+            <div className="mb-4 rounded-lg bg-muted/50 p-4 dark:bg-foreground">
               <pre className="font-mono text-sm whitespace-pre-wrap">
                 {selectedTemplate.prompt}
               </pre>
             </div>
-            <div className="rounded-lg bg-blue-50 p-4 dark:bg-blue-950">
+            <div className="rounded-lg bg-muted p-4 dark:bg-blue-950">
               <h4 className="mb-2 text-sm font-semibold">How to use:</h4>
-              <ol className="list-inside list-decimal space-y-1 text-sm text-gray-600 dark:text-gray-300">
+              <ol className="list-inside list-decimal space-y-1 text-sm text-gray-600 dark:text-muted-foreground">
                 <li>Copy the prompt above</li>
                 <li>Open your AI assistant (Cursor, Windsurf, Copilot)</li>
                 <li>Paste the prompt</li>

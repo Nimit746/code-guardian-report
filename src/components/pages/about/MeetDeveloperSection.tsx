@@ -152,14 +152,14 @@ const MeetDeveloperSection = () => {
             <h2 className="text-foreground mb-4 text-3xl font-bold sm:text-4xl">
               Meet the Development Team
             </h2>
-            <p className="mx-auto mb-6 max-w-3xl text-lg text-slate-600 dark:text-slate-400">
+            <p className="mx-auto mb-6 max-w-3xl text-lg text-muted-foreground">
               Code Guardian is proudly developed by Team Blitz - a passionate
               group of developers and security experts committed to making code
               security accessible to everyone.
             </p>
 
             {/* Team Blitz Card */}
-            <Card className="mx-auto mb-8 max-w-2xl border-0 bg-gradient-to-r from-blue-600 to-purple-600 text-white">
+            <Card className="mx-auto mb-8 max-w-2xl border-0 bg-primary text-white">
               <CardHeader>
                 <div className="mb-2 flex items-center justify-center gap-3">
                   <Users className="h-6 w-6" />
@@ -200,14 +200,14 @@ const MeetDeveloperSection = () => {
               <Card key={index} className="text-center">
                 <CardContent className="p-6">
                   <div className="mb-3 flex justify-center">
-                    <div className="rounded-lg bg-blue-100 p-3 text-blue-600 dark:bg-blue-900/30 dark:text-blue-400">
+                    <div className="rounded-lg bg-teal-100 p-3 text-primary dark:bg-teal-900/30 dark:text-primary">
                       {highlight.icon}
                     </div>
                   </div>
                   <h3 className="text-foreground mb-2 font-semibold">
                     {highlight.title}
                   </h3>
-                  <p className="text-sm text-slate-600 dark:text-slate-400">
+                  <p className="text-sm text-muted-foreground">
                     {highlight.description}
                   </p>
                 </CardContent>
@@ -230,21 +230,21 @@ const MeetDeveloperSection = () => {
                   >
                     <CardHeader>
                       <div className="flex items-start gap-4">
-                        <div className="rounded-lg bg-gradient-to-br from-blue-500 to-purple-600 p-3 text-white">
+                        <div className="rounded-lg bg-primary p-3 text-white">
                           {member.icon}
                         </div>
                         <div className="flex-1">
                           <CardTitle className="text-lg">
                             {member.name}
                           </CardTitle>
-                          <CardDescription className="font-medium text-blue-600 dark:text-blue-400">
+                          <CardDescription className="font-medium text-primary dark:text-primary">
                             {member.role}
                           </CardDescription>
                         </div>
                       </div>
                     </CardHeader>
                     <CardContent>
-                      <p className="mb-4 text-slate-600 dark:text-slate-400">
+                      <p className="mb-4 text-muted-foreground">
                         {member.description}
                       </p>
                       <div className="flex flex-wrap gap-2">
@@ -281,11 +281,11 @@ const MeetDeveloperSection = () => {
               {/* USP */}
               <div>
                 <h4 className="text-foreground mb-3 flex items-center gap-2 font-semibold">
-                  <Rocket className="h-4 w-4 text-indigo-600" />
+                  <Rocket className="h-4 w-4 text-cyan-600" />
                   Unique Selling Proposition (USP)
                 </h4>
                 <div className="grid grid-cols-1 gap-4 md:grid-cols-3">
-                  <div className="rounded-lg bg-blue-50 p-4 dark:bg-blue-950/30">
+                  <div className="rounded-lg bg-muted p-4 dark:bg-blue-950/30">
                     <h5 className="mb-2 font-medium text-blue-900 dark:text-blue-100">
                       Persistent Intelligence
                     </h5>
@@ -318,7 +318,7 @@ const MeetDeveloperSection = () => {
               {/* Technologies */}
               <div>
                 <h4 className="text-foreground mb-3 flex items-center gap-2 font-semibold">
-                  <Wrench className="h-4 w-4 text-slate-600" />
+                  <Wrench className="h-4 w-4 text-muted-foreground" />
                   Technologies Used
                 </h4>
                 <div className="flex flex-wrap gap-2">
@@ -343,7 +343,7 @@ const MeetDeveloperSection = () => {
                       <h5 className="text-foreground font-medium">
                         Persistent Security
                       </h5>
-                      <p className="text-sm text-slate-600 dark:text-slate-400">
+                      <p className="text-sm text-muted-foreground">
                         Continuous analysis with persistent results that
                         maintain security insights across sessions
                       </p>
@@ -355,19 +355,19 @@ const MeetDeveloperSection = () => {
                       <h5 className="text-foreground font-medium">
                         Enhanced Productivity
                       </h5>
-                      <p className="text-sm text-slate-600 dark:text-slate-400">
+                      <p className="text-sm text-muted-foreground">
                         Advanced storage and analytics reduce analysis time
                         while improving code quality insights
                       </p>
                     </div>
                   </div>
                   <div className="flex items-start gap-3">
-                    <Star className="mt-0.5 h-5 w-5 text-blue-500" />
+                    <Star className="mt-0.5 h-5 w-5 text-primary" />
                     <div>
                       <h5 className="text-foreground font-medium">
                         Enterprise Features
                       </h5>
-                      <p className="text-sm text-slate-600 dark:text-slate-400">
+                      <p className="text-sm text-muted-foreground">
                         Production-ready with comprehensive reporting, export
                         capabilities, and performance monitoring
                       </p>
@@ -380,7 +380,7 @@ const MeetDeveloperSection = () => {
 
           {/* Call to Action */}
           <div className="text-center">
-            <Card className="border-0 bg-gradient-to-r from-blue-600 to-purple-600 text-white">
+            <Card className="border-0 bg-primary text-white">
               <CardContent className="p-8">
                 <h3 className="mb-4 text-2xl font-bold">Join Our Mission</h3>
                 <p className="mx-auto mb-6 max-w-2xl text-blue-100">
@@ -391,7 +391,7 @@ const MeetDeveloperSection = () => {
                 <Button
                   variant="secondary"
                   size="lg"
-                  className="bg-background text-blue-600 hover:bg-blue-50"
+                  className="bg-background text-primary hover:bg-muted"
                   onClick={() =>
                     window.open("https://teamblitz.netlify.app/", "_blank")
                   }

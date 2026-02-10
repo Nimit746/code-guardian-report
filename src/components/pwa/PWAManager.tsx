@@ -104,7 +104,7 @@ export function PWAManager() {
       <CardHeader>
         <div className="flex items-center justify-between">
           <div className="flex items-center gap-2">
-            <Settings className="h-5 w-5 text-blue-600" />
+            <Settings className="h-5 w-5 text-primary" />
             <CardTitle className="text-lg">PWA Settings</CardTitle>
           </div>
           <Badge
@@ -134,11 +134,11 @@ export function PWAManager() {
 
           <div className="bg-muted/50 flex items-center justify-between rounded-lg p-3">
             <div className="flex items-center gap-3">
-              <div className="rounded-lg bg-blue-100 p-2 dark:bg-blue-900">
+              <div className="rounded-lg bg-teal-100 p-2 dark:bg-teal-900">
                 {isInstalled ? (
-                  <Smartphone className="h-5 w-5 text-blue-600" />
+                  <Smartphone className="h-5 w-5 text-primary" />
                 ) : (
-                  <Monitor className="h-5 w-5 text-blue-600" />
+                  <Monitor className="h-5 w-5 text-primary" />
                 )}
               </div>
               <div>
@@ -184,12 +184,12 @@ export function PWAManager() {
           <div className="bg-muted/50 flex items-center justify-between rounded-lg p-3">
             <div className="flex items-center gap-3">
               <div
-                className={`rounded-lg p-2 ${hasNotificationPermission ? "bg-green-100 dark:bg-green-900" : "bg-gray-100 dark:bg-gray-800"}`}
+                className={`rounded-lg p-2 ${hasNotificationPermission ? "bg-green-100 dark:bg-green-900" : "bg-muted dark:bg-foreground"}`}
               >
                 {hasNotificationPermission ? (
                   <Bell className="h-5 w-5 text-green-600" />
                 ) : (
-                  <BellOff className="h-5 w-5 text-gray-500" />
+                  <BellOff className="h-5 w-5 text-muted-foreground" />
                 )}
               </div>
               <div>
@@ -249,9 +249,9 @@ export function PWAManager() {
                 <span>Cache Usage</span>
                 <span>{formatBytes(cacheSize)} / 100 MB</span>
               </div>
-              <div className="h-2 overflow-hidden rounded-full bg-gray-200 dark:bg-gray-700">
+              <div className="h-2 overflow-hidden rounded-full bg-muted dark:bg-muted-foreground">
                 <div
-                  className="h-full bg-blue-600 transition-all duration-300"
+                  className="h-full bg-primary transition-all duration-300"
                   style={{
                     width: `${Math.min((cacheSize / (100 * 1024 * 1024)) * 100, 100)}%`,
                   }}
@@ -336,17 +336,17 @@ function CapabilityItem({
       className={`flex items-center gap-2 rounded-lg p-2 ${
         enabled
           ? "bg-green-50 dark:bg-green-900/20"
-          : "bg-gray-50 dark:bg-gray-800/50"
+          : "bg-muted/50 dark:bg-foreground/50"
       }`}
     >
       <Icon
-        className={`h-4 w-4 ${enabled ? "text-green-600" : "text-gray-400"}`}
+        className={`h-4 w-4 ${enabled ? "text-green-600" : "text-muted-foreground"}`}
       />
       <span className="text-xs font-medium">{label}</span>
       {enabled ? (
-        <CheckCircle2 className="ml-auto h-3 w-3 text-green-500" />
+        <CheckCircle2 className="ml-auto h-3 w-3 text-primary" />
       ) : (
-        <XCircle className="ml-auto h-3 w-3 text-gray-400" />
+        <XCircle className="ml-auto h-3 w-3 text-muted-foreground" />
       )}
     </div>
   );

@@ -185,16 +185,16 @@ export const SupportedToolsSection: React.FC<SupportedToolsSectionProps> = ({
 
       <div className="relative z-10">
         <div className="mb-8 px-4 text-center sm:mb-12 sm:px-0 lg:mb-16">
-          <div className="group mb-6 inline-flex items-center gap-3 rounded-full border border-blue-200 bg-gradient-to-r from-blue-50 to-indigo-50 px-6 py-3 shadow-lg backdrop-blur-sm transition-all duration-300 hover:shadow-xl dark:border-blue-800 dark:from-blue-950/30 dark:to-indigo-950/30">
+          <div className="group mb-6 inline-flex items-center gap-3 rounded-full border border-border bg-muted px-6 py-3 shadow-lg backdrop-blur-sm transition-all duration-300 hover:shadow-xl dark:border-border dark:from-blue-950/30 dark:to-indigo-950/30">
             <div className="relative">
-              <div className="h-3 w-3 animate-pulse rounded-full bg-gradient-to-r from-blue-500 to-indigo-500"></div>
-              <div className="absolute inset-0 h-3 w-3 animate-ping rounded-full bg-gradient-to-r from-blue-500 to-indigo-500 opacity-75"></div>
+              <div className="h-3 w-3 animate-pulse rounded-full bg-primary"></div>
+              <div className="absolute inset-0 h-3 w-3 animate-ping rounded-full bg-primary opacity-75"></div>
             </div>
-            <Sparkles className="h-4 w-4 text-blue-600 transition-transform duration-300 group-hover:rotate-12 dark:text-blue-400" />
-            <span className="text-sm font-semibold text-blue-700 transition-colors group-hover:text-blue-800 dark:text-blue-300 dark:group-hover:text-blue-200">
+            <Sparkles className="h-4 w-4 text-primary transition-transform duration-300 group-hover:rotate-12 dark:text-primary" />
+            <span className="text-sm font-semibold text-teal-600 transition-colors group-hover:text-blue-800 dark:text-teal-300 dark:group-hover:text-blue-200">
               Powered by Industry Leaders
             </span>
-            <Zap className="h-4 w-4 text-indigo-600 transition-transform duration-300 group-hover:-rotate-12 dark:text-indigo-400" />
+            <Zap className="h-4 w-4 text-cyan-600 transition-transform duration-300 group-hover:-rotate-12 dark:text-cyan-400" />
           </div>
 
           <h3
@@ -213,9 +213,9 @@ export const SupportedToolsSection: React.FC<SupportedToolsSectionProps> = ({
             </span>
           </h3>
 
-          <p className="mx-auto mb-8 max-w-4xl text-lg leading-relaxed text-slate-600 sm:text-xl dark:text-slate-400">
+          <p className="mx-auto mb-8 max-w-4xl text-lg leading-relaxed text-muted-foreground sm:text-xl">
             We integrate with the most{" "}
-            <span className="font-semibold text-blue-600 dark:text-blue-400">
+            <span className="font-semibold text-primary dark:text-primary">
               trusted
             </span>{" "}
             and{" "}
@@ -228,21 +228,21 @@ export const SupportedToolsSection: React.FC<SupportedToolsSectionProps> = ({
 
           {/* Stats Row */}
           <div className="mb-8 flex flex-wrap justify-center gap-6 sm:gap-8">
-            <div className="flex items-center gap-2 rounded-full bg-white/80 px-4 py-2 shadow-md backdrop-blur-sm dark:bg-slate-800/80">
+            <div className="flex items-center gap-2 rounded-full bg-white/80 px-4 py-2 shadow-md backdrop-blur-sm/80">
               <div className="h-2 w-2 animate-pulse rounded-full bg-green-500"></div>
-              <span className="text-sm font-medium text-slate-700 dark:text-slate-300">
+              <span className="text-sm font-medium text-foreground/80">
                 {supportedTools.length}+ Tools
               </span>
             </div>
-            <div className="flex items-center gap-2 rounded-full bg-white/80 px-4 py-2 shadow-md backdrop-blur-sm dark:bg-slate-800/80">
-              <TrendingUp className="h-4 w-4 text-blue-500" />
-              <span className="text-sm font-medium text-slate-700 dark:text-slate-300">
+            <div className="flex items-center gap-2 rounded-full bg-white/80 px-4 py-2 shadow-md backdrop-blur-sm/80">
+              <TrendingUp className="h-4 w-4 text-primary" />
+              <span className="text-sm font-medium text-foreground/80">
                 99.9% Uptime
               </span>
             </div>
-            <div className="flex items-center gap-2 rounded-full bg-white/80 px-4 py-2 shadow-md backdrop-blur-sm dark:bg-slate-800/80">
-              <Zap className="h-4 w-4 text-purple-500" />
-              <span className="text-sm font-medium text-slate-700 dark:text-slate-300">
+            <div className="flex items-center gap-2 rounded-full bg-white/80 px-4 py-2 shadow-md backdrop-blur-sm/80">
+              <Zap className="h-4 w-4 text-muted-foreground" />
+              <span className="text-sm font-medium text-foreground/80">
                 Real-time Analysis
               </span>
             </div>
@@ -254,20 +254,20 @@ export const SupportedToolsSection: React.FC<SupportedToolsSectionProps> = ({
           <div className="border-border/50 bg-card/60 mx-auto flex max-w-6xl flex-col items-center justify-between gap-6 rounded-2xl border p-6 shadow-xl backdrop-blur-md lg:flex-row">
             {/* Search Bar */}
             <div className="group relative max-w-md flex-1">
-              <Search className="absolute top-1/2 left-4 h-5 w-5 -translate-y-1/2 transform text-slate-400 transition-colors duration-200 group-focus-within:text-blue-500" />
+              <Search className="absolute top-1/2 left-4 h-5 w-5 -translate-y-1/2 transform text-muted-foreground transition-colors duration-200 group-focus-within:text-primary" />
               <input
                 type="text"
                 placeholder="Search tools, features, or languages..."
                 value={searchTerm}
                 onChange={(e) => setSearchTerm(e.target.value)}
-                className="border-border/50 bg-card/80 placeholder:text-muted-foreground focus:bg-card w-full rounded-xl border py-4 pr-4 pl-12 text-sm shadow-sm backdrop-blur-sm transition-all duration-300 focus:border-blue-500 focus:ring-2 focus:ring-blue-500"
+                className="border-border/50 bg-card/80 placeholder:text-muted-foreground focus:bg-card w-full rounded-xl border py-4 pr-4 pl-12 text-sm shadow-sm backdrop-blur-sm transition-all duration-300 focus:border-primary focus:ring-2 focus:ring-primary"
               />
               {searchTerm && (
                 <button
                   onClick={() => setSearchTerm("")}
-                  className="absolute top-1/2 right-3 -translate-y-1/2 transform rounded-full p-1 transition-colors hover:bg-slate-200 dark:hover:bg-slate-700"
+                  className="absolute top-1/2 right-3 -translate-y-1/2 transform rounded-full p-1 transition-colors hover:bg-muted dark:hover:bg-slate-700"
                 >
-                  <span className="text-slate-400 hover:text-slate-600 dark:hover:text-slate-300">
+                  <span className="text-muted-foreground hover:text-muted-foreground dark:hover:text-muted-foreground">
                     ×
                   </span>
                 </button>
@@ -276,7 +276,7 @@ export const SupportedToolsSection: React.FC<SupportedToolsSectionProps> = ({
 
             {/* Filter Badges */}
             <div className="flex flex-wrap items-center gap-3">
-              <div className="flex items-center gap-2 text-slate-600 dark:text-slate-400">
+              <div className="flex items-center gap-2 text-muted-foreground">
                 <Filter className="h-4 w-4" />
                 <span className="text-sm font-medium">Filter:</span>
               </div>
@@ -284,10 +284,10 @@ export const SupportedToolsSection: React.FC<SupportedToolsSectionProps> = ({
                 <Badge
                   key={option.value}
                   variant={filter === option.value ? "default" : "outline"}
-                  className={`cursor-pointer px-4 py-2 font-medium transition-all duration-300 hover:scale-105 ${
+                  className={`cursor-pointer px-4 py-2 font-medium transition-all duration-300  ${
                     filter === option.value
-                      ? "border-0 bg-gradient-to-r from-blue-500 to-indigo-500 text-white shadow-lg hover:from-blue-600 hover:to-indigo-600 hover:shadow-xl"
-                      : "bg-card/80 backdrop-blur-sm hover:border-blue-400 hover:bg-blue-50 hover:text-blue-700"
+                      ? "border-0 bg-primary text-white shadow-lg hover:bg-primary/90 hover:shadow-xl"
+                      : "bg-card/80 backdrop-blur-sm hover:border-primary hover:bg-muted hover:text-teal-600"
                   }`}
                   onClick={() => setFilter(option.value)}
                 >
@@ -298,13 +298,13 @@ export const SupportedToolsSection: React.FC<SupportedToolsSectionProps> = ({
             </div>
 
             {/* View Toggle */}
-            <div className="flex items-center gap-1 rounded-xl bg-slate-100/80 p-1 shadow-sm backdrop-blur-sm dark:bg-slate-800/80">
+            <div className="flex items-center gap-1 rounded-xl bg-muted/80 p-1 shadow-sm backdrop-blur-sm/80">
               <button
                 onClick={() => setViewMode("grid")}
                 className={`group rounded-lg p-3 transition-all duration-300 ${
                   viewMode === "grid"
-                    ? "scale-105 bg-white text-blue-600 shadow-md dark:bg-slate-700 dark:text-blue-400"
-                    : "text-slate-500 hover:bg-white/50 hover:text-slate-700 dark:hover:bg-slate-700/50 dark:hover:text-slate-300"
+                    ? "scale-105 bg-white text-primary shadow-md dark:bg-slate-700 dark:text-primary"
+                    : "text-muted-foreground hover:bg-white/50 hover:text-foreground/80 dark:hover:bg-slate-700/50 dark:hover:text-muted-foreground"
                 }`}
                 title="Grid View"
               >
@@ -314,8 +314,8 @@ export const SupportedToolsSection: React.FC<SupportedToolsSectionProps> = ({
                 onClick={() => setViewMode("list")}
                 className={`group rounded-lg p-3 transition-all duration-300 ${
                   viewMode === "list"
-                    ? "scale-105 bg-white text-blue-600 shadow-md dark:bg-slate-700 dark:text-blue-400"
-                    : "text-slate-500 hover:bg-white/50 hover:text-slate-700 dark:hover:bg-slate-700/50 dark:hover:text-slate-300"
+                    ? "scale-105 bg-white text-primary shadow-md dark:bg-slate-700 dark:text-primary"
+                    : "text-muted-foreground hover:bg-white/50 hover:text-foreground/80 dark:hover:bg-slate-700/50 dark:hover:text-muted-foreground"
                 }`}
                 title="List View"
               >
@@ -329,9 +329,9 @@ export const SupportedToolsSection: React.FC<SupportedToolsSectionProps> = ({
         <div className="mb-8 px-4 text-center sm:px-0">
           <div className="border-border from-muted/50 to-muted inline-flex items-center gap-2 rounded-full border bg-gradient-to-r px-4 py-2 shadow-sm">
             <div className="h-2 w-2 animate-pulse rounded-full bg-gradient-to-r from-green-500 to-emerald-500"></div>
-            <p className="text-sm font-medium text-slate-700 dark:text-slate-300">
+            <p className="text-sm font-medium text-foreground/80">
               Showing{" "}
-              <span className="font-bold text-blue-600 dark:text-blue-400">
+              <span className="font-bold text-primary dark:text-primary">
                 {filteredTools.length}
               </span>{" "}
               of <span className="font-bold">{supportedTools.length}</span>{" "}
@@ -372,7 +372,7 @@ export const SupportedToolsSection: React.FC<SupportedToolsSectionProps> = ({
           <div className="px-4 py-16 text-center">
             <div className="relative mx-auto mb-8">
               <div className="mx-auto flex h-24 w-24 items-center justify-center rounded-full bg-gradient-to-r from-slate-200 to-slate-300 shadow-lg dark:from-slate-700 dark:to-slate-600">
-                <Search className="h-12 w-12 text-slate-400" />
+                <Search className="h-12 w-12 text-muted-foreground" />
               </div>
               <div className="absolute -top-2 -right-2 flex h-8 w-8 animate-bounce items-center justify-center rounded-full bg-gradient-to-r from-red-400 to-pink-400">
                 <span className="text-sm font-bold text-white">0</span>
@@ -381,7 +381,7 @@ export const SupportedToolsSection: React.FC<SupportedToolsSectionProps> = ({
             <h4 className="text-foreground mb-3 text-2xl font-bold">
               No tools found
             </h4>
-            <p className="mx-auto mb-8 max-w-md text-lg text-slate-500 dark:text-slate-400">
+            <p className="mx-auto mb-8 max-w-md text-lg text-muted-foreground">
               We couldn't find any tools matching your criteria. Try adjusting
               your search or filter settings.
             </p>
@@ -391,7 +391,7 @@ export const SupportedToolsSection: React.FC<SupportedToolsSectionProps> = ({
                   setSearchTerm("");
                   setFilter("all");
                 }}
-                className="rounded-xl bg-gradient-to-r from-blue-500 to-indigo-500 px-6 py-3 font-semibold text-white shadow-lg transition-all duration-300 hover:from-blue-600 hover:to-indigo-600 hover:shadow-xl"
+                className="rounded-xl bg-primary px-6 py-3 font-semibold text-white shadow-lg transition-all duration-300 hover:bg-primary/90 hover:shadow-xl"
               >
                 Clear all filters
               </button>

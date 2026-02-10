@@ -96,7 +96,7 @@ export function PWAFeatureShowcase() {
     <Card className="mx-auto w-full max-w-4xl">
       <CardHeader>
         <div className="flex items-center gap-2">
-          <Zap className="h-6 w-6 text-blue-600" />
+          <Zap className="h-6 w-6 text-primary" />
           <CardTitle>Progressive Web App Features</CardTitle>
         </div>
         <CardDescription>
@@ -110,7 +110,7 @@ export function PWAFeatureShowcase() {
           {features.map((feature, index) => (
             <div key={index} className="space-y-2 rounded-lg border p-4">
               <div className="flex items-center gap-2">
-                <feature.icon className="h-5 w-5 text-blue-600" />
+                <feature.icon className="h-5 w-5 text-primary" />
                 <h3 className="font-medium">{feature.title}</h3>
               </div>
               <p className="text-muted-foreground text-sm">
@@ -118,7 +118,7 @@ export function PWAFeatureShowcase() {
               </p>
               <Badge
                 variant={feature.color === "green" ? "default" : "secondary"}
-                className={` ${feature.color === "green" ? "bg-green-100 text-green-800" : ""} ${feature.color === "blue" ? "bg-blue-100 text-blue-800" : ""} ${feature.color === "orange" ? "bg-orange-100 text-orange-800" : ""} ${feature.color === "gray" ? "bg-gray-100 text-gray-800" : ""} `}
+                className={` ${feature.color === "green" ? "bg-green-100 text-green-800" : ""} ${feature.color === "blue" ? "bg-teal-100 text-blue-800" : ""} ${feature.color === "orange" ? "bg-orange-100 text-orange-800" : ""} ${feature.color === "gray" ? "bg-muted text-foreground" : ""} `}
               >
                 {feature.status}
               </Badge>

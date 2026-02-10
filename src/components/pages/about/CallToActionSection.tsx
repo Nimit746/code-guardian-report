@@ -24,19 +24,19 @@ export const CallToActionSection: React.FC<CallToActionSectionProps> = ({
     <section className={`relative py-16 text-center sm:py-20 ${className}`}>
       {/* Enhanced Background Effects */}
       <div className="pointer-events-none absolute inset-0 overflow-hidden">
-        <div className="float-animation absolute top-1/2 left-1/4 h-40 w-40 rounded-full bg-gradient-to-r from-blue-500/30 via-purple-500/20 to-pink-500/30 blur-3xl"></div>
-        <div className="float-animation delay-2s absolute top-1/3 right-1/4 h-32 w-32 rounded-full bg-gradient-to-r from-emerald-500/25 to-teal-500/25 blur-2xl"></div>
-        <div className="float-animation delay-4s absolute bottom-1/4 left-1/3 h-24 w-24 rounded-full bg-gradient-to-r from-amber-500/20 to-orange-500/20 blur-xl"></div>
+        <div className="hidden absolute top-1/2 left-1/4 h-40 w-40 rounded-full bg-gradient-to-r from-blue-500/30 via-purple-500/20 to-pink-500/30 blur-3xl"></div>
+        <div className="hidden delay-2s absolute top-1/3 right-1/4 h-32 w-32 rounded-full bg-gradient-to-r from-emerald-500/25 to-teal-500/25 blur-2xl"></div>
+        <div className="hidden delay-4s absolute bottom-1/4 left-1/3 h-24 w-24 rounded-full bg-gradient-to-r from-amber-500/20 to-orange-500/20 blur-xl"></div>
       </div>
 
       <div className="relative z-10 container mx-auto px-4">
-        <Card className="enhanced-card-hover glow-on-hover group relative mx-auto max-w-4xl overflow-hidden rounded-xl border border-slate-200/50 bg-white/90 shadow-sm backdrop-blur-sm transition-all duration-200 hover:border-slate-300/50 dark:border-slate-700/50 dark:bg-slate-900/90">
+        <Card className=" glow-on-hover group relative mx-auto max-w-4xl overflow-hidden rounded-xl border border-border/50 bg-white/90 shadow-sm backdrop-blur-sm transition-all duration-200 hover:border-border/50/50/90">
           {/* Enhanced Animated Gradient Overlay */}
           <div className="animated-border absolute inset-0 opacity-0 transition-opacity duration-700 group-hover:opacity-100"></div>
 
           {/* Enhanced Floating Elements */}
-          <div className="float-animation absolute top-6 right-6 h-20 w-20 rounded-full bg-gradient-to-br from-blue-500/30 via-purple-500/20 to-pink-500/30 blur-2xl transition-transform duration-1000 group-hover:scale-150"></div>
-          <div className="float-animation delay-2s absolute bottom-6 left-6 h-16 w-16 rounded-full bg-gradient-to-tr from-emerald-500/25 to-teal-500/25 blur-xl transition-transform delay-200 duration-1000 group-hover:scale-125"></div>
+          <div className="hidden absolute top-6 right-6 h-20 w-20 rounded-full bg-gradient-to-br from-blue-500/30 via-purple-500/20 to-pink-500/30 blur-2xl transition-transform duration-1000 group-hover:scale-150"></div>
+          <div className="hidden delay-2s absolute bottom-6 left-6 h-16 w-16 rounded-full bg-gradient-to-tr from-emerald-500/25 to-teal-500/25 blur-xl transition-transform delay-200 duration-1000 group-hover:scale-125"></div>
 
           {/* Particle System */}
           <div className="particle-system opacity-0 transition-opacity duration-500 group-hover:opacity-100">
@@ -57,13 +57,13 @@ export const CallToActionSection: React.FC<CallToActionSectionProps> = ({
           <CardContent className="relative z-10 p-10 sm:p-16">
             <div className="mx-auto max-w-3xl">
               {/* Enhanced Title */}
-              <h3 className="gradient-text-animated mb-8 text-4xl font-bold transition-transform duration-500 group-hover:scale-105 sm:text-5xl">
+              <h3 className="gradient-text-animated mb-8 text-4xl font-bold transition-transform duration-500 group- sm:text-5xl">
                 Ready to Secure Your Code?
               </h3>
 
               {/* Enhanced Description */}
-              <div className="mb-10 rounded-xl border border-slate-200/50 bg-white/90 p-6 shadow-sm backdrop-blur-sm transition-all duration-200 hover:border-slate-300/50 dark:border-slate-700/50 dark:bg-slate-900/90">
-                <p className="text-xl leading-relaxed text-slate-800 dark:text-slate-200">
+              <div className="mb-10 rounded-xl border border-border/50 bg-white/90 p-6 shadow-sm backdrop-blur-sm transition-all duration-200 hover:border-border/50/50/90">
+                <p className="text-xl leading-relaxed text-foreground dark:text-slate-200">
                   Start analyzing your codebase today with our comprehensive
                   security and quality tools. Join thousands of developers who
                   trust Code Guardian for their security needs.
@@ -105,14 +105,14 @@ export const CallToActionSection: React.FC<CallToActionSectionProps> = ({
                 ].map((item, index) => (
                   <div
                     key={index}
-                    className="enhanced-card-hover group rounded-xl border border-slate-200/50 bg-white/90 p-4 shadow-sm backdrop-blur-sm transition-all duration-200 hover:border-slate-300/50 dark:border-slate-700/50 dark:bg-slate-900/90"
+                    className=" group rounded-xl border border-border/50 bg-white/90 p-4 shadow-sm backdrop-blur-sm transition-all duration-200 hover:border-border/50/50/90"
                     style={{ animationDelay: item.delay }}
                   >
                     <div className="flex items-center justify-center gap-3">
                       <div
                         className={`h-3 w-3 bg-gradient-to-r ${item.color} animate-pulse rounded-full transition-transform duration-300 group-hover:scale-125`}
                       ></div>
-                      <span className="text-sm font-semibold text-slate-700 transition-colors duration-300 group-hover:text-slate-900 dark:text-slate-300 dark:group-hover:text-white">
+                      <span className="text-sm font-semibold text-foreground/80 transition-colors duration-300 group-hover:text-foreground dark:group-hover:text-white">
                         {item.label}
                       </span>
                     </div>

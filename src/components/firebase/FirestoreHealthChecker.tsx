@@ -44,7 +44,7 @@ export const FirestoreHealthChecker: React.FC = () => {
   const getStatusColor = () => {
     if (!healthStatus.isOnline) return "text-red-500";
     if (!healthStatus.firestoreConnected) return "text-yellow-500";
-    return "text-green-500";
+    return "text-primary";
   };
 
   const getStatusIcon = () => {
@@ -52,7 +52,7 @@ export const FirestoreHealthChecker: React.FC = () => {
       return <Circle className="h-3 w-3 fill-red-500 text-red-500" />;
     if (!healthStatus.firestoreConnected)
       return <Circle className="h-3 w-3 fill-yellow-500 text-yellow-500" />;
-    return <Circle className="h-3 w-3 fill-green-500 text-green-500" />;
+    return <Circle className="h-3 w-3 fill-green-500 text-primary" />;
   };
 
   const getStatusText = () => {
@@ -90,7 +90,7 @@ export const FirestoreHealthChecker: React.FC = () => {
           </div>
           <button
             onClick={() => setShowDetails(!showDetails)}
-            className="text-gray-400 hover:text-gray-600 dark:hover:text-gray-300"
+            className="text-muted-foreground hover:text-gray-600 dark:hover:text-muted-foreground"
           >
             {showDetails ? (
               <ChevronDown className="h-4 w-4" aria-hidden="true" />
@@ -101,8 +101,8 @@ export const FirestoreHealthChecker: React.FC = () => {
         </div>
 
         {showDetails && (
-          <div className="mt-3 border-t border-gray-200 pt-3 dark:border-gray-600">
-            <div className="space-y-2 text-xs text-gray-600 dark:text-gray-400">
+          <div className="mt-3 border-t border-border pt-3 dark:border-border">
+            <div className="space-y-2 text-xs text-gray-600 dark:text-muted-foreground">
               <div className="flex justify-between">
                 <span>Network:</span>
                 <span
@@ -136,7 +136,7 @@ export const FirestoreHealthChecker: React.FC = () => {
             <div className="mt-3 flex space-x-2">
               <button
                 onClick={handleTestConnection}
-                className="flex-1 rounded bg-blue-500 px-2 py-1 text-xs text-white transition-colors hover:bg-blue-600"
+                className="flex-1 rounded bg-muted0 px-2 py-1 text-xs text-white transition-colors hover:bg-primary"
               >
                 Test
               </button>

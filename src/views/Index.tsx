@@ -80,7 +80,7 @@ const Index = () => {
         <div className="mx-auto mb-6 max-w-6xl">
           <Suspense
             fallback={
-              <div className="h-32 animate-pulse rounded-lg bg-gray-100 dark:bg-gray-800"></div>
+              <div className="h-32 animate-pulse rounded-lg bg-muted dark:bg-foreground"></div>
             }
           >
             <StorageStatus

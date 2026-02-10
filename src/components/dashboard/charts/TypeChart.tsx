@@ -33,7 +33,7 @@ export const TypeChart: React.FC<TypeChartProps> = ({ data }) => {
     <Card className="bg-card/90 border-0 shadow-xl backdrop-blur-sm">
       <CardHeader>
         <CardTitle className="flex items-center gap-2">
-          <Shield className="h-5 w-5 text-blue-600" />
+          <Shield className="h-5 w-5 text-primary" />
           Issue Type Distribution
         </CardTitle>
         <CardDescription>Breakdown by issue category</CardDescription>

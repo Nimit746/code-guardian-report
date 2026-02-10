@@ -54,11 +54,11 @@ export const FeatureGrid: React.FC<FeatureGridProps> = ({
       {/* Section Header */}
       {title && (
         <div className="mb-8 px-4 text-center sm:mb-12 sm:px-0 lg:mb-16">
-          <h2 className="mb-3 text-3xl font-bold text-slate-900 sm:mb-4 sm:text-4xl lg:text-5xl dark:text-white">
+          <h2 className="mb-3 text-3xl font-bold text-foreground sm:mb-4 sm:text-4xl lg:text-5xl dark:text-white">
             {title}
           </h2>
           {subtitle && (
-            <p className="mx-auto max-w-3xl text-base text-slate-600 sm:text-lg dark:text-slate-400">
+            <p className="mx-auto max-w-3xl text-base text-muted-foreground sm:text-lg">
               {subtitle}
             </p>
           )}
@@ -72,10 +72,10 @@ export const FeatureGrid: React.FC<FeatureGridProps> = ({
         {features.map((feature, index) => (
           <Card
             key={index}
-            className={`group relative cursor-pointer overflow-hidden transition-all duration-500 hover:scale-105 ${
+            className={`group relative cursor-pointer overflow-hidden transition-all duration-500  ${
               variant === "modern"
                 ? "modern-card border-0 shadow-xl hover:shadow-2xl"
-                : "border bg-white/90 shadow-lg backdrop-blur-sm hover:shadow-xl dark:bg-slate-800/90"
+                : "border bg-white/90 shadow-lg backdrop-blur-sm hover:shadow-xl/90"
             }`}
             style={{ animationDelay: `${index * 0.1}s` }}
           >
@@ -103,23 +103,23 @@ export const FeatureGrid: React.FC<FeatureGridProps> = ({
                   className={`rounded-lg p-2 transition-all duration-300 group-hover:scale-110 sm:rounded-xl sm:p-3 ${
                     feature.gradient
                       ? `bg-gradient-to-r ${feature.gradient} text-white shadow-lg`
-                      : "bg-slate-100 text-slate-600 dark:bg-slate-700 dark:text-slate-300"
+                      : "bg-muted text-muted-foreground dark:bg-slate-700"
                   }`}
                 >
                   <div className="h-5 w-5 sm:h-6 sm:w-6">{feature.icon}</div>
                 </div>
-                <ArrowUpRight className="h-4 w-4 text-slate-400 opacity-0 transition-colors group-hover:text-slate-600 group-hover:opacity-100 sm:h-5 sm:w-5 dark:group-hover:text-slate-300" />
+                <ArrowUpRight className="h-4 w-4 text-muted-foreground opacity-0 transition-colors group-hover:text-muted-foreground group-hover:opacity-100 sm:h-5 sm:w-5 dark:group-hover:text-muted-foreground" />
               </div>
 
               {/* Title */}
-              <CardTitle className="text-lg leading-tight font-bold text-slate-900 transition-colors duration-300 group-hover:text-blue-600 sm:text-xl dark:text-white dark:group-hover:text-blue-400">
+              <CardTitle className="text-lg leading-tight font-bold text-foreground transition-colors duration-300 group-hover:text-primary sm:text-xl dark:text-white dark:group-hover:text-primary">
                 {feature.title}
               </CardTitle>
             </CardHeader>
 
             <CardContent className="space-y-3 p-4 pt-0 sm:space-y-4 sm:p-6">
               {/* Description */}
-              <CardDescription className="text-sm leading-relaxed text-slate-600 sm:text-base dark:text-slate-400">
+              <CardDescription className="text-sm leading-relaxed text-muted-foreground sm:text-base">
                 {feature.description}
               </CardDescription>
 
@@ -129,13 +129,13 @@ export const FeatureGrid: React.FC<FeatureGridProps> = ({
                   {feature.benefits.map((benefit, benefitIndex) => (
                     <li
                       key={benefitIndex}
-                      className="flex items-start gap-2 text-xs text-slate-600 sm:text-sm dark:text-slate-400"
+                      className="flex items-start gap-2 text-xs text-muted-foreground sm:text-sm"
                     >
                       <div
                         className={`mt-1.5 h-1.5 w-1.5 flex-shrink-0 rounded-full ${
                           feature.gradient
                             ? `bg-gradient-to-r ${feature.gradient}`
-                            : "bg-blue-500"
+                            : "bg-muted0"
                         }`}
                       ></div>
                       <span className="leading-relaxed">{benefit}</span>

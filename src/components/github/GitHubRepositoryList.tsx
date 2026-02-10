@@ -45,7 +45,7 @@ const GitHubRepositoryList: React.FC<GitHubRepositoryListProps> = ({
       <div className="border-border bg-muted/5 rounded-lg border p-6 shadow-sm backdrop-blur-sm">
         <div className="flex items-center justify-center py-8">
           <div className="h-8 w-8 animate-spin rounded-full border-b-2 border-purple-500"></div>
-          <span className="ml-3 text-slate-600 dark:text-slate-400">
+          <span className="ml-3 text-muted-foreground">
             Loading repositories...
           </span>
         </div>
@@ -57,8 +57,8 @@ const GitHubRepositoryList: React.FC<GitHubRepositoryListProps> = ({
     return (
       <div className="border-border bg-muted/5 rounded-lg border p-6 shadow-sm backdrop-blur-sm">
         <div className="py-8 text-center">
-          <Github className="mx-auto mb-4 h-12 w-12 text-slate-400" />
-          <p className="text-slate-500 dark:text-slate-400">
+          <Github className="mx-auto mb-4 h-12 w-12 text-muted-foreground" />
+          <p className="text-muted-foreground">
             No repositories found
           </p>
         </div>
@@ -78,7 +78,7 @@ const GitHubRepositoryList: React.FC<GitHubRepositoryListProps> = ({
             <div className="min-w-0 flex-1">
               {/* Repository name and visibility */}
               <div className="mb-2 flex flex-wrap items-center gap-2">
-                <Github className="h-5 w-5 flex-shrink-0 text-slate-600 transition-colors group-hover:text-purple-500 dark:text-slate-400" />
+                <Github className="h-5 w-5 flex-shrink-0 text-muted-foreground transition-colors group-hover:text-muted-foreground" />
                 <h3 className="text-foreground truncate text-base font-semibold transition-colors hover:text-purple-600 sm:text-lg">
                   <a
                     href={repo.html_url}
@@ -99,13 +99,13 @@ const GitHubRepositoryList: React.FC<GitHubRepositoryListProps> = ({
 
               {/* Description */}
               {repo.description && (
-                <p className="mb-3 line-clamp-2 text-xs text-slate-600 sm:text-sm dark:text-slate-400">
+                <p className="mb-3 line-clamp-2 text-xs text-muted-foreground sm:text-sm">
                   {repo.description}
                 </p>
               )}
 
               {/* Repository stats - Responsive wrap */}
-              <div className="flex flex-wrap items-center gap-2 text-xs text-slate-500 sm:gap-4 sm:text-sm dark:text-slate-500">
+              <div className="flex flex-wrap items-center gap-2 text-xs text-muted-foreground sm:gap-4 sm:text-sm">
                 {repo.language && (
                   <div className="flex items-center gap-1">
                     <span className="h-3 w-3 rounded-full bg-purple-500"></span>

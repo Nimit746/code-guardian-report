@@ -143,7 +143,7 @@ const AdvancedSearch: React.FC<AdvancedSearchProps> = ({
       case "low":
         return "bg-green-100 text-green-800 dark:bg-green-900 dark:text-green-200";
       default:
-        return "bg-slate-100 text-slate-800 dark:bg-slate-800 dark:text-slate-200";
+        return "bg-muted text-foreground dark:text-slate-200";
     }
   };
 
@@ -154,7 +154,7 @@ const AdvancedSearch: React.FC<AdvancedSearchProps> = ({
           <CardTitle className="text-lg font-semibold">
             Search & Filter
           </CardTitle>
-          <div className="flex items-center gap-2 text-sm text-slate-600 dark:text-slate-400">
+          <div className="flex items-center gap-2 text-sm text-muted-foreground">
             <span>{resultCount} results</span>
             {activeFilterCount > 0 && (
               <Badge variant="secondary" className="text-xs">
@@ -168,7 +168,7 @@ const AdvancedSearch: React.FC<AdvancedSearchProps> = ({
       <CardContent className="space-y-4">
         {/* Search Input */}
         <div className="relative">
-          <Search className="absolute top-1/2 left-3 h-4 w-4 -translate-y-1/2 transform text-slate-400" />
+          <Search className="absolute top-1/2 left-3 h-4 w-4 -translate-y-1/2 transform text-muted-foreground" />
           <Input
             placeholder="Search issues, files, or descriptions..."
             value={filters.query}
@@ -176,7 +176,7 @@ const AdvancedSearch: React.FC<AdvancedSearchProps> = ({
             onFocus={() => setSearchFocused(true)}
             onBlur={() => setSearchFocused(false)}
             className={`pr-4 pl-10 transition-all duration-200 ${
-              searchFocused ? "border-blue-500 ring-2 ring-blue-500" : ""
+              searchFocused ? "border-primary ring-2 ring-primary" : ""
             }`}
             aria-label="Search issues"
           />
@@ -196,7 +196,7 @@ const AdvancedSearch: React.FC<AdvancedSearchProps> = ({
         {/* Sort Controls */}
         <div className="flex flex-col items-start gap-3 sm:flex-row sm:items-center">
           <div className="flex items-center gap-2">
-            <span className="text-sm font-medium text-slate-700 dark:text-slate-300">
+            <span className="text-sm font-medium text-foreground/80">
               Sort by:
             </span>
             <Select value={filters.sortBy} onValueChange={handleSortChange}>
@@ -326,7 +326,7 @@ const AdvancedSearch: React.FC<AdvancedSearchProps> = ({
             <div className="grid grid-cols-1 gap-6 md:grid-cols-3">
               {/* Severity Filters */}
               <div>
-                <h4 className="mb-3 text-sm font-medium text-slate-700 dark:text-slate-300">
+                <h4 className="mb-3 text-sm font-medium text-foreground/80">
                   Severity
                 </h4>
                 <div className="space-y-2">
@@ -357,7 +357,7 @@ const AdvancedSearch: React.FC<AdvancedSearchProps> = ({
 
               {/* Type Filters */}
               <div>
-                <h4 className="mb-3 text-sm font-medium text-slate-700 dark:text-slate-300">
+                <h4 className="mb-3 text-sm font-medium text-foreground/80">
                   Issue Type
                 </h4>
                 <div className="space-y-2">
@@ -381,7 +381,7 @@ const AdvancedSearch: React.FC<AdvancedSearchProps> = ({
 
               {/* File Filters */}
               <div>
-                <h4 className="mb-3 text-sm font-medium text-slate-700 dark:text-slate-300">
+                <h4 className="mb-3 text-sm font-medium text-foreground/80">
                   Files
                 </h4>
                 <div className="max-h-40 space-y-2 overflow-y-auto">

@@ -132,7 +132,7 @@ export const HelpPage: React.FC<HelpPageProps> = ({ className = "" }) => {
 
   return (
     <div
-      className={`relative min-h-screen overflow-hidden bg-white dark:bg-slate-950 ${className}`}
+      className={`relative min-h-screen overflow-hidden bg-background ${className}`}
     >
       <AnimatedBackground />
       <div className="relative z-10 pt-16">
@@ -140,13 +140,13 @@ export const HelpPage: React.FC<HelpPageProps> = ({ className = "" }) => {
           <div className="mx-auto max-w-6xl">
             {/* Header */}
             <div className="mb-16 text-center">
-              <div className="mb-6 inline-flex h-16 w-16 items-center justify-center rounded-full bg-blue-100 dark:bg-blue-900/30">
-                <HelpCircle className="h-8 w-8 text-blue-600 dark:text-blue-400" />
+              <div className="mb-6 inline-flex h-16 w-16 items-center justify-center rounded-full bg-teal-100 dark:bg-teal-900/30">
+                <HelpCircle className="h-8 w-8 text-primary dark:text-primary" />
               </div>
               <h1 className="text-foreground mb-4 text-4xl font-bold">
                 Help & Documentation
               </h1>
-              <p className="mx-auto max-w-3xl text-xl text-slate-600 dark:text-slate-400">
+              <p className="mx-auto max-w-3xl text-xl text-muted-foreground">
                 Everything you need to know about using Code Guardian for secure
                 code analysis
               </p>
@@ -157,10 +157,10 @@ export const HelpPage: React.FC<HelpPageProps> = ({ className = "" }) => {
               {helpSections.map((section, index) => (
                 <div
                   key={index}
-                  className="rounded-xl border border-slate-200/50 bg-white/80 p-6 backdrop-blur-sm dark:border-slate-700/50 dark:bg-slate-800/80"
+                  className="rounded-xl border border-border/50 bg-card/80 p-6 backdrop-blur-sm/50/80"
                 >
                   <div className="mb-4 flex items-center gap-3">
-                    <div className="rounded-lg bg-blue-100 p-2 dark:bg-blue-900/30">
+                    <div className="rounded-lg bg-teal-100 p-2 dark:bg-teal-900/30">
                       {section.icon}
                     </div>
                     <h3 className="text-foreground text-lg font-semibold">
@@ -172,12 +172,12 @@ export const HelpPage: React.FC<HelpPageProps> = ({ className = "" }) => {
                       <div key={itemIndex} className="group">
                         <a
                           href={item.link}
-                          className="block rounded-lg p-3 transition-colors duration-200 hover:bg-slate-50 dark:hover:bg-slate-700/50"
+                          className="block rounded-lg p-3 transition-colors duration-200 hover:bg-muted dark:hover:bg-slate-700/50"
                         >
-                          <h4 className="font-medium text-slate-900 transition-colors duration-200 group-hover:text-blue-600 dark:text-white dark:group-hover:text-blue-400">
+                          <h4 className="font-medium text-foreground transition-colors duration-200 group-hover:text-primary dark:text-white dark:group-hover:text-primary">
                             {item.title}
                           </h4>
-                          <p className="mt-1 text-sm text-slate-600 dark:text-slate-400">
+                          <p className="mt-1 text-sm text-muted-foreground">
                             {item.description}
                           </p>
                         </a>
@@ -189,7 +189,7 @@ export const HelpPage: React.FC<HelpPageProps> = ({ className = "" }) => {
             </div>
 
             {/* Support Options */}
-            <div className="rounded-xl border border-slate-200/50 bg-white/80 p-8 backdrop-blur-sm dark:border-slate-700/50 dark:bg-slate-800/80">
+            <div className="rounded-xl border border-border/50 bg-card/80 p-8 backdrop-blur-sm/50/80">
               <h2 className="text-foreground mb-6 text-center text-2xl font-bold">
                 Need More Help?
               </h2>
@@ -200,20 +200,20 @@ export const HelpPage: React.FC<HelpPageProps> = ({ className = "" }) => {
                     href={option.link}
                     target={option.external ? "_blank" : undefined}
                     rel={option.external ? "noopener noreferrer" : undefined}
-                    className="group block rounded-lg border border-transparent bg-slate-50 p-6 transition-all duration-200 hover:border-slate-200 hover:bg-slate-100 dark:bg-slate-700/50 dark:hover:border-slate-600 dark:hover:bg-slate-600/50"
+                    className="group block rounded-lg border border-transparent bg-muted p-6 transition-all duration-200 hover:border-border hover:bg-muted dark:bg-slate-700/50 dark:hover:border-slate-600 dark:hover:bg-slate-600/50"
                   >
                     <div className="mb-3 flex items-center gap-3">
-                      <div className="rounded-lg bg-blue-100 p-2 dark:bg-blue-900/30">
+                      <div className="rounded-lg bg-teal-100 p-2 dark:bg-teal-900/30">
                         {option.icon}
                       </div>
                       {option.external && (
-                        <ExternalLink className="h-4 w-4 text-slate-400 transition-colors duration-200 group-hover:text-blue-600 dark:group-hover:text-blue-400" />
+                        <ExternalLink className="h-4 w-4 text-muted-foreground transition-colors duration-200 group-hover:text-primary dark:group-hover:text-primary" />
                       )}
                     </div>
-                    <h3 className="font-semibold text-slate-900 transition-colors duration-200 group-hover:text-blue-600 dark:text-white dark:group-hover:text-blue-400">
+                    <h3 className="font-semibold text-foreground transition-colors duration-200 group-hover:text-primary dark:text-white dark:group-hover:text-primary">
                       {option.title}
                     </h3>
-                    <p className="mt-2 text-sm text-slate-600 dark:text-slate-400">
+                    <p className="mt-2 text-sm text-muted-foreground">
                       {option.description}
                     </p>
                   </a>
@@ -222,35 +222,35 @@ export const HelpPage: React.FC<HelpPageProps> = ({ className = "" }) => {
             </div>
 
             {/* Quick Tips */}
-            <div className="mt-12 rounded-xl border border-blue-200 bg-gradient-to-r from-blue-50 to-indigo-50 p-6 dark:border-blue-800 dark:from-blue-900/20 dark:to-indigo-900/20">
+            <div className="mt-12 rounded-xl border border-border bg-muted p-6 dark:border-border dark:from-blue-900/20 dark:to-indigo-900/20">
               <h3 className="text-foreground mb-4 flex items-center gap-2 text-lg font-semibold">
                 <Lightbulb className="h-5 w-5 text-amber-500" />
                 Quick Tips
               </h3>
-              <div className="grid grid-cols-1 gap-4 text-sm text-slate-700 md:grid-cols-2 dark:text-slate-300">
+              <div className="grid grid-cols-1 gap-4 text-sm text-foreground/80 md:grid-cols-2">
                 <div className="flex items-start gap-2">
-                  <div className="mt-2 h-2 w-2 flex-shrink-0 rounded-full bg-blue-500"></div>
+                  <div className="mt-2 h-2 w-2 flex-shrink-0 rounded-full bg-muted0"></div>
                   <span>
                     Use the sidebar navigation to quickly switch between
                     different analysis features
                   </span>
                 </div>
                 <div className="flex items-start gap-2">
-                  <div className="mt-2 h-2 w-2 flex-shrink-0 rounded-full bg-blue-500"></div>
+                  <div className="mt-2 h-2 w-2 flex-shrink-0 rounded-full bg-muted0"></div>
                   <span>
                     Configure your AI API keys in the AI Configuration tab for
                     enhanced analysis
                   </span>
                 </div>
                 <div className="flex items-start gap-2">
-                  <div className="mt-2 h-2 w-2 flex-shrink-0 rounded-full bg-blue-500"></div>
+                  <div className="mt-2 h-2 w-2 flex-shrink-0 rounded-full bg-muted0"></div>
                   <span>
                     Export your analysis results to share with your team or for
                     record keeping
                   </span>
                 </div>
                 <div className="flex items-start gap-2">
-                  <div className="mt-2 h-2 w-2 flex-shrink-0 rounded-full bg-blue-500"></div>
+                  <div className="mt-2 h-2 w-2 flex-shrink-0 rounded-full bg-muted0"></div>
                   <span>
                     Use custom prompts to tailor the analysis to your specific
                     security requirements

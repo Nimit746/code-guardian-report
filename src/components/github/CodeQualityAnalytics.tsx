@@ -518,7 +518,7 @@ export const CodeQualityAnalytics: React.FC<CodeQualityAnalyticsProps> = ({
         return "bg-green-500 text-white";
       case "good":
       case "medium":
-        return "bg-blue-500 text-white";
+        return "bg-muted0 text-white";
       case "fair":
       case "moderate":
         return "bg-yellow-500 text-white";
@@ -530,7 +530,7 @@ export const CodeQualityAnalytics: React.FC<CodeQualityAnalyticsProps> = ({
   if (loading) {
     return (
       <div className="flex items-center justify-center py-12">
-        <Code2 className="h-8 w-8 animate-pulse text-blue-600" />
+        <Code2 className="h-8 w-8 animate-pulse text-primary" />
       </div>
     );
   }
@@ -538,11 +538,11 @@ export const CodeQualityAnalytics: React.FC<CodeQualityAnalyticsProps> = ({
   if (!aggregateMetrics) {
     return (
       <Card className="p-12 text-center">
-        <Code2 className="mx-auto mb-4 h-16 w-16 text-slate-300" />
-        <h3 className="mb-2 text-xl font-semibold text-slate-700 dark:text-slate-300">
+        <Code2 className="mx-auto mb-4 h-16 w-16 text-muted-foreground" />
+        <h3 className="mb-2 text-xl font-semibold text-foreground/80">
           No quality data available
         </h3>
-        <p className="text-slate-600 dark:text-slate-400">
+        <p className="text-muted-foreground">
           Analyze repositories to see code quality metrics
         </p>
       </Card>
@@ -556,7 +556,7 @@ export const CodeQualityAnalytics: React.FC<CodeQualityAnalyticsProps> = ({
         <h2 className="text-foreground mb-2 text-2xl font-bold">
           Code Quality Analytics
         </h2>
-        <p className="text-slate-600 dark:text-slate-400">
+        <p className="text-muted-foreground">
           Comprehensive code quality metrics across your repositories
         </p>
       </div>
@@ -578,7 +578,7 @@ export const CodeQualityAnalytics: React.FC<CodeQualityAnalyticsProps> = ({
           <div className="text-foreground mb-1 text-3xl font-bold">
             {aggregateMetrics.complexity.average.toFixed(1)}
           </div>
-          <div className="text-sm text-slate-600 dark:text-slate-400">
+          <div className="text-sm text-muted-foreground">
             Avg Complexity Score
           </div>
         </Card>
@@ -586,8 +586,8 @@ export const CodeQualityAnalytics: React.FC<CodeQualityAnalyticsProps> = ({
         {/* Maintainability */}
         <Card className="p-6">
           <div className="mb-4 flex items-center justify-between">
-            <div className="rounded-lg bg-blue-100 p-3 dark:bg-blue-900/20">
-              <Activity className="h-6 w-6 text-blue-600 dark:text-blue-400" />
+            <div className="rounded-lg bg-teal-100 p-3 dark:bg-teal-900/20">
+              <Activity className="h-6 w-6 text-primary dark:text-primary" />
             </div>
             <Badge
               className={getRatingColor(
@@ -600,7 +600,7 @@ export const CodeQualityAnalytics: React.FC<CodeQualityAnalyticsProps> = ({
           <div className="text-foreground mb-1 text-3xl font-bold">
             {aggregateMetrics.maintainability.index}
           </div>
-          <div className="text-sm text-slate-600 dark:text-slate-400">
+          <div className="text-sm text-muted-foreground">
             Maintainability Index
           </div>
         </Card>
@@ -620,7 +620,7 @@ export const CodeQualityAnalytics: React.FC<CodeQualityAnalyticsProps> = ({
           <div className="text-foreground mb-1 text-3xl font-bold">
             {aggregateMetrics.testCoverage.percentage}%
           </div>
-          <div className="text-sm text-slate-600 dark:text-slate-400">
+          <div className="text-sm text-muted-foreground">
             Test Coverage
           </div>
         </Card>
@@ -640,7 +640,7 @@ export const CodeQualityAnalytics: React.FC<CodeQualityAnalyticsProps> = ({
           <div className="text-foreground mb-1 text-3xl font-bold">
             {aggregateMetrics.documentation.coverage}%
           </div>
-          <div className="text-sm text-slate-600 dark:text-slate-400">
+          <div className="text-sm text-muted-foreground">
             Documentation Coverage
           </div>
         </Card>
@@ -655,7 +655,7 @@ export const CodeQualityAnalytics: React.FC<CodeQualityAnalyticsProps> = ({
           </h3>
           <div className="space-y-4">
             <div className="flex items-center justify-between">
-              <span className="text-slate-600 dark:text-slate-400">
+              <span className="text-muted-foreground">
                 Code Smells
               </span>
               <span className="text-foreground font-semibold">
@@ -663,7 +663,7 @@ export const CodeQualityAnalytics: React.FC<CodeQualityAnalyticsProps> = ({
               </span>
             </div>
             <div className="flex items-center justify-between">
-              <span className="text-slate-600 dark:text-slate-400">
+              <span className="text-muted-foreground">
                 Technical Debt
               </span>
               <span className="text-foreground font-semibold">
@@ -671,7 +671,7 @@ export const CodeQualityAnalytics: React.FC<CodeQualityAnalyticsProps> = ({
               </span>
             </div>
             <div className="flex items-center justify-between">
-              <span className="text-slate-600 dark:text-slate-400">
+              <span className="text-muted-foreground">
                 Code Duplication
               </span>
               <span className="text-foreground font-semibold">
@@ -688,7 +688,7 @@ export const CodeQualityAnalytics: React.FC<CodeQualityAnalyticsProps> = ({
           </h3>
           <div className="space-y-4">
             <div className="flex items-center justify-between">
-              <span className="text-slate-600 dark:text-slate-400">
+              <span className="text-muted-foreground">
                 Total Lines
               </span>
               <span className="text-foreground font-semibold">
@@ -696,7 +696,7 @@ export const CodeQualityAnalytics: React.FC<CodeQualityAnalyticsProps> = ({
               </span>
             </div>
             <div className="flex items-center justify-between">
-              <span className="text-slate-600 dark:text-slate-400">
+              <span className="text-muted-foreground">
                 Lines Covered
               </span>
               <span className="text-foreground font-semibold">
@@ -704,7 +704,7 @@ export const CodeQualityAnalytics: React.FC<CodeQualityAnalyticsProps> = ({
               </span>
             </div>
             <div className="flex items-center justify-between">
-              <span className="text-slate-600 dark:text-slate-400">
+              <span className="text-muted-foreground">
                 Coverage Ratio
               </span>
               <span className="text-foreground font-semibold">
@@ -728,19 +728,19 @@ export const CodeQualityAnalytics: React.FC<CodeQualityAnalyticsProps> = ({
             >
               <div className="mb-3 flex items-center justify-between">
                 <div className="flex items-center gap-2">
-                  <GitBranch className="h-4 w-4 text-slate-600 dark:text-slate-400" />
+                  <GitBranch className="h-4 w-4 text-muted-foreground" />
                   <span className="text-foreground font-semibold">
                     {repo.repositoryName}
                   </span>
                 </div>
-                <span className="text-xs text-slate-500">
+                <span className="text-xs text-muted-foreground">
                   Updated {new Date(repo.lastUpdated).toLocaleDateString()}
                 </span>
               </div>
 
               <div className="grid grid-cols-2 gap-3 md:grid-cols-4">
                 <div>
-                  <div className="mb-1 text-xs text-slate-600 dark:text-slate-400">
+                  <div className="mb-1 text-xs text-muted-foreground">
                     Complexity
                   </div>
                   <Badge
@@ -751,7 +751,7 @@ export const CodeQualityAnalytics: React.FC<CodeQualityAnalyticsProps> = ({
                   </Badge>
                 </div>
                 <div>
-                  <div className="mb-1 text-xs text-slate-600 dark:text-slate-400">
+                  <div className="mb-1 text-xs text-muted-foreground">
                     Maintainability
                   </div>
                   <Badge
@@ -764,7 +764,7 @@ export const CodeQualityAnalytics: React.FC<CodeQualityAnalyticsProps> = ({
                   </Badge>
                 </div>
                 <div>
-                  <div className="mb-1 text-xs text-slate-600 dark:text-slate-400">
+                  <div className="mb-1 text-xs text-muted-foreground">
                     Test Coverage
                   </div>
                   <Badge
@@ -775,7 +775,7 @@ export const CodeQualityAnalytics: React.FC<CodeQualityAnalyticsProps> = ({
                   </Badge>
                 </div>
                 <div>
-                  <div className="mb-1 text-xs text-slate-600 dark:text-slate-400">
+                  <div className="mb-1 text-xs text-muted-foreground">
                     Documentation
                   </div>
                   <Badge

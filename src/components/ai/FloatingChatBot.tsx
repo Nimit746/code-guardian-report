@@ -152,7 +152,7 @@ How can I help you today?`,
       {!isOpen && (
         <Button
           onClick={() => setIsOpen(true)}
-          className="focus-ring animate-float fixed right-4 bottom-4 z-50 h-12 w-12 rounded-full bg-gradient-to-r from-blue-600 to-indigo-600 shadow-lg transition-all duration-300 hover:from-blue-700 hover:to-indigo-700 hover:shadow-xl sm:right-6 sm:bottom-6 sm:h-14 sm:w-14"
+          className="focus-ring animate-float fixed right-4 bottom-4 z-50 h-12 w-12 rounded-full bg-primary shadow-lg transition-all duration-300 hover:bg-primary/90 hover:shadow-xl sm:right-6 sm:bottom-6 sm:h-14 sm:w-14"
           size="sm"
           aria-label="Open AI chat assistant"
         >
@@ -162,8 +162,8 @@ How can I help you today?`,
 
       {/* Chat Window */}
       {isOpen && (
-        <Card className="animate-slide-up fixed right-4 bottom-4 z-50 h-[70vh] max-h-[500px] w-[calc(100vw-2rem)] max-w-sm border-0 bg-white/95 shadow-2xl backdrop-blur-sm sm:right-6 sm:bottom-6 sm:w-96 dark:bg-slate-900/95">
-          <CardHeader className="rounded-t-lg bg-gradient-to-r from-blue-600 to-indigo-600 pb-3 text-white">
+        <Card className="animate-slide-up fixed right-4 bottom-4 z-50 h-[70vh] max-h-[500px] w-[calc(100vw-2rem)] max-w-sm border-0 bg-white/95 shadow-2xl backdrop-blur-sm sm:right-6 sm:bottom-6 sm:w-96/95">
+          <CardHeader className="rounded-t-lg bg-primary pb-3 text-white">
             <div className="flex items-center justify-between">
               <CardTitle className="flex items-center gap-2 text-base sm:text-lg">
                 <Bot className="h-4 w-4 sm:h-5 sm:w-5" />
@@ -194,8 +194,8 @@ How can I help you today?`,
                     <div
                       className={`max-w-[85%] rounded-lg p-2 sm:max-w-[80%] sm:p-3 ${
                         message.role === "user"
-                          ? "bg-blue-600 text-white"
-                          : "bg-slate-100 text-slate-900 dark:bg-slate-800 dark:text-white"
+                          ? "bg-primary text-white"
+                          : "bg-muted text-foreground dark:text-white"
                       }`}
                     >
                       <p className="text-xs leading-relaxed whitespace-pre-wrap sm:text-sm">
@@ -212,9 +212,9 @@ How can I help you today?`,
                 ))}
                 {isLoading && (
                   <div className="animate-fade-in flex justify-start">
-                    <div className="flex items-center gap-2 rounded-lg bg-slate-100 p-2 sm:p-3 dark:bg-slate-800">
+                    <div className="flex items-center gap-2 rounded-lg bg-muted p-2 sm:p-3">
                       <Loader2 className="h-3 w-3 animate-spin sm:h-4 sm:w-4" />
-                      <span className="text-xs text-slate-600 sm:text-sm dark:text-slate-400">
+                      <span className="text-xs text-muted-foreground sm:text-sm">
                         AI is thinking...
                       </span>
                     </div>
@@ -224,7 +224,7 @@ How can I help you today?`,
             </ScrollArea>
 
             {/* Input Area */}
-            <div className="border-t border-slate-200 p-3 sm:p-4 dark:border-slate-700">
+            <div className="border-t border-border p-3 sm:p-4">
               <div className="flex gap-2">
                 <Input
                   value={input}
@@ -239,7 +239,7 @@ How can I help you today?`,
                   onClick={handleSendMessage}
                   disabled={!input.trim() || isLoading}
                   size="sm"
-                  className="focus-ring flex-shrink-0 bg-blue-600 hover:bg-blue-700"
+                  className="focus-ring flex-shrink-0 bg-primary hover:bg-primary/90"
                   aria-label="Send message"
                 >
                   <Send className="h-3 w-3 sm:h-4 sm:w-4" />

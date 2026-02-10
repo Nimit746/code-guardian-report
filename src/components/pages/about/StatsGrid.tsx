@@ -107,7 +107,7 @@ export const StatsGrid: React.FC<StatsGridProps> = ({ className = "" }) => {
       {stats.map((stat, index) => (
         <div
           key={index}
-          className="stat-card-enhanced enhanced-card-hover glow-on-hover group relative overflow-hidden rounded-xl border border-slate-200/50 bg-white/90 p-6 shadow-sm backdrop-blur-sm transition-all duration-200 hover:border-slate-300/50 lg:p-8 dark:border-slate-700/50 dark:bg-slate-900/90"
+          className="stat-card-enhanced  glow-on-hover group relative overflow-hidden rounded-xl border border-border/50 bg-white/90 p-6 shadow-sm backdrop-blur-sm transition-all duration-200 hover:border-border/50 lg:p-8/50/90"
           style={{
             animationDelay: `${index * 0.1}s`,
           }}
@@ -116,8 +116,8 @@ export const StatsGrid: React.FC<StatsGridProps> = ({ className = "" }) => {
           <div className="animated-border absolute inset-0 opacity-0 transition-opacity duration-700 group-hover:opacity-100"></div>
 
           {/* Multiple Floating Orbs for Depth */}
-          <div className="float-animation absolute -top-6 -right-6 h-20 w-20 rounded-full bg-gradient-to-br from-blue-500/30 via-purple-500/20 to-pink-500/30 blur-2xl transition-transform duration-700 group-hover:scale-150"></div>
-          <div className="float-animation delay-2s absolute -bottom-4 -left-4 h-16 w-16 rounded-full bg-gradient-to-br from-emerald-500/25 to-teal-500/25 blur-xl transition-transform duration-500 group-hover:scale-125"></div>
+          <div className="hidden absolute -top-6 -right-6 h-20 w-20 rounded-full bg-gradient-to-br from-blue-500/30 via-purple-500/20 to-pink-500/30 blur-2xl transition-transform duration-700 group-hover:scale-150"></div>
+          <div className="hidden delay-2s absolute -bottom-4 -left-4 h-16 w-16 rounded-full bg-gradient-to-br from-emerald-500/25 to-teal-500/25 blur-xl transition-transform duration-500 group-hover:scale-125"></div>
 
           {/* Particle System */}
           <div className="particle-system opacity-0 transition-opacity duration-500 group-hover:opacity-100">
@@ -133,7 +133,7 @@ export const StatsGrid: React.FC<StatsGridProps> = ({ className = "" }) => {
 
           <div className="relative z-10 text-center">
             {/* Enhanced Icon Container */}
-            <div className="mb-6 flex items-center justify-center text-blue-600 transition-all duration-700 group-hover:scale-125 group-hover:rotate-12 dark:text-blue-400">
+            <div className="mb-6 flex items-center justify-center text-primary transition-all duration-700 group-hover:scale-125 group-hover:rotate-12 dark:text-primary">
               <div className="rounded-2xl bg-gradient-to-br from-blue-500/15 via-purple-500/10 to-pink-500/15 p-4 shadow-lg transition-all duration-700 group-hover:from-blue-500/30 group-hover:via-purple-500/20 group-hover:to-pink-500/30 group-hover:shadow-xl">
                 <div className="text-lg">{stat.icon}</div>
               </div>
@@ -145,7 +145,7 @@ export const StatsGrid: React.FC<StatsGridProps> = ({ className = "" }) => {
             </div>
 
             {/* Enhanced Label */}
-            <div className="text-sm font-semibold tracking-wide text-slate-700 transition-colors duration-300 group-hover:text-slate-800 lg:text-base dark:text-slate-300 dark:group-hover:text-slate-200">
+            <div className="text-sm font-semibold tracking-wide text-foreground/80 transition-colors duration-300 group-hover:text-foreground lg:text-base dark:group-hover:text-slate-200">
               {stat.label}
             </div>
           </div>

@@ -143,10 +143,10 @@ export const FirestoreErrorNotification: React.FC = () => {
       case "offline":
         return {
           container:
-            "bg-blue-500/10 border-blue-500/30 dark:bg-blue-900/20 dark:border-blue-500/40",
-          text: "text-blue-700 dark:text-blue-300",
+            "bg-muted0/10 border-primary/30 dark:bg-teal-900/20 dark:border-primary/40",
+          text: "text-teal-600 dark:text-teal-300",
           button:
-            "bg-blue-500/20 hover:bg-blue-500/30 text-blue-700 dark:text-blue-300",
+            "bg-muted0/20 hover:bg-muted0/30 text-teal-600 dark:text-teal-300",
         };
       case "circuit-breaker":
         return {
@@ -159,10 +159,10 @@ export const FirestoreErrorNotification: React.FC = () => {
       default:
         return {
           container:
-            "bg-gray-500/10 border-gray-500/30 dark:bg-gray-700/30 dark:border-gray-500/40",
-          text: "text-gray-700 dark:text-gray-300",
+            "bg-muted-foreground/10 border-gray-500/30 dark:bg-muted-foreground/30 dark:border-gray-500/40",
+          text: "text-foreground dark:text-muted-foreground",
           button:
-            "bg-gray-500/20 hover:bg-gray-500/30 text-gray-700 dark:text-gray-300",
+            "bg-muted-foreground/20 hover:bg-muted-foreground/30 text-foreground dark:text-muted-foreground",
         };
     }
   };
@@ -230,7 +230,7 @@ export const FirestoreErrorNotification: React.FC = () => {
                 </p>
                 {/* Only show technical details in development */}
                 {process.env.NODE_ENV === "development" && (
-                  <p className="mt-1.5 truncate font-mono text-xs text-gray-500 opacity-50 dark:text-gray-400">
+                  <p className="mt-1.5 truncate font-mono text-xs text-muted-foreground opacity-50 dark:text-muted-foreground">
                     {error.docPath}
                   </p>
                 )}

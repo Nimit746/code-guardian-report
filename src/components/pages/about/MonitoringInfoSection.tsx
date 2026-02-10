@@ -34,7 +34,7 @@ const MonitoringInfoSection: React.FC = () => {
       <div className="grid grid-cols-1 gap-6 md:grid-cols-2 lg:grid-cols-3">
         <Card>
           <CardHeader>
-            <Webhook className="mb-2 h-8 w-8 text-blue-600" />
+            <Webhook className="mb-2 h-8 w-8 text-primary" />
             <CardTitle>GitHub/GitLab Webhooks</CardTitle>
           </CardHeader>
           <CardContent>
@@ -129,7 +129,7 @@ const MonitoringInfoSection: React.FC = () => {
           </CardHeader>
           <CardContent className="space-y-4">
             <div className="flex items-center gap-3">
-              <Languages className="h-5 w-5 text-blue-600" />
+              <Languages className="h-5 w-5 text-primary" />
               <div>
                 <h5 className="font-medium">Multi-Language Analysis</h5>
                 <p className="text-muted-foreground text-sm">
@@ -199,7 +199,7 @@ const MonitoringInfoSection: React.FC = () => {
       </div>
 
       {/* Setup Information */}
-      <Card className="border-2 border-dashed border-blue-200 bg-blue-50/50 dark:border-blue-800 dark:bg-blue-950/30">
+      <Card className="border-2 border-dashed border-border bg-muted/50 dark:border-border dark:bg-blue-950/30">
         <CardHeader>
           <CardTitle>Ready to Get Started?</CardTitle>
           <CardDescription>
@@ -211,13 +211,13 @@ const MonitoringInfoSection: React.FC = () => {
           <div className="flex flex-col gap-4 sm:flex-row">
             <button
               onClick={() => (window.location.hash = "#github-analysis")}
-              className="rounded-lg bg-gradient-to-r from-blue-600 to-blue-700 px-6 py-3 font-medium text-white shadow-md transition-all duration-300 hover:from-blue-700 hover:to-blue-800 hover:shadow-lg"
+              className="rounded-lg bg-primary px-6 py-3 font-medium text-white shadow-md transition-all duration-300 hover:bg-primary/90 hover:shadow-lg"
             >
               Analyze Your Repository
             </button>
             <button
               onClick={() => (window.location.hash = "#about-section")}
-              className="rounded-lg border border-slate-300 px-6 py-3 font-medium text-slate-700 transition-all duration-300 hover:bg-slate-50 dark:border-slate-600 dark:text-slate-300 dark:hover:bg-slate-800"
+              className="rounded-lg border border-border px-6 py-3 font-medium text-foreground/80 transition-all duration-300 hover:bg-muted dark:border-slate-600"
             >
               Learn More
             </button>

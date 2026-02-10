@@ -18,11 +18,11 @@ const GitHubRepositoryPermissionModal: React.FC<
 
   return (
     <div className="fixed inset-0 z-50 flex items-center justify-center bg-black/70 backdrop-blur-sm">
-      <div className="relative mx-4 w-full max-w-md rounded-xl border border-gray-700 bg-gradient-to-br from-[#1e1e2f] to-[#2a2a3d] shadow-2xl">
+      <div className="relative mx-4 w-full max-w-md rounded-xl border border-border bg-gradient-to-br from-[#1e1e2f] to-[#2a2a3d] shadow-2xl">
         {/* Close button */}
         <button
           onClick={onClose}
-          className="absolute top-4 right-4 text-gray-400 transition-colors hover:text-white"
+          className="absolute top-4 right-4 text-muted-foreground transition-colors hover:text-white"
           aria-label="Close"
         >
           <X className="h-5 w-5" />
@@ -43,18 +43,18 @@ const GitHubRepositoryPermissionModal: React.FC<
 
           {/* Description */}
           <div className="mb-6 space-y-4">
-            <p className="text-center text-gray-300">
+            <p className="text-center text-muted-foreground">
               We detected that your account email{" "}
               <span className="font-semibold text-white">{email}</span> may be
               associated with a GitHub account.
             </p>
 
-            <div className="rounded-lg border border-gray-700 bg-[#252538] p-4">
+            <div className="rounded-lg border border-border bg-[#252538] p-4">
               <h3 className="mb-3 flex items-center text-sm font-semibold text-white">
                 <CheckCircle className="mr-2 h-4 w-4 text-green-400" />
                 What we'll access:
               </h3>
-              <ul className="space-y-2 text-sm text-gray-300">
+              <ul className="space-y-2 text-sm text-muted-foreground">
                 <li className="flex items-start">
                   <span className="mr-2 text-purple-400">•</span>
                   <span>Your public repositories</span>
@@ -70,8 +70,8 @@ const GitHubRepositoryPermissionModal: React.FC<
               </ul>
             </div>
 
-            <div className="rounded-lg border border-blue-500/30 bg-blue-500/10 p-4">
-              <p className="flex items-start text-sm text-blue-300">
+            <div className="rounded-lg border border-primary/30 bg-muted0/10 p-4">
+              <p className="flex items-start text-sm text-teal-300">
                 <AlertCircle className="mt-0.5 mr-2 h-4 w-4 flex-shrink-0" />
                 <span>
                   This will help you quickly analyze your GitHub repositories
@@ -86,7 +86,7 @@ const GitHubRepositoryPermissionModal: React.FC<
             <Button
               onClick={onDeny}
               variant="outline"
-              className="flex-1 border-gray-600 bg-transparent text-gray-300 hover:bg-gray-800 hover:text-white"
+              className="flex-1 border-border bg-transparent text-muted-foreground hover:bg-foreground hover:text-white"
             >
               Not Now
             </Button>
@@ -99,7 +99,7 @@ const GitHubRepositoryPermissionModal: React.FC<
           </div>
 
           {/* Privacy note */}
-          <p className="mt-4 text-center text-xs text-gray-500">
+          <p className="mt-4 text-center text-xs text-muted-foreground">
             You can revoke this permission anytime in your account settings.
           </p>
         </div>

@@ -22,7 +22,7 @@ export function PWAInstallPrompt() {
   };
 
   return (
-    <Card className="animate-in slide-in-from-bottom-2 fixed right-4 bottom-4 z-50 max-w-sm border-0 bg-gradient-to-r from-blue-600 to-purple-600 p-4 text-white shadow-2xl">
+    <Card className="animate-in slide-in-from-bottom-2 fixed right-4 bottom-4 z-50 max-w-sm border-0 bg-primary p-4 text-white shadow-2xl">
       <div className="flex items-start gap-3">
         <div className="flex-shrink-0">
           <div className="rounded-lg bg-white/20 p-2">
@@ -52,7 +52,7 @@ export function PWAInstallPrompt() {
               size="sm"
               variant="secondary"
               onClick={handleInstall}
-              className="flex-1 bg-white text-blue-600 hover:bg-white/90"
+              className="flex-1 bg-white text-primary hover:bg-white/90"
             >
               Install
             </Button>

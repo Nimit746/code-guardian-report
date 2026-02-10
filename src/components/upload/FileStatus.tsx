@@ -41,19 +41,19 @@ export const FileStatus: React.FC<FileStatusProps> = ({
 }) => {
   return (
     <div className="animate-slide-up space-y-4 sm:space-y-6">
-      <div className="flex flex-col items-start justify-between gap-4 rounded-xl border-2 border-slate-200 bg-gradient-to-r from-slate-50 to-blue-50 p-4 sm:flex-row sm:items-center sm:p-6 dark:border-slate-600 dark:from-slate-800 dark:to-slate-700">
+      <div className="flex flex-col items-start justify-between gap-4 rounded-xl border-2 border-border bg-muted/30 p-4 sm:flex-row sm:items-center sm:p-6 dark:border-slate-600 dark:from-slate-800 dark:to-slate-700">
         <div className="flex min-w-0 flex-1 items-center gap-3 sm:gap-4">
-          <div className="flex-shrink-0 rounded-xl bg-gradient-to-r from-blue-500 to-purple-600 p-2 shadow-lg sm:p-3">
+          <div className="flex-shrink-0 rounded-xl bg-primary p-2 shadow-lg sm:p-3">
             <FileCode className="h-6 w-6 text-white sm:h-8 sm:w-8" />
           </div>
           <div className="min-w-0 flex-1">
             <p
-              className="truncate text-base font-bold text-slate-900 sm:text-lg dark:text-white"
+              className="truncate text-base font-bold text-foreground sm:text-lg dark:text-white"
               title={selectedFile.name}
             >
               {selectedFile.name}
             </p>
-            <p className="text-sm text-slate-600 dark:text-slate-300">
+            <p className="text-sm text-muted-foreground">
               {(selectedFile.size / 1024 / 1024).toFixed(2)} MB
             </p>
           </div>
@@ -71,18 +71,18 @@ export const FileStatus: React.FC<FileStatusProps> = ({
       </div>
 
       {isUploading && (
-        <div className="animate-fade-in space-y-3 rounded-xl border border-blue-200 bg-gradient-to-r from-blue-50 to-indigo-50 p-4 sm:space-y-4 sm:p-6 dark:border-blue-800 dark:from-blue-950/30 dark:to-indigo-950/30">
+        <div className="animate-fade-in space-y-3 rounded-xl border border-border bg-muted p-4 sm:space-y-4 sm:p-6 dark:border-border dark:from-blue-950/30 dark:to-indigo-950/30">
           <div className="flex items-center justify-between">
             <span className="text-sm font-semibold text-blue-900 dark:text-blue-100">
               Uploading file...
             </span>
-            <span className="font-mono text-sm text-blue-700 dark:text-blue-300">
+            <span className="font-mono text-sm text-teal-600 dark:text-teal-300">
               {uploadProgress}%
             </span>
           </div>
           <Progress
             value={uploadProgress}
-            className="h-2 w-full bg-blue-100 sm:h-3 dark:bg-blue-900"
+            className="h-2 w-full bg-teal-100 sm:h-3 dark:bg-teal-900"
           />
         </div>
       )}

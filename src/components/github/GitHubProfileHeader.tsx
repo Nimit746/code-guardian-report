@@ -42,31 +42,31 @@ export const GitHubProfileHeader: React.FC<GitHubProfileHeaderProps> = ({
             />
           ) : (
             <div className="flex h-20 w-20 items-center justify-center rounded-2xl bg-gradient-to-br from-slate-100 to-slate-200 shadow-lg ring-4 ring-white dark:from-slate-800 dark:to-slate-700 dark:ring-slate-800">
-              <Github className="h-10 w-10 text-slate-400" />
+              <Github className="h-10 w-10 text-muted-foreground" />
             </div>
           )}
-          <div className="absolute -right-2 -bottom-2 rounded-full bg-white p-1.5 shadow-md ring-1 ring-slate-200 dark:bg-slate-800 dark:ring-slate-700">
-            <Github className="h-4 w-4 text-slate-900 dark:text-white" />
+          <div className="absolute -right-2 -bottom-2 rounded-full bg-white p-1.5 shadow-md ring-1 ring-slate-200 dark:ring-slate-700">
+            <Github className="h-4 w-4 text-foreground dark:text-white" />
           </div>
         </div>
 
         <div>
-          <h1 className="mb-1 text-3xl font-bold tracking-tight text-slate-900 dark:text-white">
+          <h1 className="mb-1 text-3xl font-bold tracking-tight text-foreground dark:text-white">
             {isLoadingProfile ? (
-              <span className="inline-block h-8 w-48 animate-pulse rounded bg-slate-200 dark:bg-slate-700" />
+              <span className="inline-block h-8 w-48 animate-pulse rounded bg-muted dark:bg-slate-700" />
             ) : (
               githubDisplayName || "GitHub User"
             )}
           </h1>
-          <div className="flex items-center gap-3 text-slate-500 dark:text-slate-400">
+          <div className="flex items-center gap-3 text-muted-foreground">
             {isLoadingProfile ? (
-              <span className="inline-block h-5 w-32 animate-pulse rounded bg-slate-200 dark:bg-slate-700" />
+              <span className="inline-block h-5 w-32 animate-pulse rounded bg-muted dark:bg-slate-700" />
             ) : githubUsername ? (
               <a
                 href={`https://github.com/${githubUsername}`}
                 target="_blank"
                 rel="noopener noreferrer"
-                className="flex items-center gap-1.5 transition-colors hover:text-blue-600 dark:hover:text-blue-400"
+                className="flex items-center gap-1.5 transition-colors hover:text-primary dark:hover:text-primary"
               >
                 @{githubUsername}
                 <ExternalLink className="h-3 w-3 opacity-50" />
@@ -74,7 +74,7 @@ export const GitHubProfileHeader: React.FC<GitHubProfileHeaderProps> = ({
             ) : (
               <Button
                 variant="link"
-                className="h-auto p-0 text-blue-600 hover:text-blue-700 dark:text-blue-500 dark:hover:text-blue-400"
+                className="h-auto p-0 text-primary hover:text-teal-600 dark:text-primary dark:hover:text-primary"
                 onClick={openConnectGitHubPrompt}
               >
                 Connect GitHub Profile
@@ -114,15 +114,15 @@ export const GitHubProfileHeader: React.FC<GitHubProfileHeaderProps> = ({
         ].map((stat, i) => (
           <div
             key={i}
-            className="group rounded-xl border border-slate-200 bg-white p-4 shadow-sm transition-all hover:border-blue-500/20 hover:shadow-md dark:border-slate-800 dark:bg-slate-900 dark:hover:border-blue-400/20"
+            className="group rounded-xl border border-border bg-white p-4 shadow-sm transition-all hover:border-primary/20 hover:shadow-md dark:hover:border-primary/20"
           >
-            <div className="mb-1 text-xs font-medium tracking-wider text-slate-500 uppercase dark:text-slate-400">
+            <div className="mb-1 text-xs font-medium tracking-wider text-muted-foreground uppercase">
               {stat.label}
             </div>
             <div className="flex items-baseline gap-1">
               <span
                 className={cn("text-2xl font-bold transition-colors", {
-                  "text-blue-600 dark:text-blue-400": stat.color === "blue",
+                  "text-primary dark:text-primary": stat.color === "blue",
                   "text-emerald-600 dark:text-emerald-400":
                     stat.color === "green",
                   "text-orange-600 dark:text-orange-400":
@@ -131,7 +131,7 @@ export const GitHubProfileHeader: React.FC<GitHubProfileHeaderProps> = ({
               >
                 {dashboardStats.loading ? "..." : stat.value}
               </span>
-              <span className="text-xs font-medium text-slate-400 dark:text-slate-500">
+              <span className="text-xs font-medium text-muted-foreground">
                 {stat.sub}
               </span>
             </div>

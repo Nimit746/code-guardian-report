@@ -40,7 +40,7 @@ export const ScrollToTop: React.FC<ScrollToTopProps> = ({ className = "" }) => {
       onClick={scrollToTop}
       variant="ghost"
       size="sm"
-      className={`group fixed right-6 bottom-6 z-50 rounded-full border border-slate-700/50 bg-slate-800/50 p-3 text-slate-300 transition-all duration-300 hover:scale-110 hover:border-slate-600/50 hover:bg-slate-700/50 hover:text-white ${className}`}
+      className={`group fixed right-6 bottom-6 z-50 rounded-full border border-border/50 bg-muted/50 p-3 text-muted-foreground transition-all duration-300 hover:scale-110 hover:border-slate-600/50 hover:bg-slate-700/50 hover:text-white ${className}`}
       aria-label="Scroll to top"
     >
       <ArrowUp className="h-5 w-5 transition-transform duration-300 group-hover:-translate-y-1" />

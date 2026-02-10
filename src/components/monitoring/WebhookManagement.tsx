@@ -172,7 +172,7 @@ const WebhookManagement: React.FC = () => {
         <Card>
           <CardContent className="pt-6">
             <div className="text-center">
-              <Webhook className="mx-auto mb-2 h-8 w-8 text-blue-600" />
+              <Webhook className="mx-auto mb-2 h-8 w-8 text-primary" />
               <div className="text-3xl font-bold">{webhooks.length}</div>
               <div className="text-muted-foreground text-sm">
                 Active Webhooks
@@ -267,9 +267,9 @@ const WebhookCard: React.FC<WebhookCardProps> = ({
   onSelect,
 }) => {
   const providerColors = {
-    github: "bg-gray-900 text-white",
+    github: "bg-foreground text-white",
     gitlab: "bg-orange-600 text-white",
-    bitbucket: "bg-blue-600 text-white",
+    bitbucket: "bg-primary text-white",
   };
 
   return (

@@ -20,8 +20,8 @@ const getLanguageBadge = (language: string) => {
   const normalized = language.toLowerCase();
   const map: Record<string, { label: string; color: string }> = {
     javascript: { label: "JS", color: "bg-yellow-500" },
-    typescript: { label: "TS", color: "bg-blue-600" },
-    python: { label: "PY", color: "bg-blue-500" },
+    typescript: { label: "TS", color: "bg-primary" },
+    python: { label: "PY", color: "bg-muted0" },
     java: { label: "JAVA", color: "bg-red-600" },
     php: { label: "PHP", color: "bg-indigo-600" },
     ruby: { label: "RB", color: "bg-red-500" },
@@ -31,7 +31,7 @@ const getLanguageBadge = (language: string) => {
   };
   const { label, color } = map[normalized] ?? {
     label: "CODE",
-    color: "bg-slate-500",
+    color: "bg-muted0",
   };
 
   return (
@@ -47,7 +47,7 @@ const getFrameworkBadge = (framework: string) => {
   const normalized = framework.toLowerCase();
   const map: Record<string, { label: string; color: string }> = {
     react: { label: "React", color: "bg-cyan-600" },
-    "next.js": { label: "Next", color: "bg-slate-900" },
+    "next.js": { label: "Next", color: "bg-card" },
     "vue.js": { label: "Vue", color: "bg-emerald-600" },
     "nuxt.js": { label: "Nuxt", color: "bg-emerald-700" },
     angular: { label: "Ng", color: "bg-red-600" },
@@ -62,7 +62,7 @@ const getFrameworkBadge = (framework: string) => {
   };
   const { label, color } = map[normalized] ?? {
     label: "FW",
-    color: "bg-slate-500",
+    color: "bg-muted0",
   };
 
   return (
@@ -83,10 +83,10 @@ const getConfidenceColor = (confidence: number) => {
 
 const getConfidenceIcon = (confidence: number) => {
   if (confidence >= 80)
-    return <CheckCircle className="h-3 w-3 text-green-500" />;
+    return <CheckCircle className="h-3 w-3 text-primary" />;
   if (confidence >= 60)
     return <AlertCircle className="h-3 w-3 text-yellow-500" />;
-  return <AlertCircle className="h-3 w-3 text-orange-500" />;
+  return <AlertCircle className="h-3 w-3 text-muted-foreground" />;
 };
 
 export const LanguageDetectionSummary: React.FC<
@@ -165,12 +165,12 @@ export const LanguageDetectionSummary: React.FC<
                 Language Detection
               </span>
             </div>
-            <div className="flex items-center gap-3 text-xs font-medium text-slate-600 dark:text-slate-400">
-              <div className="flex items-center gap-1 rounded-md bg-slate-100 px-2 py-1 dark:bg-slate-800">
+            <div className="flex items-center gap-3 text-xs font-medium text-muted-foreground">
+              <div className="flex items-center gap-1 rounded-md bg-muted px-2 py-1">
                 <Code2 className="h-3 w-3" />
                 <span>{totalFiles} files</span>
               </div>
-              <div className="flex items-center gap-1 rounded-md bg-slate-100 px-2 py-1 dark:bg-slate-800">
+              <div className="flex items-center gap-1 rounded-md bg-muted px-2 py-1">
                 <Zap className="h-3 w-3" />
                 <span>{analysisTime}ms</span>
               </div>

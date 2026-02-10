@@ -51,7 +51,7 @@ const getRatingColor = (rating: string): string => {
     case "E":
       return "bg-red-100 text-red-800 border-red-200 dark:bg-red-900/30 dark:text-red-300";
     default:
-      return "bg-gray-100 text-gray-800 border-gray-200 dark:bg-gray-900/30 dark:text-gray-300";
+      return "bg-muted text-foreground border-border dark:bg-foreground/30 dark:text-muted-foreground";
   }
 };
 
@@ -155,7 +155,7 @@ export const ModernSecurityDashboard: React.FC<
           <CardHeader>
             <div className="flex items-center justify-between">
               <div className="flex items-center gap-2">
-                <Shield className="h-5 w-5 text-blue-600 dark:text-blue-400" />
+                <Shield className="h-5 w-5 text-primary dark:text-primary" />
                 <CardTitle className="text-lg">Security</CardTitle>
               </div>
               <Badge
@@ -168,7 +168,7 @@ export const ModernSecurityDashboard: React.FC<
           <CardContent>
             <div className="space-y-2">
               <div className="flex justify-between text-sm">
-                <span className="text-slate-600 dark:text-slate-400">
+                <span className="text-muted-foreground">
                   Vulnerabilities
                 </span>
                 <span className="text-foreground font-semibold">
@@ -176,7 +176,7 @@ export const ModernSecurityDashboard: React.FC<
                 </span>
               </div>
               <div className="flex justify-between text-sm">
-                <span className="text-slate-600 dark:text-slate-400">
+                <span className="text-muted-foreground">
                   Security Hotspots
                 </span>
                 <span className="text-foreground font-semibold">
@@ -205,13 +205,13 @@ export const ModernSecurityDashboard: React.FC<
           <CardContent>
             <div className="space-y-2">
               <div className="flex justify-between text-sm">
-                <span className="text-slate-600 dark:text-slate-400">Bugs</span>
+                <span className="text-muted-foreground">Bugs</span>
                 <span className="text-foreground font-semibold">
                   {metrics.bugs}
                 </span>
               </div>
               <div className="flex justify-between text-sm">
-                <span className="text-slate-600 dark:text-slate-400">
+                <span className="text-muted-foreground">
                   Total Issues
                 </span>
                 <span className="text-foreground font-semibold">
@@ -240,7 +240,7 @@ export const ModernSecurityDashboard: React.FC<
           <CardContent>
             <div className="space-y-2">
               <div className="flex justify-between text-sm">
-                <span className="text-slate-600 dark:text-slate-400">
+                <span className="text-muted-foreground">
                   Code Smells
                 </span>
                 <span className="text-foreground font-semibold">
@@ -248,7 +248,7 @@ export const ModernSecurityDashboard: React.FC<
                 </span>
               </div>
               <div className="flex justify-between text-sm">
-                <span className="text-slate-600 dark:text-slate-400">
+                <span className="text-muted-foreground">
                   Maintainability
                 </span>
                 <span className="text-foreground font-semibold">
@@ -273,7 +273,7 @@ export const ModernSecurityDashboard: React.FC<
           <CardContent className="space-y-4">
             <div>
               <div className="mb-2 flex justify-between">
-                <span className="text-sm text-slate-600 dark:text-slate-400">
+                <span className="text-sm text-muted-foreground">
                   Remediation Time
                 </span>
                 <span className="text-lg font-bold text-purple-600 dark:text-purple-400">
@@ -286,7 +286,7 @@ export const ModernSecurityDashboard: React.FC<
               />
             </div>
             <div className="flex justify-between text-sm">
-              <span className="text-slate-600 dark:text-slate-400">
+              <span className="text-muted-foreground">
                 Debt Ratio
               </span>
               <span className="text-foreground font-semibold">
@@ -294,7 +294,7 @@ export const ModernSecurityDashboard: React.FC<
               </span>
             </div>
             <div className="flex justify-between text-sm">
-              <span className="text-slate-600 dark:text-slate-400">
+              <span className="text-muted-foreground">
                 Remediation Effort
               </span>
               <span className="text-foreground font-semibold">
@@ -308,13 +308,13 @@ export const ModernSecurityDashboard: React.FC<
         <Card>
           <CardHeader>
             <div className="flex items-center gap-2">
-              <Activity className="h-5 w-5 text-blue-600 dark:text-blue-400" />
+              <Activity className="h-5 w-5 text-primary dark:text-primary" />
               <CardTitle>Code Metrics</CardTitle>
             </div>
           </CardHeader>
           <CardContent className="space-y-3">
             <div className="flex justify-between text-sm">
-              <span className="text-slate-600 dark:text-slate-400">
+              <span className="text-muted-foreground">
                 Lines of Code
               </span>
               <span className="text-foreground font-semibold">
@@ -322,7 +322,7 @@ export const ModernSecurityDashboard: React.FC<
               </span>
             </div>
             <div className="flex justify-between text-sm">
-              <span className="text-slate-600 dark:text-slate-400">
+              <span className="text-muted-foreground">
                 Comment Lines
               </span>
               <span className="text-foreground font-semibold">
@@ -330,7 +330,7 @@ export const ModernSecurityDashboard: React.FC<
               </span>
             </div>
             <div className="flex justify-between text-sm">
-              <span className="text-slate-600 dark:text-slate-400">
+              <span className="text-muted-foreground">
                 Duplicated Lines
               </span>
               <span className="text-foreground font-semibold">
@@ -346,15 +346,15 @@ export const ModernSecurityDashboard: React.FC<
         <Card>
           <CardHeader>
             <div className="flex items-center gap-2">
-              <Target className="h-5 w-5 text-indigo-600 dark:text-indigo-400" />
+              <Target className="h-5 w-5 text-cyan-600 dark:text-cyan-400" />
               <CardTitle className="text-base">Cyclomatic Complexity</CardTitle>
             </div>
           </CardHeader>
           <CardContent>
-            <div className="text-3xl font-bold text-indigo-600 dark:text-indigo-400">
+            <div className="text-3xl font-bold text-cyan-600 dark:text-cyan-400">
               {metrics.cyclomaticComplexity}
             </div>
-            <p className="mt-1 text-xs text-slate-600 dark:text-slate-400">
+            <p className="mt-1 text-xs text-muted-foreground">
               Decision points in code
             </p>
           </CardContent>
@@ -371,7 +371,7 @@ export const ModernSecurityDashboard: React.FC<
             <div className="text-3xl font-bold text-yellow-600 dark:text-yellow-400">
               {metrics.cognitiveComplexity}
             </div>
-            <p className="mt-1 text-xs text-slate-600 dark:text-slate-400">
+            <p className="mt-1 text-xs text-muted-foreground">
               Code readability measure
             </p>
           </CardContent>
@@ -388,7 +388,7 @@ export const ModernSecurityDashboard: React.FC<
             <div className="text-3xl font-bold text-green-600 dark:text-green-400">
               {metrics.estimatedTestCoverage}%
             </div>
-            <p className="mt-1 text-xs text-slate-600 dark:text-slate-400">
+            <p className="mt-1 text-xs text-muted-foreground">
               Estimated coverage
             </p>
           </CardContent>
@@ -432,11 +432,11 @@ export const ModernSecurityDashboard: React.FC<
                 Code Smells
               </div>
             </div>
-            <div className="rounded-lg bg-blue-50 p-4 text-center dark:bg-blue-900/20">
-              <div className="text-3xl font-bold text-blue-600 dark:text-blue-400">
+            <div className="rounded-lg bg-muted p-4 text-center dark:bg-teal-900/20">
+              <div className="text-3xl font-bold text-primary dark:text-primary">
                 {metrics.securityHotspots}
               </div>
-              <div className="mt-1 text-sm text-blue-700 dark:text-blue-300">
+              <div className="mt-1 text-sm text-teal-600 dark:text-teal-300">
                 Security Hotspots
               </div>
             </div>

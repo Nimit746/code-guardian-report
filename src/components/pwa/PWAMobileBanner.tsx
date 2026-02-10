@@ -116,7 +116,7 @@ export function PWAMobileBanner() {
           {/* Install Button */}
           <Button
             onClick={handleInstall}
-            className="w-full bg-white font-semibold text-blue-600 shadow-lg hover:bg-white/90 sm:w-auto"
+            className="w-full bg-white font-semibold text-primary shadow-lg hover:bg-white/90 sm:w-auto"
             size="lg"
           >
             <Download className="mr-2 h-4 w-4" />

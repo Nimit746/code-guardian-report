@@ -124,7 +124,7 @@ const EnhancedCardDescription = React.forwardRef<
   <p
     ref={ref}
     className={cn(
-      "text-sm leading-relaxed text-slate-600 dark:text-slate-400",
+      "text-sm leading-relaxed text-muted-foreground",
       className
     )}
     {...props}

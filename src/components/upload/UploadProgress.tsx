@@ -15,18 +15,18 @@ export const UploadProgress: React.FC<UploadProgressProps> = ({
 }) => {
   if (isUploading) {
     return (
-      <div className="animate-fade-in space-y-3 rounded-xl border border-blue-200 bg-gradient-to-r from-blue-50 to-indigo-50 p-4 sm:space-y-4 sm:p-6 dark:border-blue-800 dark:from-blue-950/30 dark:to-indigo-950/30">
+      <div className="animate-fade-in space-y-3 rounded-xl border border-border bg-muted p-4 sm:space-y-4 sm:p-6 dark:border-border dark:from-blue-950/30 dark:to-indigo-950/30">
         <div className="flex items-center justify-between">
           <span className="text-sm font-semibold text-blue-900 dark:text-blue-100">
             Uploading file...
           </span>
-          <span className="font-mono text-sm text-blue-700 dark:text-blue-300">
+          <span className="font-mono text-sm text-teal-600 dark:text-teal-300">
             {uploadProgress}%
           </span>
         </div>
         <Progress
           value={uploadProgress}
-          className="h-2 w-full bg-blue-100 sm:h-3 dark:bg-blue-900"
+          className="h-2 w-full bg-teal-100 sm:h-3 dark:bg-teal-900"
         />
       </div>
     );

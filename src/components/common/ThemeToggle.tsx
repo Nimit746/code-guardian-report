@@ -30,12 +30,12 @@ export function ThemeToggle() {
   const getIcon = () => {
     if (theme === "system") {
       return (
-        <Monitor className="h-5 w-5 text-slate-600 transition-all duration-300 dark:text-slate-400" />
+        <Monitor className="h-5 w-5 text-muted-foreground transition-all duration-300" />
       );
     }
     if (theme === "dark") {
       return (
-        <Moon className="h-5 w-5 text-indigo-500 transition-all duration-300 hover:text-indigo-400" />
+        <Moon className="h-5 w-5 text-cyan-500 transition-all duration-300 hover:text-cyan-400" />
       );
     }
     return (

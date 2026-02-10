@@ -2,65 +2,118 @@
 @reference "tailwindcss";
 
 @layer components {
-  /* Modern Card System - Professional */
+  /* Modern Card System */
   .card-ultra-modern {
-    @apply rounded-lg border border-slate-200 bg-white p-6 shadow-sm transition-all duration-200 hover:shadow-md dark:border-slate-800 dark:bg-slate-900;
+    @apply rounded-lg p-6 shadow-sm transition-all duration-200 hover:shadow-md;
+    border: 1px solid hsl(var(--border));
+    background-color: hsl(var(--card));
   }
 
   .card-glass-ultra,
   .glass-card-ultra {
-    @apply rounded-lg border border-slate-200/50 bg-white/90 p-6 shadow-sm backdrop-blur-sm transition-all duration-200 hover:border-slate-300/50 dark:border-slate-700/50 dark:bg-slate-900/90;
+    @apply rounded-lg p-6 shadow-sm transition-all duration-200;
+    border: 1px solid hsl(var(--border));
+    background-color: hsl(var(--card));
   }
 
-  /* Enhanced Button System - Professional */
+  /* Button System */
   .btn-ultra-primary {
-    @apply relative overflow-hidden rounded-md bg-blue-600 px-6 py-2.5 font-medium text-white shadow-sm transition-all duration-200 hover:bg-blue-700 focus:ring-2 focus:ring-blue-500/50 focus:outline-none;
+    @apply relative overflow-hidden rounded-md px-6 py-2.5 font-medium shadow-sm transition-all duration-200 focus:outline-none;
+    background-color: hsl(var(--primary));
+    color: hsl(var(--primary-foreground));
   }
 
   .btn-ultra-primary:hover {
     @apply shadow-md;
+    background-color: hsl(var(--primary) / 0.9);
   }
 
   .btn-ultra-secondary {
-    @apply rounded-md border border-slate-200 bg-white px-6 py-2.5 font-medium text-slate-700 shadow-sm transition-all duration-200 hover:bg-slate-50 hover:text-slate-900 dark:border-slate-700 dark:bg-slate-900 dark:text-slate-300 dark:hover:bg-slate-800;
+    @apply rounded-md px-6 py-2.5 font-medium shadow-sm transition-all duration-200;
+    border: 1px solid hsl(var(--border));
+    background-color: hsl(var(--card));
+    color: hsl(var(--foreground));
+  }
+
+  .btn-ultra-secondary:hover {
+    background-color: hsl(var(--muted));
   }
 
   .btn-ultra-glass {
-    @apply rounded-md border border-slate-200/50 bg-white/80 px-6 py-2.5 font-medium text-slate-700 shadow-sm backdrop-blur-sm transition-all duration-200 hover:bg-white dark:border-slate-700/50 dark:bg-slate-800/80 dark:text-slate-300 dark:hover:bg-slate-800;
+    @apply rounded-md px-6 py-2.5 font-medium shadow-sm transition-all duration-200;
+    border: 1px solid hsl(var(--border));
+    background-color: hsl(var(--card));
+    color: hsl(var(--foreground));
   }
 
-  /* Enhanced Text Effects - Professional */
+  .btn-ultra-glass:hover {
+    background-color: hsl(var(--muted));
+  }
+
+  /* Text Effects */
   .text-ultra-gradient {
-    @apply text-slate-900 dark:text-white;
+    color: hsl(var(--foreground));
   }
 
   .text-shimmer-ultra {
-    @apply text-slate-900 dark:text-white;
+    color: hsl(var(--foreground));
   }
 
-  /* Enhanced Navigation - Professional */
+  /* Navigation */
   .nav-ultra-modern {
-    @apply border-b border-slate-200 bg-white shadow-sm dark:border-slate-800 dark:bg-slate-950;
+    @apply shadow-sm;
+    border-bottom: 1px solid hsl(var(--border));
+    background-color: hsl(var(--background));
   }
 
   .nav-item-ultra {
-    @apply relative rounded-md px-4 py-2 font-medium text-slate-600 transition-all duration-200 hover:bg-slate-100 hover:text-slate-900 dark:text-slate-400 dark:hover:bg-slate-800 dark:hover:text-white;
+    @apply relative rounded-md px-4 py-2 font-medium transition-all duration-200;
+    color: hsl(var(--muted-foreground));
+  }
+
+  .nav-item-ultra:hover {
+    background-color: hsl(var(--muted));
+    color: hsl(var(--foreground));
   }
 
   .nav-item-ultra::before {
     @apply hidden;
   }
 
-  /* Enhanced Form Elements - Professional */
+  /* Form Elements */
   .input-ultra-modern {
-    @apply rounded-md border border-slate-200 bg-white px-4 py-2 text-slate-900 placeholder-slate-500 transition-all duration-200 focus:border-blue-500 focus:ring-1 focus:ring-blue-500 dark:border-slate-700 dark:bg-slate-900 dark:text-white dark:placeholder-slate-400 dark:focus:border-blue-400;
+    @apply rounded-md px-4 py-2 transition-all duration-200;
+    border: 1px solid hsl(var(--border));
+    background-color: hsl(var(--background));
+    color: hsl(var(--foreground));
+  }
+
+  .input-ultra-modern::placeholder {
+    color: hsl(var(--muted-foreground));
+  }
+
+  .input-ultra-modern:focus {
+    border-color: hsl(var(--primary));
+    box-shadow: 0 0 0 1px hsl(var(--primary));
   }
 
   .textarea-ultra-modern {
-    @apply min-h-[120px] resize-y rounded-md border border-slate-200 bg-white px-4 py-2 text-slate-900 placeholder-slate-500 transition-all duration-200 focus:border-blue-500 focus:ring-1 focus:ring-blue-500 dark:border-slate-700 dark:bg-slate-900 dark:text-white dark:placeholder-slate-400 dark:focus:border-blue-400;
+    @apply min-h-[120px] resize-y rounded-md px-4 py-2 transition-all duration-200;
+    border: 1px solid hsl(var(--border));
+    background-color: hsl(var(--background));
+    color: hsl(var(--foreground));
   }
 
-  /* Enhanced Status Indicators - Professional */
+  .textarea-ultra-modern::placeholder {
+    color: hsl(var(--muted-foreground));
+  }
+
+  .textarea-ultra-modern:focus {
+    border-color: hsl(var(--primary));
+    box-shadow: 0 0 0 1px hsl(var(--primary));
+  }
+
+  /* Status Indicators */
   .status-ultra-success {
     @apply rounded-md bg-emerald-100 px-3 py-1 text-sm font-medium text-emerald-800 dark:bg-emerald-900/30 dark:text-emerald-400;
   }
@@ -74,62 +127,75 @@
   }
 
   .status-ultra-info {
-    @apply rounded-md bg-blue-100 px-3 py-1 text-sm font-medium text-blue-800 dark:bg-blue-900/30 dark:text-blue-400;
+    @apply rounded-md px-3 py-1 text-sm font-medium;
+    background-color: hsl(var(--muted));
+    color: hsl(var(--foreground));
   }
 
-  /* Enhanced Progress Indicators - Professional */
+  /* Progress Indicators */
   .progress-ultra-modern {
-    @apply h-2 overflow-hidden rounded-full bg-slate-100 dark:bg-slate-800;
+    @apply h-2 overflow-hidden rounded-full;
+    background-color: hsl(var(--muted));
   }
 
   .progress-fill-ultra {
-    @apply relative h-full rounded-full bg-blue-600 transition-all duration-500;
+    @apply relative h-full rounded-full transition-all duration-500;
+    background-color: hsl(var(--primary));
   }
 
   .progress-fill-ultra::after {
     @apply hidden;
   }
 
-  /* Enhanced Modal System - Professional */
+  /* Modal System */
   .modal-ultra-modern {
-    @apply rounded-lg border border-slate-200 bg-white p-6 shadow-xl transition-all duration-200 dark:border-slate-800 dark:bg-slate-900;
+    @apply rounded-lg p-6 shadow-xl transition-all duration-200;
+    border: 1px solid hsl(var(--border));
+    background-color: hsl(var(--card));
   }
 
   .modal-overlay-ultra {
-    @apply fixed inset-0 bg-slate-900/50 backdrop-blur-sm transition-all duration-200;
+    @apply fixed inset-0 backdrop-blur-sm transition-all duration-200;
+    background-color: hsl(var(--background) / 0.8);
   }
 
-  /* Enhanced Dropdown System - Professional */
+  /* Dropdown System */
   .dropdown-ultra-modern {
-    @apply rounded-lg border border-slate-200 bg-white p-1 shadow-lg dark:border-slate-800 dark:bg-slate-900;
+    @apply rounded-lg p-1 shadow-lg;
+    border: 1px solid hsl(var(--border));
+    background-color: hsl(var(--card));
   }
 
   .dropdown-item-ultra {
-    @apply cursor-pointer rounded-md px-4 py-2 text-sm font-medium text-slate-700 transition-all duration-200 hover:bg-slate-100 dark:text-slate-300 dark:hover:bg-slate-800;
+    @apply cursor-pointer rounded-md px-4 py-2 text-sm font-medium transition-all duration-200;
+    color: hsl(var(--foreground));
   }
 
-  /* Enhanced Tooltip System - Professional */
+  .dropdown-item-ultra:hover {
+    background-color: hsl(var(--muted));
+  }
+
+  /* Tooltip System */
   .tooltip-ultra-modern {
-    @apply rounded-md border border-slate-200 bg-slate-900 px-3 py-1.5 text-xs font-medium text-white shadow-md dark:border-slate-700 dark:bg-white dark:text-slate-900;
+    @apply rounded-md px-3 py-1.5 text-xs font-medium shadow-md;
+    border: 1px solid hsl(var(--border));
+    background-color: hsl(var(--foreground));
+    color: hsl(var(--background));
   }
 }
 
 @layer utilities {
-  /* Animation Utilities - Disabled or Subtle */
   .animate-ultra-float {
-    /* No animation for professional look usually, or very subtle */
+    animation: float 3s ease-in-out infinite;
   }
-
   .animate-ultra-glow {
-    /* Removed */
+    animation: glow 2s ease-in-out infinite;
   }
-
   .animate-ultra-pulse {
-    /* Removed */
+    animation: pulse 2s cubic-bezier(0.4, 0, 0.6, 1) infinite;
   }
-
   .animate-ultra-bounce {
-    /* Removed */
+    animation: bounce 1s infinite;
   }
 
   .animate-ultra-spin {
@@ -137,20 +203,32 @@
   }
 
   .animate-ultra-gradient {
-    /* Removed */
+    background: linear-gradient(90deg, hsl(var(--primary)), hsl(var(--secondary)));
+    background-size: 200% 200%;
+    animation: gradient-shift 3s ease infinite;
   }
 
   @keyframes spin {
-    from {
-      transform: rotate(0deg);
-    }
-
-    to {
-      transform: rotate(360deg);
-    }
+    from { transform: rotate(0deg); }
+    to { transform: rotate(360deg); }
   }
 
-  /* Enhanced Hover Effects - Professional */
+  @keyframes float {
+    0%, 100% { transform: translateY(0); }
+    50% { transform: translateY(-10px); }
+  }
+
+  @keyframes glow {
+    0%, 100% { box-shadow: 0 0 5px hsl(var(--primary)); }
+    50% { box-shadow: 0 0 20px hsl(var(--primary)), 0 0 30px hsl(var(--primary)); }
+  }
+
+  @keyframes gradient-shift {
+    0% { background-position: 0% 50%; }
+    50% { background-position: 100% 50%; }
+    100% { background-position: 0% 50%; }
+  }
+
   .hover-ultra-lift:hover {
     @apply -translate-y-1 shadow-md;
   }
@@ -167,16 +245,17 @@
     @apply rotate-0;
   }
 
-  /* Enhanced Background Effects - Professional */
   .bg-ultra-gradient {
-    @apply bg-slate-50 dark:bg-slate-900;
+    background-color: hsl(var(--background));
   }
 
   .bg-ultra-glass {
-    @apply border border-slate-200/50 bg-white/80 backdrop-blur-sm dark:border-slate-700/50 dark:bg-slate-900/80;
+    border: 1px solid hsl(var(--border));
+    background-color: hsl(var(--card));
   }
 
   .bg-ultra-glass-strong {
-    @apply border border-slate-200 bg-white/90 backdrop-blur-md dark:border-slate-700 dark:bg-slate-900/90;
+    border: 1px solid hsl(var(--border));
+    background-color: hsl(var(--card));
   }
 }

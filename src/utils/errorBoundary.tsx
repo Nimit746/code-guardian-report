@@ -55,8 +55,8 @@ export class ErrorBoundary extends Component<Props, State> {
 
       // Default error UI
       return (
-        <div className="flex min-h-screen items-center justify-center bg-gray-50 px-4">
-          <div className="w-full max-w-md rounded-lg bg-white p-6 shadow-lg">
+        <div className="flex min-h-screen items-center justify-center bg-muted/50 px-4">
+          <div className="w-full max-w-md rounded-lg bg-card p-6 shadow-lg">
             <div className="mx-auto flex h-12 w-12 items-center justify-center rounded-full bg-red-100">
               <svg
                 className="h-6 w-6 text-red-600"
@@ -72,7 +72,7 @@ export class ErrorBoundary extends Component<Props, State> {
                 />
               </svg>
             </div>
-            <h3 className="mt-4 text-center text-lg font-semibold text-gray-900">
+            <h3 className="mt-4 text-center text-lg font-semibold text-foreground">
               Something went wrong
             </h3>
             <p className="mt-2 text-center text-sm text-gray-600">
@@ -80,13 +80,13 @@ export class ErrorBoundary extends Component<Props, State> {
               refreshing the page.
             </p>
             {process.env.NODE_ENV === "development" && this.state.error && (
-              <div className="mt-4 max-h-40 overflow-auto rounded bg-gray-100 p-3 font-mono text-xs text-red-600">
+              <div className="mt-4 max-h-40 overflow-auto rounded bg-muted p-3 font-mono text-xs text-red-600">
                 {this.state.error.toString()}
               </div>
             )}
             <button
               onClick={() => window.location.reload()}
-              className="mt-6 w-full rounded bg-blue-600 px-4 py-2 text-white transition-colors hover:bg-blue-700"
+              className="mt-6 w-full rounded bg-primary px-4 py-2 text-white transition-colors hover:bg-primary/90"
             >
               Reload Page
             </button>

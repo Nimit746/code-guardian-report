@@ -80,7 +80,7 @@ const GitHubContributorsSection = () => {
         <div className="container mx-auto px-4">
           <div className="mx-auto max-w-6xl text-center">
             <Loader2 className="mx-auto mb-4 h-8 w-8 animate-spin" />
-            <p className="text-slate-600 dark:text-slate-400">
+            <p className="text-muted-foreground">
               Loading GitHub contributors...
             </p>
           </div>
@@ -113,7 +113,7 @@ const GitHubContributorsSection = () => {
             <h2 className="text-foreground mb-4 text-3xl font-bold sm:text-4xl">
               Our GitHub Contributors
             </h2>
-            <p className="mx-auto mb-6 max-w-3xl text-lg text-slate-600 dark:text-slate-400">
+            <p className="mx-auto mb-6 max-w-3xl text-lg text-muted-foreground">
               Meet the amazing developers who have contributed to making Code
               Guardian better. Their dedication and expertise drive our mission
               forward.
@@ -121,7 +121,7 @@ const GitHubContributorsSection = () => {
 
             {/* Repository Stats */}
             {repoStats && (
-              <Card className="mx-auto mb-8 max-w-2xl border-0 bg-gradient-to-r from-blue-600 to-purple-600 text-white">
+              <Card className="mx-auto mb-8 max-w-2xl border-0 bg-primary text-white">
                 <CardHeader>
                   <div className="mb-2 flex items-center justify-center gap-3">
                     <Github className="h-6 w-6" />
@@ -197,7 +197,7 @@ const GitHubContributorsSection = () => {
                         <img
                           src={contributor.avatar_url}
                           alt={contributor.name || contributor.login}
-                          className="border-border h-16 w-16 rounded-full border-2 transition-transform group-hover:scale-105"
+                          className="border-border h-16 w-16 rounded-full border-2 transition-transform group-"
                         />
                         <div
                           className={`absolute -right-1 -bottom-1 h-6 w-6 rounded-full ${getContributorBadgeColor(contributor.contributions, index)} flex items-center justify-center text-xs font-bold text-white`}
@@ -209,7 +209,7 @@ const GitHubContributorsSection = () => {
                         <CardTitle className="truncate text-lg">
                           {contributor.name || contributor.login}
                         </CardTitle>
-                        <CardDescription className="font-medium text-blue-600 dark:text-blue-400">
+                        <CardDescription className="font-medium text-primary dark:text-primary">
                           {getContributorRole(contributor.contributions, index)}
                         </CardDescription>
                         <div className="mt-1 flex items-center gap-2">
@@ -223,7 +223,7 @@ const GitHubContributorsSection = () => {
                   <CardContent>
                     {contributor.bio && (
                       <p
-                        className="mb-3 overflow-hidden text-sm text-slate-600 dark:text-slate-400"
+                        className="mb-3 overflow-hidden text-sm text-muted-foreground"
                         style={{
                           display: "-webkit-box",
                           WebkitLineClamp: 2,
@@ -236,7 +236,7 @@ const GitHubContributorsSection = () => {
 
                     <div className="mb-4 space-y-2">
                       {contributor.location && (
-                        <div className="flex items-center gap-2 text-sm text-slate-600 dark:text-slate-400">
+                        <div className="flex items-center gap-2 text-sm text-muted-foreground">
                           <MapPin className="h-4 w-4" />
                           <span className="truncate">
                             {contributor.location}
@@ -244,7 +244,7 @@ const GitHubContributorsSection = () => {
                         </div>
                       )}
                       {contributor.company && (
-                        <div className="flex items-center gap-2 text-sm text-slate-600 dark:text-slate-400">
+                        <div className="flex items-center gap-2 text-sm text-muted-foreground">
                           <Building className="h-4 w-4" />
                           <span className="truncate">
                             {contributor.company}
@@ -252,7 +252,7 @@ const GitHubContributorsSection = () => {
                         </div>
                       )}
                       {contributor.blog && (
-                        <div className="flex items-center gap-2 text-sm text-slate-600 dark:text-slate-400">
+                        <div className="flex items-center gap-2 text-sm text-muted-foreground">
                           <Globe className="h-4 w-4" />
                           <a
                             href={
@@ -262,7 +262,7 @@ const GitHubContributorsSection = () => {
                             }
                             target="_blank"
                             rel="noopener noreferrer"
-                            className="truncate hover:text-blue-600 dark:hover:text-blue-400"
+                            className="truncate hover:text-primary dark:hover:text-primary"
                           >
                             {contributor.blog}
                           </a>
@@ -271,7 +271,7 @@ const GitHubContributorsSection = () => {
                     </div>
 
                     <div className="flex items-center justify-between">
-                      <div className="flex gap-4 text-sm text-slate-600 dark:text-slate-400">
+                      <div className="flex gap-4 text-sm text-muted-foreground">
                         {contributor.public_repos !== undefined && (
                           <span>{contributor.public_repos} repos</span>
                         )}
@@ -296,8 +296,8 @@ const GitHubContributorsSection = () => {
             </div>
           ) : (
             <div className="py-12 text-center">
-              <Users className="mx-auto mb-4 h-16 w-16 text-slate-400" />
-              <p className="text-slate-600 dark:text-slate-400">
+              <Users className="mx-auto mb-4 h-16 w-16 text-muted-foreground" />
+              <p className="text-muted-foreground">
                 No contributors found
               </p>
             </div>
@@ -305,7 +305,7 @@ const GitHubContributorsSection = () => {
 
           {/* Call to Action */}
           <div className="text-center">
-            <Card className="border-0 bg-gradient-to-r from-green-600 to-blue-600 text-white">
+            <Card className="border-0 bg-primary text-white">
               <CardContent className="p-8">
                 <h3 className="mb-4 text-2xl font-bold">
                   Join Our Contributors
