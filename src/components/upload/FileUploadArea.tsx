@@ -18,9 +18,9 @@ export const FileUploadArea: React.FC<FileUploadAreaProps> = ({
 }) => {
   return (
     <div
-      className={`group relative overflow-hidden rounded-2xl border-2 border-dashed p-6 text-center transition-all duration-300 focus-within:ring-2 focus-within:ring-primary focus-within:ring-offset-2 sm:p-8 lg:p-12 ${
+      className={`group focus-within:ring-primary relative overflow-hidden rounded-2xl border-2 border-dashed p-6 text-center transition-all duration-300 focus-within:ring-2 focus-within:ring-offset-2 sm:p-8 lg:p-12 ${
         isDragOver
-          ? "scale-[1.02] border-primary bg-muted/50 dark:bg-blue-950/20"
+          ? "border-primary bg-muted/50 scale-[1.02] dark:bg-blue-950/20"
           : "border-border hover:border-primary hover:bg-muted/50 dark:hover:border-primary/50/50"
       }`}
       onDragOver={onDragOver}
@@ -35,11 +35,11 @@ export const FileUploadArea: React.FC<FileUploadAreaProps> = ({
       <div className="relative z-10">
         <div className="mb-4 transition-transform duration-300 group-hover:scale-110 sm:mb-6">
           <Upload
-            className="mx-auto h-12 w-12 text-muted-foreground transition-colors duration-300 group-hover:text-primary sm:h-16 sm:w-16"
+            className="text-muted-foreground group-hover:text-primary mx-auto h-12 w-12 transition-colors duration-300 sm:h-16 sm:w-16"
             aria-hidden="true"
           />
         </div>
-        <h3 className="mb-3 text-lg font-bold text-foreground transition-colors group-hover:text-primary sm:mb-4 sm:text-xl lg:text-2xl dark:text-white dark:group-hover:text-primary">
+        <h3 className="text-foreground mb-3 text-lg font-bold sm:mb-4 sm:text-xl lg:text-2xl">
           Drop your .zip file here
         </h3>
         <div className="mb-4 flex items-center justify-center gap-4 sm:mb-6">
@@ -47,7 +47,7 @@ export const FileUploadArea: React.FC<FileUploadAreaProps> = ({
             className="h-px flex-1 bg-gradient-to-r from-transparent via-slate-300 to-transparent dark:via-slate-600"
             aria-hidden="true"
           ></div>
-          <span className="text-sm font-medium text-muted-foreground sm:text-base">
+          <span className="text-muted-foreground text-sm font-medium sm:text-base">
             or
           </span>
           <div
@@ -58,7 +58,7 @@ export const FileUploadArea: React.FC<FileUploadAreaProps> = ({
         <div className="space-y-4">
           <label
             htmlFor="file-upload"
-            className="focus-ring inline-flex transform cursor-pointer items-center rounded-lg border-0 bg-primary px-6 py-2 text-base font-semibold text-white shadow-lg transition-all duration-300  hover:bg-primary/90 hover:shadow-xl sm:px-8 sm:py-3 sm:text-lg"
+            className="focus-ring bg-primary text-primary-foreground hover:bg-primary/90 inline-flex transform cursor-pointer items-center rounded-lg border-0 px-6 py-2 text-base font-semibold shadow-lg transition-all duration-300 hover:shadow-xl sm:px-8 sm:py-3 sm:text-lg"
             tabIndex={0}
             onKeyDown={(e) => {
               if (e.key === "Enter" || e.key === " ") {
@@ -73,7 +73,7 @@ export const FileUploadArea: React.FC<FileUploadAreaProps> = ({
             />
             Browse Files
           </label>
-          <p className="text-xs text-muted-foreground">
+          <p className="text-muted-foreground text-xs">
             Or drag and drop your zip file anywhere in this area
           </p>
         </div>
@@ -85,14 +85,17 @@ export const FileUploadArea: React.FC<FileUploadAreaProps> = ({
           onChange={onFileInput}
           aria-label="Choose zip file to upload"
         />
-        <div className="mt-4 rounded-lg bg-muted p-3 text-xs text-muted-foreground sm:mt-6 sm:p-4 sm:text-sm dark:bg-slate-700/50">
+        <div className="bg-muted/80 mt-4 rounded-lg p-3 text-xs sm:mt-6 sm:p-4 sm:text-sm">
           <div className="space-y-1">
-            <p>
-              <strong>Maximum file size:</strong> 50MB
+            <p className="text-foreground">
+              <strong>Maximum file size:</strong>{" "}
+              <span className="text-muted-foreground">50MB</span>
             </p>
-            <p>
-              <strong>Supported languages:</strong> Python, JavaScript,
-              TypeScript, React, Node.js
+            <p className="text-foreground">
+              <strong>Supported languages:</strong>{" "}
+              <span className="text-muted-foreground">
+                Python, JavaScript, TypeScript, React, Node.js
+              </span>
             </p>
           </div>
         </div>

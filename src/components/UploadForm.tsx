@@ -49,12 +49,12 @@ export const UploadForm: React.FC<UploadFormProps> = ({
 
   return (
     <div className="mx-auto w-full max-w-3xl">
-      <Card className="border-muted/40 overflow-hidden shadow-2xl shadow-black/5 backdrop-blur-xl dark:border-white/5/50 dark:shadow-black/20">
+      <Card className="border-muted/40 dark:border-white/5/50 overflow-hidden shadow-2xl shadow-black/5 backdrop-blur-xl dark:shadow-black/20">
         <CardHeader className="border-border/40 bg-muted/20 border-b pt-10 pb-8 text-center dark:bg-white/[0.02]">
-          <div className="mx-auto mb-4 flex h-16 w-16 items-center justify-center rounded-2xl bg-primary shadow-lg ring-4 shadow-primary/10 ring-primary/10">
+          <div className="bg-primary shadow-primary/10 ring-primary/10 mx-auto mb-4 flex h-16 w-16 items-center justify-center rounded-2xl shadow-lg ring-4">
             <FileCode className="h-8 w-8 text-white" />
           </div>
-          <CardTitle className="from-foreground to-foreground/70 bg-gradient-to-b bg-clip-text text-3xl font-extrabold tracking-tight text-transparent sm:text-4xl">
+          <CardTitle className="text-foreground text-3xl font-extrabold tracking-tight sm:text-4xl">
             Analyze Your Code
           </CardTitle>
           <CardDescription className="text-muted-foreground/80 mx-auto mt-3 max-w-lg text-base">
@@ -75,7 +75,7 @@ export const UploadForm: React.FC<UploadFormProps> = ({
               <TabsList className="bg-muted/30 border-border/50 mb-8 grid h-auto w-full grid-cols-2 rounded-xl border p-1.5">
                 <TabsTrigger
                   value="file"
-                  className="data-[state=active]:bg-background text-muted-foreground hover:text-foreground flex h-12 items-center justify-center gap-2.5 rounded-lg text-sm font-semibold transition-all duration-200 data-[state=active]:text-primary data-[state=active]:shadow-md data-[state=active]: dark:data-[state=active]:text-primary"
+                  className="data-[state=active]:bg-background text-muted-foreground hover:text-foreground data-[state=active]:text-primary data-[state=active]: dark:data-[state=active]:text-primary flex h-12 items-center justify-center gap-2.5 rounded-lg text-sm font-semibold transition-all duration-200 data-[state=active]:shadow-md"
                 >
                   <Upload className="h-5 w-5" />
                   Upload ZIP
