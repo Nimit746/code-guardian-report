@@ -50,7 +50,7 @@ export const HomeHero: React.FC<HomeHeroProps> = ({ onStartAnalysis }) => {
           <Button
             variant="outline"
             size="lg"
-            className="border-border bg-background text-foreground hover:bg-muted w-full sm:w-auto"
+            className="w-full border border-slate-200 !bg-white !text-black shadow-sm hover:bg-slate-50 sm:w-auto dark:border-white/20 dark:!bg-transparent dark:!text-white dark:hover:bg-white/10"
           >
             Live Demo
           </Button>

@@ -51,8 +51,8 @@ export const UploadForm: React.FC<UploadFormProps> = ({
     <div className="mx-auto w-full max-w-3xl">
       <Card className="border-muted/40 dark:border-white/5/50 overflow-hidden shadow-2xl shadow-black/5 backdrop-blur-xl dark:shadow-black/20">
         <CardHeader className="border-border/40 bg-muted/20 border-b pt-10 pb-8 text-center dark:bg-white/[0.02]">
-          <div className="bg-primary shadow-primary/10 ring-primary/10 mx-auto mb-4 flex h-16 w-16 items-center justify-center rounded-2xl shadow-lg ring-4">
-            <FileCode className="h-8 w-8 text-white" />
+          <div className="mx-auto mb-4 flex h-16 w-16 items-center justify-center rounded-2xl bg-emerald-100 ring-4 ring-emerald-50 dark:bg-emerald-900/30 dark:ring-emerald-900/20">
+            <FileCode className="h-8 w-8 text-emerald-600 dark:text-emerald-400" />
           </div>
           <CardTitle className="text-foreground text-3xl font-extrabold tracking-tight sm:text-4xl">
             Analyze Your Code
