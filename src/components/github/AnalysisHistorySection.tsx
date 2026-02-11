@@ -131,27 +131,24 @@ export const AnalysisHistorySection: React.FC<AnalysisHistorySectionProps> = ({
       <div className="space-y-6">
         <div className="flex items-center justify-between">
           <div>
-            <div className="mb-2 h-7 w-48 animate-pulse rounded bg-muted"></div>
-            <div className="h-4 w-64 animate-pulse rounded bg-muted"></div>
+            <div className="bg-muted mb-2 h-7 w-48 animate-pulse rounded"></div>
+            <div className="bg-muted h-4 w-64 animate-pulse rounded"></div>
           </div>
           <div className="flex gap-2">
-            <div className="h-9 w-24 animate-pulse rounded bg-muted"></div>
-            <div className="h-9 w-20 animate-pulse rounded bg-muted"></div>
+            <div className="bg-muted h-9 w-24 animate-pulse rounded"></div>
+            <div className="bg-muted h-9 w-20 animate-pulse rounded"></div>
           </div>
         </div>
-        <div className="h-10 w-full animate-pulse rounded bg-muted"></div>
+        <div className="bg-muted h-10 w-full animate-pulse rounded"></div>
         <div className="space-y-4">
           {Array.from({ length: 3 }).map((_, i) => (
-            <Card
-              key={i}
-              className="border-border p-6"
-            >
+            <Card key={i} className="border-border p-6">
               <div className="flex items-center justify-between">
                 <div className="space-y-2">
-                  <div className="h-5 w-40 animate-pulse rounded bg-muted"></div>
-                  <div className="h-4 w-56 animate-pulse rounded bg-muted"></div>
+                  <div className="bg-muted h-5 w-40 animate-pulse rounded"></div>
+                  <div className="bg-muted h-4 w-56 animate-pulse rounded"></div>
                 </div>
-                <div className="h-8 w-24 animate-pulse rounded bg-muted"></div>
+                <div className="bg-muted h-8 w-24 animate-pulse rounded"></div>
               </div>
             </Card>
           ))}
@@ -173,14 +170,14 @@ export const AnalysisHistorySection: React.FC<AnalysisHistorySectionProps> = ({
           </p>
         </div>
 
-        <div className="flex items-center gap-3 rounded-lg bg-muted p-1/50">
+        <div className="bg-muted p-1/50 flex items-center gap-3 rounded-lg">
           <button
             onClick={() => setViewMode("timeline")}
             className={cn(
               "flex items-center gap-2 rounded-md px-3 py-1.5 text-sm font-medium transition-all",
               viewMode === "timeline"
-                ? "bg-white text-foreground shadow-sm dark:bg-slate-700 dark:text-white"
-                : "text-muted-foreground hover:text-foreground dark:hover:text-white"
+                ? "bg-background text-foreground dark:bg-secondary dark:text-foreground shadow-sm"
+                : "text-muted-foreground hover:text-foreground"
             )}
           >
             <Calendar className="h-4 w-4" />
@@ -191,8 +188,8 @@ export const AnalysisHistorySection: React.FC<AnalysisHistorySectionProps> = ({
             className={cn(
               "flex items-center gap-2 rounded-md px-3 py-1.5 text-sm font-medium transition-all",
               viewMode === "list"
-                ? "bg-white text-foreground shadow-sm dark:bg-slate-700 dark:text-white"
-                : "text-muted-foreground hover:text-foreground dark:hover:text-white"
+                ? "bg-background text-foreground dark:bg-secondary dark:text-foreground shadow-sm"
+                : "text-muted-foreground hover:text-foreground"
             )}
           >
             <Filter className="h-4 w-4" />
@@ -203,12 +200,12 @@ export const AnalysisHistorySection: React.FC<AnalysisHistorySectionProps> = ({
 
       {/* Search Bar */}
       <div className="group relative">
-        <Search className="absolute top-1/2 left-3 h-4 w-4 -translate-y-1/2 transform text-muted-foreground transition-colors group-focus-within:text-primary" />
+        <Search className="text-muted-foreground group-focus-within:text-primary absolute top-1/2 left-3 h-4 w-4 -translate-y-1/2 transform transition-colors" />
         <Input
           placeholder="Search analysis history..."
           value={searchQuery}
           onChange={(e) => setSearchQuery(e.target.value)}
-          className="h-11 border-border bg-white pl-10 transition-all focus:ring-2 focus:ring-primary"
+          className="border-border bg-background focus:ring-primary h-11 pl-10 transition-all focus:ring-2"
         />
       </div>
 
@@ -216,26 +213,26 @@ export const AnalysisHistorySection: React.FC<AnalysisHistorySectionProps> = ({
       {viewMode === "timeline" && (
         <div className="relative pl-4 md:pl-8">
           {/* Timeline Line */}
-          <div className="absolute top-0 bottom-0 left-4 w-px bg-muted md:left-8"></div>
+          <div className="bg-muted absolute top-0 bottom-0 left-4 w-px md:left-8"></div>
 
           <div className="space-y-8">
             {filteredAnalyses.map((analysis, _index) => (
               <div key={analysis.id} className="relative pl-8 md:pl-12">
                 {/* Timeline Dot */}
-                <div className="absolute top-6 left-2.5 z-10 h-3 w-3 rounded-full border-2 border-primary bg-white md:left-[2.1rem]"></div>
+                <div className="border-primary bg-background absolute top-6 left-2.5 z-10 h-3 w-3 rounded-full border-2 md:left-[2.1rem]"></div>
 
                 <Card className="group border-border p-6 transition-all duration-300 hover:shadow-lg">
                   <div className="flex flex-col justify-between gap-6 md:flex-row md:items-center">
                     <div className="flex-1">
                       <div className="mb-3 flex items-center gap-3">
-                        <div className="rounded-lg bg-muted p-2 text-primary dark:bg-teal-900/20 dark:text-primary">
+                        <div className="bg-muted text-primary dark:text-primary rounded-lg p-2 dark:bg-teal-900/20">
                           <GitBranch className="h-5 w-5" />
                         </div>
                         <div>
-                          <h3 className="text-lg font-semibold text-foreground transition-colors group-hover:text-primary dark:text-white dark:group-hover:text-primary">
+                          <h3 className="text-foreground group-hover:text-primary dark:group-hover:text-primary text-lg font-semibold transition-colors dark:text-white">
                             {analysis.repositoryName}
                           </h3>
-                          <div className="flex items-center gap-2 text-xs text-muted-foreground">
+                          <div className="text-muted-foreground flex items-center gap-2 text-xs">
                             <Clock className="h-3 w-3" />
                             {new Date(analysis.analyzedAt).toLocaleString()}
                           </div>
@@ -249,7 +246,7 @@ export const AnalysisHistorySection: React.FC<AnalysisHistorySectionProps> = ({
                         >
                           {analysis.language}
                         </Badge>
-                        <div className="flex items-center gap-1.5 text-sm text-muted-foreground">
+                        <div className="text-muted-foreground flex items-center gap-1.5 text-sm">
                           <TrendingUp className="h-4 w-4" />
                           {formatDuration(analysis.duration)}
                         </div>
@@ -278,7 +275,7 @@ export const AnalysisHistorySection: React.FC<AnalysisHistorySectionProps> = ({
                         size="sm"
                         variant="ghost"
                         onClick={() => handleViewReport(analysis)}
-                        className="group/btn w-full hover:bg-muted md:w-auto"
+                        className="group/btn hover:bg-muted w-full md:w-auto"
                       >
                         View Report
                         <ArrowRight className="ml-2 h-4 w-4 transition-transform group-hover/btn:translate-x-1" />
@@ -297,47 +294,47 @@ export const AnalysisHistorySection: React.FC<AnalysisHistorySectionProps> = ({
         <Card className="border-border overflow-hidden">
           <div className="overflow-x-auto">
             <table className="w-full">
-              <thead className="border-b border-border bg-muted/50">
+              <thead className="border-border bg-muted/50 border-b">
                 <tr>
-                  <th className="px-6 py-4 text-left text-xs font-semibold tracking-wider text-muted-foreground uppercase">
+                  <th className="text-muted-foreground px-6 py-4 text-left text-xs font-semibold tracking-wider uppercase">
                     Repository
                   </th>
-                  <th className="px-6 py-4 text-left text-xs font-semibold tracking-wider text-muted-foreground uppercase">
+                  <th className="text-muted-foreground px-6 py-4 text-left text-xs font-semibold tracking-wider uppercase">
                     Date
                   </th>
-                  <th className="px-6 py-4 text-left text-xs font-semibold tracking-wider text-muted-foreground uppercase">
+                  <th className="text-muted-foreground px-6 py-4 text-left text-xs font-semibold tracking-wider uppercase">
                     Score
                   </th>
-                  <th className="px-6 py-4 text-left text-xs font-semibold tracking-wider text-muted-foreground uppercase">
+                  <th className="text-muted-foreground px-6 py-4 text-left text-xs font-semibold tracking-wider uppercase">
                     Issues
                   </th>
-                  <th className="px-6 py-4 text-right text-xs font-semibold tracking-wider text-muted-foreground uppercase">
+                  <th className="text-muted-foreground px-6 py-4 text-right text-xs font-semibold tracking-wider uppercase">
                     Actions
                   </th>
                 </tr>
               </thead>
-              <tbody className="divide-y divide-slate-200 bg-white dark:divide-slate-800">
+              <tbody className="divide-border bg-card divide-y">
                 {filteredAnalyses.map((analysis) => (
                   <tr
                     key={analysis.id}
-                    className="transition-colors hover:bg-muted/50"
+                    className="hover:bg-muted/50 transition-colors"
                   >
                     <td className="px-6 py-4 whitespace-nowrap">
                       <div className="flex items-center">
-                        <div className="mr-3 rounded-lg bg-muted p-2">
-                          <GitBranch className="h-4 w-4 text-muted-foreground" />
+                        <div className="bg-muted mr-3 rounded-lg p-2">
+                          <GitBranch className="text-muted-foreground h-4 w-4" />
                         </div>
                         <div>
                           <div className="text-foreground text-sm font-medium">
                             {analysis.repositoryName}
                           </div>
-                          <div className="text-xs text-muted-foreground">
+                          <div className="text-muted-foreground text-xs">
                             {analysis.language}
                           </div>
                         </div>
                       </div>
                     </td>
-                    <td className="px-6 py-4 text-sm whitespace-nowrap text-muted-foreground">
+                    <td className="text-muted-foreground px-6 py-4 text-sm whitespace-nowrap">
                       {new Date(analysis.analyzedAt).toLocaleDateString()}
                     </td>
                     <td className="px-6 py-4 whitespace-nowrap">
@@ -375,14 +372,14 @@ export const AnalysisHistorySection: React.FC<AnalysisHistorySectionProps> = ({
 
       {/* Empty State */}
       {filteredAnalyses.length === 0 && (
-        <Card className="border-2 border-dashed border-border bg-muted/50 p-16 text-center/50">
-          <div className="mx-auto mb-4 flex h-16 w-16 items-center justify-center rounded-full bg-muted">
-            <Clock className="h-8 w-8 text-muted-foreground" />
+        <Card className="border-border bg-muted/50 text-center/50 border-2 border-dashed p-16">
+          <div className="bg-muted mx-auto mb-4 flex h-16 w-16 items-center justify-center rounded-full">
+            <Clock className="text-muted-foreground h-8 w-8" />
           </div>
           <h3 className="text-foreground mb-2 text-xl font-semibold">
             {searchQuery ? "No results found" : "No analysis history yet"}
           </h3>
-          <p className="mx-auto max-w-md text-muted-foreground">
+          <p className="text-muted-foreground mx-auto max-w-md">
             {searchQuery
               ? "Try adjusting your search terms to find what you're looking for."
               : "Your repository security analysis history will appear here once you start analyzing repositories."}
@@ -392,25 +389,27 @@ export const AnalysisHistorySection: React.FC<AnalysisHistorySectionProps> = ({
 
       {/* Analysis Report Modal */}
       {selectedAnalysis && (
-        <div className="animate-in fade-in fixed inset-0 z-50 flex items-center justify-center bg-card/60 p-4 backdrop-blur-sm duration-200">
-          <Card className="animate-in zoom-in-95 flex max-h-[90vh] w-full max-w-2xl flex-col overflow-hidden border-border shadow-2xl duration-200">
-            <div className="flex flex-shrink-0 items-center justify-between border-b border-border bg-white p-4">
+        <div className="animate-in fade-in bg-card/60 fixed inset-0 z-50 flex items-center justify-center p-4 backdrop-blur-sm duration-200">
+          <Card className="animate-in zoom-in-95 border-border flex max-h-[90vh] w-full max-w-2xl flex-col overflow-hidden shadow-2xl duration-200">
+            <div className="border-border bg-background flex flex-shrink-0 items-center justify-between border-b p-4">
               <div className="flex items-center gap-3">
-                <div className="rounded-lg bg-muted p-2 dark:bg-teal-900/20">
-                  <GitBranch className="h-5 w-5 text-primary dark:text-primary" />
+                <div className="bg-muted rounded-lg p-2 dark:bg-teal-900/20">
+                  <GitBranch className="text-primary dark:text-primary h-5 w-5" />
                 </div>
                 <div>
                   <h2 className="text-foreground text-lg font-bold">
                     {selectedAnalysis.repositoryName}
                   </h2>
-                  <p className="text-xs text-muted-foreground">Analysis Report</p>
+                  <p className="text-muted-foreground text-xs">
+                    Analysis Report
+                  </p>
                 </div>
               </div>
               <Button
                 variant="ghost"
                 size="icon"
                 onClick={handleCloseReport}
-                className="rounded-full hover:bg-muted"
+                className="hover:bg-muted rounded-full"
               >
                 <X className="h-5 w-5" />
               </Button>
@@ -419,7 +418,7 @@ export const AnalysisHistorySection: React.FC<AnalysisHistorySectionProps> = ({
             <div className="space-y-8 overflow-y-auto p-6">
               {/* Security Score */}
               <div className="relative overflow-hidden rounded-2xl bg-gradient-to-br from-slate-900 to-slate-800 p-8 text-center text-white dark:from-slate-800 dark:to-slate-950">
-                <div className="pointer-events-none absolute top-0 right-0 -mt-32 -mr-32 h-64 w-64 rounded-full bg-muted0/10 blur-3xl" />
+                <div className="bg-muted/10 pointer-events-none absolute top-0 right-0 -mt-32 -mr-32 h-64 w-64 rounded-full blur-3xl" />
 
                 <div className="relative z-10">
                   <div
@@ -434,7 +433,7 @@ export const AnalysisHistorySection: React.FC<AnalysisHistorySectionProps> = ({
                   >
                     {selectedAnalysis.securityScore.toFixed(1)}
                   </div>
-                  <div className="mb-4 text-sm font-medium tracking-wider text-muted-foreground uppercase">
+                  <div className="text-muted-foreground mb-4 text-sm font-medium tracking-wider uppercase">
                     Security Score
                   </div>
                   <div className="inline-flex">
@@ -478,7 +477,7 @@ export const AnalysisHistorySection: React.FC<AnalysisHistorySectionProps> = ({
                   <div
                     key={i}
                     className={cn(
-                      "rounded-xl border border-transparent p-4 text-center transition-colors hover:border-border dark:hover:border-border",
+                      "hover:border-border dark:hover:border-border rounded-xl border border-transparent p-4 text-center transition-colors",
                       stat.bg
                     )}
                   >
@@ -488,7 +487,7 @@ export const AnalysisHistorySection: React.FC<AnalysisHistorySectionProps> = ({
                     <div className="text-foreground mb-1 text-xl font-bold">
                       {stat.value}
                     </div>
-                    <div className="text-xs font-medium text-muted-foreground uppercase">
+                    <div className="text-muted-foreground text-xs font-medium uppercase">
                       {stat.label}
                     </div>
                   </div>
@@ -498,14 +497,12 @@ export const AnalysisHistorySection: React.FC<AnalysisHistorySectionProps> = ({
               {/* Analysis Details */}
               <div className="space-y-4">
                 <h3 className="text-foreground flex items-center gap-2 font-semibold">
-                  <Shield className="h-5 w-5 text-primary" />
+                  <Shield className="text-primary h-5 w-5" />
                   Analysis Details
                 </h3>
-                <div className="space-y-4 rounded-xl border border-border bg-muted p-5/50">
-                  <div className="flex items-center justify-between border-b border-border pb-4 text-sm">
-                    <span className="text-muted-foreground">
-                      Analyzed At
-                    </span>
+                <div className="border-border bg-muted p-5/50 space-y-4 rounded-xl border">
+                  <div className="border-border flex items-center justify-between border-b pb-4 text-sm">
+                    <span className="text-muted-foreground">Analyzed At</span>
                     <span className="text-foreground font-medium">
                       {new Date(selectedAnalysis.analyzedAt).toLocaleString()}
                     </span>
@@ -518,7 +515,7 @@ export const AnalysisHistorySection: React.FC<AnalysisHistorySectionProps> = ({
                       href={selectedAnalysis.repositoryUrl}
                       target="_blank"
                       rel="noopener noreferrer"
-                      className="flex items-center gap-1 font-medium text-primary hover:text-teal-600 hover:underline"
+                      className="text-primary flex items-center gap-1 font-medium hover:text-teal-600 hover:underline"
                     >
                       View on GitHub <ExternalLink className="h-3 w-3" />
                     </a>
@@ -527,7 +524,7 @@ export const AnalysisHistorySection: React.FC<AnalysisHistorySectionProps> = ({
               </div>
 
               {/* Summary */}
-              <div className="rounded-xl border border-blue-100 bg-muted p-5 dark:border-blue-900/30 dark:bg-teal-900/10">
+              <div className="bg-muted rounded-xl border border-blue-100 p-5 dark:border-blue-900/30 dark:bg-teal-900/10">
                 <h4 className="mb-2 flex items-center gap-2 font-semibold text-blue-900 dark:text-blue-100">
                   <TrendingUp className="h-4 w-4" />
                   Executive Summary
@@ -561,9 +558,9 @@ export const AnalysisHistorySection: React.FC<AnalysisHistorySectionProps> = ({
               </div>
             </div>
 
-            <div className="flex flex-shrink-0 gap-3 border-t border-border bg-muted p-4">
+            <div className="border-border bg-muted flex flex-shrink-0 gap-3 border-t p-4">
               <Button
-                className="flex-1 bg-card text-white hover:bg-muted dark:bg-white"
+                className="flex-1"
                 onClick={() =>
                   handleOpenInGitHub(selectedAnalysis.repositoryUrl)
                 }

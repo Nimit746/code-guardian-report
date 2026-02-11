@@ -66,7 +66,7 @@ export const SecuritySummaryCards: React.FC<SecuritySummaryCardsProps> = ({
                     >
                       {results.summary.securityScore}
                     </p>
-                    <p className="truncate text-sm text-muted-foreground">
+                    <p className="text-muted-foreground truncate text-sm">
                       Security Score
                     </p>
                   </div>
@@ -114,17 +114,17 @@ export const SecuritySummaryCards: React.FC<SecuritySummaryCardsProps> = ({
 
         <Tooltip>
           <TooltipTrigger asChild>
-            <Card className="cursor-help border-border bg-muted/50 transition-shadow duration-200 hover:shadow-md dark:border-border dark:from-blue-950/20 dark:to-blue-900/20">
+            <Card className="border-border bg-muted/50 dark:border-border cursor-help transition-shadow duration-200 hover:shadow-md dark:from-blue-950/20 dark:to-blue-900/20">
               <CardContent className="p-4">
                 <div className="flex items-center gap-3">
-                  <div className="rounded-lg bg-muted0 p-2">
+                  <div className="bg-muted rounded-lg p-2">
                     <Target className="h-5 w-5 text-white" />
                   </div>
                   <div>
                     <p className="text-2xl font-bold text-blue-800 dark:text-blue-200">
                       {results.metrics.vulnerabilityDensity}
                     </p>
-                    <p className="text-sm text-primary dark:text-primary">
+                    <p className="text-primary dark:text-primary text-sm">
                       Vuln/1000 Lines
                     </p>
                   </div>
@@ -206,7 +206,7 @@ export const SecuritySummaryCards: React.FC<SecuritySummaryCardsProps> = ({
                     >
                       {results.summary.qualityScore}
                     </p>
-                    <p className="text-sm text-muted-foreground">
+                    <p className="text-muted-foreground text-sm">
                       Quality Score
                     </p>
                   </div>

@@ -162,7 +162,7 @@ export const GitHubRepoInput: React.FC<GitHubRepoInputProps> = ({
     <div className="space-y-4 sm:space-y-6">
       <div className="flex flex-col gap-3">
         <div className="relative w-full">
-          <Github className="pointer-events-none absolute top-1/2 left-3 z-10 h-4 w-4 -translate-y-1/2 transform text-muted-foreground sm:h-5 sm:w-5" />
+          <Github className="text-muted-foreground pointer-events-none absolute top-1/2 left-3 z-10 h-4 w-4 -translate-y-1/2 transform sm:h-5 sm:w-5" />
           <Input
             type="url"
             placeholder="https://github.com/owner/repository"
@@ -172,16 +172,16 @@ export const GitHubRepoInput: React.FC<GitHubRepoInputProps> = ({
             disabled={isLoading}
             pattern="https://github\.com/[^\/]+/[^\/]+(/.*)?"
             title="Enter a valid GitHub repository URL"
-            className="h-11 w-full border-2 pr-10 pl-9 text-sm transition-all focus:border-primary sm:h-12 sm:pl-10 sm:text-base"
+            className="focus:border-primary h-11 w-full border-2 pr-10 pl-9 text-sm transition-all sm:h-12 sm:pl-10 sm:text-base"
           />
           {isFetchingInfo && (
-            <Loader2 className="absolute top-1/2 right-3 h-4 w-4 -translate-y-1/2 transform animate-spin text-primary sm:h-5 sm:w-5" />
+            <Loader2 className="text-primary absolute top-1/2 right-3 h-4 w-4 -translate-y-1/2 transform animate-spin sm:h-5 sm:w-5" />
           )}
         </div>
         <Button
           onClick={handleAnalyze}
           disabled={isLoading || !repoUrl.trim()}
-          className="h-11 w-full bg-primary px-4 text-sm font-semibold text-white shadow-lg transition-all hover:bg-primary/90 hover:shadow-xl sm:h-12 sm:px-6 sm:text-base"
+          className="bg-primary hover:bg-primary/90 h-11 w-full px-4 text-sm font-semibold text-white shadow-lg transition-all hover:shadow-xl sm:h-12 sm:px-6 sm:text-base"
         >
           {isLoading ? (
             <>
@@ -203,20 +203,20 @@ export const GitHubRepoInput: React.FC<GitHubRepoInputProps> = ({
             <CheckCircle className="mt-0.5 h-4 w-4 flex-shrink-0 text-green-600 sm:h-5 sm:w-5 dark:text-green-400" />
             <div className="min-w-0 flex-1 space-y-2">
               <div>
-                <p className="text-sm font-semibold break-words text-foreground sm:text-base dark:text-white">
+                <p className="text-foreground text-sm font-semibold break-words sm:text-base dark:text-white">
                   {repoInfo.fullName}
                 </p>
                 {repoInfo.description && (
-                  <p className="mt-1 line-clamp-2 text-xs text-muted-foreground sm:text-sm">
+                  <p className="text-muted-foreground mt-1 line-clamp-2 text-xs sm:text-sm">
                     {repoInfo.description}
                   </p>
                 )}
               </div>
 
-              <div className="flex flex-wrap gap-2 text-xs text-muted-foreground sm:gap-3 sm:text-sm">
+              <div className="text-muted-foreground flex flex-wrap gap-2 text-xs sm:gap-3 sm:text-sm">
                 {repoInfo.language && (
                   <span className="flex items-center gap-1">
-                    <span className="h-2 w-2 flex-shrink-0 rounded-full bg-muted0 sm:h-3 sm:w-3"></span>
+                    <span className="bg-muted h-2 w-2 flex-shrink-0 rounded-full sm:h-3 sm:w-3"></span>
                     <span className="truncate">{repoInfo.language}</span>
                   </span>
                 )}
@@ -241,10 +241,10 @@ export const GitHubRepoInput: React.FC<GitHubRepoInputProps> = ({
       {isLoading && (
         <div className="space-y-2 sm:space-y-3">
           <div className="flex items-center justify-between text-xs sm:text-sm">
-            <span className="truncate pr-2 font-medium text-muted-foreground">
+            <span className="text-muted-foreground truncate pr-2 font-medium">
               {progressMessage}
             </span>
-            <span className="flex-shrink-0 font-semibold text-primary dark:text-primary">
+            <span className="text-primary dark:text-primary flex-shrink-0 font-semibold">
               {progress}%
             </span>
           </div>
@@ -261,8 +261,8 @@ export const GitHubRepoInput: React.FC<GitHubRepoInputProps> = ({
         </Alert>
       )}
 
-      <Alert className="border-l-4 border-l-blue-500 bg-muted dark:bg-blue-950/20">
-        <Info className="h-4 w-4 flex-shrink-0 text-primary sm:h-5 sm:w-5 dark:text-primary" />
+      <Alert className="bg-muted border-l-4 border-l-blue-500 dark:bg-blue-950/20">
+        <Info className="text-primary dark:text-primary h-4 w-4 flex-shrink-0 sm:h-5 sm:w-5" />
         <AlertDescription className="text-xs text-blue-800 sm:text-sm dark:text-blue-200">
           <strong className="mb-1 block">Supported formats:</strong>
           <ul className="list-inside list-disc space-y-1 text-xs sm:text-sm">

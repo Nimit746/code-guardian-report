@@ -242,7 +242,7 @@ const CustomRulesEditor: React.FC = () => {
         <Card>
           <CardContent className="pt-6">
             <div className="text-center">
-              <Code className="mx-auto mb-2 h-8 w-8 text-primary" />
+              <Code className="text-primary mx-auto mb-2 h-8 w-8" />
               <div className="text-3xl font-bold">{rules.length}</div>
               <div className="text-muted-foreground text-sm">Total Rules</div>
             </div>
@@ -421,7 +421,7 @@ const RuleCard: React.FC<RuleCardProps> = ({
     Critical: "bg-red-500",
     High: "bg-orange-500",
     Medium: "bg-yellow-500",
-    Low: "bg-muted0",
+    Low: "bg-muted",
   };
 
   return (
@@ -502,7 +502,7 @@ const TemplateCard: React.FC<TemplateCardProps> = ({ template, onUse }) => {
     Critical: "bg-red-500",
     High: "bg-orange-500",
     Medium: "bg-yellow-500",
-    Low: "bg-muted0",
+    Low: "bg-muted",
   };
 
   return (

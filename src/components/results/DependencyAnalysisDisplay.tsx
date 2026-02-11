@@ -20,15 +20,15 @@ export const DependencyAnalysisDisplay: React.FC<
         <Card className="border-border bg-gradient-to-br from-slate-50 to-white shadow-sm dark:from-slate-900/40 dark:to-slate-900/10">
           <CardContent className="p-8">
             <div className="animate-pulse space-y-4">
-              <div className="h-6 w-48 rounded bg-muted" />
+              <div className="bg-muted h-6 w-48 rounded" />
               <div className="grid grid-cols-2 gap-4 md:grid-cols-4">
-                <div className="h-24 rounded-lg bg-muted" />
-                <div className="h-24 rounded-lg bg-muted" />
-                <div className="h-24 rounded-lg bg-muted" />
-                <div className="h-24 rounded-lg bg-muted" />
+                <div className="bg-muted h-24 rounded-lg" />
+                <div className="bg-muted h-24 rounded-lg" />
+                <div className="bg-muted h-24 rounded-lg" />
+                <div className="bg-muted h-24 rounded-lg" />
               </div>
-              <div className="h-4 w-64 rounded bg-muted" />
-              <div className="h-4 w-80 rounded bg-muted" />
+              <div className="bg-muted h-4 w-64 rounded" />
+              <div className="bg-muted h-4 w-80 rounded" />
             </div>
           </CardContent>
         </Card>
@@ -51,14 +51,14 @@ export const DependencyAnalysisDisplay: React.FC<
         <Card className="border-border bg-gradient-to-br from-slate-50 to-white shadow-sm dark:from-slate-900/40 dark:to-slate-900/10">
           <CardContent className="p-8">
             <div className="flex flex-col items-center gap-4 text-center">
-              <div className="rounded-2xl bg-muted p-3">
-                <Package className="h-8 w-8 text-muted-foreground" />
+              <div className="bg-muted rounded-2xl p-3">
+                <Package className="text-muted-foreground h-8 w-8" />
               </div>
               <div>
-                <h3 className="mb-1 text-xl font-semibold text-foreground dark:text-slate-50">
+                <h3 className="text-foreground mb-1 text-xl font-semibold dark:text-slate-50">
                   Dependency Analysis Unavailable
                 </h3>
-                <p className="max-w-2xl text-sm text-muted-foreground">
+                <p className="text-muted-foreground max-w-2xl text-sm">
                   We couldn't complete dependency scanning. This often happens
                   when required package manifests are missing or the file
                   selection didn't include them.
@@ -82,10 +82,10 @@ export const DependencyAnalysisDisplay: React.FC<
 
               <div id="dependency-help" className="mt-4 w-full">
                 <div className="mx-auto max-w-2xl text-left">
-                  <h4 className="mb-2 text-sm font-semibold text-foreground dark:text-slate-200">
+                  <h4 className="text-foreground mb-2 text-sm font-semibold dark:text-slate-200">
                     To enable Dependency Scanning:
                   </h4>
-                  <ul className="list-disc space-y-1 pl-5 text-sm text-foreground/80">
+                  <ul className="text-foreground/80 list-disc space-y-1 pl-5 text-sm">
                     <li>
                       Include at least one supported manifest when running
                       analysis or uploading archives.
@@ -97,57 +97,57 @@ export const DependencyAnalysisDisplay: React.FC<
                   </ul>
 
                   <div className="mt-3 grid grid-cols-1 gap-3 sm:grid-cols-2">
-                    <div className="rounded-lg border border-border bg-card/70 p-3/30">
+                    <div className="border-border bg-card/70 p-3/30 rounded-lg border">
                       <p className="text-foreground mb-1 text-xs font-semibold">
                         JavaScript/TypeScript
                       </p>
-                      <p className="text-xs text-muted-foreground">
+                      <p className="text-muted-foreground text-xs">
                         package.json, yarn.lock
                       </p>
                     </div>
-                    <div className="rounded-lg border border-border bg-card/70 p-3/30">
+                    <div className="border-border bg-card/70 p-3/30 rounded-lg border">
                       <p className="text-foreground mb-1 text-xs font-semibold">
                         Python
                       </p>
-                      <p className="text-xs text-muted-foreground">
+                      <p className="text-muted-foreground text-xs">
                         requirements.txt
                       </p>
                     </div>
-                    <div className="rounded-lg border border-border bg-card/70 p-3/30">
+                    <div className="border-border bg-card/70 p-3/30 rounded-lg border">
                       <p className="text-foreground mb-1 text-xs font-semibold">
                         Java (Maven/Gradle)
                       </p>
-                      <p className="text-xs text-muted-foreground">
+                      <p className="text-muted-foreground text-xs">
                         pom.xml, build.gradle
                       </p>
                     </div>
-                    <div className="rounded-lg border border-border bg-card/70 p-3/30">
+                    <div className="border-border bg-card/70 p-3/30 rounded-lg border">
                       <p className="text-foreground mb-1 text-xs font-semibold">
                         PHP
                       </p>
-                      <p className="text-xs text-muted-foreground">
+                      <p className="text-muted-foreground text-xs">
                         composer.json, composer.lock
                       </p>
                     </div>
-                    <div className="rounded-lg border border-border bg-card/70 p-3/30">
+                    <div className="border-border bg-card/70 p-3/30 rounded-lg border">
                       <p className="text-foreground mb-1 text-xs font-semibold">
                         Rust
                       </p>
-                      <p className="text-xs text-muted-foreground">
+                      <p className="text-muted-foreground text-xs">
                         Cargo.toml, Cargo.lock
                       </p>
                     </div>
-                    <div className="rounded-lg border border-border bg-card/70 p-3/30">
+                    <div className="border-border bg-card/70 p-3/30 rounded-lg border">
                       <p className="text-foreground mb-1 text-xs font-semibold">
                         Ruby
                       </p>
-                      <p className="text-xs text-muted-foreground">
+                      <p className="text-muted-foreground text-xs">
                         Gemfile, Gemfile.lock
                       </p>
                     </div>
                   </div>
 
-                  <p className="mt-3 text-xs text-muted-foreground">
+                  <p className="text-muted-foreground mt-3 text-xs">
                     Tip: If you uploaded a zip, make sure your manifests are not
                     nested too deeply. Place them near the root for best
                     results.
@@ -179,7 +179,7 @@ export const DependencyAnalysisDisplay: React.FC<
       case "medium":
         return "bg-yellow-500 text-black";
       case "low":
-        return "bg-muted0 text-white";
+        return "bg-muted text-white";
       default:
         return "bg-muted-foreground text-white";
     }
@@ -264,7 +264,7 @@ export const DependencyAnalysisDisplay: React.FC<
         <Card className="border-border bg-muted/50 dark:border-border dark:from-blue-950/20 dark:to-indigo-950/20">
           <CardContent className="p-4">
             <div className="flex items-center gap-2">
-              <Package className="h-5 w-5 text-primary" />
+              <Package className="text-primary h-5 w-5" />
               <div>
                 <p className="text-sm font-medium text-blue-900 dark:text-blue-100">
                   Total Packages
@@ -336,7 +336,7 @@ export const DependencyAnalysisDisplay: React.FC<
             </CardTitle>
           </CardHeader>
           <CardContent>
-            <p className="text-sm text-gray-600 dark:text-muted-foreground">
+            <p className="dark:text-muted-foreground text-sm text-gray-600">
               Great news! We didn’t find any known vulnerabilities in your
               dependencies. Keep your dependencies updated and consider enabling
               automated scanning in CI.
@@ -368,17 +368,17 @@ export const DependencyAnalysisDisplay: React.FC<
                         >
                           {vuln.vulnerability.severity}
                         </Badge>
-                        <span className="font-mono text-sm text-gray-600 dark:text-muted-foreground">
+                        <span className="dark:text-muted-foreground font-mono text-sm text-gray-600">
                           {vuln.vulnerability.id}
                         </span>
                       </div>
-                      <h4 className="mb-1 font-semibold text-foreground dark:text-white">
+                      <h4 className="text-foreground mb-1 font-semibold dark:text-white">
                         {vuln.vulnerability.title}
                       </h4>
-                      <p className="mb-2 text-sm text-gray-600 dark:text-muted-foreground">
+                      <p className="dark:text-muted-foreground mb-2 text-sm text-gray-600">
                         {vuln.vulnerability.description}
                       </p>
-                      <div className="flex items-center gap-4 text-xs text-muted-foreground dark:text-muted-foreground">
+                      <div className="text-muted-foreground dark:text-muted-foreground flex items-center gap-4 text-xs">
                         <span>
                           Package: {vuln.package}@{vuln.version}
                         </span>
@@ -396,7 +396,7 @@ export const DependencyAnalysisDisplay: React.FC<
                 </div>
               ))}
               {vulnerabilities.length > 10 && (
-                <p className="text-center text-sm text-muted-foreground">
+                <p className="text-muted-foreground text-center text-sm">
                   ... and {vulnerabilities.length - 10} more vulnerabilities
                 </p>
               )}
@@ -426,10 +426,10 @@ export const DependencyAnalysisDisplay: React.FC<
                       <Badge className={getSeverityColor(issue.severity)}>
                         {issue.severity}
                       </Badge>
-                      <h4 className="mt-1 font-semibold text-foreground dark:text-white">
+                      <h4 className="text-foreground mt-1 font-semibold dark:text-white">
                         {issue.package}: {issue.license}
                       </h4>
-                      <p className="text-sm text-gray-600 dark:text-muted-foreground">
+                      <p className="dark:text-muted-foreground text-sm text-gray-600">
                         {issue.description}
                       </p>
                     </div>
@@ -446,7 +446,7 @@ export const DependencyAnalysisDisplay: React.FC<
         <Card>
           <CardHeader>
             <CardTitle className="flex items-center gap-2">
-              <Clock className="h-5 w-5 text-primary" />
+              <Clock className="text-primary h-5 w-5" />
               Outdated Packages ({outdatedPackages.length})
             </CardTitle>
           </CardHeader>
@@ -455,14 +455,14 @@ export const DependencyAnalysisDisplay: React.FC<
               {outdatedPackages.slice(0, 10).map((pkg, index) => (
                 <div
                   key={`outdated-${pkg.package}-${pkg.currentVersion}-${index}`}
-                  className="rounded-lg border bg-muted p-4 dark:bg-blue-950/10"
+                  className="bg-muted rounded-lg border p-4 dark:bg-blue-950/10"
                 >
                   <div className="flex items-center justify-between">
                     <div>
-                      <h4 className="font-semibold text-foreground dark:text-white">
+                      <h4 className="text-foreground font-semibold dark:text-white">
                         {pkg.package}
                       </h4>
-                      <p className="text-sm text-gray-600 dark:text-muted-foreground">
+                      <p className="dark:text-muted-foreground text-sm text-gray-600">
                         {pkg.currentVersion} → {pkg.latestVersion}
                       </p>
                       <div className="mt-1 flex items-center gap-2">
@@ -475,7 +475,7 @@ export const DependencyAnalysisDisplay: React.FC<
                           {pkg.updateRecommendation}
                         </Badge>
                         {pkg.majorVersionsBehind > 0 && (
-                          <span className="text-xs text-muted-foreground">
+                          <span className="text-muted-foreground text-xs">
                             {pkg.majorVersionsBehind} major versions behind
                           </span>
                         )}
@@ -485,7 +485,7 @@ export const DependencyAnalysisDisplay: React.FC<
                 </div>
               ))}
               {outdatedPackages.length > 10 && (
-                <p className="text-center text-sm text-muted-foreground">
+                <p className="text-muted-foreground text-center text-sm">
                   ... and {outdatedPackages.length - 10} more outdated packages
                 </p>
               )}
@@ -515,13 +515,13 @@ export const DependencyAnalysisDisplay: React.FC<
                       {rec.priority}
                     </Badge>
                     <div className="flex-1">
-                      <h4 className="mb-1 font-semibold text-foreground dark:text-white">
+                      <h4 className="text-foreground mb-1 font-semibold dark:text-white">
                         {rec.title}
                       </h4>
-                      <p className="mb-2 text-sm text-foreground dark:text-muted-foreground">
+                      <p className="text-foreground dark:text-muted-foreground mb-2 text-sm">
                         {rec.description}
                       </p>
-                      <p className="mb-2 text-sm font-medium text-foreground dark:text-muted-foreground">
+                      <p className="text-foreground dark:text-muted-foreground mb-2 text-sm font-medium">
                         Action: {rec.action}
                       </p>
                       {rec.packages.length > 0 && (
@@ -575,13 +575,13 @@ export const DependencyAnalysisDisplay: React.FC<
                       {risk.riskType.replace("_", " ").toUpperCase()}
                     </span>
                   </div>
-                  <h4 className="mb-1 font-semibold text-foreground dark:text-white">
+                  <h4 className="text-foreground mb-1 font-semibold dark:text-white">
                     {risk.package}
                   </h4>
-                  <p className="mb-2 text-sm text-gray-600 dark:text-muted-foreground">
+                  <p className="dark:text-muted-foreground mb-2 text-sm text-gray-600">
                     {risk.description}
                   </p>
-                  <p className="text-sm font-medium text-foreground dark:text-muted-foreground">
+                  <p className="text-foreground dark:text-muted-foreground text-sm font-medium">
                     Mitigation: {risk.mitigation}
                   </p>
                 </div>

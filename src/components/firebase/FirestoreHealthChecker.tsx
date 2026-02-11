@@ -52,7 +52,7 @@ export const FirestoreHealthChecker: React.FC = () => {
       return <Circle className="h-3 w-3 fill-red-500 text-red-500" />;
     if (!healthStatus.firestoreConnected)
       return <Circle className="h-3 w-3 fill-yellow-500 text-yellow-500" />;
-    return <Circle className="h-3 w-3 fill-green-500 text-primary" />;
+    return <Circle className="text-primary h-3 w-3 fill-green-500" />;
   };
 
   const getStatusText = () => {
@@ -90,7 +90,7 @@ export const FirestoreHealthChecker: React.FC = () => {
           </div>
           <button
             onClick={() => setShowDetails(!showDetails)}
-            className="text-muted-foreground hover:text-gray-600 dark:hover:text-muted-foreground"
+            className="text-muted-foreground dark:hover:text-muted-foreground hover:text-gray-600"
           >
             {showDetails ? (
               <ChevronDown className="h-4 w-4" aria-hidden="true" />
@@ -101,8 +101,8 @@ export const FirestoreHealthChecker: React.FC = () => {
         </div>
 
         {showDetails && (
-          <div className="mt-3 border-t border-border pt-3 dark:border-border">
-            <div className="space-y-2 text-xs text-gray-600 dark:text-muted-foreground">
+          <div className="border-border dark:border-border mt-3 border-t pt-3">
+            <div className="dark:text-muted-foreground space-y-2 text-xs text-gray-600">
               <div className="flex justify-between">
                 <span>Network:</span>
                 <span
@@ -136,7 +136,7 @@ export const FirestoreHealthChecker: React.FC = () => {
             <div className="mt-3 flex space-x-2">
               <button
                 onClick={handleTestConnection}
-                className="flex-1 rounded bg-muted0 px-2 py-1 text-xs text-white transition-colors hover:bg-primary"
+                className="bg-muted hover:bg-primary flex-1 rounded px-2 py-1 text-xs text-white transition-colors"
               >
                 Test
               </button>

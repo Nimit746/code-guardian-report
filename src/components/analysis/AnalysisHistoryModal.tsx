@@ -95,15 +95,15 @@ export const AnalysisHistoryModal: React.FC<AnalysisHistoryModalProps> = ({
 
   return (
     <div className="fixed inset-0 z-50 flex items-center justify-center bg-black/50 p-4">
-      <Card className="max-h-[80vh] w-full max-w-4xl bg-white shadow-2xl">
+      <Card className="bg-card max-h-[80vh] w-full max-w-4xl shadow-2xl">
         <div className="flex items-center justify-between border-b p-6">
           <div className="flex items-center gap-3">
-            <Clock className="h-6 w-6 text-primary" />
+            <Clock className="text-primary h-6 w-6" />
             <div>
               <h2 className="text-foreground text-xl font-bold">
                 Analysis History
               </h2>
-              <p className="text-sm text-muted-foreground">
+              <p className="text-muted-foreground text-sm">
                 {allAnalyses.length} analysis
                 {allAnalyses.length !== 1 ? "es" : ""} •{" "}
                 {formatBytes(history.totalStorageUsed)} used
@@ -122,7 +122,7 @@ export const AnalysisHistoryModal: React.FC<AnalysisHistoryModalProps> = ({
 
         <div className="max-h-[60vh] overflow-y-auto p-6">
           {allAnalyses.length === 0 ? (
-            <div className="py-12 text-center text-muted-foreground">
+            <div className="text-muted-foreground py-12 text-center">
               <FileText className="mx-auto mb-4 h-12 w-12 opacity-50" />
               <p className="mb-2 text-lg font-medium">No Analysis History</p>
               <p className="text-sm">
@@ -145,7 +145,7 @@ export const AnalysisHistoryModal: React.FC<AnalysisHistoryModalProps> = ({
                     key={analysis.id}
                     className={`relative transition-all duration-200 hover:shadow-md ${
                       analysis.isCurrent
-                        ? "bg-muted/50 ring-2 ring-primary dark:bg-blue-950/20"
+                        ? "bg-muted/50 ring-primary ring-2 dark:bg-blue-950/20"
                         : ""
                     }`}
                   >
@@ -153,14 +153,14 @@ export const AnalysisHistoryModal: React.FC<AnalysisHistoryModalProps> = ({
                       <div className="flex items-start justify-between">
                         <div className="min-w-0 flex-1">
                           <div className="mb-2 flex items-center gap-2">
-                            <FileText className="h-4 w-4 flex-shrink-0 text-muted-foreground" />
+                            <FileText className="text-muted-foreground h-4 w-4 flex-shrink-0" />
                             <h3 className="text-foreground truncate font-medium">
                               {analysis.fileName}
                             </h3>
                             {analysis.isCurrent && (
                               <Badge
                                 variant="outline"
-                                className="ml-2 border-blue-600 text-primary"
+                                className="text-primary ml-2 border-blue-600"
                               >
                                 Current
                               </Badge>
@@ -235,7 +235,7 @@ export const AnalysisHistoryModal: React.FC<AnalysisHistoryModalProps> = ({
                           </div>
 
                           {/* Metadata */}
-                          <div className="text-xs text-muted-foreground">
+                          <div className="text-muted-foreground text-xs">
                             <div className="flex items-center gap-4">
                               <span>
                                 Engine: {analysis.metadata.analysisEngine} v
@@ -259,7 +259,7 @@ export const AnalysisHistoryModal: React.FC<AnalysisHistoryModalProps> = ({
                               variant="outline"
                               size="sm"
                               onClick={() => onRestoreAnalysis(analysis)}
-                              className="flex items-center gap-1 text-primary hover:bg-muted hover:text-teal-600 dark:hover:bg-blue-950/20"
+                              className="text-primary hover:bg-muted flex items-center gap-1 hover:text-teal-600 dark:hover:bg-blue-950/20"
                             >
                               <RotateCcw className="h-3 w-3" />
                               Restore
@@ -289,7 +289,7 @@ export const AnalysisHistoryModal: React.FC<AnalysisHistoryModalProps> = ({
 
         {/* Footer */}
         <div className="border-t p-4">
-          <div className="flex items-center justify-between text-sm text-muted-foreground">
+          <div className="text-muted-foreground flex items-center justify-between text-sm">
             <span>
               Showing {allAnalyses.length} of {history.maxHistorySize} maximum
               entries

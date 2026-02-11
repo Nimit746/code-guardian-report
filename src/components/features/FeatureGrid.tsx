@@ -54,11 +54,11 @@ export const FeatureGrid: React.FC<FeatureGridProps> = ({
       {/* Section Header */}
       {title && (
         <div className="mb-8 px-4 text-center sm:mb-12 sm:px-0 lg:mb-16">
-          <h2 className="mb-3 text-3xl font-bold text-foreground sm:mb-4 sm:text-4xl lg:text-5xl dark:text-white">
+          <h2 className="text-foreground mb-3 text-3xl font-bold sm:mb-4 sm:text-4xl lg:text-5xl dark:text-white">
             {title}
           </h2>
           {subtitle && (
-            <p className="mx-auto max-w-3xl text-base text-muted-foreground sm:text-lg">
+            <p className="text-muted-foreground mx-auto max-w-3xl text-base sm:text-lg">
               {subtitle}
             </p>
           )}
@@ -72,7 +72,7 @@ export const FeatureGrid: React.FC<FeatureGridProps> = ({
         {features.map((feature, index) => (
           <Card
             key={index}
-            className={`group relative cursor-pointer overflow-hidden transition-all duration-500  ${
+            className={`group relative cursor-pointer overflow-hidden transition-all duration-500 ${
               variant === "modern"
                 ? "modern-card border-0 shadow-xl hover:shadow-2xl"
                 : "border bg-white/90 shadow-lg backdrop-blur-sm hover:shadow-xl/90"
@@ -108,18 +108,18 @@ export const FeatureGrid: React.FC<FeatureGridProps> = ({
                 >
                   <div className="h-5 w-5 sm:h-6 sm:w-6">{feature.icon}</div>
                 </div>
-                <ArrowUpRight className="h-4 w-4 text-muted-foreground opacity-0 transition-colors group-hover:text-muted-foreground group-hover:opacity-100 sm:h-5 sm:w-5 dark:group-hover:text-muted-foreground" />
+                <ArrowUpRight className="text-muted-foreground group-hover:text-muted-foreground dark:group-hover:text-muted-foreground h-4 w-4 opacity-0 transition-colors group-hover:opacity-100 sm:h-5 sm:w-5" />
               </div>
 
               {/* Title */}
-              <CardTitle className="text-lg leading-tight font-bold text-foreground transition-colors duration-300 group-hover:text-primary sm:text-xl dark:text-white dark:group-hover:text-primary">
+              <CardTitle className="text-foreground group-hover:text-primary dark:group-hover:text-primary text-lg leading-tight font-bold transition-colors duration-300 sm:text-xl dark:text-white">
                 {feature.title}
               </CardTitle>
             </CardHeader>
 
             <CardContent className="space-y-3 p-4 pt-0 sm:space-y-4 sm:p-6">
               {/* Description */}
-              <CardDescription className="text-sm leading-relaxed text-muted-foreground sm:text-base">
+              <CardDescription className="text-muted-foreground text-sm leading-relaxed sm:text-base">
                 {feature.description}
               </CardDescription>
 
@@ -129,13 +129,13 @@ export const FeatureGrid: React.FC<FeatureGridProps> = ({
                   {feature.benefits.map((benefit, benefitIndex) => (
                     <li
                       key={benefitIndex}
-                      className="flex items-start gap-2 text-xs text-muted-foreground sm:text-sm"
+                      className="text-muted-foreground flex items-start gap-2 text-xs sm:text-sm"
                     >
                       <div
                         className={`mt-1.5 h-1.5 w-1.5 flex-shrink-0 rounded-full ${
                           feature.gradient
                             ? `bg-gradient-to-r ${feature.gradient}`
-                            : "bg-muted0"
+                            : "bg-muted"
                         }`}
                       ></div>
                       <span className="leading-relaxed">{benefit}</span>

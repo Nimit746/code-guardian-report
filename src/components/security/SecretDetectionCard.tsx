@@ -34,14 +34,14 @@ export const SecretDetectionCard: React.FC<SecretDetectionCardProps> = ({
       case "medium":
         return "bg-yellow-500/10 text-yellow-400 border border-yellow-500/20 px-2 py-1 rounded text-xs font-medium";
       case "low":
-        return "bg-muted0/10 text-primary border border-primary/20 px-2 py-1 rounded text-xs font-medium";
+        return "bg-muted/10 text-primary border border-primary/20 px-2 py-1 rounded text-xs font-medium";
       default:
         return "bg-muted-foreground/10 text-muted-foreground border border-gray-500/20 px-2 py-1 rounded text-xs font-medium";
     }
   };
 
   const getConfidenceBadge = (_confidence: number) => {
-    return "bg-muted0/10 text-primary border border-primary/20 px-2 py-1 rounded text-xs font-medium";
+    return "bg-muted/10 text-primary border border-primary/20 px-2 py-1 rounded text-xs font-medium";
   };
 
   const copyToClipboard = (text: string) => {
@@ -60,20 +60,20 @@ export const SecretDetectionCard: React.FC<SecretDetectionCardProps> = ({
   };
 
   return (
-    <div className="rounded-lg border border-border/50 bg-card/50">
+    <div className="border-border/50 bg-card/50 rounded-lg border">
       {}
-      <div className="border-b border-border/50 p-6">
+      <div className="border-border/50 border-b p-6">
         <div className="flex items-center justify-between">
           <div>
             <h2 className="mb-2 text-xl font-semibold text-white">
               Secret Detection ({secretIssues.length})
             </h2>
-            <p className="text-sm text-muted-foreground">
+            <p className="text-muted-foreground text-sm">
               Comprehensive security analysis with pattern matching and ML
               classifiers
             </p>
           </div>
-          <ChevronDown className="h-5 w-5 text-muted-foreground" />
+          <ChevronDown className="text-muted-foreground h-5 w-5" />
         </div>
       </div>
 
@@ -85,11 +85,11 @@ export const SecretDetectionCard: React.FC<SecretDetectionCardProps> = ({
           return (
             <div
               key={secret.id}
-              className="rounded-lg border border-border/50 bg-muted/50"
+              className="border-border/50 bg-muted/50 rounded-lg border"
             >
               {}
               <div
-                className="cursor-pointer p-4 transition-colors hover:bg-muted/70"
+                className="hover:bg-muted/70 cursor-pointer p-4 transition-colors"
                 onClick={() => toggleSecretExpansion(secret.id)}
               >
                 <div className="flex items-center justify-between">
@@ -101,22 +101,22 @@ export const SecretDetectionCard: React.FC<SecretDetectionCardProps> = ({
                       <span className={getConfidenceBadge(secret.confidence)}>
                         {secret.confidence}% confidence
                       </span>
-                      <span className="text-sm text-primary">
+                      <span className="text-primary text-sm">
                         Secret Detection
                       </span>
                     </div>
                   </div>
                   {isExpanded ? (
-                    <ChevronDown className="h-4 w-4 text-muted-foreground" />
+                    <ChevronDown className="text-muted-foreground h-4 w-4" />
                   ) : (
-                    <ChevronRight className="h-4 w-4 text-muted-foreground" />
+                    <ChevronRight className="text-muted-foreground h-4 w-4" />
                   )}
                 </div>
 
                 <h3 className="mt-2 mb-1 font-medium text-white">
                   {secret.message}
                 </h3>
-                <p className="text-sm text-muted-foreground">
+                <p className="text-muted-foreground text-sm">
                   {secret.filename}:{secret.line} •{" "}
                   {secret.type.replace("_", " ")}
                 </p>
@@ -124,7 +124,7 @@ export const SecretDetectionCard: React.FC<SecretDetectionCardProps> = ({
 
               {}
               {isExpanded && (
-                <div className="border-t border-border/50 p-4">
+                <div className="border-border/50 border-t p-4">
                   <div className="grid grid-cols-1 gap-6 lg:grid-cols-2">
                     {}
                     <div>
@@ -150,7 +150,9 @@ export const SecretDetectionCard: React.FC<SecretDetectionCardProps> = ({
                         </div>
                         {secret.cvssScore && (
                           <div className="flex justify-between">
-                            <span className="text-muted-foreground">CVSS Score:</span>
+                            <span className="text-muted-foreground">
+                              CVSS Score:
+                            </span>
                             <span className="text-white">
                               {secret.cvssScore.toFixed(1)}
                             </span>
@@ -164,20 +166,20 @@ export const SecretDetectionCard: React.FC<SecretDetectionCardProps> = ({
                       <h4 className="mb-3 font-medium text-white">
                         Remediation
                       </h4>
-                      <p className="mb-3 text-sm text-muted-foreground">
+                      <p className="text-muted-foreground mb-3 text-sm">
                         {secret.recommendation ||
                           secret.remediation?.description ||
                           "No remediation information available"}
                       </p>
                       {secret.remediation && (
                         <div className="flex items-center gap-2">
-                          <span className="text-sm text-muted-foreground">
+                          <span className="text-muted-foreground text-sm">
                             Effort:
                           </span>
                           <span className="text-sm text-yellow-400">
                             {secret.remediation.effort}
                           </span>
-                          <span className="text-sm text-muted-foreground">
+                          <span className="text-muted-foreground text-sm">
                             Priority:
                           </span>
                           <div className="flex items-center gap-1">
@@ -215,7 +217,7 @@ export const SecretDetectionCard: React.FC<SecretDetectionCardProps> = ({
                           <Copy className="h-4 w-4" />
                         </Button>
                       </div>
-                      <div className="rounded border border-border/50 bg-card/50 p-3">
+                      <div className="border-border/50 bg-card/50 rounded border p-3">
                         <code className="font-mono text-sm break-all text-red-400">
                           {secret.codeSnippet}
                         </code>
@@ -229,7 +231,7 @@ export const SecretDetectionCard: React.FC<SecretDetectionCardProps> = ({
                       <h4 className="mb-3 font-medium text-green-400">
                         Fixed Code
                       </h4>
-                      <div className="rounded border border-border/50 bg-card/50 p-3">
+                      <div className="border-border/50 bg-card/50 rounded border p-3">
                         <code className="font-mono text-sm break-all text-green-400">
                           {secret.remediation.fixExample}
                         </code>
@@ -250,7 +252,7 @@ export const SecretDetectionCard: React.FC<SecretDetectionCardProps> = ({
                             href={ref}
                             target="_blank"
                             rel="noopener noreferrer"
-                            className="flex items-center gap-2 text-sm text-primary hover:text-teal-300"
+                            className="text-primary flex items-center gap-2 text-sm hover:text-teal-300"
                           >
                             {ref}
                             <ExternalLink className="h-3 w-3" />

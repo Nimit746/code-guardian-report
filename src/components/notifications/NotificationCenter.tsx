@@ -130,7 +130,7 @@ const NotificationCenter: React.FC<NotificationCenterProps> = ({
     const colors = {
       urgent: "bg-red-500",
       high: "bg-orange-500",
-      normal: "bg-muted0",
+      normal: "bg-muted",
       low: "bg-muted-foreground",
     };
 
@@ -232,7 +232,7 @@ const NotificationCenter: React.FC<NotificationCenterProps> = ({
                 <div className="text-muted-foreground text-xs">Total</div>
               </div>
               <div className="bg-muted rounded-lg p-2 text-center">
-                <div className="text-2xl font-bold text-primary">
+                <div className="text-primary text-2xl font-bold">
                   {stats.byType.info}
                 </div>
                 <div className="text-muted-foreground text-xs">Info</div>

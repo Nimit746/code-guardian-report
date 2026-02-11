@@ -143,10 +143,10 @@ export const FirestoreErrorNotification: React.FC = () => {
       case "offline":
         return {
           container:
-            "bg-muted0/10 border-primary/30 dark:bg-teal-900/20 dark:border-primary/40",
+            "bg-muted/10 border-primary/30 dark:bg-teal-900/20 dark:border-primary/40",
           text: "text-teal-600 dark:text-teal-300",
           button:
-            "bg-muted0/20 hover:bg-muted0/30 text-teal-600 dark:text-teal-300",
+            "bg-muted/20 hover:bg-muted/30 text-teal-600 dark:text-teal-300",
         };
       case "circuit-breaker":
         return {
@@ -230,7 +230,7 @@ export const FirestoreErrorNotification: React.FC = () => {
                 </p>
                 {/* Only show technical details in development */}
                 {process.env.NODE_ENV === "development" && (
-                  <p className="mt-1.5 truncate font-mono text-xs text-muted-foreground opacity-50 dark:text-muted-foreground">
+                  <p className="text-muted-foreground dark:text-muted-foreground mt-1.5 truncate font-mono text-xs opacity-50">
                     {error.docPath}
                   </p>
                 )}

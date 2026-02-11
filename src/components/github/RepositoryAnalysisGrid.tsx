@@ -583,7 +583,7 @@ export const RepositoryAnalysisGrid: React.FC<RepositoryAnalysisGridProps> = ({
                     <div className="text-muted-foreground mb-3 flex items-center gap-4 text-xs">
                       {repo.language && (
                         <span className="flex items-center gap-1">
-                          <span className="bg-muted0 h-2.5 w-2.5 rounded-full" />
+                          <span className="bg-muted h-2.5 w-2.5 rounded-full" />
                           {repo.language}
                         </span>
                       )}

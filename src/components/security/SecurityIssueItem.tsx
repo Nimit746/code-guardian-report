@@ -110,11 +110,11 @@ export const SecurityIssueItem: React.FC<SecurityIssueItemProps> = ({
   };
 
   return (
-    <div className="rounded-lg border border-border/50 bg-muted/50">
+    <div className="border-border/50 bg-muted/50 rounded-lg border">
       <button
         type="button"
         onClick={onToggle}
-        className="touch-target w-full p-4 text-left transition-colors hover:bg-muted/70 active:scale-[0.99]"
+        className="touch-target hover:bg-muted/70 w-full p-4 text-left transition-colors active:scale-[0.99]"
       >
         <div className="flex items-start justify-between gap-3">
           <div className="min-w-0 flex-1">
@@ -168,7 +168,7 @@ export const SecurityIssueItem: React.FC<SecurityIssueItemProps> = ({
                       setShowNaturalLanguage(!showNaturalLanguage);
                     }
                   }}
-                  className="touch-target inline-flex h-8 cursor-pointer items-center self-start rounded-lg px-3 text-xs text-muted-foreground transition-colors hover:bg-slate-700 hover:text-white sm:self-auto"
+                  className="touch-target text-muted-foreground inline-flex h-8 cursor-pointer items-center self-start rounded-lg px-3 text-xs transition-colors hover:bg-slate-700 hover:text-white sm:self-auto"
                 >
                   <MessageSquare className="mr-1.5 h-3 w-3" />
                   <span className="hidden sm:inline">
@@ -181,13 +181,15 @@ export const SecurityIssueItem: React.FC<SecurityIssueItemProps> = ({
               </div>
               <div className="text-sm leading-relaxed">
                 {showNaturalLanguage ? (
-                  <p className="text-muted-foreground">{naturalLanguageDescription}</p>
+                  <p className="text-muted-foreground">
+                    {naturalLanguageDescription}
+                  </p>
                 ) : (
                   <p className="font-medium text-white">{issue.message}</p>
                 )}
               </div>
             </div>
-            <div className="flex flex-col gap-1 text-sm text-muted-foreground sm:flex-row sm:items-center sm:gap-2">
+            <div className="text-muted-foreground flex flex-col gap-1 text-sm sm:flex-row sm:items-center sm:gap-2">
               <span className="rounded bg-slate-700 px-2 py-1 font-mono text-xs">
                 {issue.filename}:{issue.line}
               </span>
@@ -198,56 +200,56 @@ export const SecurityIssueItem: React.FC<SecurityIssueItemProps> = ({
           </div>
           <div className="ml-3 flex flex-shrink-0 items-center">
             {isExpanded ? (
-              <ChevronDown className="h-5 w-5 text-muted-foreground transition-transform duration-200" />
+              <ChevronDown className="text-muted-foreground h-5 w-5 transition-transform duration-200" />
             ) : (
-              <ChevronRight className="h-5 w-5 text-muted-foreground transition-transform duration-200" />
+              <ChevronRight className="text-muted-foreground h-5 w-5 transition-transform duration-200" />
             )}
           </div>
         </div>
       </button>
 
       {isExpanded && (
-        <div className="border-t border-border/50 p-3 sm:p-4">
+        <div className="border-border/50 border-t p-3 sm:p-4">
           <Tabs defaultValue="summary" className="w-full">
-            <TabsList className="mb-4 flex w-full snap-x snap-mandatory gap-1 overflow-x-auto rounded-lg bg-muted p-1 [-ms-overflow-style:'none'] [scrollbar-width:'none'] sm:flex sm:flex-wrap sm:justify-start [&::-webkit-scrollbar]:hidden">
+            <TabsList className="bg-muted mb-4 flex w-full snap-x snap-mandatory gap-1 overflow-x-auto rounded-lg p-1 [-ms-overflow-style:'none'] [scrollbar-width:'none'] sm:flex sm:flex-wrap sm:justify-start [&::-webkit-scrollbar]:hidden">
               <TabsTrigger
                 value="summary"
-                className="touch-target flex min-w-[90px] flex-shrink-0 snap-center items-center justify-center gap-1.5 rounded-md px-3 py-2 text-xs text-muted-foreground transition-all data-[state=active]:bg-primary data-[state=active]:text-white sm:w-auto sm:text-sm"
+                className="touch-target text-muted-foreground data-[state=active]:bg-primary flex min-w-[90px] flex-shrink-0 snap-center items-center justify-center gap-1.5 rounded-md px-3 py-2 text-xs transition-all data-[state=active]:text-white sm:w-auto sm:text-sm"
               >
                 <MessageSquare className="h-3.5 w-3.5 flex-shrink-0 sm:h-4 sm:w-4" />
                 <span>Summary</span>
               </TabsTrigger>
               <TabsTrigger
                 value="details"
-                className="touch-target flex min-w-[90px] flex-shrink-0 snap-center items-center justify-center rounded-md px-3 py-2 text-xs text-muted-foreground transition-all data-[state=active]:bg-primary data-[state=active]:text-white sm:w-auto sm:text-sm"
+                className="touch-target text-muted-foreground data-[state=active]:bg-primary flex min-w-[90px] flex-shrink-0 snap-center items-center justify-center rounded-md px-3 py-2 text-xs transition-all data-[state=active]:text-white sm:w-auto sm:text-sm"
               >
                 <span>Technical</span>
               </TabsTrigger>
               <TabsTrigger
                 value="remediation"
-                className="touch-target flex min-w-[90px] flex-shrink-0 snap-center items-center justify-center rounded-md px-3 py-2 text-xs text-muted-foreground transition-all data-[state=active]:bg-primary data-[state=active]:text-white sm:w-auto sm:text-sm"
+                className="touch-target text-muted-foreground data-[state=active]:bg-primary flex min-w-[90px] flex-shrink-0 snap-center items-center justify-center rounded-md px-3 py-2 text-xs transition-all data-[state=active]:text-white sm:w-auto sm:text-sm"
               >
                 <span>Fix Guide</span>
               </TabsTrigger>
               <TabsTrigger
                 value="ai-fixes"
-                className="touch-target flex min-w-[90px] flex-shrink-0 snap-center items-center justify-center gap-1.5 rounded-md px-3 py-2 text-xs text-muted-foreground transition-all data-[state=active]:bg-primary data-[state=active]:text-white sm:w-auto sm:text-sm"
+                className="touch-target text-muted-foreground data-[state=active]:bg-primary flex min-w-[90px] flex-shrink-0 snap-center items-center justify-center gap-1.5 rounded-md px-3 py-2 text-xs transition-all data-[state=active]:text-white sm:w-auto sm:text-sm"
               >
                 <Brain className="h-3.5 w-3.5 flex-shrink-0 sm:h-4 sm:w-4" />
                 <span>AI Fixes</span>
               </TabsTrigger>
               <TabsTrigger
                 value="references"
-                className="touch-target flex min-w-[90px] flex-shrink-0 snap-center items-center justify-center rounded-md px-3 py-2 text-xs text-muted-foreground transition-all data-[state=active]:bg-primary data-[state=active]:text-white sm:w-auto sm:text-sm"
+                className="touch-target text-muted-foreground data-[state=active]:bg-primary flex min-w-[90px] flex-shrink-0 snap-center items-center justify-center rounded-md px-3 py-2 text-xs transition-all data-[state=active]:text-white sm:w-auto sm:text-sm"
               >
                 <span>References</span>
               </TabsTrigger>
             </TabsList>
 
             <TabsContent value="summary" className="mt-4 space-y-4">
-              <div className="rounded-xl border border-border bg-blue-950/20 p-4">
+              <div className="border-border rounded-xl border bg-blue-950/20 p-4">
                 <div className="flex items-start gap-3">
-                  <div className="flex-shrink-0 rounded-lg bg-muted0 p-2">
+                  <div className="bg-muted flex-shrink-0 rounded-lg p-2">
                     <MessageSquare className="h-4 w-4 text-white" />
                   </div>
                   <div className="min-w-0 flex-1">
@@ -293,11 +295,11 @@ export const SecurityIssueItem: React.FC<SecurityIssueItemProps> = ({
                 </div>
               </div>
 
-              <div className="rounded-lg border border-border/50 bg-muted/50 p-3 sm:p-4">
+              <div className="border-border/50 bg-muted/50 rounded-lg border p-3 sm:p-4">
                 <h4 className="mb-2 text-sm font-semibold text-white sm:text-base">
                   Location
                 </h4>
-                <div className="space-y-1.5 text-xs text-muted-foreground sm:text-sm">
+                <div className="text-muted-foreground space-y-1.5 text-xs sm:text-sm">
                   <p>
                     Found in{" "}
                     <code className="rounded bg-slate-700 px-1.5 py-0.5 text-xs break-all sm:text-sm">
@@ -309,7 +311,7 @@ export const SecurityIssueItem: React.FC<SecurityIssueItemProps> = ({
                   </p>
                 </div>
                 {issue.confidence && (
-                  <p className="mt-2 border-t border-border/50 pt-2 text-xs text-muted-foreground sm:text-sm">
+                  <p className="border-border/50 text-muted-foreground mt-2 border-t pt-2 text-xs sm:text-sm">
                     Detection confidence:{" "}
                     <strong className="text-white">{issue.confidence}%</strong>
                   </p>
@@ -320,22 +322,22 @@ export const SecurityIssueItem: React.FC<SecurityIssueItemProps> = ({
             <TabsContent value="details" className="space-y-3 sm:space-y-4">
               <div className="grid grid-cols-1 gap-3 sm:gap-4">
                 {}
-                <div className="rounded-lg border border-border/50 bg-muted/50 p-3 sm:p-4">
+                <div className="border-border/50 bg-muted/50 rounded-lg border p-3 sm:p-4">
                   <h4 className="mb-3 flex items-center gap-2 text-base font-semibold text-white">
-                    <Info className="h-4 w-4 text-primary" />
+                    <Info className="text-primary h-4 w-4" />
                     Issue Details
                   </h4>
                   <div className="space-y-2.5 text-sm">
                     {issue.cweId && (
-                      <div className="xs:flex-row xs:items-center xs:gap-2 flex flex-col gap-1 border-b border-border/50 py-2 last:border-0">
-                        <span className="min-w-[80px] text-xs font-medium text-muted-foreground sm:text-sm">
+                      <div className="xs:flex-row xs:items-center xs:gap-2 border-border/50 flex flex-col gap-1 border-b py-2 last:border-0">
+                        <span className="text-muted-foreground min-w-[80px] text-xs font-medium sm:text-sm">
                           CWE:
                         </span>
                         <a
                           href={`https://cwe.mitre.org/data/definitions/${issue.cweId.replace("CWE-", "")}.html`}
                           target="_blank"
                           rel="noopener noreferrer"
-                          className="touch-target-lg flex items-center gap-1.5 text-primary hover:underline"
+                          className="touch-target-lg text-primary flex items-center gap-1.5 hover:underline"
                         >
                           <span className="text-sm sm:text-base">
                             {issue.cweId}
@@ -345,17 +347,17 @@ export const SecurityIssueItem: React.FC<SecurityIssueItemProps> = ({
                       </div>
                     )}
                     {issue.owaspCategory && (
-                      <div className="xs:flex-row xs:items-start xs:gap-2 flex flex-col gap-1 border-b border-border/50 py-2 last:border-0">
-                        <span className="min-w-[80px] flex-shrink-0 text-xs font-medium text-muted-foreground sm:text-sm">
+                      <div className="xs:flex-row xs:items-start xs:gap-2 border-border/50 flex flex-col gap-1 border-b py-2 last:border-0">
+                        <span className="text-muted-foreground min-w-[80px] flex-shrink-0 text-xs font-medium sm:text-sm">
                           OWASP:
                         </span>
-                        <span className="text-sm break-words text-muted-foreground sm:text-base">
+                        <span className="text-muted-foreground text-sm break-words sm:text-base">
                           {issue.owaspCategory}
                         </span>
                       </div>
                     )}
-                    <div className="xs:flex-row xs:items-center xs:gap-2 flex flex-col gap-1 border-b border-border/50 py-2 last:border-0">
-                      <span className="min-w-[80px] text-xs font-medium text-muted-foreground sm:text-sm">
+                    <div className="xs:flex-row xs:items-center xs:gap-2 border-border/50 flex flex-col gap-1 border-b py-2 last:border-0">
+                      <span className="text-muted-foreground min-w-[80px] text-xs font-medium sm:text-sm">
                         Risk:
                       </span>
                       <span
@@ -365,10 +367,10 @@ export const SecurityIssueItem: React.FC<SecurityIssueItemProps> = ({
                       </span>
                     </div>
                     <div className="xs:flex-row xs:items-start xs:gap-2 flex flex-col gap-1 py-2">
-                      <span className="min-w-[80px] flex-shrink-0 text-xs font-medium text-muted-foreground sm:text-sm">
+                      <span className="text-muted-foreground min-w-[80px] flex-shrink-0 text-xs font-medium sm:text-sm">
                         Impact:
                       </span>
-                      <span className="text-sm break-words text-muted-foreground sm:text-base">
+                      <span className="text-muted-foreground text-sm break-words sm:text-base">
                         {issue.impact}
                       </span>
                     </div>
@@ -376,36 +378,36 @@ export const SecurityIssueItem: React.FC<SecurityIssueItemProps> = ({
                 </div>
 
                 {}
-                <div className="rounded-lg border border-border/50 bg-muted/50 p-3 sm:p-4">
+                <div className="border-border/50 bg-muted/50 rounded-lg border p-3 sm:p-4">
                   <h4 className="mb-3 flex items-center gap-2 text-base font-semibold text-white">
                     <Settings className="h-4 w-4 text-purple-400" />
                     Technical Information
                   </h4>
                   <div className="space-y-2.5 text-sm">
-                    <div className="flex flex-col gap-1 border-b border-border/50 py-2 last:border-0">
-                      <span className="text-xs font-medium text-muted-foreground sm:text-sm">
+                    <div className="border-border/50 flex flex-col gap-1 border-b py-2 last:border-0">
+                      <span className="text-muted-foreground text-xs font-medium sm:text-sm">
                         File:
                       </span>
-                      <span className="rounded bg-slate-700 px-2.5 py-1.5 font-mono text-xs break-all text-muted-foreground sm:text-sm">
+                      <span className="text-muted-foreground rounded bg-slate-700 px-2.5 py-1.5 font-mono text-xs break-all sm:text-sm">
                         {issue.filename}:{issue.line}
                       </span>
                     </div>
-                    <div className="xs:flex-row xs:items-start xs:gap-2 flex flex-col gap-1 border-b border-border/50 py-2 last:border-0">
-                      <span className="min-w-[80px] flex-shrink-0 text-xs font-medium text-muted-foreground sm:text-sm">
+                    <div className="xs:flex-row xs:items-start xs:gap-2 border-border/50 flex flex-col gap-1 border-b py-2 last:border-0">
+                      <span className="text-muted-foreground min-w-[80px] flex-shrink-0 text-xs font-medium sm:text-sm">
                         Category:
                       </span>
-                      <span className="text-sm break-words text-muted-foreground sm:text-base">
+                      <span className="text-muted-foreground text-sm break-words sm:text-base">
                         {issue.category}
                       </span>
                     </div>
                     {issue.tool && (
                       <div className="xs:flex-row xs:items-center xs:gap-2 flex flex-col gap-1 py-2">
-                        <span className="min-w-[80px] text-xs font-medium text-muted-foreground sm:text-sm">
+                        <span className="text-muted-foreground min-w-[80px] text-xs font-medium sm:text-sm">
                           Detected by:
                         </span>
                         <Badge
                           variant="outline"
-                          className="xs:self-auto self-start border-slate-600 text-xs text-muted-foreground sm:text-sm"
+                          className="xs:self-auto text-muted-foreground self-start border-slate-600 text-xs sm:text-sm"
                         >
                           {issue.tool}
                         </Badge>
@@ -417,29 +419,29 @@ export const SecurityIssueItem: React.FC<SecurityIssueItemProps> = ({
             </TabsContent>
 
             <TabsContent value="remediation" className="space-y-3 sm:space-y-4">
-              <div className="rounded-lg border border-border/50 bg-muted/50 p-3 sm:p-4">
+              <div className="border-border/50 bg-muted/50 rounded-lg border p-3 sm:p-4">
                 <h4 className="mb-3 flex items-center gap-2 text-base font-semibold text-white">
                   <Wrench className="h-4 w-4 text-green-400" />
                   Remediation Guidance
                 </h4>
                 <div className="space-y-3 text-sm">
-                  <p className="leading-relaxed text-muted-foreground">
+                  <p className="text-muted-foreground leading-relaxed">
                     {issue.remediation.description}
                   </p>
-                  <div className="xs:flex-row xs:items-center flex flex-col gap-3 border-t border-border/50 pt-2">
+                  <div className="xs:flex-row xs:items-center border-border/50 flex flex-col gap-3 border-t pt-2">
                     <div className="flex items-center gap-2">
-                      <span className="text-xs font-medium text-muted-foreground sm:text-sm">
+                      <span className="text-muted-foreground text-xs font-medium sm:text-sm">
                         Effort:
                       </span>
                       <Badge
                         variant="outline"
-                        className="border-slate-600 text-xs text-muted-foreground sm:text-sm"
+                        className="text-muted-foreground border-slate-600 text-xs sm:text-sm"
                       >
                         {issue.remediation.effort}
                       </Badge>
                     </div>
                     <div className="flex items-center gap-2">
-                      <span className="text-xs font-medium text-muted-foreground sm:text-sm">
+                      <span className="text-muted-foreground text-xs font-medium sm:text-sm">
                         Priority:
                       </span>
                       <div className="flex gap-0.5">
@@ -478,7 +480,7 @@ export const SecurityIssueItem: React.FC<SecurityIssueItemProps> = ({
                               "Vulnerable code"
                             )
                           }
-                          className="touch-target border-slate-600 px-2 text-muted-foreground hover:bg-slate-700 sm:px-3"
+                          className="touch-target text-muted-foreground border-slate-600 px-2 hover:bg-slate-700 sm:px-3"
                         >
                           {copiedCode === "Vulnerable code" ? (
                             <CheckCircle className="h-3.5 w-3.5 sm:h-4 sm:w-4" />
@@ -490,7 +492,7 @@ export const SecurityIssueItem: React.FC<SecurityIssueItemProps> = ({
                           </span>
                         </Button>
                       </div>
-                      <div className="overflow-hidden rounded-lg bg-card/50">
+                      <div className="bg-card/50 overflow-hidden rounded-lg">
                         <pre className="overflow-x-auto p-3 text-xs sm:p-4 sm:text-sm">
                           <code className="text-red-200">
                             {issue.remediation.codeExample}
@@ -516,7 +518,7 @@ export const SecurityIssueItem: React.FC<SecurityIssueItemProps> = ({
                               "Fixed code"
                             )
                           }
-                          className="touch-target border-slate-600 px-2 text-muted-foreground hover:bg-slate-700 sm:px-3"
+                          className="touch-target text-muted-foreground border-slate-600 px-2 hover:bg-slate-700 sm:px-3"
                         >
                           {copiedCode === "Fixed code" ? (
                             <CheckCircle className="h-3.5 w-3.5 sm:h-4 sm:w-4" />
@@ -528,7 +530,7 @@ export const SecurityIssueItem: React.FC<SecurityIssueItemProps> = ({
                           </span>
                         </Button>
                       </div>
-                      <div className="overflow-hidden rounded-lg bg-card/50">
+                      <div className="bg-card/50 overflow-hidden rounded-lg">
                         <pre className="overflow-x-auto p-3 text-xs sm:p-4 sm:text-sm">
                           <code className="text-green-200">
                             {issue.remediation.fixExample}
@@ -552,11 +554,11 @@ export const SecurityIssueItem: React.FC<SecurityIssueItemProps> = ({
                 />
               ) : (
                 <div className="py-8 text-center">
-                  <Lightbulb className="mx-auto mb-4 h-12 w-12 text-muted-foreground" />
-                  <p className="mb-2 text-muted-foreground">
+                  <Lightbulb className="text-muted-foreground mx-auto mb-4 h-12 w-12" />
+                  <p className="text-muted-foreground mb-2">
                     AI fix suggestions require code context
                   </p>
-                  <p className="text-sm text-muted-foreground">
+                  <p className="text-muted-foreground text-sm">
                     Upload a file with this issue to get AI-powered fix
                     suggestions
                   </p>
@@ -566,9 +568,9 @@ export const SecurityIssueItem: React.FC<SecurityIssueItemProps> = ({
 
             <TabsContent value="references" className="space-y-4">
               {issue.references && issue.references.length > 0 ? (
-                <div className="rounded-lg border border-border/50 bg-muted/50 p-3 sm:p-4">
+                <div className="border-border/50 bg-muted/50 rounded-lg border p-3 sm:p-4">
                   <h4 className="mb-3 flex items-center gap-2 text-base font-semibold text-white">
-                    <ExternalLink className="h-4 w-4 text-primary" />
+                    <ExternalLink className="text-primary h-4 w-4" />
                     External References
                   </h4>
                   <div className="space-y-2">
@@ -578,7 +580,7 @@ export const SecurityIssueItem: React.FC<SecurityIssueItemProps> = ({
                         href={ref}
                         target="_blank"
                         rel="noopener noreferrer"
-                        className="touch-target flex items-start gap-2 rounded p-2 text-xs break-all text-primary transition-colors hover:bg-slate-700/50 hover:underline sm:text-sm"
+                        className="touch-target text-primary flex items-start gap-2 rounded p-2 text-xs break-all transition-colors hover:bg-slate-700/50 hover:underline sm:text-sm"
                       >
                         <ExternalLink className="mt-0.5 h-3.5 w-3.5 flex-shrink-0" />
                         <span className="break-all">{ref}</span>
@@ -588,7 +590,7 @@ export const SecurityIssueItem: React.FC<SecurityIssueItemProps> = ({
                 </div>
               ) : (
                 <div className="py-8 text-center">
-                  <ExternalLink className="mx-auto mb-4 h-12 w-12 text-muted-foreground" />
+                  <ExternalLink className="text-muted-foreground mx-auto mb-4 h-12 w-12" />
                   <p className="text-muted-foreground">
                     No external references available for this issue
                   </p>

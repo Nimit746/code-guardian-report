@@ -234,14 +234,14 @@ export const CodeProvenanceCard: React.FC<CodeProvenanceCardProps> = ({
               <Card>
                 <CardContent className="p-4">
                   <div className="flex items-center gap-3">
-                    <div className="rounded-lg bg-muted0 p-2">
+                    <div className="bg-muted rounded-lg p-2">
                       <Database className="h-4 w-4 text-white" />
                     </div>
                     <div>
                       <p className="text-2xl font-bold text-blue-800 dark:text-blue-200">
                         {statistics.totalFiles}
                       </p>
-                      <p className="text-sm text-primary dark:text-primary">
+                      <p className="text-primary dark:text-primary text-sm">
                         Total Files
                       </p>
                     </div>
@@ -339,7 +339,7 @@ export const CodeProvenanceCard: React.FC<CodeProvenanceCardProps> = ({
                       </div>
                       <div>
                         <span className="font-medium">Last Scan:</span>
-                        <span className="ml-2 text-muted-foreground">
+                        <span className="text-muted-foreground ml-2">
                           {report.lastScanTime.toLocaleString()}
                         </span>
                       </div>
@@ -381,11 +381,11 @@ export const CodeProvenanceCard: React.FC<CodeProvenanceCardProps> = ({
           <TabsContent value="alerts" className="space-y-4">
             {alerts.length === 0 ? (
               <div className="py-8 text-center">
-                <CheckCircle className="mx-auto mb-4 h-12 w-12 text-primary" />
+                <CheckCircle className="text-primary mx-auto mb-4 h-12 w-12" />
                 <p className="text-muted-foreground">
                   No integrity alerts detected
                 </p>
-                <p className="text-sm text-muted-foreground">
+                <p className="text-muted-foreground text-sm">
                   All monitored files are secure
                 </p>
               </div>
@@ -402,7 +402,7 @@ export const CodeProvenanceCard: React.FC<CodeProvenanceCardProps> = ({
                               {alert.severity}
                             </Badge>
                             <Badge variant="outline">{alert.alertType}</Badge>
-                            <div className="flex items-center gap-1 text-sm text-muted-foreground">
+                            <div className="text-muted-foreground flex items-center gap-1 text-sm">
                               <Clock className="h-3 w-3" />
                               {alert.detectedAt.toLocaleString()}
                             </div>
@@ -428,7 +428,7 @@ export const CodeProvenanceCard: React.FC<CodeProvenanceCardProps> = ({
                           <h4 className="mb-2 font-semibold">
                             Risk Assessment
                           </h4>
-                          <p className="text-sm text-muted-foreground">
+                          <p className="text-muted-foreground text-sm">
                             {alert.riskAssessment}
                           </p>
                         </div>
@@ -442,7 +442,7 @@ export const CodeProvenanceCard: React.FC<CodeProvenanceCardProps> = ({
                               {alert.changes.map((change, index) => (
                                 <div
                                   key={index}
-                                  className="rounded bg-muted p-3"
+                                  className="bg-muted rounded p-3"
                                 >
                                   <div className="mb-1 flex items-center gap-2">
                                     <Badge
@@ -454,7 +454,7 @@ export const CodeProvenanceCard: React.FC<CodeProvenanceCardProps> = ({
                                     <span className="text-sm font-medium">
                                       {change.field}
                                     </span>
-                                    <span className="text-xs text-muted-foreground">
+                                    <span className="text-muted-foreground text-xs">
                                       {change.confidence}% confidence
                                     </span>
                                   </div>
@@ -520,7 +520,7 @@ export const CodeProvenanceCard: React.FC<CodeProvenanceCardProps> = ({
                 <div className="flex items-center justify-between">
                   <div>
                     <h4 className="font-semibold">Monitoring Status</h4>
-                    <p className="text-sm text-muted-foreground">
+                    <p className="text-muted-foreground text-sm">
                       File integrity monitoring is{" "}
                       {statistics.monitoringStatus ? "active" : "inactive"}
                     </p>
@@ -592,10 +592,10 @@ export const CodeProvenanceCard: React.FC<CodeProvenanceCardProps> = ({
                     {Object.entries(report.fileStatistics.byCategory).map(
                       ([category, count]) => (
                         <div key={category} className="text-center">
-                          <p className="text-2xl font-bold text-primary">
+                          <p className="text-primary text-2xl font-bold">
                             {count}
                           </p>
-                          <p className="text-sm text-muted-foreground capitalize">
+                          <p className="text-muted-foreground text-sm capitalize">
                             {category} Files
                           </p>
                         </div>
@@ -636,11 +636,11 @@ export const CodeProvenanceCard: React.FC<CodeProvenanceCardProps> = ({
               </Card>
             ) : (
               <div className="py-8 text-center">
-                <Activity className="mx-auto mb-4 h-12 w-12 text-muted-foreground" />
+                <Activity className="text-muted-foreground mx-auto mb-4 h-12 w-12" />
                 <p className="text-muted-foreground">
                   No integrity reports available
                 </p>
-                <p className="text-sm text-muted-foreground">
+                <p className="text-muted-foreground text-sm">
                   Run an integrity scan to generate a report
                 </p>
               </div>

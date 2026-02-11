@@ -49,11 +49,11 @@ export class ErrorBoundary extends Component<Props, State> {
 
       // Default fallback UI
       return (
-        <div className="flex min-h-screen items-center justify-center bg-muted/50">
-          <div className="w-full max-w-md rounded-lg bg-white p-6 shadow-lg">
-            <div className="mx-auto mb-4 flex h-12 w-12 items-center justify-center rounded-full bg-red-100">
+        <div className="bg-muted/50 flex min-h-screen items-center justify-center">
+          <div className="bg-card w-full max-w-md rounded-lg p-6 shadow-lg">
+            <div className="mx-auto mb-4 flex h-12 w-12 items-center justify-center rounded-full bg-red-100 dark:bg-red-900/20">
               <svg
-                className="h-6 w-6 text-red-600"
+                className="h-6 w-6 text-red-600 dark:text-red-400"
                 fill="none"
                 stroke="currentColor"
                 viewBox="0 0 24 24"
@@ -66,17 +66,17 @@ export class ErrorBoundary extends Component<Props, State> {
                 />
               </svg>
             </div>
-            <h2 className="mb-2 text-center text-xl font-semibold text-foreground">
+            <h2 className="text-foreground mb-2 text-center text-xl font-semibold">
               Something went wrong
             </h2>
-            <p className="mb-4 text-center text-gray-600">
+            <p className="text-muted-foreground mb-4 text-center">
               We're experiencing some technical difficulties. Please try
               refreshing the page.
             </p>
             <div className="flex space-x-3">
               <button
                 onClick={() => window.location.reload()}
-                className="flex-1 rounded-md bg-primary px-4 py-2 text-white transition-colors hover:bg-primary/90"
+                className="bg-primary hover:bg-primary/90 flex-1 rounded-md px-4 py-2 text-white transition-colors"
               >
                 Refresh Page
               </button>
@@ -84,13 +84,13 @@ export class ErrorBoundary extends Component<Props, State> {
                 onClick={() =>
                   this.setState({ hasError: false, error: undefined })
                 }
-                className="flex-1 rounded-md bg-muted px-4 py-2 text-foreground transition-colors hover:bg-muted"
+                className="bg-muted text-foreground hover:bg-muted flex-1 rounded-md px-4 py-2 transition-colors"
               >
                 Try Again
               </button>
             </div>
             {process.env.NODE_ENV === "development" && this.state.error && (
-              <details className="mt-4 rounded bg-muted p-3 text-xs">
+              <details className="bg-muted mt-4 rounded p-3 text-xs">
                 <summary className="cursor-pointer font-medium">
                   Error Details
                 </summary>

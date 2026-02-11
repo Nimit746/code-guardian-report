@@ -123,7 +123,7 @@ const HowToUseSection = () => {
         },
         {
           level: "Low",
-          color: "bg-muted0",
+          color: "bg-muted",
           description: "Minor improvements",
         },
       ],

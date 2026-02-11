@@ -53,7 +53,7 @@ const SUPPORTED_LANGUAGES = [
     name: "TypeScript",
     iconLabel: "TS",
     extensions: [".ts", ".tsx", ".d.ts"],
-    color: "bg-muted0",
+    color: "bg-muted",
     ecosystem: "Web",
   },
   {
@@ -222,14 +222,14 @@ export const MultiLanguageSupportDisplay: React.FC<
         </CardHeader>
         <CardContent>
           <div className="grid grid-cols-1 gap-4 md:grid-cols-3">
-            <div className="rounded-lg bg-muted p-4 dark:bg-blue-950">
+            <div className="bg-muted rounded-lg p-4 dark:bg-blue-950">
               <div className="mb-2 flex items-center gap-2">
-                <Code2 className="h-5 w-5 text-primary" />
+                <Code2 className="text-primary h-5 w-5" />
                 <span className="font-semibold text-blue-900 dark:text-blue-100">
                   Supported Languages
                 </span>
               </div>
-              <p className="text-3xl font-bold text-primary">
+              <p className="text-primary text-3xl font-bold">
                 {SUPPORTED_LANGUAGES.length}
               </p>
               <p className="mt-1 text-sm text-teal-600 dark:text-teal-300">
@@ -410,7 +410,7 @@ export const MultiLanguageSupportDisplay: React.FC<
                           )}
                         </div>
                       </div>
-                      <CheckCircle2 className="h-5 w-5 text-primary" />
+                      <CheckCircle2 className="text-primary h-5 w-5" />
                     </div>
                   </div>
                 );
@@ -429,7 +429,7 @@ export const MultiLanguageSupportDisplay: React.FC<
           <div className="grid grid-cols-1 gap-6 md:grid-cols-3">
             <div>
               <div className="mb-2 flex items-center gap-2">
-                <TrendingUp className="h-6 w-6 text-primary" />
+                <TrendingUp className="text-primary h-6 w-6" />
                 <h4 className="font-semibold">Broader Market Appeal</h4>
               </div>
               <p className="text-muted-foreground text-sm">

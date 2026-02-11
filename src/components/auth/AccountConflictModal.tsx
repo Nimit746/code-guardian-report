@@ -64,7 +64,7 @@ const providerConfig = {
         />
       </svg>
     ),
-    color: "bg-muted0",
+    color: "bg-muted",
     hoverColor: "hover:bg-primary",
     textColor: "text-primary",
     borderColor: "border-border",
@@ -135,15 +135,15 @@ export const AccountConflictModal: React.FC<AccountConflictModalProps> = ({
       <DialogContent className="animate-in fade-in zoom-in-95 border-border/50 bg-card/90 overflow-hidden p-0 shadow-2xl backdrop-blur-xl duration-300 sm:max-w-[480px]">
         {/* Decorative Background Elements */}
         <div className="pointer-events-none absolute top-0 left-0 h-32 w-full bg-gradient-to-b from-blue-500/10 to-transparent" />
-        <div className="pointer-events-none absolute -top-24 -right-24 h-48 w-48 rounded-full bg-muted0/20 blur-3xl" />
+        <div className="bg-muted/20 pointer-events-none absolute -top-24 -right-24 h-48 w-48 rounded-full blur-3xl" />
         <div className="pointer-events-none absolute -bottom-24 -left-24 h-48 w-48 rounded-full bg-purple-500/20 blur-3xl" />
 
         {/* Header */}
         <div className="relative px-6 pt-8 pb-2 text-center">
           <div className="group relative mx-auto mb-6 h-20 w-20 cursor-default">
             <div className="absolute inset-0 rounded-2xl bg-gradient-to-tr from-blue-500 to-purple-500 opacity-40 blur-lg transition-opacity duration-500 group-hover:opacity-60" />
-            <div className="bg-card ring-border relative transform rounded-2xl p-5 shadow-xl ring-1 transition-transform duration-500 group-">
-              <ShieldCheck className="h-full w-full text-primary dark:text-primary" />
+            <div className="bg-card ring-border group- relative transform rounded-2xl p-5 shadow-xl ring-1 transition-transform duration-500">
+              <ShieldCheck className="text-primary dark:text-primary h-full w-full" />
             </div>
             <div className="absolute -right-2 -bottom-2 rounded-full border-2 border-white bg-red-500 p-1.5 text-white shadow-sm dark:border-slate-900">
               <AlertTriangle className="h-3 w-3" />
@@ -154,7 +154,7 @@ export const AccountConflictModal: React.FC<AccountConflictModalProps> = ({
             Account Conflict
           </DialogTitle>
 
-          <DialogDescription className="mx-auto max-w-xs text-base leading-relaxed text-muted-foreground">
+          <DialogDescription className="text-muted-foreground mx-auto max-w-xs text-base leading-relaxed">
             You already have an account linked to{" "}
             <span className="text-foreground font-semibold">{email}</span>
           </DialogDescription>
@@ -169,23 +169,23 @@ export const AccountConflictModal: React.FC<AccountConflictModalProps> = ({
               <div className="group flex flex-col items-center gap-3">
                 <div className="border-border bg-card relative flex h-14 w-14 items-center justify-center rounded-xl border p-3.5 opacity-50 grayscale transition-all duration-300 group-hover:opacity-75 group-hover:grayscale-0">
                   {attemptedProviderInfo.icon}
-                  <div className="absolute -top-1.5 -right-1.5 rounded-full bg-muted p-0.5 text-muted-foreground ring-2 ring-white dark:bg-slate-700 dark:ring-slate-900">
+                  <div className="bg-muted text-muted-foreground absolute -top-1.5 -right-1.5 rounded-full p-0.5 ring-2 ring-white dark:bg-slate-700 dark:ring-slate-900">
                     <X className="h-3 w-3" />
                   </div>
                 </div>
-                <span className="text-[10px] font-bold tracking-wider text-muted-foreground uppercase">
+                <span className="text-muted-foreground text-[10px] font-bold tracking-wider uppercase">
                   Blocked
                 </span>
               </div>
 
               {/* Connection Line */}
               <div className="-mt-4 flex flex-1 flex-col items-center">
-                <div className="mb-1 text-[10px] font-medium text-muted-foreground">
+                <div className="text-muted-foreground mb-1 text-[10px] font-medium">
                   Use instead
                 </div>
                 <div className="relative h-px w-full bg-gradient-to-r from-transparent via-slate-300 to-transparent dark:via-slate-600">
-                  <div className="absolute top-1/2 left-1/2 -translate-x-1/2 -translate-y-1/2 bg-muted px-2">
-                    <ArrowRight className="h-4 w-4 text-muted-foreground" />
+                  <div className="bg-muted absolute top-1/2 left-1/2 -translate-x-1/2 -translate-y-1/2 px-2">
+                    <ArrowRight className="text-muted-foreground h-4 w-4" />
                   </div>
                 </div>
               </div>
@@ -196,20 +196,20 @@ export const AccountConflictModal: React.FC<AccountConflictModalProps> = ({
                   className="group relative cursor-pointer"
                   onClick={onSignInWithExisting}
                 >
-                  <div className="absolute -inset-3 rounded-full bg-muted0/20 opacity-0 blur-md transition-opacity duration-500 group-hover:opacity-100" />
+                  <div className="bg-muted/20 absolute -inset-3 rounded-full opacity-0 blur-md transition-opacity duration-500 group-hover:opacity-100" />
                   <div
                     className={cn(
-                      "bg-card relative flex h-16 w-16 transform items-center justify-center rounded-xl border-2 p-4 shadow-lg transition-all duration-300 group-hover:-translate-y-1 group-",
+                      "bg-card group- relative flex h-16 w-16 transform items-center justify-center rounded-xl border-2 p-4 shadow-lg transition-all duration-300 group-hover:-translate-y-1",
                       existingProviderInfo.borderColor
                     )}
                   >
                     {existingProviderInfo.icon}
                   </div>
-                  <div className="animate-bounce-slow absolute -top-2 -right-2 rounded-full bg-primary px-2 py-0.5 text-[10px] font-bold text-white shadow-sm ring-2 ring-white dark:ring-slate-900">
+                  <div className="animate-bounce-slow bg-primary absolute -top-2 -right-2 rounded-full px-2 py-0.5 text-[10px] font-bold text-white shadow-sm ring-2 ring-white dark:ring-slate-900">
                     USE THIS
                   </div>
                 </div>
-                <span className="text-[10px] font-bold tracking-wider text-primary uppercase dark:text-primary">
+                <span className="text-primary dark:text-primary text-[10px] font-bold tracking-wider uppercase">
                   Recommended
                 </span>
               </div>
@@ -218,8 +218,8 @@ export const AccountConflictModal: React.FC<AccountConflictModalProps> = ({
 
           {/* Explanation Text */}
           <div className="mt-6 flex gap-3 px-2">
-            <HelpCircle className="mt-0.5 h-5 w-5 flex-shrink-0 text-muted-foreground" />
-            <p className="text-xs leading-relaxed text-muted-foreground sm:text-sm">
+            <HelpCircle className="text-muted-foreground mt-0.5 h-5 w-5 flex-shrink-0" />
+            <p className="text-muted-foreground text-xs leading-relaxed sm:text-sm">
               To protect your security, please sign in with your existing
               account. You can link other login methods in your settings later.
             </p>
@@ -227,13 +227,13 @@ export const AccountConflictModal: React.FC<AccountConflictModalProps> = ({
         </div>
 
         {/* Footer */}
-        <div className="flex flex-col gap-3 border-t border-slate-100 bg-muted/50 p-6 pt-2/50/30">
+        <div className="bg-muted/50 pt-2/50/30 flex flex-col gap-3 border-t border-slate-100 p-6">
           <Button
             onClick={onSignInWithExisting}
             disabled={isLinking}
             className={cn(
               "relative h-12 w-full overflow-hidden rounded-xl text-base font-medium shadow-lg transition-all duration-300 hover:scale-[1.01] hover:shadow-xl active:scale-[0.99]",
-              "border-0 bg-primary text-white hover:bg-primary/90"
+              "bg-primary hover:bg-primary/90 border-0 text-white"
             )}
           >
             <div className="bg-background/20 absolute inset-0 translate-y-full transition-transform duration-300 hover:translate-y-0" />
@@ -266,7 +266,7 @@ export const AccountConflictModal: React.FC<AccountConflictModalProps> = ({
         <div className="absolute right-2 bottom-2 opacity-0 transition-opacity hover:opacity-100">
           <button
             onClick={() => setShowTechnicalDetails(!showTechnicalDetails)}
-            className="p-1 text-muted-foreground hover:text-muted-foreground/80 dark:hover:text-muted-foreground"
+            className="text-muted-foreground hover:text-muted-foreground/80 dark:hover:text-muted-foreground p-1"
           >
             <HelpCircle className="h-3 w-3" />
           </button>
@@ -284,7 +284,7 @@ export const AccountConflictModal: React.FC<AccountConflictModalProps> = ({
                 <X className="h-4 w-4" />
               </Button>
             </div>
-            <div className="flex-1 space-y-2 overflow-auto font-mono text-xs text-muted-foreground">
+            <div className="text-muted-foreground flex-1 space-y-2 overflow-auto font-mono text-xs">
               <p>Error: auth/account-exists-with-different-credential</p>
               <p>Email: {email}</p>
               <p>Existing Provider: {existingProvider}</p>

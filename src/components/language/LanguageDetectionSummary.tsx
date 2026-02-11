@@ -21,7 +21,7 @@ const getLanguageBadge = (language: string) => {
   const map: Record<string, { label: string; color: string }> = {
     javascript: { label: "JS", color: "bg-yellow-500" },
     typescript: { label: "TS", color: "bg-primary" },
-    python: { label: "PY", color: "bg-muted0" },
+    python: { label: "PY", color: "bg-muted" },
     java: { label: "JAVA", color: "bg-red-600" },
     php: { label: "PHP", color: "bg-indigo-600" },
     ruby: { label: "RB", color: "bg-red-500" },
@@ -31,7 +31,7 @@ const getLanguageBadge = (language: string) => {
   };
   const { label, color } = map[normalized] ?? {
     label: "CODE",
-    color: "bg-muted0",
+    color: "bg-muted",
   };
 
   return (
@@ -62,7 +62,7 @@ const getFrameworkBadge = (framework: string) => {
   };
   const { label, color } = map[normalized] ?? {
     label: "FW",
-    color: "bg-muted0",
+    color: "bg-muted",
   };
 
   return (
@@ -82,11 +82,10 @@ const getConfidenceColor = (confidence: number) => {
 };
 
 const getConfidenceIcon = (confidence: number) => {
-  if (confidence >= 80)
-    return <CheckCircle className="h-3 w-3 text-primary" />;
+  if (confidence >= 80) return <CheckCircle className="text-primary h-3 w-3" />;
   if (confidence >= 60)
     return <AlertCircle className="h-3 w-3 text-yellow-500" />;
-  return <AlertCircle className="h-3 w-3 text-muted-foreground" />;
+  return <AlertCircle className="text-muted-foreground h-3 w-3" />;
 };
 
 export const LanguageDetectionSummary: React.FC<
@@ -165,12 +164,12 @@ export const LanguageDetectionSummary: React.FC<
                 Language Detection
               </span>
             </div>
-            <div className="flex items-center gap-3 text-xs font-medium text-muted-foreground">
-              <div className="flex items-center gap-1 rounded-md bg-muted px-2 py-1">
+            <div className="text-muted-foreground flex items-center gap-3 text-xs font-medium">
+              <div className="bg-muted flex items-center gap-1 rounded-md px-2 py-1">
                 <Code2 className="h-3 w-3" />
                 <span>{totalFiles} files</span>
               </div>
-              <div className="flex items-center gap-1 rounded-md bg-muted px-2 py-1">
+              <div className="bg-muted flex items-center gap-1 rounded-md px-2 py-1">
                 <Zap className="h-3 w-3" />
                 <span>{analysisTime}ms</span>
               </div>

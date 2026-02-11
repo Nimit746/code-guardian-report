@@ -132,7 +132,7 @@ export const HelpPage: React.FC<HelpPageProps> = ({ className = "" }) => {
 
   return (
     <div
-      className={`relative min-h-screen overflow-hidden bg-background ${className}`}
+      className={`bg-background relative min-h-screen overflow-hidden ${className}`}
     >
       <AnimatedBackground />
       <div className="relative z-10 pt-16">
@@ -141,12 +141,12 @@ export const HelpPage: React.FC<HelpPageProps> = ({ className = "" }) => {
             {/* Header */}
             <div className="mb-16 text-center">
               <div className="mb-6 inline-flex h-16 w-16 items-center justify-center rounded-full bg-teal-100 dark:bg-teal-900/30">
-                <HelpCircle className="h-8 w-8 text-primary dark:text-primary" />
+                <HelpCircle className="text-primary dark:text-primary h-8 w-8" />
               </div>
               <h1 className="text-foreground mb-4 text-4xl font-bold">
                 Help & Documentation
               </h1>
-              <p className="mx-auto max-w-3xl text-xl text-muted-foreground">
+              <p className="text-muted-foreground mx-auto max-w-3xl text-xl">
                 Everything you need to know about using Code Guardian for secure
                 code analysis
               </p>
@@ -157,7 +157,7 @@ export const HelpPage: React.FC<HelpPageProps> = ({ className = "" }) => {
               {helpSections.map((section, index) => (
                 <div
                   key={index}
-                  className="rounded-xl border border-border/50 bg-card/80 p-6 backdrop-blur-sm/50/80"
+                  className="border-border/50 bg-card/80 backdrop-blur-sm/50/80 rounded-xl border p-6"
                 >
                   <div className="mb-4 flex items-center gap-3">
                     <div className="rounded-lg bg-teal-100 p-2 dark:bg-teal-900/30">
@@ -172,12 +172,12 @@ export const HelpPage: React.FC<HelpPageProps> = ({ className = "" }) => {
                       <div key={itemIndex} className="group">
                         <a
                           href={item.link}
-                          className="block rounded-lg p-3 transition-colors duration-200 hover:bg-muted dark:hover:bg-slate-700/50"
+                          className="hover:bg-muted block rounded-lg p-3 transition-colors duration-200 dark:hover:bg-slate-700/50"
                         >
-                          <h4 className="font-medium text-foreground transition-colors duration-200 group-hover:text-primary dark:text-white dark:group-hover:text-primary">
+                          <h4 className="text-foreground group-hover:text-primary dark:group-hover:text-primary font-medium transition-colors duration-200 dark:text-white">
                             {item.title}
                           </h4>
-                          <p className="mt-1 text-sm text-muted-foreground">
+                          <p className="text-muted-foreground mt-1 text-sm">
                             {item.description}
                           </p>
                         </a>
@@ -189,7 +189,7 @@ export const HelpPage: React.FC<HelpPageProps> = ({ className = "" }) => {
             </div>
 
             {/* Support Options */}
-            <div className="rounded-xl border border-border/50 bg-card/80 p-8 backdrop-blur-sm/50/80">
+            <div className="border-border/50 bg-card/80 backdrop-blur-sm/50/80 rounded-xl border p-8">
               <h2 className="text-foreground mb-6 text-center text-2xl font-bold">
                 Need More Help?
               </h2>
@@ -200,20 +200,20 @@ export const HelpPage: React.FC<HelpPageProps> = ({ className = "" }) => {
                     href={option.link}
                     target={option.external ? "_blank" : undefined}
                     rel={option.external ? "noopener noreferrer" : undefined}
-                    className="group block rounded-lg border border-transparent bg-muted p-6 transition-all duration-200 hover:border-border hover:bg-muted dark:bg-slate-700/50 dark:hover:border-slate-600 dark:hover:bg-slate-600/50"
+                    className="group bg-muted hover:border-border hover:bg-muted block rounded-lg border border-transparent p-6 transition-all duration-200 dark:bg-slate-700/50 dark:hover:border-slate-600 dark:hover:bg-slate-600/50"
                   >
                     <div className="mb-3 flex items-center gap-3">
                       <div className="rounded-lg bg-teal-100 p-2 dark:bg-teal-900/30">
                         {option.icon}
                       </div>
                       {option.external && (
-                        <ExternalLink className="h-4 w-4 text-muted-foreground transition-colors duration-200 group-hover:text-primary dark:group-hover:text-primary" />
+                        <ExternalLink className="text-muted-foreground group-hover:text-primary dark:group-hover:text-primary h-4 w-4 transition-colors duration-200" />
                       )}
                     </div>
-                    <h3 className="font-semibold text-foreground transition-colors duration-200 group-hover:text-primary dark:text-white dark:group-hover:text-primary">
+                    <h3 className="text-foreground group-hover:text-primary dark:group-hover:text-primary font-semibold transition-colors duration-200 dark:text-white">
                       {option.title}
                     </h3>
-                    <p className="mt-2 text-sm text-muted-foreground">
+                    <p className="text-muted-foreground mt-2 text-sm">
                       {option.description}
                     </p>
                   </a>
@@ -222,35 +222,35 @@ export const HelpPage: React.FC<HelpPageProps> = ({ className = "" }) => {
             </div>
 
             {/* Quick Tips */}
-            <div className="mt-12 rounded-xl border border-border bg-muted p-6 dark:border-border dark:from-blue-900/20 dark:to-indigo-900/20">
+            <div className="border-border bg-muted dark:border-border mt-12 rounded-xl border p-6 dark:from-blue-900/20 dark:to-indigo-900/20">
               <h3 className="text-foreground mb-4 flex items-center gap-2 text-lg font-semibold">
                 <Lightbulb className="h-5 w-5 text-amber-500" />
                 Quick Tips
               </h3>
-              <div className="grid grid-cols-1 gap-4 text-sm text-foreground/80 md:grid-cols-2">
+              <div className="text-foreground/80 grid grid-cols-1 gap-4 text-sm md:grid-cols-2">
                 <div className="flex items-start gap-2">
-                  <div className="mt-2 h-2 w-2 flex-shrink-0 rounded-full bg-muted0"></div>
+                  <div className="bg-muted mt-2 h-2 w-2 flex-shrink-0 rounded-full"></div>
                   <span>
                     Use the sidebar navigation to quickly switch between
                     different analysis features
                   </span>
                 </div>
                 <div className="flex items-start gap-2">
-                  <div className="mt-2 h-2 w-2 flex-shrink-0 rounded-full bg-muted0"></div>
+                  <div className="bg-muted mt-2 h-2 w-2 flex-shrink-0 rounded-full"></div>
                   <span>
                     Configure your AI API keys in the AI Configuration tab for
                     enhanced analysis
                   </span>
                 </div>
                 <div className="flex items-start gap-2">
-                  <div className="mt-2 h-2 w-2 flex-shrink-0 rounded-full bg-muted0"></div>
+                  <div className="bg-muted mt-2 h-2 w-2 flex-shrink-0 rounded-full"></div>
                   <span>
                     Export your analysis results to share with your team or for
                     record keeping
                   </span>
                 </div>
                 <div className="flex items-start gap-2">
-                  <div className="mt-2 h-2 w-2 flex-shrink-0 rounded-full bg-muted0"></div>
+                  <div className="bg-muted mt-2 h-2 w-2 flex-shrink-0 rounded-full"></div>
                   <span>
                     Use custom prompts to tailor the analysis to your specific
                     security requirements

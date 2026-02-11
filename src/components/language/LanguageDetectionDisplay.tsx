@@ -33,7 +33,7 @@ const getLanguageBadge = (language: string) => {
   const map: Record<string, { label: string; color: string }> = {
     javascript: { label: "JS", color: "bg-yellow-500" },
     typescript: { label: "TS", color: "bg-primary" },
-    python: { label: "PY", color: "bg-muted0" },
+    python: { label: "PY", color: "bg-muted" },
     java: { label: "JAVA", color: "bg-red-600" },
     php: { label: "PHP", color: "bg-indigo-600" },
     ruby: { label: "RB", color: "bg-red-500" },
@@ -45,7 +45,7 @@ const getLanguageBadge = (language: string) => {
   };
   const { label, color } = map[normalized] ?? {
     label: "CODE",
-    color: "bg-muted0",
+    color: "bg-muted",
   };
 
   return (
@@ -80,7 +80,7 @@ const getFrameworkBadge = (framework: string) => {
   };
   const { label, color } = map[normalized] ?? {
     label: "FW",
-    color: "bg-muted0",
+    color: "bg-muted",
   };
 
   return (
@@ -163,18 +163,18 @@ export const LanguageDetectionDisplay: React.FC<
                 Language Detection Results
               </span>
             </CardTitle>
-            <div className="flex items-center gap-4 text-sm font-semibold text-muted-foreground">
-              <div className="flex items-center gap-2 rounded-full bg-white/60 px-3 py-1/60">
+            <div className="text-muted-foreground flex items-center gap-4 text-sm font-semibold">
+              <div className="py-1/60 flex items-center gap-2 rounded-full bg-white/60 px-3">
                 <FileCode className="h-4 w-4" />
                 <span>{totalFiles} files</span>
               </div>
-              <div className="flex items-center gap-2 rounded-full bg-white/60 px-3 py-1/60">
+              <div className="py-1/60 flex items-center gap-2 rounded-full bg-white/60 px-3">
                 <Zap className="h-4 w-4" />
                 <span>{analysisTime}ms</span>
               </div>
             </div>
           </div>
-          <CardDescription className="text-base text-foreground/80">
+          <CardDescription className="text-foreground/80 text-base">
             Advanced pattern recognition and file analysis completed
             successfully
           </CardDescription>
