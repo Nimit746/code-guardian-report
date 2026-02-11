@@ -30,7 +30,7 @@ export const CallToActionSection: React.FC<CallToActionSectionProps> = ({
       </div>
 
       <div className="relative z-10 container mx-auto px-4">
-        <Card className="glow-on-hover group border-border/50 hover:border-border/50/50/90 relative mx-auto max-w-4xl overflow-hidden rounded-xl border bg-white/90 shadow-sm backdrop-blur-sm transition-all duration-200 dark:bg-slate-900/90">
+        <Card className="glow-on-hover group border-border/50 hover:border-border/50/50/90 bg-card/90 dark:bg-card/90 relative mx-auto max-w-4xl overflow-hidden rounded-xl border shadow-sm backdrop-blur-sm transition-all duration-200">
           {/* Enhanced Animated Gradient Overlay */}
           <div className="animated-border absolute inset-0 opacity-0 transition-opacity duration-700 group-hover:opacity-100"></div>
 
@@ -62,8 +62,8 @@ export const CallToActionSection: React.FC<CallToActionSectionProps> = ({
               </h3>
 
               {/* Enhanced Description */}
-              <div className="border-border/50 hover:border-border/50/50/90 mb-10 rounded-xl border bg-white/90 p-6 shadow-sm backdrop-blur-sm transition-all duration-200">
-                <p className="text-foreground text-xl leading-relaxed dark:text-slate-200">
+              <div className="border-border/50 hover:border-border/50/50/90 bg-card/50 mb-10 rounded-xl border p-6 shadow-sm backdrop-blur-sm transition-all duration-200">
+                <p className="text-foreground text-xl leading-relaxed">
                   Start analyzing your codebase today with our comprehensive
                   security and quality tools. Join thousands of developers who
                   trust Code Guardian for their security needs.
@@ -75,7 +75,7 @@ export const CallToActionSection: React.FC<CallToActionSectionProps> = ({
                 <Button
                   onClick={scrollToHome}
                   size="lg"
-                  className="btn-enhanced-cta hover:shadow-3xl bg-primary hover:bg-primary/90 rounded-3xl border-0 px-12 py-6 text-xl font-bold text-white shadow-2xl transition-all duration-500 hover:scale-110 focus:ring-4 focus:ring-purple-300 dark:focus:ring-purple-600"
+                  className="btn-enhanced-cta hover:shadow-3xl bg-primary hover:bg-primary/90 text-primary-foreground focus:ring-primary/30 dark:focus:ring-primary/60 rounded-3xl border-0 px-12 py-6 text-xl font-bold shadow-2xl transition-all duration-500 hover:scale-110 focus:ring-4"
                 >
                   <span className="relative z-10 flex items-center gap-4">
                     Get Started Now
@@ -105,14 +105,14 @@ export const CallToActionSection: React.FC<CallToActionSectionProps> = ({
                 ].map((item, index) => (
                   <div
                     key={index}
-                    className="group border-border/50 hover:border-border/50/50/90 rounded-xl border bg-white/90 p-4 shadow-sm backdrop-blur-sm transition-all duration-200"
+                    className="group border-border/50 hover:border-border/50/50/90 bg-card/50 rounded-xl border p-4 shadow-sm backdrop-blur-sm transition-all duration-200"
                     style={{ animationDelay: item.delay }}
                   >
                     <div className="flex items-center justify-center gap-3">
                       <div
                         className={`h-3 w-3 bg-gradient-to-r ${item.color} animate-pulse rounded-full transition-transform duration-300 group-hover:scale-125`}
                       ></div>
-                      <span className="text-foreground/80 group-hover:text-foreground text-sm font-semibold transition-colors duration-300 dark:group-hover:text-white">
+                      <span className="text-foreground/80 group-hover:text-foreground text-sm font-semibold transition-colors duration-300">
                         {item.label}
                       </span>
                     </div>

@@ -113,7 +113,7 @@ const GitHubContributorsSection = () => {
             <h2 className="text-foreground mb-4 text-3xl font-bold sm:text-4xl">
               Our GitHub Contributors
             </h2>
-            <p className="mx-auto mb-6 max-w-3xl text-lg text-muted-foreground">
+            <p className="text-muted-foreground mx-auto mb-6 max-w-3xl text-lg">
               Meet the amazing developers who have contributed to making Code
               Guardian better. Their dedication and expertise drive our mission
               forward.
@@ -121,15 +121,15 @@ const GitHubContributorsSection = () => {
 
             {/* Repository Stats */}
             {repoStats && (
-              <Card className="mx-auto mb-8 max-w-2xl border-0 bg-primary text-white">
+              <Card className="bg-primary text-primary-foreground mx-auto mb-8 max-w-2xl border-0">
                 <CardHeader>
                   <div className="mb-2 flex items-center justify-center gap-3">
                     <Github className="h-6 w-6" />
-                    <CardTitle className="text-2xl">
+                    <CardTitle className="text-primary-foreground text-2xl">
                       Code Guardian Repository
                     </CardTitle>
                   </div>
-                  <CardDescription className="text-blue-100">
+                  <CardDescription className="text-primary-foreground/90">
                     Open source security analysis platform
                   </CardDescription>
                 </CardHeader>
@@ -140,7 +140,9 @@ const GitHubContributorsSection = () => {
                         <Star className="h-4 w-4" />
                         <span className="font-bold">{repoStats.stars}</span>
                       </div>
-                      <p className="text-xs text-blue-100">Stars</p>
+                      <p className="text-primary-foreground/90 text-xs">
+                        Stars
+                      </p>
                     </div>
                     <div className="text-center">
                       <div className="mb-1 flex items-center justify-center gap-1">
@@ -154,14 +156,18 @@ const GitHubContributorsSection = () => {
                         <Eye className="h-4 w-4" />
                         <span className="font-bold">{repoStats.watchers}</span>
                       </div>
-                      <p className="text-xs text-blue-100">Watchers</p>
+                      <p className="text-primary-foreground/90 text-xs">
+                        Watchers
+                      </p>
                     </div>
                     <div className="text-center">
                       <div className="mb-1 flex items-center justify-center gap-1">
                         <Users className="h-4 w-4" />
                         <span className="font-bold">{contributors.length}</span>
                       </div>
-                      <p className="text-xs text-blue-100">Contributors</p>
+                      <p className="text-primary-foreground/90 text-xs">
+                        Contributors
+                      </p>
                     </div>
                   </div>
                   <Button
@@ -197,7 +203,7 @@ const GitHubContributorsSection = () => {
                         <img
                           src={contributor.avatar_url}
                           alt={contributor.name || contributor.login}
-                          className="border-border h-16 w-16 rounded-full border-2 transition-transform group-"
+                          className="border-border group- h-16 w-16 rounded-full border-2 transition-transform"
                         />
                         <div
                           className={`absolute -right-1 -bottom-1 h-6 w-6 rounded-full ${getContributorBadgeColor(contributor.contributions, index)} flex items-center justify-center text-xs font-bold text-white`}
@@ -209,7 +215,7 @@ const GitHubContributorsSection = () => {
                         <CardTitle className="truncate text-lg">
                           {contributor.name || contributor.login}
                         </CardTitle>
-                        <CardDescription className="font-medium text-primary dark:text-primary">
+                        <CardDescription className="text-primary dark:text-primary font-medium">
                           {getContributorRole(contributor.contributions, index)}
                         </CardDescription>
                         <div className="mt-1 flex items-center gap-2">
@@ -223,7 +229,7 @@ const GitHubContributorsSection = () => {
                   <CardContent>
                     {contributor.bio && (
                       <p
-                        className="mb-3 overflow-hidden text-sm text-muted-foreground"
+                        className="text-muted-foreground mb-3 overflow-hidden text-sm"
                         style={{
                           display: "-webkit-box",
                           WebkitLineClamp: 2,
@@ -236,7 +242,7 @@ const GitHubContributorsSection = () => {
 
                     <div className="mb-4 space-y-2">
                       {contributor.location && (
-                        <div className="flex items-center gap-2 text-sm text-muted-foreground">
+                        <div className="text-muted-foreground flex items-center gap-2 text-sm">
                           <MapPin className="h-4 w-4" />
                           <span className="truncate">
                             {contributor.location}
@@ -244,7 +250,7 @@ const GitHubContributorsSection = () => {
                         </div>
                       )}
                       {contributor.company && (
-                        <div className="flex items-center gap-2 text-sm text-muted-foreground">
+                        <div className="text-muted-foreground flex items-center gap-2 text-sm">
                           <Building className="h-4 w-4" />
                           <span className="truncate">
                             {contributor.company}
@@ -252,7 +258,7 @@ const GitHubContributorsSection = () => {
                         </div>
                       )}
                       {contributor.blog && (
-                        <div className="flex items-center gap-2 text-sm text-muted-foreground">
+                        <div className="text-muted-foreground flex items-center gap-2 text-sm">
                           <Globe className="h-4 w-4" />
                           <a
                             href={
@@ -262,7 +268,7 @@ const GitHubContributorsSection = () => {
                             }
                             target="_blank"
                             rel="noopener noreferrer"
-                            className="truncate hover:text-primary dark:hover:text-primary"
+                            className="hover:text-primary dark:hover:text-primary truncate"
                           >
                             {contributor.blog}
                           </a>
@@ -271,7 +277,7 @@ const GitHubContributorsSection = () => {
                     </div>
 
                     <div className="flex items-center justify-between">
-                      <div className="flex gap-4 text-sm text-muted-foreground">
+                      <div className="text-muted-foreground flex gap-4 text-sm">
                         {contributor.public_repos !== undefined && (
                           <span>{contributor.public_repos} repos</span>
                         )}
@@ -296,16 +302,14 @@ const GitHubContributorsSection = () => {
             </div>
           ) : (
             <div className="py-12 text-center">
-              <Users className="mx-auto mb-4 h-16 w-16 text-muted-foreground" />
-              <p className="text-muted-foreground">
-                No contributors found
-              </p>
+              <Users className="text-muted-foreground mx-auto mb-4 h-16 w-16" />
+              <p className="text-muted-foreground">No contributors found</p>
             </div>
           )}
 
           {/* Call to Action */}
           <div className="text-center">
-            <Card className="border-0 bg-primary text-white">
+            <Card className="bg-primary text-primary-foreground border-0">
               <CardContent className="p-8">
                 <h3 className="mb-4 text-2xl font-bold">
                   Join Our Contributors

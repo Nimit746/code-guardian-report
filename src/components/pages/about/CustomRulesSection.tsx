@@ -27,7 +27,7 @@ export const CustomRulesSection: React.FC = () => {
     <div className="space-y-8">
       {/* Section Header */}
       <div className="text-center">
-        <h2 className="mb-4 bg-primary bg-clip-text text-3xl font-bold text-transparent md:text-4xl">
+        <h2 className="bg-primary mb-4 bg-clip-text text-3xl font-bold text-transparent md:text-4xl">
           Custom Rules Engine
         </h2>
         <p className="text-muted-foreground mx-auto max-w-3xl text-lg">
@@ -51,9 +51,9 @@ export const CustomRulesSection: React.FC = () => {
           </CardContent>
         </Card>
 
-        <Card className="border-2 transition-colors duration-300 hover:border-primary">
+        <Card className="hover:border-primary border-2 transition-colors duration-300">
           <CardHeader>
-            <Target className="mb-2 h-8 w-8 text-primary" />
+            <Target className="text-primary mb-2 h-8 w-8" />
             <CardTitle>Company Policies</CardTitle>
           </CardHeader>
           <CardContent>
@@ -66,7 +66,7 @@ export const CustomRulesSection: React.FC = () => {
 
         <Card className="border-2 transition-colors duration-300 hover:border-purple-500">
           <CardHeader>
-            <Users className="mb-2 h-8 w-8 text-purple-600" />
+            <Users className="text-primary mb-2 h-8 w-8" />
             <CardTitle>Share & Collaborate</CardTitle>
           </CardHeader>
           <CardContent>
@@ -201,7 +201,7 @@ export const CustomRulesSection: React.FC = () => {
           <div className="grid grid-cols-1 gap-6 md:grid-cols-2">
             <div>
               <h4 className="text-foreground mb-2 flex items-center gap-2 font-semibold">
-                <ShieldCheck className="h-4 w-4 text-emerald-600" />
+                <ShieldCheck className="h-4 w-4 text-emerald-600 dark:text-emerald-400" />
                 Security
               </h4>
               <ul className="text-muted-foreground space-y-1 text-sm">
@@ -214,7 +214,7 @@ export const CustomRulesSection: React.FC = () => {
 
             <div>
               <h4 className="text-foreground mb-2 flex items-center gap-2 font-semibold">
-                <CheckCircle2 className="h-4 w-4 text-primary" />
+                <CheckCircle2 className="text-primary h-4 w-4" />
                 Best Practices
               </h4>
               <ul className="text-muted-foreground space-y-1 text-sm">
@@ -227,7 +227,7 @@ export const CustomRulesSection: React.FC = () => {
 
             <div>
               <h4 className="text-foreground mb-2 flex items-center gap-2 font-semibold">
-                <Building2 className="h-4 w-4 text-muted-foreground" />
+                <Building2 className="text-muted-foreground h-4 w-4" />
                 Compliance
               </h4>
               <ul className="text-muted-foreground space-y-1 text-sm">
@@ -240,7 +240,7 @@ export const CustomRulesSection: React.FC = () => {
 
             <div>
               <h4 className="text-foreground mb-2 flex items-center gap-2 font-semibold">
-                <Gauge className="h-4 w-4 text-amber-600" />
+                <Gauge className="h-4 w-4 text-amber-600 dark:text-amber-400" />
                 Performance
               </h4>
               <ul className="text-muted-foreground space-y-1 text-sm">
