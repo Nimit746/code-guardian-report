@@ -238,10 +238,8 @@ export const Navigation: React.FC<NavigationProps> = ({
                         }}
                       />
                     )}
-                    <span className="relative z-10">
-                      {React.cloneElement(item.icon as React.ReactElement, {
-                        className: "h-4 w-4",
-                      })}
+                    <span className="relative z-10 flex h-4 w-4 items-center justify-center">
+                      {item.icon}
                     </span>
                   </button>
                 );
