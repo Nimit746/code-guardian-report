@@ -24,6 +24,7 @@ import { AuthModal } from "@/components/auth/AuthModal";
 import NotificationCenter from "@/components/notifications/NotificationCenter";
 import { PWAQuickActions } from "@/components/pwa/PWAQuickActions";
 import { ThemeToggle } from "@/components/common/ThemeToggle";
+import { motion, AnimatePresence } from "framer-motion";
 
 interface NavigationProps {
   className?: string;
@@ -74,7 +75,7 @@ export const Navigation: React.FC<NavigationProps> = ({
   useEffect(() => {
     setMounted(true);
     const handleScroll = () => {
-      setIsScrolled(window.scrollY > 10);
+      setIsScrolled(window.scrollY > 20);
     };
     window.addEventListener("scroll", handleScroll);
     return () => window.removeEventListener("scroll", handleScroll);
@@ -83,7 +84,7 @@ export const Navigation: React.FC<NavigationProps> = ({
   const handleNavigate = (sectionId: string) => {
     navigateTo(sectionId);
     setIsMobileMenuOpen(false);
-    window.scrollTo({ top: 0, behavior: "instant" });
+    window.scrollTo({ top: 0, behavior: "smooth" });
   };
 
   const navItems = [
@@ -113,178 +114,194 @@ export const Navigation: React.FC<NavigationProps> = ({
   if (!mounted) return null;
 
   const navContent = (
-    <nav
+    <motion.nav
+      initial={{ y: -100 }}
+      animate={{ y: 0 }}
+      transition={{ duration: 0.5, ease: "circOut" }}
       className={cn(
-        "transition-all duration-300",
+        "fixed top-0 right-0 left-0 z-50 w-full transition-all duration-300",
         isScrolled
-          ? "border-border/40 bg-background/75 supports-[backdrop-filter]:bg-background/60 border-b shadow-[0_1px_0_0_hsl(var(--glow)/0.08)] backdrop-blur-xl"
-          : "bg-background/0 border-b border-transparent"
+          ? "bg-background/80 supports-[backdrop-filter]:bg-background/60 border-border/40 border-b shadow-sm backdrop-blur-xl"
+          : "border-b border-transparent bg-transparent py-2"
       )}
       style={{
-        position: "fixed",
-        top: 0,
-        left: 0,
-        right: 0,
-        zIndex: 50,
-        width: "100%",
         paddingTop: "env(safe-area-inset-top)",
       }}
     >
       <div className="mx-auto max-w-7xl px-4 sm:px-6 lg:px-8">
-        <div className="flex h-14 items-center justify-between sm:h-16">
+        <div className="flex h-16 items-center justify-between">
           {/* Logo */}
           <button
             onClick={() => handleNavigate("home")}
-            className="flex items-center gap-2 transition-opacity hover:opacity-80"
+            className="group flex items-center gap-2.5 transition-opacity hover:opacity-90"
           >
-            <Shield className="text-primary h-5 w-5" />
-            <span className="font-display text-lg">Code Guardian</span>
+            <div className="from-primary/20 to-primary/5 relative flex h-9 w-9 items-center justify-center rounded-xl bg-gradient-to-tr transition-transform group-hover:scale-105">
+              <Shield className="text-primary h-5 w-5 transition-colors" />
+            </div>
+            <span className="font-display text-foreground text-xl font-medium tracking-tight">
+              Code Guardian
+            </span>
           </button>
 
           {/* Desktop Nav */}
-          <div className="hidden flex-1 items-center justify-center lg:flex">
+          <div className="bg-muted/30 border-border/20 hidden items-center justify-center rounded-full border p-1.5 backdrop-blur-sm lg:flex">
             <div className="flex items-center gap-1">
-              {navItems.map((item) => (
-                <button
-                  key={item.id}
-                  onClick={() => handleNavigate(item.id)}
-                  className={cn(
-                    "flex items-center gap-1.5 rounded-md px-3 py-1.5 text-sm font-medium transition-colors",
-                    isActive(item.id)
-                      ? "bg-muted text-foreground"
-                      : "text-muted-foreground hover:text-foreground"
-                  )}
-                >
-                  <span>{item.label}</span>
-                  {item.badge && (
-                    <span className="bg-primary/10 text-primary rounded px-1.5 py-0.5 text-[10px] font-semibold uppercase">
-                      {item.badge}
+              {navItems.map((item) => {
+                const active = isActive(item.id);
+                return (
+                  <button
+                    key={item.id}
+                    onClick={() => handleNavigate(item.id)}
+                    className={cn(
+                      "relative flex items-center gap-2 rounded-full px-4 py-1.5 text-sm font-medium transition-colors",
+                      active
+                        ? "text-primary-foreground"
+                        : "text-muted-foreground hover:text-foreground"
+                    )}
+                  >
+                    {active && (
+                      <motion.div
+                        layoutId="active-nav-pill"
+                        className="bg-primary absolute inset-0 rounded-full shadow-sm"
+                        transition={{
+                          type: "spring",
+                          bounce: 0.2,
+                          duration: 0.6,
+                        }}
+                      />
+                    )}
+                    <span className="relative z-10 flex items-center gap-2">
+                      {item.label}
+                      {item.badge && (
+                        <span
+                          className={cn(
+                            "rounded-full px-1.5 py-0.5 text-[10px] font-bold uppercase",
+                            active
+                              ? "bg-white/20 text-white"
+                              : "bg-primary/10 text-primary"
+                          )}
+                        >
+                          {item.badge}
+                        </span>
+                      )}
                     </span>
-                  )}
-                </button>
-              ))}
+                  </button>
+                );
+              })}
             </div>
           </div>
 
-          {/* Tablet Nav */}
-          <div className="hidden flex-1 items-center justify-center gap-1 md:flex lg:hidden">
-            {navItems.slice(0, 3).map((item) => (
-              <button
-                key={item.id}
-                onClick={() => handleNavigate(item.id)}
-                className={cn(
-                  "flex items-center gap-1 rounded-md px-2.5 py-1.5 text-xs font-medium transition-colors",
-                  isActive(item.id)
-                    ? "bg-muted text-foreground"
-                    : "text-muted-foreground hover:text-foreground"
-                )}
-              >
-                <span className="flex-shrink-0">{item.icon}</span>
-                <span className="hidden md:inline">{item.label}</span>
-              </button>
-            ))}
+          {/* Tablet Nav (Simplified) */}
+          <div className="hidden flex-1 items-center justify-center gap-2 md:flex lg:hidden">
+            {/* Can be hidden or simplified, sticking to menu for tablet often better or just icons */}
           </div>
 
           {/* Right Actions */}
-          <div className="flex items-center gap-2 sm:gap-3">
+          <div className="flex items-center gap-2 sm:gap-4">
             {/* Auth — Desktop */}
             {user ? (
               <div className="relative hidden md:block" ref={userDropdownRef}>
                 <button
                   onClick={() => setShowUserDropdown(!showUserDropdown)}
-                  className="hover:bg-muted flex items-center gap-2 rounded-md px-2.5 py-1.5 text-sm transition-colors"
+                  className="group border-border/40 bg-background/50 hover:bg-muted/50 flex items-center gap-3 rounded-full border py-1 pr-3 pl-1 text-sm transition-all"
                 >
                   {getGithubAvatarUrl() ? (
                     <img
                       src={getGithubAvatarUrl() as string}
                       alt="Profile"
-                      className="h-6 w-6 rounded-full object-cover"
+                      className="ring-background h-7 w-7 rounded-full object-cover ring-2"
                     />
-                  ) : null}
+                  ) : (
+                    <div className="bg-primary/10 flex h-7 w-7 items-center justify-center rounded-full">
+                      <User className="text-primary h-4 w-4" />
+                    </div>
+                  )}
                   <span className="hidden max-w-[100px] truncate text-sm font-medium lg:block">
-                    {userProfile?.displayName ||
-                      userProfile?.githubUsername ||
-                      user?.email?.split("@")[0] ||
-                      "User"}
+                    {userProfile?.displayName || "User"}
                   </span>
                   <ChevronDown
                     className={cn(
-                      "text-muted-foreground hidden h-3.5 w-3.5 transition-transform duration-150 lg:block",
+                      "text-muted-foreground h-4 w-4 transition-transform duration-200",
                       showUserDropdown && "rotate-180"
                     )}
                   />
                 </button>
 
                 {/* Dropdown */}
-                {showUserDropdown && (
-                  <div className="border-border bg-card absolute right-0 z-50 mt-1 w-52 rounded-md border py-1 shadow-lg">
-                    <div className="border-border border-b px-3 py-2.5">
-                      <p className="truncate text-sm font-medium">
-                        {userProfile?.displayName ||
-                          userProfile?.githubUsername ||
-                          "User"}
-                      </p>
-                      <p className="text-muted-foreground truncate text-xs">
-                        {user?.email}
-                      </p>
-                    </div>
-                    <button
-                      onClick={() => {
-                        handleNavigate("history");
-                        setShowUserDropdown(false);
-                      }}
-                      className="text-foreground hover:bg-muted flex w-full items-center gap-2.5 px-3 py-2 text-sm transition-colors"
+                <AnimatePresence>
+                  {showUserDropdown && (
+                    <motion.div
+                      initial={{ opacity: 0, y: 10, scale: 0.95 }}
+                      animate={{ opacity: 1, y: 0, scale: 1 }}
+                      exit={{ opacity: 0, y: 10, scale: 0.95 }}
+                      transition={{ duration: 0.2 }}
+                      className="border-border bg-popover/80 absolute right-0 z-50 mt-2 w-64 rounded-xl border p-2 shadow-xl backdrop-blur-xl"
                     >
-                      <History className="h-4 w-4" />
-                      Scan History
-                    </button>
-                    <div className="border-border border-t">
+                      <div className="px-3 py-2.5">
+                        <p className="text-foreground truncate text-sm font-semibold">
+                          {userProfile?.displayName ||
+                            userProfile?.githubUsername ||
+                            "User"}
+                        </p>
+                        <p className="text-muted-foreground truncate text-xs">
+                          {user?.email}
+                        </p>
+                      </div>
+                      <div className="bg-border/50 my-1 h-px" />
+                      <button
+                        onClick={() => {
+                          handleNavigate("history");
+                          setShowUserDropdown(false);
+                        }}
+                        className="text-foreground hover:bg-muted flex w-full items-center gap-3 rounded-lg px-3 py-2 text-sm font-medium transition-colors"
+                      >
+                        <History className="h-4 w-4" />
+                        Scan History
+                      </button>
                       <button
                         onClick={() => {
                           logout();
                           setShowUserDropdown(false);
                         }}
-                        className="text-destructive hover:bg-destructive/10 flex w-full items-center gap-2.5 px-3 py-2 text-sm transition-colors"
+                        className="text-destructive hover:bg-destructive/10 flex w-full items-center gap-3 rounded-lg px-3 py-2 text-sm font-medium transition-colors"
                       >
                         <LogOut className="h-4 w-4" />
                         Sign Out
                       </button>
-                    </div>
-                  </div>
-                )}
+                    </motion.div>
+                  )}
+                </AnimatePresence>
               </div>
             ) : (
-              <div className="hidden items-center gap-2 md:flex">
+              <div className="hidden items-center gap-3 md:flex">
                 <Button
                   variant="ghost"
-                  size="sm"
                   onClick={() => setShowAuthModal(true)}
-                  className="text-muted-foreground hover:text-foreground rounded-md px-3 py-1.5 text-sm font-medium"
+                  className="text-muted-foreground hover:text-foreground font-medium"
                 >
                   Sign In
                 </Button>
                 <Button
-                  size="sm"
                   onClick={() => setShowAuthModal(true)}
-                  className="bg-primary text-primary-foreground hover:bg-primary/90 rounded-md px-4 py-1.5 text-sm font-medium"
+                  className="bg-primary hover:bg-primary/90 text-primary-foreground shadow-primary/20 rounded-full px-6 shadow-lg transition-all hover:scale-105 active:scale-95"
                 >
                   Get Started
                 </Button>
               </div>
             )}
 
+            <div className="bg-border/50 hidden h-6 w-px sm:block" />
+
             <ThemeToggle />
-
-            <NotificationCenter className="text-muted-foreground hover:bg-muted hover:text-foreground h-8 w-8 rounded-md transition-colors sm:h-9 sm:w-9" />
-
-            <PWAQuickActions className="text-muted-foreground hover:bg-muted hover:text-foreground hidden h-8 w-8 rounded-md transition-colors sm:flex sm:h-9 sm:w-9" />
+            <NotificationCenter className="hover:bg-muted/50 h-9 w-9 rounded-full transition-colors" />
+            <PWAQuickActions className="hover:bg-muted/50 hidden h-9 w-9 rounded-full transition-colors sm:flex" />
 
             {/* Mobile Toggle */}
             <Button
               variant="ghost"
-              size="sm"
+              size="icon"
               onClick={() => setIsMobileMenuOpen(!isMobileMenuOpen)}
-              className="text-muted-foreground hover:text-foreground flex h-8 w-8 items-center justify-center rounded-md p-0 sm:h-9 sm:w-9 lg:hidden"
+              className="h-9 w-9 rounded-full lg:hidden"
               aria-label="Toggle mobile menu"
             >
               {isMobileMenuOpen ? (
@@ -295,117 +312,115 @@ export const Navigation: React.FC<NavigationProps> = ({
             </Button>
           </div>
         </div>
-
-        {/* Mobile Menu */}
-        <div
-          className={cn(
-            "bg-background/90 fixed inset-x-0 backdrop-blur-xl transition-all duration-300 md:hidden",
-            isMobileMenuOpen
-              ? "pointer-events-auto translate-y-0 opacity-100"
-              : "pointer-events-none -translate-y-2 opacity-0"
-          )}
-          style={{
-            top: "0",
-            paddingTop: "calc(56px + env(safe-area-inset-top))",
-            height: "100vh",
-            zIndex: 40,
-          }}
-        >
-          <div className="border-border h-full overflow-y-auto border-t px-4 py-4">
-            {/* Nav Items */}
-            <div className="space-y-0.5">
-              {navItems.map((item) => (
-                <button
-                  key={item.id}
-                  onClick={() => handleNavigate(item.id)}
-                  className={cn(
-                    "flex w-full items-center gap-3 rounded-md px-3 py-2.5 text-sm font-medium transition-colors",
-                    isActive(item.id)
-                      ? "bg-muted text-foreground"
-                      : "text-muted-foreground hover:bg-muted hover:text-foreground"
-                  )}
-                >
-                  {item.icon}
-                  <span>{item.label}</span>
-                  {item.badge && (
-                    <span className="bg-primary/10 text-primary rounded px-1.5 py-0.5 text-[10px] font-semibold uppercase">
-                      {item.badge}
-                    </span>
-                  )}
-                </button>
-              ))}
-            </div>
-
-            {/* Mobile Auth */}
-            <div className="border-border mt-6 border-t pt-4">
-              {user ? (
-                <div className="space-y-1">
-                  <div className="flex items-center gap-3 rounded-md px-3 py-2.5">
-                    {getGithubAvatarUrl() ? (
-                      <img
-                        src={getGithubAvatarUrl() as string}
-                        alt="Profile"
-                        className="h-8 w-8 rounded-full object-cover"
-                      />
-                    ) : null}
-                    <div className="min-w-0">
-                      <p className="truncate text-sm font-medium">
-                        {userProfile?.displayName ||
-                          userProfile?.githubUsername ||
-                          "User"}
-                      </p>
-                      <p className="text-muted-foreground truncate text-xs">
-                        {user?.email}
-                      </p>
-                    </div>
-                  </div>
-                  <button
-                    onClick={() => {
-                      logout();
-                      setIsMobileMenuOpen(false);
-                    }}
-                    className="text-destructive hover:bg-destructive/10 flex w-full items-center gap-3 rounded-md px-3 py-2.5 text-sm font-medium transition-colors"
-                  >
-                    <LogOut className="h-4 w-4" />
-                    Sign Out
-                  </button>
-                </div>
-              ) : (
-                <div className="space-y-2">
-                  <button
-                    onClick={() => {
-                      setShowAuthModal(true);
-                      setIsMobileMenuOpen(false);
-                    }}
-                    className="text-muted-foreground hover:bg-muted hover:text-foreground flex w-full items-center gap-3 rounded-md px-3 py-2.5 text-sm font-medium transition-colors"
-                  >
-                    <User className="h-4 w-4" />
-                    Sign In
-                  </button>
-                  <button
-                    onClick={() => {
-                      setShowAuthModal(true);
-                      setIsMobileMenuOpen(false);
-                    }}
-                    className="bg-primary text-primary-foreground flex w-full items-center gap-3 rounded-md px-3 py-2.5 text-sm font-medium transition-opacity hover:opacity-90"
-                  >
-                    <Shield className="h-4 w-4" />
-                    Get Started
-                  </button>
-                </div>
-              )}
-            </div>
-
-            {/* Mobile footer */}
-            <div className="border-border mt-6 border-t pt-4 text-center">
-              <p className="text-muted-foreground text-xs">
-                © {new Date().getFullYear()} Code Guardian
-              </p>
-            </div>
-          </div>
-        </div>
       </div>
-    </nav>
+
+      {/* Mobile Menu */}
+      <AnimatePresence>
+        {isMobileMenuOpen && (
+          <motion.div
+            initial={{ opacity: 0, height: 0 }}
+            animate={{ opacity: 1, height: "100vh" }}
+            exit={{ opacity: 0, height: 0 }}
+            transition={{ duration: 0.3, ease: "easeInOut" }}
+            className="bg-background/95 fixed inset-0 top-[64px] z-40 overflow-hidden backdrop-blur-3xl lg:hidden"
+          >
+            <div className="border-border/40 flex h-full flex-col overflow-y-auto border-t p-6">
+              <nav className="flex-1 space-y-2">
+                {navItems.map((item, index) => (
+                  <motion.button
+                    key={item.id}
+                    initial={{ opacity: 0, x: -20 }}
+                    animate={{ opacity: 1, x: 0 }}
+                    transition={{ delay: index * 0.1 }}
+                    onClick={() => handleNavigate(item.id)}
+                    className={cn(
+                      "flex w-full items-center gap-4 rounded-xl px-4 py-3 text-lg font-medium transition-all",
+                      isActive(item.id)
+                        ? "bg-primary/10 text-primary"
+                        : "text-muted-foreground hover:bg-muted hover:text-foreground"
+                    )}
+                  >
+                    {item.icon}
+                    {item.label}
+                    {item.badge && (
+                      <span className="bg-primary/10 text-primary ml-auto rounded-full px-2 py-0.5 text-xs font-bold uppercase">
+                        {item.badge}
+                      </span>
+                    )}
+                  </motion.button>
+                ))}
+              </nav>
+
+              <motion.div
+                initial={{ opacity: 0 }}
+                animate={{ opacity: 1 }}
+                transition={{ delay: 0.3 }}
+                className="border-border mt-6 space-y-4 border-t pt-6"
+              >
+                {user ? (
+                  <div className="space-y-4">
+                    <div className="flex items-center gap-4 px-2">
+                      {getGithubAvatarUrl() && (
+                        <img
+                          src={getGithubAvatarUrl() as string}
+                          alt="Profile"
+                          className="ring-primary/20 h-10 w-10 rounded-full object-cover ring-2"
+                        />
+                      )}
+                      <div>
+                        <p className="font-semibold">
+                          {userProfile?.displayName || "User"}
+                        </p>
+                        <p className="text-muted-foreground text-sm">
+                          {user?.email}
+                        </p>
+                      </div>
+                    </div>
+                    <Button
+                      variant="destructive"
+                      className="w-full justify-start gap-2"
+                      onClick={() => {
+                        logout();
+                        setIsMobileMenuOpen(false);
+                      }}
+                    >
+                      <LogOut className="h-4 w-4" />
+                      Sign Out
+                    </Button>
+                  </div>
+                ) : (
+                  <div className="grid gap-3">
+                    <Button
+                      variant="outline"
+                      size="lg"
+                      className="w-full justify-start gap-2"
+                      onClick={() => {
+                        setShowAuthModal(true);
+                        setIsMobileMenuOpen(false);
+                      }}
+                    >
+                      <User className="h-4 w-4" />
+                      Sign In
+                    </Button>
+                    <Button
+                      size="lg"
+                      className="w-full justify-start gap-2"
+                      onClick={() => {
+                        setShowAuthModal(true);
+                        setIsMobileMenuOpen(false);
+                      }}
+                    >
+                      <Shield className="h-4 w-4" />
+                      Get Started
+                    </Button>
+                  </div>
+                )}
+              </motion.div>
+            </div>
+          </motion.div>
+        )}
+      </AnimatePresence>
+    </motion.nav>
   );
 
   return (
