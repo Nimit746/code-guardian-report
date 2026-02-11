@@ -1,7 +1,8 @@
+import React from "react";
 import { Shield, Code, Bot, Zap } from "lucide-react";
 import { FeatureGrid } from "@/components/features/FeatureGrid";
 
-export const AboutFeatures = () => {
+const AboutFeaturesComponent: React.FC = () => {
   const features = [
     {
       icon: <Shield className="h-8 w-8" />,
@@ -69,8 +70,8 @@ export const AboutFeatures = () => {
     <div className="relative py-16 sm:py-20">
       {/* Background Elements */}
       <div className="pointer-events-none absolute inset-0 overflow-hidden">
-        <div className="hidden absolute top-1/4 left-1/4 h-64 w-64 rounded-full bg-gradient-to-r from-blue-500/10 to-purple-500/10 blur-3xl"></div>
-        <div className="hidden delay-2s absolute right-1/4 bottom-1/4 h-48 w-48 rounded-full bg-gradient-to-r from-emerald-500/10 to-teal-500/10 blur-2xl"></div>
+        <div className="absolute top-1/4 left-1/4 hidden h-64 w-64 rounded-full bg-gradient-to-r from-blue-500/10 to-purple-500/10 blur-3xl"></div>
+        <div className="delay-2s absolute right-1/4 bottom-1/4 hidden h-48 w-48 rounded-full bg-gradient-to-r from-emerald-500/10 to-teal-500/10 blur-2xl"></div>
       </div>
 
       <div className="relative z-10">
@@ -85,3 +86,5 @@ export const AboutFeatures = () => {
     </div>
   );
 };
+
+export const AboutFeatures = React.memo(AboutFeaturesComponent);

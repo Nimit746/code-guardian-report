@@ -16,8 +16,10 @@ import {
   Github,
   Award,
 } from "lucide-react";
+import { scrollToElement } from "./utils";
+import { SECTION_IDS } from "./constants";
 
-const MonitoringInfoSection: React.FC = () => {
+const MonitoringInfoSectionComponent: React.FC = () => {
   return (
     <section id="real-time-monitoring" className="space-y-8">
       <div className="text-center">
@@ -34,7 +36,7 @@ const MonitoringInfoSection: React.FC = () => {
       <div className="grid grid-cols-1 gap-6 md:grid-cols-2 lg:grid-cols-3">
         <Card>
           <CardHeader>
-            <Webhook className="mb-2 h-8 w-8 text-primary" />
+            <Webhook className="text-primary mb-2 h-8 w-8" />
             <CardTitle>GitHub/GitLab Webhooks</CardTitle>
           </CardHeader>
           <CardContent>
@@ -129,7 +131,7 @@ const MonitoringInfoSection: React.FC = () => {
           </CardHeader>
           <CardContent className="space-y-4">
             <div className="flex items-center gap-3">
-              <Languages className="h-5 w-5 text-primary" />
+              <Languages className="text-primary h-5 w-5" />
               <div>
                 <h5 className="font-medium">Multi-Language Analysis</h5>
                 <p className="text-muted-foreground text-sm">
@@ -199,7 +201,7 @@ const MonitoringInfoSection: React.FC = () => {
       </div>
 
       {/* Setup Information */}
-      <Card className="border-2 border-dashed border-border bg-muted/50 dark:border-border dark:bg-blue-950/30">
+      <Card className="border-border bg-muted/50 dark:border-border border-2 border-dashed dark:bg-blue-950/30">
         <CardHeader>
           <CardTitle>Ready to Get Started?</CardTitle>
           <CardDescription>
@@ -210,14 +212,14 @@ const MonitoringInfoSection: React.FC = () => {
         <CardContent>
           <div className="flex flex-col gap-4 sm:flex-row">
             <button
-              onClick={() => (window.location.hash = "#github-analysis")}
-              className="rounded-lg bg-primary px-6 py-3 font-medium text-white shadow-md transition-all duration-300 hover:bg-primary/90 hover:shadow-lg"
+              onClick={() => scrollToElement("github-analysis")}
+              className="bg-primary hover:bg-primary/90 rounded-lg px-6 py-3 font-medium text-white shadow-md transition-all duration-300 hover:shadow-lg"
             >
               Analyze Your Repository
             </button>
             <button
-              onClick={() => (window.location.hash = "#about-section")}
-              className="rounded-lg border border-border px-6 py-3 font-medium text-foreground/80 transition-all duration-300 hover:bg-muted dark:border-slate-600"
+              onClick={() => scrollToElement(SECTION_IDS.ABOUT_SECTION)}
+              className="border-border text-foreground/80 hover:bg-muted rounded-lg border px-6 py-3 font-medium transition-all duration-300 dark:border-slate-600"
             >
               Learn More
             </button>
@@ -228,4 +230,4 @@ const MonitoringInfoSection: React.FC = () => {
   );
 };
 
-export default MonitoringInfoSection;
+export const MonitoringInfoSection = React.memo(MonitoringInfoSectionComponent);

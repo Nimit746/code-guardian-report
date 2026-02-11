@@ -2,7 +2,7 @@ import React from "react";
 import { Code2, Cpu, Layers, Zap } from "lucide-react";
 import { APP_VERSION } from "@/utils/version";
 
-export const VersionInfo: React.FC = () => {
+const VersionInfoComponent: React.FC = () => {
   const techStack = [
     {
       name: "React",
@@ -76,3 +76,5 @@ export const VersionInfo: React.FC = () => {
     </div>
   );
 };
+
+export const VersionInfo = React.memo(VersionInfoComponent);

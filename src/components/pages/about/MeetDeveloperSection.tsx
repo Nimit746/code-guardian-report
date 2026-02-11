@@ -22,6 +22,7 @@ import {
   Wrench,
   Lightbulb,
 } from "lucide-react";
+import { openUrlInNewTab } from "./utils";
 
 const MeetDeveloperSection = () => {
   const teamMembers = [
@@ -176,7 +177,7 @@ const MeetDeveloperSection = () => {
                     variant="secondary"
                     className="border-primary/30 bg-primary/20 text-primary-foreground hover:bg-primary/30"
                     onClick={() =>
-                      window.open("https://teamblitz.netlify.app/", "_blank")
+                      openUrlInNewTab("https://teamblitz.netlify.app/")
                     }
                   >
                     <Globe className="mr-2 h-4 w-4" />
@@ -393,7 +394,7 @@ const MeetDeveloperSection = () => {
                   size="lg"
                   className="bg-background text-primary hover:bg-muted"
                   onClick={() =>
-                    window.open("https://teamblitz.netlify.app/", "_blank")
+                    openUrlInNewTab("https://teamblitz.netlify.app/")
                   }
                 >
                   <Users className="mr-2 h-5 w-5" />
@@ -409,4 +410,4 @@ const MeetDeveloperSection = () => {
   );
 };
 
-export default MeetDeveloperSection;
+export { MeetDeveloperSection };

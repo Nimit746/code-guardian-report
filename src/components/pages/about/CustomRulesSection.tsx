@@ -22,7 +22,7 @@ import {
   Gauge,
 } from "lucide-react";
 
-export const CustomRulesSection: React.FC = () => {
+const CustomRulesSectionComponent: React.FC = () => {
   return (
     <div className="space-y-8">
       {/* Section Header */}
@@ -256,3 +256,5 @@ export const CustomRulesSection: React.FC = () => {
     </div>
   );
 };
+
+export const CustomRulesSection = React.memo(CustomRulesSectionComponent);

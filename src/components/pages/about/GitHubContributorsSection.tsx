@@ -26,6 +26,12 @@ import {
 } from "@/services/api/githubService";
 
 import { logger } from "@/utils/logger";
+import {
+  getContributorRole,
+  getContributorBadgeColor,
+  openUrlInNewTab,
+} from "./utils";
+
 const GitHubContributorsSection = () => {
   const [contributors, setContributors] = useState<ContributorWithDetails[]>(
     []
@@ -55,24 +61,6 @@ const GitHubContributorsSection = () => {
 
     fetchData();
   }, []);
-
-  const getContributorRole = (contributions: number, index: number) => {
-    if (index === 0) return "Lead Contributor";
-    if (contributions > 50) return "Core Contributor";
-    if (contributions > 20) return "Active Contributor";
-    if (contributions > 10) return "Regular Contributor";
-    return "Contributor";
-  };
-
-  const getContributorBadgeColor = (contributions: number, index: number) => {
-    if (index === 0) return "bg-gradient-to-r from-yellow-500 to-orange-500";
-    if (contributions > 50)
-      return "bg-gradient-to-r from-purple-500 to-pink-500";
-    if (contributions > 20) return "bg-gradient-to-r from-blue-500 to-cyan-500";
-    if (contributions > 10)
-      return "bg-gradient-to-r from-green-500 to-emerald-500";
-    return "bg-gradient-to-r from-gray-500 to-slate-500";
-  };
 
   if (loading) {
     return (
@@ -174,9 +162,8 @@ const GitHubContributorsSection = () => {
                     variant="secondary"
                     className="border-primary/30 bg-primary/20 text-primary-foreground hover:bg-primary/30 w-full"
                     onClick={() =>
-                      window.open(
-                        "https://github.com/Xenonesis/code-guardian-report",
-                        "_blank"
+                      openUrlInNewTab(
+                        "https://github.com/Xenonesis/code-guardian-report"
                       )
                     }
                   >
@@ -288,9 +275,7 @@ const GitHubContributorsSection = () => {
                       <Button
                         variant="outline"
                         size="sm"
-                        onClick={() =>
-                          window.open(contributor.html_url, "_blank")
-                        }
+                        onClick={() => openUrlInNewTab(contributor.html_url)}
                       >
                         <Github className="mr-1 h-4 w-4" />
                         Profile
@@ -325,9 +310,8 @@ const GitHubContributorsSection = () => {
                     size="lg"
                     className="bg-background text-green-600 hover:bg-green-50"
                     onClick={() =>
-                      window.open(
-                        "https://github.com/Xenonesis/code-guardian-report",
-                        "_blank"
+                      openUrlInNewTab(
+                        "https://github.com/Xenonesis/code-guardian-report"
                       )
                     }
                   >
@@ -340,9 +324,8 @@ const GitHubContributorsSection = () => {
                     size="lg"
                     className="border-primary/30 bg-primary/20 text-primary-foreground hover:bg-primary/30"
                     onClick={() =>
-                      window.open(
-                        "https://github.com/Xenonesis/code-guardian-report/issues",
-                        "_blank"
+                      openUrlInNewTab(
+                        "https://github.com/Xenonesis/code-guardian-report/issues"
                       )
                     }
                   >
@@ -360,4 +343,4 @@ const GitHubContributorsSection = () => {
   );
 };
 
-export default GitHubContributorsSection;
+export { GitHubContributorsSection };

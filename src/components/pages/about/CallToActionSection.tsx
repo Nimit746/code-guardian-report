@@ -2,22 +2,15 @@ import React from "react";
 import { Download } from "lucide-react";
 import { Button } from "@/components/ui/button";
 import { Card, CardContent } from "@/components/ui/card";
+import { TRUST_INDICATORS, SECTION_IDS } from "./constants";
+import { scrollToElement } from "./utils";
+import type { BaseSectionProps } from "./types";
 
-interface CallToActionSectionProps {
-  className?: string;
-}
-
-export const CallToActionSection: React.FC<CallToActionSectionProps> = ({
+export const CallToActionSection: React.FC<BaseSectionProps> = ({
   className = "",
 }) => {
   const scrollToHome = () => {
-    const homeSection = document.getElementById("home");
-    if (homeSection) {
-      homeSection.scrollIntoView({
-        behavior: "smooth",
-        block: "start",
-      });
-    }
+    scrollToElement(SECTION_IDS.HOME);
   };
 
   return (
@@ -86,23 +79,7 @@ export const CallToActionSection: React.FC<CallToActionSectionProps> = ({
 
               {/* Enhanced Trust Indicators */}
               <div className="grid grid-cols-1 gap-6 sm:grid-cols-3">
-                {[
-                  {
-                    label: "25,000+ Developers",
-                    color: "from-green-500 to-emerald-500",
-                    delay: "0s",
-                  },
-                  {
-                    label: "150,000+ Vulnerabilities Found",
-                    color: "from-blue-500 to-indigo-500",
-                    delay: "0.3s",
-                  },
-                  {
-                    label: "Free Forever",
-                    color: "from-purple-500 to-pink-500",
-                    delay: "0.6s",
-                  },
-                ].map((item, index) => (
+                {TRUST_INDICATORS.map((item, index) => (
                   <div
                     key={index}
                     className="group border-border/50 hover:border-border/50/50/90 bg-card/50 rounded-xl border p-4 shadow-sm backdrop-blur-sm transition-all duration-200"

@@ -7,12 +7,12 @@ import { DetailedInfo } from "@/components/pages/about/DetailedInfo";
 import { SupportedToolsSection } from "@/components/pages/about/SupportedToolsSection";
 import { CallToActionSection } from "@/components/pages/about/CallToActionSection";
 import { AboutFeatures } from "@/components/pages/about/AboutFeatures";
-import HowToUseSection from "@/components/pages/about/HowToUseSection";
-import HowItWorksSection from "@/components/pages/about/HowItWorksSection";
-import GitHubContributorsSection from "@/components/pages/about/GitHubContributorsSection";
-import EnhancedFeatureShowcase from "@/components/pages/about/EnhancedFeatureShowcase";
+import { HowToUseSection } from "@/components/pages/about/HowToUseSection";
+import { HowItWorksSection } from "@/components/pages/about/HowItWorksSection";
+import { GitHubContributorsSection } from "@/components/pages/about/GitHubContributorsSection";
+import { EnhancedFeatureShowcase } from "@/components/pages/about/EnhancedFeatureShowcase";
 import { CustomRulesSection } from "@/components/pages/about/CustomRulesSection";
-import MonitoringInfoSection from "@/components/pages/about/MonitoringInfoSection";
+import { MonitoringInfoSection } from "@/components/pages/about/MonitoringInfoSection";
 import MultiLanguageSupportDisplay from "@/components/language/MultiLanguageSupportDisplay";
 
 const About = () => {

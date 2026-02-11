@@ -458,4 +458,4 @@ const HowToUseSection = () => {
   );
 };
 
-export default HowToUseSection;
+export { HowToUseSection };

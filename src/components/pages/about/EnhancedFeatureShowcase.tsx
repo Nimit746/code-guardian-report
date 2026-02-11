@@ -263,5 +263,3 @@ export const EnhancedFeatureShowcase: React.FC = () => {
     </section>
   );
 };
-
-export default EnhancedFeatureShowcase;

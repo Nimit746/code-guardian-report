@@ -2,7 +2,9 @@
  * AnimatedBackground - Premium ambient decoration
  * Subtle gradient orbs that add visual depth without distraction
  */
-export const AnimatedBackground = () => {
+import React from "react";
+
+const AnimatedBackgroundComponent: React.FC = () => {
   return (
     <div
       className="pointer-events-none absolute inset-0 overflow-hidden"
@@ -64,3 +66,5 @@ export const AnimatedBackground = () => {
     </div>
   );
 };
+
+export const AnimatedBackground = React.memo(AnimatedBackgroundComponent);

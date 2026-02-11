@@ -8,18 +8,19 @@ import { VersionInfo } from "@/components/pages/about/VersionInfo";
 import { DetailedInfo } from "@/components/pages/about/DetailedInfo";
 import { SupportedToolsSection } from "@/components/pages/about/SupportedToolsSection";
 import { CallToActionSection } from "@/components/pages/about/CallToActionSection";
-import HowToUseSection from "@/components/pages/about/HowToUseSection";
-import HowItWorksSection from "@/components/pages/about/HowItWorksSection";
-import MeetDeveloperSection from "@/components/pages/about/MeetDeveloperSection";
-import EnhancedFeatureShowcase from "@/components/pages/about/EnhancedFeatureShowcase";
+import { HowToUseSection } from "@/components/pages/about/HowToUseSection";
+import { HowItWorksSection } from "@/components/pages/about/HowItWorksSection";
+import { MeetDeveloperSection } from "@/components/pages/about/MeetDeveloperSection";
+import { EnhancedFeatureShowcase } from "@/components/pages/about/EnhancedFeatureShowcase";
 import { AboutFeatures } from "@/components/pages/about/AboutFeatures";
 import { CustomRulesSection } from "@/components/pages/about/CustomRulesSection";
+import { SECTION_IDS } from "./constants";
 
 export const AboutSection: React.FC = () => {
   return (
     <section
-      id="about"
-      className="relative min-h-screen overflow-hidden bg-background"
+      id={SECTION_IDS.ABOUT}
+      className="bg-background relative min-h-screen overflow-hidden"
     >
       <AnimatedBackground />
 
@@ -44,42 +45,42 @@ export const AboutSection: React.FC = () => {
 
             {/* Enhanced Information Sections */}
             <div className="space-y-16 sm:space-y-20">
-              <div id="getting-started">
+              <div id={SECTION_IDS.GETTING_STARTED}>
                 <DetailedInfo />
               </div>
 
-              <div id="features">
+              <div id={SECTION_IDS.FEATURES}>
                 <EnhancedFeatureShowcase />
               </div>
 
-              <div id="examples">
+              <div id={SECTION_IDS.EXAMPLES}>
                 <HowToUseSection />
               </div>
 
-              <div id="api-reference">
+              <div id={SECTION_IDS.API_REFERENCE}>
                 <HowItWorksSection />
               </div>
             </div>
 
-            <div id="tech-stack">
+            <div id={SECTION_IDS.TECH_STACK}>
               <AboutFeatures />
             </div>
 
             {/* Enhanced Bottom Sections */}
             <div className="space-y-16 sm:space-y-20">
-              <div id="custom-rules">
+              <div id={SECTION_IDS.CUSTOM_RULES}>
                 <CustomRulesSection />
               </div>
 
-              <div id="updates">
+              <div id={SECTION_IDS.UPDATES}>
                 <SupportedToolsSection />
               </div>
 
-              <div id="about-section">
+              <div id={SECTION_IDS.ABOUT_SECTION}>
                 <MeetDeveloperSection />
               </div>
 
-              <div id="faq">
+              <div id={SECTION_IDS.FAQ}>
                 <CallToActionSection />
               </div>
             </div>
@@ -89,5 +90,3 @@ export const AboutSection: React.FC = () => {
     </section>
   );
 };
-
-export default AboutSection;
