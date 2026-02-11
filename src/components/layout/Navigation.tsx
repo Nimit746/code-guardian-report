@@ -24,12 +24,7 @@ import { AuthModal } from "@/components/auth/AuthModal";
 import NotificationCenter from "@/components/notifications/NotificationCenter";
 import { PWAQuickActions } from "@/components/pwa/PWAQuickActions";
 import { ThemeToggle } from "@/components/common/ThemeToggle";
-import {
-  motion,
-  AnimatePresence,
-  useScroll,
-  useMotionValueEvent,
-} from "framer-motion";
+import { motion, AnimatePresence } from "framer-motion";
 
 interface NavigationProps {
   className?: string;
@@ -40,14 +35,10 @@ export const Navigation: React.FC<NavigationProps> = ({
 }) => {
   const [isMobileMenuOpen, setIsMobileMenuOpen] = useState(false);
   const [isScrolled, setIsScrolled] = useState(false);
-  const [isVisible, setIsVisible] = useState(true);
   const [mounted, setMounted] = useState(false);
   const [showAuthModal, setShowAuthModal] = useState(false);
   const [showUserDropdown, setShowUserDropdown] = useState(false);
   const userDropdownRef = useRef<HTMLDivElement>(null);
-
-  const { scrollY } = useScroll();
-  const lastScrollY = useRef(0);
 
   const { user, userProfile, logout } = useAuth();
   const { currentSection, navigateTo } = useNavigation();
@@ -90,16 +81,6 @@ export const Navigation: React.FC<NavigationProps> = ({
     return () => window.removeEventListener("scroll", handleScroll);
   }, []);
 
-  useMotionValueEvent(scrollY, "change", (latest) => {
-    const previous = lastScrollY.current;
-    if (latest > previous && latest > 150 && !isMobileMenuOpen) {
-      setIsVisible(false);
-    } else {
-      setIsVisible(true);
-    }
-    lastScrollY.current = latest;
-  });
-
   const handleNavigate = (sectionId: string) => {
     navigateTo(sectionId);
     setIsMobileMenuOpen(false);
@@ -135,7 +116,7 @@ export const Navigation: React.FC<NavigationProps> = ({
   const navContent = (
     <motion.nav
       initial={{ y: -100 }}
-      animate={{ y: isVisible ? 0 : -100 }}
+      animate={{ y: 0 }}
       transition={{ duration: 0.4, ease: [0.32, 0.72, 0, 1] }}
       className={cn(
         "fixed top-0 right-0 left-0 z-50 w-full transition-all duration-300",
