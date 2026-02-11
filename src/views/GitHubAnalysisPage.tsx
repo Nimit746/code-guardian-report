@@ -443,7 +443,7 @@ export const GitHubAnalysisPage: React.FC = () => {
     }
   };
 
-  if (!isGitHubUser && !permissionGranted && !user) {
+  if (!user) {
     return (
       <div className="bg-background relative flex min-h-screen items-center justify-center overflow-hidden p-4">
         {}

@@ -44,7 +44,7 @@ export const GitHubNavigationTabs: React.FC<GitHubNavigationTabsProps> = ({
   ];
 
   return (
-    <div className="scrollbar-hide mt-12 flex items-center gap-1 overflow-x-auto border-b border-border pb-0">
+    <div className="scrollbar-hide border-border mt-12 flex items-center gap-1 overflow-x-auto border-b pb-0">
       <div className="flex gap-2">
         {tabs.map((tab) => (
           <button
@@ -53,8 +53,8 @@ export const GitHubNavigationTabs: React.FC<GitHubNavigationTabsProps> = ({
             className={cn(
               "group relative flex items-center gap-2 rounded-t-lg border-b-2 px-4 py-3 text-sm font-medium whitespace-nowrap transition-all",
               selectedTab === tab.id
-                ? "border-primary bg-muted/50 text-primary dark:border-blue-400/30 dark:text-primary"
-                : "border-transparent text-muted-foreground hover:border-border hover:bg-muted hover:text-foreground/80 dark:hover:border-border/50 dark:hover:text-muted-foreground"
+                ? "border-primary bg-muted/50 text-primary dark:text-primary dark:border-blue-400/30"
+                : "text-muted-foreground hover:border-border hover:bg-muted hover:text-foreground/80 dark:hover:border-border/50 dark:hover:text-muted-foreground border-transparent"
             )}
           >
             <tab.icon
@@ -71,14 +71,14 @@ export const GitHubNavigationTabs: React.FC<GitHubNavigationTabsProps> = ({
 
         {analysisResults && (
           <>
-            <div className="mx-2 my-auto h-6 w-px bg-muted dark:bg-slate-700" />
+            <div className="bg-muted dark:bg-border mx-2 my-auto h-6 w-px" />
             <button
               onClick={() => setSelectedTab("results")}
               className={cn(
                 "group relative flex items-center gap-2 rounded-t-lg border-b-2 px-4 py-3 text-sm font-medium whitespace-nowrap transition-all",
                 selectedTab === "results"
                   ? "border-emerald-500 bg-emerald-50/50 text-emerald-600 dark:border-emerald-400 dark:bg-emerald-900/10 dark:text-emerald-400"
-                  : "border-transparent text-muted-foreground hover:border-emerald-300 hover:bg-emerald-50/30 hover:text-emerald-700 dark:hover:border-emerald-700 dark:hover:bg-emerald-900/10 dark:hover:text-emerald-300"
+                  : "text-muted-foreground border-transparent hover:border-emerald-300 hover:bg-emerald-50/30 hover:text-emerald-700 dark:hover:border-emerald-700 dark:hover:bg-emerald-900/10 dark:hover:text-emerald-300"
               )}
             >
               <FileCode

@@ -38,35 +38,35 @@ export const GitHubProfileHeader: React.FC<GitHubProfileHeaderProps> = ({
             <img
               src={githubAvatarUrl}
               alt={githubDisplayName || "User"}
-              className="h-20 w-20 rounded-2xl object-cover shadow-lg ring-4 ring-white dark:ring-slate-800"
+              className="ring-background h-20 w-20 rounded-2xl object-cover shadow-lg ring-4"
             />
           ) : (
-            <div className="flex h-20 w-20 items-center justify-center rounded-2xl bg-gradient-to-br from-slate-100 to-slate-200 shadow-lg ring-4 ring-white dark:from-slate-800 dark:to-slate-700 dark:ring-slate-800">
-              <Github className="h-10 w-10 text-muted-foreground" />
+            <div className="bg-muted ring-background flex h-20 w-20 items-center justify-center rounded-2xl shadow-lg ring-4">
+              <Github className="text-muted-foreground h-10 w-10" />
             </div>
           )}
-          <div className="absolute -right-2 -bottom-2 rounded-full bg-white p-1.5 shadow-md ring-1 ring-slate-200 dark:ring-slate-700">
-            <Github className="h-4 w-4 text-foreground dark:text-white" />
+          <div className="bg-background ring-border absolute -right-2 -bottom-2 rounded-full p-1.5 shadow-md ring-1">
+            <Github className="text-foreground h-4 w-4" />
           </div>
         </div>
 
         <div>
-          <h1 className="mb-1 text-3xl font-bold tracking-tight text-foreground dark:text-white">
+          <h1 className="text-foreground mb-1 text-3xl font-bold tracking-tight">
             {isLoadingProfile ? (
-              <span className="inline-block h-8 w-48 animate-pulse rounded bg-muted dark:bg-slate-700" />
+              <span className="bg-muted inline-block h-8 w-48 animate-pulse rounded" />
             ) : (
               githubDisplayName || "GitHub User"
             )}
           </h1>
-          <div className="flex items-center gap-3 text-muted-foreground">
+          <div className="text-muted-foreground flex items-center gap-3">
             {isLoadingProfile ? (
-              <span className="inline-block h-5 w-32 animate-pulse rounded bg-muted dark:bg-slate-700" />
+              <span className="bg-muted inline-block h-5 w-32 animate-pulse rounded" />
             ) : githubUsername ? (
               <a
                 href={`https://github.com/${githubUsername}`}
                 target="_blank"
                 rel="noopener noreferrer"
-                className="flex items-center gap-1.5 transition-colors hover:text-primary dark:hover:text-primary"
+                className="hover:text-primary dark:hover:text-primary flex items-center gap-1.5 transition-colors"
               >
                 @{githubUsername}
                 <ExternalLink className="h-3 w-3 opacity-50" />
@@ -74,7 +74,7 @@ export const GitHubProfileHeader: React.FC<GitHubProfileHeaderProps> = ({
             ) : (
               <Button
                 variant="link"
-                className="h-auto p-0 text-primary hover:text-teal-600 dark:text-primary dark:hover:text-primary"
+                className="text-primary dark:text-primary dark:hover:text-primary h-auto p-0 hover:text-teal-600"
                 onClick={openConnectGitHubPrompt}
               >
                 Connect GitHub Profile
@@ -82,7 +82,7 @@ export const GitHubProfileHeader: React.FC<GitHubProfileHeaderProps> = ({
             )}
             {totalGitHubRepos > 0 && (
               <>
-                <span className="h-1 w-1 rounded-full bg-slate-300 dark:bg-slate-600" />
+                <span className="bg-muted-foreground/30 h-1 w-1 rounded-full" />
                 <span>{totalGitHubRepos} repositories</span>
               </>
             )}
@@ -114,9 +114,9 @@ export const GitHubProfileHeader: React.FC<GitHubProfileHeaderProps> = ({
         ].map((stat, i) => (
           <div
             key={i}
-            className="group rounded-xl border border-border bg-white p-4 shadow-sm transition-all hover:border-primary/20 hover:shadow-md dark:hover:border-primary/20"
+            className="group border-border bg-card hover:border-primary/20 rounded-xl border p-4 shadow-sm transition-all hover:shadow-md"
           >
-            <div className="mb-1 text-xs font-medium tracking-wider text-muted-foreground uppercase">
+            <div className="text-muted-foreground mb-1 text-xs font-medium tracking-wider uppercase">
               {stat.label}
             </div>
             <div className="flex items-baseline gap-1">
@@ -131,7 +131,7 @@ export const GitHubProfileHeader: React.FC<GitHubProfileHeaderProps> = ({
               >
                 {dashboardStats.loading ? "..." : stat.value}
               </span>
-              <span className="text-xs font-medium text-muted-foreground">
+              <span className="text-muted-foreground text-xs font-medium">
                 {stat.sub}
               </span>
             </div>

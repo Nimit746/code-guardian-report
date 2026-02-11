@@ -156,7 +156,7 @@ export const RepositoryComparisonTool: React.FC<
   if (loading) {
     return (
       <div className="flex items-center justify-center py-12">
-        <BarChart3 className="h-8 w-8 animate-pulse text-primary" />
+        <BarChart3 className="text-primary h-8 w-8 animate-pulse" />
       </div>
     );
   }
@@ -205,14 +205,14 @@ export const RepositoryComparisonTool: React.FC<
                 <button
                   key={repo.id}
                   onClick={() => addRepository(repo)}
-                  className="flex items-center gap-3 rounded-lg border border-border p-3 text-left transition-colors hover:bg-muted"
+                  className="border-border hover:bg-muted flex items-center gap-3 rounded-lg border p-3 text-left transition-colors"
                 >
-                  <GitBranch className="h-4 w-4 text-muted-foreground" />
+                  <GitBranch className="text-muted-foreground h-4 w-4" />
                   <div className="min-w-0 flex-1">
                     <div className="text-foreground truncate font-medium">
                       {repo.name}
                     </div>
-                    <div className="text-sm text-muted-foreground">
+                    <div className="text-muted-foreground text-sm">
                       Score: {repo.securityScore.toFixed(1)}
                     </div>
                   </div>
@@ -225,11 +225,11 @@ export const RepositoryComparisonTool: React.FC<
       {/* Comparison Grid */}
       {selectedRepos.length === 0 ? (
         <Card className="p-12 text-center">
-          <BarChart3 className="mx-auto mb-4 h-16 w-16 text-muted-foreground" />
-          <h3 className="mb-2 text-xl font-semibold text-foreground/80">
+          <BarChart3 className="text-muted-foreground mx-auto mb-4 h-16 w-16" />
+          <h3 className="text-foreground/80 mb-2 text-xl font-semibold">
             No repositories selected
           </h3>
-          <p className="mb-4 text-muted-foreground">
+          <p className="text-muted-foreground mb-4">
             Select at least 2 repositories to compare their metrics
           </p>
           <Button onClick={() => setShowSelector(true)}>
@@ -250,16 +250,16 @@ export const RepositoryComparisonTool: React.FC<
               <Card key={repo.id} className="relative p-4">
                 <button
                   onClick={() => removeRepository(repo.id)}
-                  className="absolute top-2 right-2 rounded-lg p-1 transition-colors hover:bg-muted"
+                  className="hover:bg-muted absolute top-2 right-2 rounded-lg p-1 transition-colors"
                 >
-                  <X className="h-3 w-3 text-muted-foreground" />
+                  <X className="text-muted-foreground h-3 w-3" />
                 </button>
 
                 <div className="pr-6">
                   <h4 className="text-foreground mb-1 truncate font-semibold">
                     {repo.name}
                   </h4>
-                  <p className="truncate text-xs text-muted-foreground">
+                  <p className="text-muted-foreground truncate text-xs">
                     {repo.fullName}
                   </p>
                 </div>
@@ -278,11 +278,9 @@ export const RepositoryComparisonTool: React.FC<
                 }}
               >
                 {/* Metric Label */}
-                <div className="flex items-center gap-2 rounded-lg bg-muted p-4/50">
-                  <div className="text-muted-foreground">
-                    {metric.icon}
-                  </div>
-                  <span className="font-medium text-foreground/80">
+                <div className="bg-muted p-4/50 flex items-center gap-2 rounded-lg">
+                  <div className="text-muted-foreground">{metric.icon}</div>
+                  <span className="text-foreground/80 font-medium">
                     {metric.label}
                   </span>
                 </div>
@@ -335,7 +333,7 @@ export const RepositoryComparisonTool: React.FC<
               {selectedRepos.map((repo) => (
                 <div key={repo.id}>
                   <div className="mb-2 flex items-center justify-between">
-                    <span className="text-sm font-medium text-foreground/80">
+                    <span className="text-foreground/80 text-sm font-medium">
                       {repo.name}
                     </span>
                     <span
@@ -344,7 +342,7 @@ export const RepositoryComparisonTool: React.FC<
                       {repo.securityScore.toFixed(1)}/10
                     </span>
                   </div>
-                  <div className="h-3 w-full rounded-full bg-muted dark:bg-slate-700">
+                  <div className="bg-muted/50 h-3 w-full rounded-full">
                     <div
                       className={`h-3 rounded-full transition-all duration-500 ${
                         repo.securityScore >= 8
@@ -362,7 +360,7 @@ export const RepositoryComparisonTool: React.FC<
           </Card>
 
           {/* Summary Insights */}
-          <Card className="border-border bg-muted p-6 dark:border-border dark:bg-teal-900/20">
+          <Card className="border-border bg-muted dark:border-border p-6 dark:bg-teal-900/20">
             <h3 className="mb-3 text-lg font-semibold text-blue-900 dark:text-blue-100">
               Comparison Insights
             </h3>
