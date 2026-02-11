@@ -22,50 +22,42 @@ const NotFound = () => {
   return (
     <PageLayout showNavigation={false}>
       <div className="flex min-h-[80vh] items-center justify-center">
-        <Card className="animate-fade-in w-full max-w-2xl border-0 bg-card/95 shadow-2xl backdrop-blur-sm/95">
+        <Card className="animate-fade-in bg-card/95 text-foreground backdrop-blur-sm/95 w-full max-w-2xl border-0 shadow-2xl">
           <CardHeader className="pb-6 text-center">
-            <div className="animate-bounce-in mx-auto mb-6 w-fit rounded-full bg-primary p-4">
+            <div className="animate-bounce-in bg-primary mx-auto mb-6 w-fit rounded-full p-4">
               <Shield className="h-12 w-12 text-white" />
             </div>
-            <CardTitle className="mb-4 bg-primary bg-clip-text text-6xl font-bold text-transparent sm:text-8xl">
+            <CardTitle className="bg-primary mb-4 bg-clip-text text-6xl font-bold text-transparent sm:text-8xl">
               404
             </CardTitle>
-            <CardTitle className="mb-2 text-2xl font-bold text-foreground sm:text-3xl dark:text-white">
+            <CardTitle className="text-foreground mb-2 text-2xl font-bold sm:text-3xl dark:text-white">
               Page Not Found
             </CardTitle>
-            <CardDescription className="text-lg text-muted-foreground">
+            <CardDescription className="text-muted-foreground text-lg">
               The page you're looking for doesn't exist or has been moved.
             </CardDescription>
           </CardHeader>
 
           <CardContent className="space-y-6">
             <div className="space-y-4">
-              <h3 className="font-semibold text-foreground dark:text-white">
+              <h3 className="text-foreground font-semibold dark:text-white">
                 What you can do:
               </h3>
-              <ul className="space-y-2 text-sm text-muted-foreground">
+              <ul className="text-muted-foreground space-y-2 text-sm">
                 <li className="flex items-start gap-2">
-                  <span className="mt-1 text-primary dark:text-primary">
-                    •
-                  </span>
+                  <span className="text-primary dark:text-primary mt-1">•</span>
                   Check the URL for any typos
                 </li>
                 <li className="flex items-start gap-2">
-                  <span className="mt-1 text-primary dark:text-primary">
-                    •
-                  </span>
+                  <span className="text-primary dark:text-primary mt-1">•</span>
                   Go back to the previous page
                 </li>
                 <li className="flex items-start gap-2">
-                  <span className="mt-1 text-primary dark:text-primary">
-                    •
-                  </span>
+                  <span className="text-primary dark:text-primary mt-1">•</span>
                   Return to the homepage to start fresh
                 </li>
                 <li className="flex items-start gap-2">
-                  <span className="mt-1 text-primary dark:text-primary">
-                    •
-                  </span>
+                  <span className="text-primary dark:text-primary mt-1">•</span>
                   Use the navigation to find what you need
                 </li>
               </ul>
@@ -74,7 +66,7 @@ const NotFound = () => {
             <div className="flex flex-col gap-3 pt-4 sm:flex-row">
               <Button
                 onClick={() => (window.location.href = "/")}
-                className="focus-ring flex items-center gap-2 bg-primary hover:bg-primary/90"
+                className="focus-ring bg-primary hover:bg-primary/90 flex items-center gap-2"
               >
                 <Home className="h-4 w-4" />
                 Go Home
@@ -89,8 +81,8 @@ const NotFound = () => {
               </Button>
             </div>
 
-            <div className="border-t border-border pt-6">
-              <div className="flex items-center justify-center gap-2 text-sm text-muted-foreground">
+            <div className="border-border border-t pt-6">
+              <div className="text-muted-foreground flex items-center justify-center gap-2 text-sm">
                 <Search className="h-4 w-4" />
                 <span>Looking for code analysis? Head to the homepage!</span>
               </div>

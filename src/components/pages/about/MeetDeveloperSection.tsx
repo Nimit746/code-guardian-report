@@ -144,7 +144,7 @@ const MeetDeveloperSection = () => {
   ];
 
   return (
-    <section className="bg-gradient-to-br from-slate-50 to-blue-50 py-16 dark:from-slate-900 dark:to-slate-800">
+    <section className="dark:from-background dark:to-muted/30 bg-gradient-to-br from-slate-50 to-blue-50 py-16">
       <div className="container mx-auto px-4">
         <div className="mx-auto max-w-6xl">
           {/* Section Header */}
@@ -152,20 +152,20 @@ const MeetDeveloperSection = () => {
             <h2 className="text-foreground mb-4 text-3xl font-bold sm:text-4xl">
               Meet the Development Team
             </h2>
-            <p className="mx-auto mb-6 max-w-3xl text-lg text-muted-foreground">
+            <p className="text-muted-foreground mx-auto mb-6 max-w-3xl text-lg">
               Code Guardian is proudly developed by Team Blitz - a passionate
               group of developers and security experts committed to making code
               security accessible to everyone.
             </p>
 
             {/* Team Blitz Card */}
-            <Card className="mx-auto mb-8 max-w-2xl border-0 bg-primary text-white">
+            <Card className="bg-primary text-primary-foreground mx-auto mb-8 max-w-2xl border-0">
               <CardHeader>
                 <div className="mb-2 flex items-center justify-center gap-3">
                   <Users className="h-6 w-6" />
                   <CardTitle className="text-2xl">Team Blitz</CardTitle>
                 </div>
-                <CardDescription className="text-blue-100">
+                <CardDescription className="text-primary-foreground/90">
                   Innovative development team focused on AI-powered security
                   solutions
                 </CardDescription>
@@ -200,14 +200,14 @@ const MeetDeveloperSection = () => {
               <Card key={index} className="text-center">
                 <CardContent className="p-6">
                   <div className="mb-3 flex justify-center">
-                    <div className="rounded-lg bg-teal-100 p-3 text-primary dark:bg-teal-900/30 dark:text-primary">
+                    <div className="text-primary dark:text-primary rounded-lg bg-teal-100 p-3 dark:bg-teal-900/30">
                       {highlight.icon}
                     </div>
                   </div>
                   <h3 className="text-foreground mb-2 font-semibold">
                     {highlight.title}
                   </h3>
-                  <p className="text-sm text-muted-foreground">
+                  <p className="text-muted-foreground text-sm">
                     {highlight.description}
                   </p>
                 </CardContent>
@@ -230,21 +230,21 @@ const MeetDeveloperSection = () => {
                   >
                     <CardHeader>
                       <div className="flex items-start gap-4">
-                        <div className="rounded-lg bg-primary p-3 text-white">
+                        <div className="bg-primary rounded-lg p-3 text-white">
                           {member.icon}
                         </div>
                         <div className="flex-1">
                           <CardTitle className="text-lg">
                             {member.name}
                           </CardTitle>
-                          <CardDescription className="font-medium text-primary dark:text-primary">
+                          <CardDescription className="text-primary dark:text-primary font-medium">
                             {member.role}
                           </CardDescription>
                         </div>
                       </div>
                     </CardHeader>
                     <CardContent>
-                      <p className="mb-4 text-muted-foreground">
+                      <p className="text-muted-foreground mb-4">
                         {member.description}
                       </p>
                       <div className="flex flex-wrap gap-2">
@@ -285,7 +285,7 @@ const MeetDeveloperSection = () => {
                   Unique Selling Proposition (USP)
                 </h4>
                 <div className="grid grid-cols-1 gap-4 md:grid-cols-3">
-                  <div className="rounded-lg bg-muted p-4 dark:bg-blue-950/30">
+                  <div className="bg-muted rounded-lg p-4 dark:bg-blue-950/30">
                     <h5 className="mb-2 font-medium text-blue-900 dark:text-blue-100">
                       Persistent Intelligence
                     </h5>
@@ -318,7 +318,7 @@ const MeetDeveloperSection = () => {
               {/* Technologies */}
               <div>
                 <h4 className="text-foreground mb-3 flex items-center gap-2 font-semibold">
-                  <Wrench className="h-4 w-4 text-muted-foreground" />
+                  <Wrench className="text-muted-foreground h-4 w-4" />
                   Technologies Used
                 </h4>
                 <div className="flex flex-wrap gap-2">
@@ -343,7 +343,7 @@ const MeetDeveloperSection = () => {
                       <h5 className="text-foreground font-medium">
                         Persistent Security
                       </h5>
-                      <p className="text-sm text-muted-foreground">
+                      <p className="text-muted-foreground text-sm">
                         Continuous analysis with persistent results that
                         maintain security insights across sessions
                       </p>
@@ -355,19 +355,19 @@ const MeetDeveloperSection = () => {
                       <h5 className="text-foreground font-medium">
                         Enhanced Productivity
                       </h5>
-                      <p className="text-sm text-muted-foreground">
+                      <p className="text-muted-foreground text-sm">
                         Advanced storage and analytics reduce analysis time
                         while improving code quality insights
                       </p>
                     </div>
                   </div>
                   <div className="flex items-start gap-3">
-                    <Star className="mt-0.5 h-5 w-5 text-primary" />
+                    <Star className="text-primary mt-0.5 h-5 w-5" />
                     <div>
                       <h5 className="text-foreground font-medium">
                         Enterprise Features
                       </h5>
-                      <p className="text-sm text-muted-foreground">
+                      <p className="text-muted-foreground text-sm">
                         Production-ready with comprehensive reporting, export
                         capabilities, and performance monitoring
                       </p>
@@ -380,7 +380,7 @@ const MeetDeveloperSection = () => {
 
           {/* Call to Action */}
           <div className="text-center">
-            <Card className="border-0 bg-primary text-white">
+            <Card className="bg-primary border-0 text-white">
               <CardContent className="p-8">
                 <h3 className="mb-4 text-2xl font-bold">Join Our Mission</h3>
                 <p className="mx-auto mb-6 max-w-2xl text-blue-100">

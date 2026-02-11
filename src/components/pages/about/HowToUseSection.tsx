@@ -195,22 +195,22 @@ const HowToUseSection = () => {
   ];
 
   return (
-    <section className="py-16 lg:py-24">
+    <section className="bg-white py-16 lg:py-24 dark:bg-transparent">
       <div className="container mx-auto px-4">
         {/* Section Header */}
         <div className="mb-12 text-center">
-          <h2 className="mb-4 text-3xl font-bold text-foreground sm:text-4xl lg:text-5xl dark:text-white">
+          <h2 className="mb-4 text-3xl font-bold text-slate-900 sm:text-4xl lg:text-5xl dark:text-white">
             How to Use This Platform
           </h2>
-          <p className="mx-auto mb-8 max-w-3xl text-lg text-muted-foreground">
+          <p className="dark:text-muted-foreground mx-auto mb-8 max-w-3xl text-lg text-slate-600">
             Follow these simple steps to analyze your code and get actionable
             security insights
           </p>
 
           {/* Quick Start */}
-          <Card className="mx-auto mb-12 max-w-2xl border-border bg-muted dark:border-border dark:from-blue-950 dark:to-indigo-950">
+          <Card className="mx-auto mb-12 max-w-2xl border-blue-100 bg-blue-50/50 dark:border-blue-900/50 dark:bg-blue-950/20">
             <CardHeader>
-              <CardTitle className="flex items-center gap-2 text-blue-900 dark:text-blue-100">
+              <CardTitle className="flex items-center gap-2 text-blue-700 dark:text-blue-300">
                 <CheckCircle className="h-5 w-5" />
                 Quick Start Guide
               </CardTitle>
@@ -220,12 +220,9 @@ const HowToUseSection = () => {
                 {quickStartGuide.map((step, index) => (
                   <li
                     key={index}
-                    className="flex items-start gap-3 text-sm text-blue-800 dark:text-blue-200"
+                    className="flex items-start gap-3 text-sm text-slate-700 dark:text-slate-300"
                   >
-                    <Badge
-                      variant="secondary"
-                      className="flex h-6 min-w-6 items-center justify-center rounded-full p-0 text-xs"
-                    >
+                    <Badge className="flex h-6 min-w-6 items-center justify-center rounded-full bg-blue-600 p-0 text-xs text-white hover:bg-blue-700 dark:bg-blue-500 dark:hover:bg-blue-600">
                       {index + 1}
                     </Badge>
                     <span>{step}</span>
@@ -243,7 +240,11 @@ const HowToUseSection = () => {
               key={step.id}
               variant={activeStep === index ? "default" : "outline"}
               onClick={() => setActiveStep(index)}
-              className="flex items-center gap-2"
+              className={`flex items-center gap-2 ${
+                activeStep === index
+                  ? "bg-slate-900 text-white hover:bg-slate-800 dark:bg-white dark:text-slate-900 dark:hover:bg-slate-200"
+                  : "border-slate-200 text-slate-600 hover:bg-slate-50 hover:text-slate-900 dark:border-slate-700 dark:text-slate-400 dark:hover:bg-slate-800 dark:hover:text-slate-200"
+              }`}
             >
               {step.icon}
               <span className="hidden sm:inline">Step {step.id}</span>
@@ -254,17 +255,17 @@ const HowToUseSection = () => {
 
         {/* Active Step Details */}
         <div className="mx-auto max-w-4xl">
-          <Card className="mb-8">
+          <Card className="mb-8 border-slate-200 shadow-sm dark:border-slate-700">
             <CardHeader>
               <div className="mb-4 flex items-center gap-4">
-                <div className="rounded-lg bg-teal-100 p-3 dark:bg-teal-900">
+                <div className="rounded-lg bg-teal-100 p-3 text-teal-700 dark:bg-teal-900 dark:text-teal-300">
                   {steps[activeStep].icon}
                 </div>
                 <div>
-                  <CardTitle className="text-2xl">
+                  <CardTitle className="text-2xl text-slate-900 dark:text-white">
                     Step {steps[activeStep].id}: {steps[activeStep].title}
                   </CardTitle>
-                  <CardDescription className="text-lg">
+                  <CardDescription className="text-lg text-slate-600 dark:text-slate-400">
                     {steps[activeStep].description}
                   </CardDescription>
                 </div>
@@ -273,13 +274,16 @@ const HowToUseSection = () => {
             <CardContent className="space-y-6">
               {/* Main Details */}
               <div>
-                <h4 className="mb-3 font-semibold">
+                <h4 className="mb-3 font-semibold text-slate-900 dark:text-white">
                   What happens in this step:
                 </h4>
                 <ul className="space-y-2">
                   {steps[activeStep].details.map((detail, index) => (
-                    <li key={index} className="flex items-start gap-2">
-                      <ChevronRight className="mt-0.5 h-4 w-4 flex-shrink-0 text-primary" />
+                    <li
+                      key={index}
+                      className="flex items-start gap-2 text-slate-700 dark:text-slate-300"
+                    >
+                      <ChevronRight className="text-primary mt-0.5 h-4 w-4 flex-shrink-0" />
                       <span className="text-sm">{detail}</span>
                     </li>
                   ))}
@@ -289,10 +293,16 @@ const HowToUseSection = () => {
               {/* Step-specific content */}
               {steps[activeStep].supportedFormats && (
                 <div>
-                  <h4 className="mb-3 font-semibold">Supported File Types:</h4>
+                  <h4 className="mb-3 font-semibold text-slate-900 dark:text-white">
+                    Supported File Types:
+                  </h4>
                   <div className="flex flex-wrap gap-2">
                     {steps[activeStep].supportedFormats.map((format) => (
-                      <Badge key={format} variant="outline">
+                      <Badge
+                        key={format}
+                        variant="outline"
+                        className="border-slate-200 text-slate-700 dark:border-slate-700 dark:text-slate-300"
+                      >
                         {format}
                       </Badge>
                     ))}
@@ -302,17 +312,24 @@ const HowToUseSection = () => {
 
               {steps[activeStep].analysisTypes && (
                 <div>
-                  <h4 className="mb-3 font-semibold">Analysis Types:</h4>
+                  <h4 className="mb-3 font-semibold text-slate-900 dark:text-white">
+                    Analysis Types:
+                  </h4>
                   <div className="grid grid-cols-1 gap-4 sm:grid-cols-3">
                     {steps[activeStep].analysisTypes.map((type) => (
-                      <Card key={type.name} className="p-4">
+                      <Card
+                        key={type.name}
+                        className="border-slate-200 bg-slate-50 p-4 dark:border-slate-700 dark:bg-slate-800/50"
+                      >
                         <div className="mb-2 flex items-center gap-2">
-                          {type.icon}
-                          <span className="text-sm font-medium">
+                          <div className="text-slate-900 dark:text-white">
+                            {type.icon}
+                          </div>
+                          <span className="text-sm font-medium text-slate-900 dark:text-white">
                             {type.name}
                           </span>
                         </div>
-                        <p className="text-xs text-muted-foreground">
+                        <p className="text-xs text-slate-500 dark:text-slate-400">
                           Typical time: {type.time}
                         </p>
                       </Card>
@@ -323,7 +340,9 @@ const HowToUseSection = () => {
 
               {steps[activeStep].severityLevels && (
                 <div>
-                  <h4 className="mb-3 font-semibold">Severity Levels:</h4>
+                  <h4 className="mb-3 font-semibold text-slate-900 dark:text-white">
+                    Severity Levels:
+                  </h4>
                   <div className="space-y-2">
                     {steps[activeStep].severityLevels.map((severity) => (
                       <div
@@ -333,10 +352,10 @@ const HowToUseSection = () => {
                         <div
                           className={`h-3 w-3 rounded-full ${severity.color}`}
                         ></div>
-                        <span className="text-sm font-medium">
+                        <span className="text-sm font-medium text-slate-900 dark:text-white">
                           {severity.level}
                         </span>
-                        <span className="text-sm text-muted-foreground">
+                        <span className="text-sm text-slate-600 dark:text-slate-400">
                           - {severity.description}
                         </span>
                       </div>
@@ -347,17 +366,19 @@ const HowToUseSection = () => {
 
               {steps[activeStep].promptTypes && (
                 <div>
-                  <h4 className="mb-3 font-semibold">
+                  <h4 className="mb-3 font-semibold text-slate-900 dark:text-white">
                     Available Prompt Types:
                   </h4>
                   <div className="grid grid-cols-1 gap-2 sm:grid-cols-2">
                     {steps[activeStep].promptTypes.map((type) => (
                       <div
                         key={type}
-                        className="flex items-center gap-2 rounded bg-muted p-2"
+                        className="flex items-center gap-2 rounded bg-slate-100 p-2 dark:bg-slate-800"
                       >
-                        <Wand2 className="h-4 w-4 text-muted-foreground" />
-                        <span className="text-sm">{type}</span>
+                        <Wand2 className="h-4 w-4 text-slate-500 dark:text-slate-400" />
+                        <span className="text-sm text-slate-700 dark:text-slate-300">
+                          {type}
+                        </span>
                       </div>
                     ))}
                   </div>
@@ -366,17 +387,22 @@ const HowToUseSection = () => {
 
               {steps[activeStep].exportFormats && (
                 <div>
-                  <h4 className="mb-3 font-semibold">Export Formats:</h4>
+                  <h4 className="mb-3 font-semibold text-slate-900 dark:text-white">
+                    Export Formats:
+                  </h4>
                   <div className="grid grid-cols-1 gap-4 sm:grid-cols-2">
                     {steps[activeStep].exportFormats.map((format) => (
-                      <Card key={format.format} className="p-4">
+                      <Card
+                        key={format.format}
+                        className="border-slate-200 bg-slate-50 p-4 dark:border-slate-700 dark:bg-slate-800/50"
+                      >
                         <div className="mb-2 flex items-center gap-2">
-                          <FileText className="h-4 w-4" />
-                          <span className="text-sm font-medium">
+                          <FileText className="h-4 w-4 text-slate-900 dark:text-white" />
+                          <span className="text-sm font-medium text-slate-900 dark:text-white">
                             {format.format}
                           </span>
                         </div>
-                        <p className="text-xs text-muted-foreground">
+                        <p className="text-xs text-slate-500 dark:text-slate-400">
                           {format.description}
                         </p>
                       </Card>
@@ -386,7 +412,7 @@ const HowToUseSection = () => {
               )}
 
               {/* Tips */}
-              <div className="rounded-lg border border-amber-200 bg-amber-50 p-4 dark:border-amber-800 dark:bg-amber-950">
+              <div className="rounded-lg border border-amber-200 bg-amber-50 p-4 dark:border-amber-900 dark:bg-amber-950/30">
                 <h4 className="mb-2 flex items-center gap-2 font-semibold text-amber-800 dark:text-amber-200">
                   <Lightbulb className="h-4 w-4" />
                   Pro Tips:
@@ -411,6 +437,7 @@ const HowToUseSection = () => {
               variant="outline"
               onClick={() => setActiveStep(Math.max(0, activeStep - 1))}
               disabled={activeStep === 0}
+              className="border-slate-200 hover:bg-slate-50 dark:border-slate-700 dark:hover:bg-slate-800"
             >
               Previous Step
             </Button>
@@ -419,6 +446,7 @@ const HowToUseSection = () => {
                 setActiveStep(Math.min(steps.length - 1, activeStep + 1))
               }
               disabled={activeStep === steps.length - 1}
+              className="bg-slate-900 text-white hover:bg-slate-800 dark:bg-white dark:text-slate-900 dark:hover:bg-slate-200"
             >
               Next Step
               <ChevronRight className="ml-2 h-4 w-4" />

@@ -213,7 +213,7 @@ export const HowItWorksSection: React.FC = () => {
   return (
     <section className="relative overflow-hidden py-20">
       {/* Background Effects */}
-      <div className="absolute inset-0 bg-gradient-to-br from-slate-50 via-blue-50/30 to-purple-50/30 dark:from-slate-900 dark:via-blue-900/10 dark:to-purple-900/10"></div>
+      <div className="dark:from-background dark:via-muted/5 dark:to-muted/10 absolute inset-0 bg-gradient-to-br from-slate-50 via-blue-50/30 to-purple-50/30"></div>
       <div className="absolute top-0 left-1/4 h-72 w-72 animate-pulse rounded-full bg-blue-300 opacity-20 mix-blend-multiply blur-xl filter"></div>
       <div className="absolute right-1/4 bottom-0 h-72 w-72 animate-pulse rounded-full bg-purple-300 opacity-20 mix-blend-multiply blur-xl filter delay-1000"></div>
 
@@ -225,7 +225,7 @@ export const HowItWorksSection: React.FC = () => {
               How Our Analysis Engine Works
             </span>
           </h2>
-          <p className="mx-auto max-w-3xl text-xl text-muted-foreground">
+          <p className="text-muted-foreground mx-auto max-w-3xl text-xl">
             Deep dive into our comprehensive, multi-layered analysis system that
             provides real-time security, quality, and performance insights with
             industry-leading accuracy
@@ -234,7 +234,7 @@ export const HowItWorksSection: React.FC = () => {
 
         {/* Analysis Steps */}
         <div className="mb-20">
-          <h3 className="mb-12 text-center text-3xl font-bold text-foreground dark:text-slate-200">
+          <h3 className="text-foreground mb-12 text-center text-3xl font-bold dark:text-slate-200">
             5-Stage Analysis Pipeline
           </h3>
 
@@ -267,7 +267,7 @@ export const HowItWorksSection: React.FC = () => {
                   : "max-h-0 overflow-hidden opacity-0"
               }`}
             >
-              <div className="border-border/50 bg-card/80 rounded-2xl border p-8 shadow-xl backdrop-blur-sm">
+              <div className="border-border/50 bg-card/80 dark:bg-card rounded-2xl border p-8 shadow-xl backdrop-blur-sm">
                 <div className="grid gap-8 md:grid-cols-2">
                   {/* Description & Details */}
                   <div>
@@ -278,7 +278,7 @@ export const HowItWorksSection: React.FC = () => {
                         {step.icon}
                       </div>
                       <div>
-                        <h4 className="text-2xl font-bold text-foreground dark:text-slate-200">
+                        <h4 className="text-foreground text-2xl font-bold dark:text-slate-200">
                           {step.title}
                         </h4>
                         <p className="text-muted-foreground">
@@ -288,7 +288,7 @@ export const HowItWorksSection: React.FC = () => {
                     </div>
 
                     <div className="space-y-3">
-                      <h5 className="flex items-center gap-2 font-semibold text-foreground dark:text-slate-200">
+                      <h5 className="text-foreground flex items-center gap-2 font-semibold dark:text-slate-200">
                         <Eye className="h-4 w-4" />
                         Analysis Components:
                       </h5>
@@ -296,9 +296,9 @@ export const HowItWorksSection: React.FC = () => {
                         {step.details.map((detail, index) => (
                           <div
                             key={index}
-                            className="flex items-center gap-3 text-sm text-muted-foreground"
+                            className="text-muted-foreground flex items-center gap-3 text-sm"
                           >
-                            <CheckCircle className="h-4 w-4 flex-shrink-0 text-primary" />
+                            <CheckCircle className="text-primary h-4 w-4 flex-shrink-0" />
                             <span>{detail}</span>
                           </div>
                         ))}
@@ -308,7 +308,7 @@ export const HowItWorksSection: React.FC = () => {
 
                   {/* Metrics */}
                   <div>
-                    <h5 className="mb-4 flex items-center gap-2 font-semibold text-foreground dark:text-slate-200">
+                    <h5 className="text-foreground mb-4 flex items-center gap-2 font-semibold dark:text-slate-200">
                       <TrendingUp className="h-4 w-4" />
                       Generated Metrics:
                     </h5>
@@ -316,10 +316,10 @@ export const HowItWorksSection: React.FC = () => {
                       {step.metrics.map((metric, index) => (
                         <div
                           key={index}
-                          className="flex items-center gap-3 rounded-lg bg-muted/50 p-3 dark:bg-slate-700/50"
+                          className="bg-muted/50 flex items-center gap-3 rounded-lg p-3"
                         >
-                          <BarChart3 className="h-4 w-4 text-primary" />
-                          <span className="text-sm font-medium text-foreground/80">
+                          <BarChart3 className="text-primary h-4 w-4" />
+                          <span className="text-foreground/80 text-sm font-medium">
                             {metric}
                           </span>
                         </div>
@@ -334,7 +334,7 @@ export const HowItWorksSection: React.FC = () => {
 
         {/* Advanced Metrics Grid */}
         <div className="mb-16">
-          <h3 className="mb-12 text-center text-3xl font-bold text-foreground dark:text-slate-200">
+          <h3 className="text-foreground mb-12 text-center text-3xl font-bold dark:text-slate-200">
             Comprehensive Scoring System
           </h3>
           <div className="grid gap-6 md:grid-cols-2 lg:grid-cols-4">
@@ -344,10 +344,10 @@ export const HowItWorksSection: React.FC = () => {
                 className="border-border/50 bg-card/60 rounded-xl border p-6 backdrop-blur-sm transition-all duration-300 hover:shadow-lg"
               >
                 <div className="mb-4 flex items-center gap-3">
-                  <div className="rounded-lg bg-primary p-2 text-white">
+                  <div className="bg-primary rounded-lg p-2 text-white">
                     {category.icon}
                   </div>
-                  <h4 className="font-bold text-foreground dark:text-slate-200">
+                  <h4 className="text-foreground font-bold dark:text-slate-200">
                     {category.category}
                   </h4>
                 </div>
@@ -355,9 +355,9 @@ export const HowItWorksSection: React.FC = () => {
                   {category.items.map((item, itemIndex) => (
                     <div
                       key={itemIndex}
-                      className="flex items-center gap-2 text-sm text-muted-foreground"
+                      className="text-muted-foreground flex items-center gap-2 text-sm"
                     >
-                      <div className="h-1.5 w-1.5 rounded-full bg-primary"></div>
+                      <div className="bg-primary h-1.5 w-1.5 rounded-full"></div>
                       <span>{item}</span>
                     </div>
                   ))}
@@ -369,7 +369,7 @@ export const HowItWorksSection: React.FC = () => {
 
         {/* Technology Stack */}
         <div className="text-center">
-          <h3 className="mb-8 text-3xl font-bold text-foreground dark:text-slate-200">
+          <h3 className="text-foreground mb-8 text-3xl font-bold dark:text-slate-200">
             Powered by Advanced Technology
           </h3>
           <div className="flex flex-wrap justify-center gap-4">
@@ -398,7 +398,7 @@ export const HowItWorksSection: React.FC = () => {
                 className="border-border/50 bg-muted/50 flex items-center gap-2 rounded-full border px-4 py-2"
               >
                 <div className="text-primary">{tech.icon}</div>
-                <span className="text-sm font-medium text-foreground/80">
+                <span className="text-foreground/80 text-sm font-medium">
                   {tech.name}
                 </span>
               </div>

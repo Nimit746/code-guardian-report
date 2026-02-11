@@ -58,7 +58,7 @@ export const Privacy: React.FC = () => {
               "Analysis preferences and settings",
             ]}
           />
-          <p className="mt-3 rounded-lg border border-green-200 bg-green-50 p-4 dark:border-green-800 dark:bg-green-900/20">
+          <p className="mt-3 rounded-lg border border-green-200 bg-green-50 p-4 text-green-800 dark:border-green-800 dark:bg-green-900/20 dark:text-green-100">
             <strong>Important:</strong> Your source code is processed locally in
             your browser whenever possible. We do not permanently store your
             source code on our servers.
@@ -277,26 +277,26 @@ export const Privacy: React.FC = () => {
           please contact us:
         </p>
 
-        <div className="mt-6 rounded-xl border border-border bg-muted p-6 dark:border-border dark:bg-teal-900/20">
+        <div className="border-border bg-muted dark:border-border mt-6 rounded-xl border p-6 dark:bg-teal-900/20">
           <div className="space-y-3">
             <div className="flex items-center gap-3">
-              <Mail className="h-5 w-5 text-primary" />
+              <Mail className="text-primary h-5 w-5" />
               <span className="font-medium">Email: itisaddy7@gmail.com</span>
             </div>
             <div className="flex items-center gap-3">
-              <Globe className="h-5 w-5 text-primary" />
+              <Globe className="text-primary h-5 w-5" />
               <span className="font-medium">
                 Website: Code Guardian Platform
               </span>
             </div>
             <div className="flex items-center gap-3">
-              <FileText className="h-5 w-5 text-primary" />
+              <FileText className="text-primary h-5 w-5" />
               <span className="font-medium">Response Time: Within 30 days</span>
             </div>
           </div>
         </div>
 
-        <p className="mt-6 text-sm text-muted-foreground">
+        <p className="text-muted-foreground mt-6 text-sm">
           This Privacy Policy is effective as of January 15, 2025, and will
           remain in effect except with respect to any changes in its provisions
           in the future, which will be in effect immediately after being posted

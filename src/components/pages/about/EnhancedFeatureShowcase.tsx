@@ -90,22 +90,22 @@ export const EnhancedFeatureShowcase: React.FC = () => {
     features.find((f) => f.id === activeFeature) || features[0];
 
   return (
-    <section className="relative overflow-hidden py-20">
-      {/* Enhanced Background Elements */}
+    <section className="relative overflow-hidden bg-slate-50/50 py-20 dark:bg-transparent">
+      {/* Enhanced Background Elements - Made more subtle for light mode */}
       <div className="pointer-events-none absolute inset-0">
-        <div className="hidden absolute top-1/4 left-1/4 h-64 w-64 rounded-full bg-gradient-to-r from-blue-500/10 via-purple-500/10 to-pink-500/10 blur-3xl"></div>
-        <div className="hidden delay-2s absolute right-1/4 bottom-1/4 h-48 w-48 rounded-full bg-gradient-to-r from-emerald-500/10 to-teal-500/10 blur-2xl"></div>
+        <div className="absolute top-1/4 left-1/4 hidden h-64 w-64 rounded-full bg-blue-500/5 blur-3xl dark:bg-blue-500/10"></div>
+        <div className="delay-2s absolute right-1/4 bottom-1/4 hidden h-48 w-48 rounded-full bg-emerald-500/5 blur-2xl dark:bg-emerald-500/10"></div>
       </div>
 
       <div className="relative z-10 container mx-auto px-4">
         <div className="mx-auto max-w-7xl">
           {/* Enhanced Header */}
           <div className="mb-16 text-center">
-            <div className="mx-auto mb-8 max-w-4xl rounded-xl border border-border/50 bg-white/90 p-8 shadow-sm backdrop-blur-sm transition-all duration-200 hover:border-border/50/50/90">
-              <h3 className="gradient-text-animated mb-6 text-4xl font-bold sm:text-5xl">
+            <div className="mx-auto mb-8 max-w-4xl rounded-xl border border-slate-200 bg-white p-8 shadow-sm transition-all duration-200 hover:border-slate-300 hover:shadow-md dark:border-white/10 dark:bg-white/5">
+              <h3 className="mb-6 text-4xl font-bold text-slate-900 sm:text-5xl dark:text-white">
                 Platform Capabilities
               </h3>
-              <p className="text-xl leading-relaxed text-foreground/80">
+              <p className="text-xl leading-relaxed text-slate-600 dark:text-slate-300">
                 Discover the powerful features that make Code Guardian the
                 ultimate security analysis platform
               </p>
@@ -118,52 +118,52 @@ export const EnhancedFeatureShowcase: React.FC = () => {
               {features.map((feature, index) => (
                 <Card
                   key={feature.id}
-                  className={` glow-on-hover cursor-pointer rounded-xl border p-6 backdrop-blur-sm transition-all duration-700 ${
+                  className={`cursor-pointer rounded-xl border p-6 transition-all duration-700 ${
                     activeFeature === feature.id
-                      ? "border-2 border-blue-400/50 bg-white/90 shadow-2xl shadow-blue-500/30 dark:border-primary/50/90"
-                      : "border-border/50 bg-white/90 shadow-sm hover:border-border/50/50/90 dark:hover:border-white/20"
+                      ? "dark:border-primary dark:ring-primary border-blue-500 bg-white shadow-lg ring-1 ring-blue-500 dark:bg-slate-800"
+                      : "border-slate-200 bg-white shadow-sm hover:border-slate-300 hover:shadow-md dark:border-slate-700 dark:bg-slate-900 dark:hover:border-slate-600"
                   }`}
                   onClick={() => setActiveFeature(feature.id)}
                   style={{ animationDelay: `${index * 0.1}s` }}
                 >
-                  <CardContent className="p-8">
+                  <CardContent className="p-0">
                     <div className="flex items-start gap-6">
                       {/* Enhanced Icon Container */}
                       <div
-                        className={`relative rounded-2xl bg-gradient-to-r p-4 ${feature.gradient} text-white shadow-xl ${
+                        className={`relative rounded-2xl p-4 shadow-md transition-all duration-500 ${
                           activeFeature === feature.id
-                            ? "scale-110 rotate-3"
-                            : ""
-                        } transition-all duration-500`}
+                            ? `bg-gradient-to-r ${feature.gradient} scale-110 rotate-3 text-white`
+                            : "bg-slate-100 text-slate-600 dark:bg-white/10 dark:text-slate-300"
+                        }`}
                       >
                         {feature.icon}
                         {activeFeature === feature.id && (
-                          <div className="bg-background/20 absolute inset-0 animate-pulse rounded-2xl"></div>
+                          <div className="absolute inset-0 animate-pulse rounded-2xl bg-white/20"></div>
                         )}
                       </div>
 
                       <div className="flex-1">
                         <h4
-                          className={`mb-3 text-xl font-bold ${
+                          className={`mb-3 text-xl font-bold transition-all duration-500 ${
                             activeFeature === feature.id
-                              ? "gradient-text-animated"
-                              : "text-foreground"
-                          } transition-all duration-500`}
+                              ? "text-blue-700 dark:text-white"
+                              : "text-slate-900 dark:text-slate-200"
+                          }`}
                         >
                           {feature.title}
                         </h4>
-                        <p className="leading-relaxed text-foreground/80">
+                        <p className="leading-relaxed text-slate-600 dark:text-slate-400">
                           {feature.description}
                         </p>
                       </div>
 
                       {/* Enhanced Arrow */}
                       <div
-                        className={`flex h-10 w-10 items-center justify-center rounded-full ${
+                        className={`flex h-10 w-10 items-center justify-center rounded-full transition-all duration-500 ${
                           activeFeature === feature.id
-                            ? "scale-110 bg-primary text-white"
-                            : "bg-muted text-muted-foreground dark:bg-slate-700"
-                        } transition-all duration-500`}
+                            ? "bg-primary scale-110 text-white"
+                            : "bg-slate-100 text-slate-400 dark:bg-slate-800 dark:text-slate-500"
+                        }`}
                       >
                         <ArrowRight className="h-5 w-5" />
                       </div>
@@ -175,13 +175,13 @@ export const EnhancedFeatureShowcase: React.FC = () => {
 
             {/* Enhanced Active Feature Details */}
             <div className="relative lg:sticky lg:top-8">
-              <Card className=" overflow-hidden rounded-xl border border-border/50 bg-white/90 shadow-sm backdrop-blur-sm transition-all duration-200 hover:border-border/50/50/90">
+              <Card className="overflow-hidden rounded-xl border border-slate-200 bg-white shadow-sm transition-all duration-200 hover:border-slate-300 hover:shadow-md dark:border-slate-700 dark:bg-slate-900">
                 {/* Enhanced Background Decoration */}
                 <div
-                  className={`absolute inset-0 bg-gradient-to-br ${activeFeatureData.gradient} opacity-10`}
+                  className={`absolute inset-0 bg-gradient-to-br ${activeFeatureData.gradient} opacity-5 dark:opacity-10`}
                 ></div>
-                <div className="hidden absolute top-0 right-0 h-40 w-40 rounded-full bg-gradient-to-br from-blue-500/30 via-purple-500/20 to-pink-500/30 blur-3xl"></div>
-                <div className="hidden delay-2s absolute bottom-0 left-0 h-32 w-32 rounded-full bg-gradient-to-br from-emerald-500/25 to-teal-500/25 blur-2xl"></div>
+                <div className="absolute top-0 right-0 hidden h-40 w-40 rounded-full bg-gradient-to-br from-blue-500/30 via-purple-500/20 to-pink-500/30 blur-3xl"></div>
+                <div className="delay-2s absolute bottom-0 left-0 hidden h-32 w-32 rounded-full bg-gradient-to-br from-emerald-500/25 to-teal-500/25 blur-2xl"></div>
 
                 {/* Particle System */}
                 <div className="particle-system">
@@ -203,17 +203,17 @@ export const EnhancedFeatureShowcase: React.FC = () => {
                   {/* Enhanced Header */}
                   <div className="mb-8 flex items-center gap-6">
                     <div
-                      className={`rounded-3xl bg-gradient-to-r p-5 ${activeFeatureData.gradient} animate-pulse text-white shadow-2xl`}
+                      className={`rounded-3xl bg-gradient-to-r p-5 ${activeFeatureData.gradient} animate-pulse text-white shadow-xl`}
                     >
                       <div className="text-2xl">{activeFeatureData.icon}</div>
                     </div>
                     <div>
-                      <h4 className="gradient-text-animated mb-2 text-3xl font-bold">
+                      <h4 className="mb-2 text-3xl font-bold text-slate-900 dark:text-white">
                         {activeFeatureData.title}
                       </h4>
                       <div className="flex items-center gap-3">
-                        <Sparkles className="h-5 w-5 animate-pulse text-yellow-500" />
-                        <span className="font-medium text-foreground/80">
+                        <Sparkles className="h-5 w-5 text-amber-500" />
+                        <span className="font-medium text-slate-600 dark:text-slate-300">
                           Featured Capability
                         </span>
                       </div>
@@ -221,17 +221,17 @@ export const EnhancedFeatureShowcase: React.FC = () => {
                   </div>
 
                   {/* Enhanced Description */}
-                  <div className="mb-8 rounded-xl border border-border/50 bg-white/90 p-6 shadow-sm backdrop-blur-sm transition-all duration-200 hover:border-border/50/50/90">
-                    <p className="text-lg leading-relaxed text-foreground dark:text-slate-200">
+                  <div className="mb-8 rounded-xl border border-slate-200 bg-slate-50 p-6 shadow-sm dark:border-white/10 dark:bg-white/5">
+                    <p className="text-lg leading-relaxed text-slate-700 dark:text-slate-200">
                       {activeFeatureData.description}
                     </p>
                   </div>
 
                   {/* Enhanced Benefits Section */}
                   <div className="space-y-6">
-                    <h5 className="text-foreground flex items-center gap-3 text-xl font-bold">
-                      <div className="rounded-lg bg-gradient-to-r from-green-500 to-emerald-500 p-2">
-                        <CheckCircle className="h-5 w-5 text-white" />
+                    <h5 className="flex items-center gap-3 text-xl font-bold text-slate-900 dark:text-white">
+                      <div className="rounded-lg bg-emerald-100 p-2 dark:bg-emerald-500/20">
+                        <CheckCircle className="h-5 w-5 text-emerald-600 dark:text-emerald-400" />
                       </div>
                       Key Benefits
                     </h5>
@@ -239,14 +239,14 @@ export const EnhancedFeatureShowcase: React.FC = () => {
                       {activeFeatureData.benefits.map((benefit, index) => (
                         <div
                           key={index}
-                          className=" group rounded-xl border border-border/50 bg-white/90 p-4 shadow-sm backdrop-blur-sm transition-all duration-200 hover:border-border/50/50/90"
+                          className="group rounded-xl border border-slate-200 bg-white p-4 shadow-sm transition-all duration-200 hover:border-slate-300 hover:shadow-md dark:border-white/10 dark:bg-white/5 dark:hover:border-white/20"
                           style={{ animationDelay: `${index * 0.1}s` }}
                         >
                           <div className="flex items-center gap-4">
                             <div
-                              className={`h-3 w-3 rounded-full bg-gradient-to-r ${activeFeatureData.gradient} transition-transform duration-300 group-hover:scale-125`}
+                              className={`h-3 w-3 rounded-full bg-gradient-to-r ${activeFeatureData.gradient}`}
                             ></div>
-                            <span className="text-foreground/80 group-hover:text-foreground font-medium transition-colors duration-300">
+                            <span className="font-medium text-slate-700 transition-colors duration-300 group-hover:text-slate-900 dark:text-slate-300 dark:group-hover:text-white">
                               {benefit}
                             </span>
                           </div>

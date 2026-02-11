@@ -42,7 +42,7 @@ export const Terms: React.FC = () => {
           constitutes acceptance of any changes.
         </p>
 
-        <div className="mt-6 rounded-lg border border-border bg-muted p-4 dark:border-border dark:bg-teal-900/20">
+        <div className="mt-6 rounded-lg border border-blue-200 bg-blue-50 p-4 dark:border-blue-900/30 dark:bg-blue-900/20">
           <p className="font-medium text-blue-900 dark:text-blue-100">
             <strong>Important:</strong> Code Guardian is provided as a free
             service for educational and professional use. Commercial use may
@@ -290,26 +290,26 @@ export const Terms: React.FC = () => {
           If you have questions about these Terms of Service, please contact us:
         </p>
 
-        <div className="mt-6 rounded-xl border border-border bg-muted p-6 dark:border-border dark:bg-teal-900/20">
+        <div className="border-border bg-muted dark:border-border mt-6 rounded-xl border p-6 dark:bg-teal-900/20">
           <div className="space-y-3">
             <div className="flex items-center gap-3">
-              <Mail className="h-5 w-5 text-primary" />
+              <Mail className="text-primary h-5 w-5" />
               <span className="font-medium">Email: itisaddy7@gmail.com</span>
             </div>
             <div className="flex items-center gap-3">
-              <Globe className="h-5 w-5 text-primary" />
+              <Globe className="text-primary h-5 w-5" />
               <span className="font-medium">
                 Website: Code Guardian Platform
               </span>
             </div>
             <div className="flex items-center gap-3">
-              <FileText className="h-5 w-5 text-primary" />
+              <FileText className="text-primary h-5 w-5" />
               <span className="font-medium">Response Time: Within 30 days</span>
             </div>
           </div>
         </div>
 
-        <p className="mt-6 text-sm text-muted-foreground">
+        <p className="text-muted-foreground mt-6 text-sm">
           These Terms of Service are effective as of November 28, 2025. We
           reserve the right to update these Terms at any time. Continued use of
           the service after changes constitutes acceptance of the new Terms.

@@ -16,12 +16,19 @@ export const HeroSection: React.FC<HeroSectionProps> = ({
   children,
   className = "",
   titleId = "hero-title",
+  variant = "minimal",
 }) => {
   return (
     <section
-      className={`relative py-20 sm:py-28 md:py-32 lg:py-40 ${className}`}
+      className={`relative overflow-hidden py-20 sm:py-28 md:py-32 lg:py-40 ${
+        variant === "minimal" ? "border-border/40 border-b" : ""
+      } ${className}`}
       aria-labelledby={titleId}
     >
+      {variant === "gradient" && (
+        <div className="from-primary/5 via-background to-background dark:from-primary/10 absolute inset-0 -z-10 bg-[radial-gradient(ellipse_at_top,_var(--tw-gradient-stops))]" />
+      )}
+
       <div className="relative z-10 container mx-auto px-4 sm:px-6 lg:px-8">
         {title && (
           <h1
@@ -33,7 +40,7 @@ export const HeroSection: React.FC<HeroSectionProps> = ({
         )}
 
         {description && (
-          <p className="mx-auto mt-6 max-w-2xl text-center text-base leading-relaxed text-muted-foreground sm:text-lg">
+          <p className="text-muted-foreground mx-auto mt-6 max-w-2xl text-center text-base leading-relaxed sm:text-lg">
             {description}
           </p>
         )}
