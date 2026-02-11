@@ -445,24 +445,24 @@ export const GitHubAnalysisPage: React.FC = () => {
 
   if (!isGitHubUser && !permissionGranted && !user) {
     return (
-      <div className="relative flex min-h-screen items-center justify-center overflow-hidden bg-background p-4">
+      <div className="bg-background relative flex min-h-screen items-center justify-center overflow-hidden p-4">
         {}
         <div className="pointer-events-none absolute top-0 left-0 h-full w-full overflow-hidden">
-          <div className="absolute -top-[20%] -left-[10%] h-[50%] w-[50%] rounded-full bg-muted0/10 blur-[100px] dark:bg-muted0/10" />
+          <div className="bg-muted/10 dark:bg-muted/10 absolute -top-[20%] -left-[10%] h-[50%] w-[50%] rounded-full blur-[100px]" />
           <div className="absolute top-[40%] -right-[10%] h-[40%] w-[40%] rounded-full bg-purple-500/10 blur-[100px] dark:bg-purple-500/10" />
         </div>
 
-        <Card className="w-full max-w-4xl overflow-hidden border-0 bg-card/80 p-0 shadow-2xl ring-1 ring-border backdrop-blur-xl dark:ring-border">
+        <Card className="bg-card/80 ring-border dark:ring-border w-full max-w-4xl overflow-hidden border-0 p-0 shadow-2xl ring-1 backdrop-blur-xl">
           <div className="grid grid-cols-1 md:grid-cols-2">
             <div className="flex flex-col justify-center p-8 md:p-12">
               <div className="mb-8 flex h-16 w-16 items-center justify-center rounded-2xl bg-gradient-to-br from-slate-900 to-slate-700 shadow-lg dark:from-white dark:to-slate-300">
                 <Github className="h-8 w-8 text-white" />
               </div>
 
-              <h1 className="mb-4 text-3xl font-bold tracking-tight text-foreground md:text-4xl dark:text-white">
+              <h1 className="text-foreground mb-4 text-3xl font-bold tracking-tight md:text-4xl dark:text-white">
                 GitHub Analysis
               </h1>
-              <p className="mb-8 text-lg leading-relaxed text-muted-foreground">
+              <p className="text-muted-foreground mb-8 text-lg leading-relaxed">
                 Connect your GitHub account to unlock advanced security
                 insights, repository tracking, and automated code analysis.
               </p>
@@ -478,13 +478,13 @@ export const GitHubAnalysisPage: React.FC = () => {
                 </Button>
 
                 {!user && (
-                  <p className="text-center text-sm text-muted-foreground">
+                  <p className="text-muted-foreground text-center text-sm">
                     Don't have an account?{" "}
                     <a
                       href="https://github.com/signup"
                       target="_blank"
                       rel="noopener noreferrer"
-                      className="font-medium text-primary hover:underline"
+                      className="text-primary font-medium hover:underline"
                     >
                       Sign up
                     </a>
@@ -493,9 +493,9 @@ export const GitHubAnalysisPage: React.FC = () => {
               </div>
             </div>
 
-            <div className="flex flex-col justify-center border-l border-border bg-muted p-8 md:p-12/50">
-              <h3 className="mb-6 flex items-center gap-2 font-semibold text-foreground dark:text-white">
-                <Shield className="h-5 w-5 text-primary" />
+            <div className="border-border bg-muted/50 flex flex-col justify-center border-l p-8 md:p-12">
+              <h3 className="text-foreground mb-6 flex items-center gap-2 font-semibold dark:text-white">
+                <Shield className="text-primary h-5 w-5" />
                 Premium Features
               </h3>
 
@@ -523,17 +523,17 @@ export const GitHubAnalysisPage: React.FC = () => {
                   <div key={i} className="flex gap-4">
                     <div
                       className={cn(
-                        "flex h-10 w-10 flex-shrink-0 items-center justify-center rounded-lg bg-white shadow-sm",
+                        "bg-background dark:bg-muted flex h-10 w-10 flex-shrink-0 items-center justify-center rounded-lg shadow-sm",
                         feature.color
                       )}
                     >
                       <feature.icon className="h-5 w-5" />
                     </div>
                     <div>
-                      <h4 className="font-medium text-foreground dark:text-white">
+                      <h4 className="text-foreground font-medium dark:text-white">
                         {feature.title}
                       </h4>
-                      <p className="text-sm leading-relaxed text-muted-foreground">
+                      <p className="text-muted-foreground text-sm leading-relaxed">
                         {feature.desc}
                       </p>
                     </div>
@@ -550,7 +550,7 @@ export const GitHubAnalysisPage: React.FC = () => {
   if (!user) return null;
 
   return (
-    <div className="relative min-h-screen overflow-hidden bg-background">
+    <div className="bg-background relative min-h-screen overflow-hidden">
       <AnimatedBackground />
       <div className="relative z-10 bg-transparent">
         <GitHubRepositoryPermissionModal
@@ -570,8 +570,8 @@ export const GitHubAnalysisPage: React.FC = () => {
         />
 
         {/* Hero Section */}
-        <div className="relative overflow-hidden border-b border-border bg-background">
-          <div className="absolute inset-0 bg-muted/50/50" />
+        <div className="border-border bg-background relative overflow-hidden border-b">
+          <div className="bg-muted/50 absolute inset-0" />
           <div className="absolute inset-0 bg-[linear-gradient(to_right,#80808012_1px,transparent_1px),linear-gradient(to_bottom,#80808012_1px,transparent_1px)] bg-[size:24px_24px]" />
 
           <div className="relative z-10 mx-auto max-w-7xl px-4 pt-24 pb-12 sm:px-6 lg:px-8">
@@ -605,10 +605,10 @@ export const GitHubAnalysisPage: React.FC = () => {
                       <Github className="h-5 w-5 text-purple-600 dark:text-purple-400" />
                     </div>
                     <div>
-                      <h2 className="text-lg font-semibold text-foreground dark:text-white">
+                      <h2 className="text-foreground text-lg font-semibold dark:text-white">
                         Your GitHub Repositories
                       </h2>
-                      <p className="text-sm text-muted-foreground">
+                      <p className="text-muted-foreground text-sm">
                         Select a repository to analyze ({repositories.length}{" "}
                         repos)
                       </p>
@@ -655,10 +655,10 @@ export const GitHubAnalysisPage: React.FC = () => {
                   <div className="mx-auto mb-4 flex h-16 w-16 items-center justify-center rounded-full bg-purple-100 dark:bg-purple-900/30">
                     <Github className="h-8 w-8 text-purple-600 dark:text-purple-400" />
                   </div>
-                  <h3 className="mb-2 text-xl font-semibold text-foreground dark:text-white">
+                  <h3 className="text-foreground mb-2 text-xl font-semibold dark:text-white">
                     Connect Your GitHub Account
                   </h3>
-                  <p className="mx-auto mb-6 max-w-md text-muted-foreground">
+                  <p className="text-muted-foreground mx-auto mb-6 max-w-md">
                     Link your GitHub username to automatically load your
                     repositories for security analysis. Your public repos will
                     be available for scanning.
@@ -679,7 +679,7 @@ export const GitHubAnalysisPage: React.FC = () => {
             <div className="mb-8">
               <Card className="border-border p-8 text-center">
                 <div className="mx-auto mb-4 flex h-16 w-16 items-center justify-center">
-                  <div className="h-10 w-10 animate-spin rounded-full border-4 border-border border-t-purple-600 dark:border-t-purple-400" />
+                  <div className="border-border h-10 w-10 animate-spin rounded-full border-4 border-t-purple-600 dark:border-t-purple-400" />
                 </div>
                 <p className="text-muted-foreground">
                   Loading your repositories...
@@ -741,7 +741,7 @@ export const GitHubAnalysisPage: React.FC = () => {
             {selectedTab === "results" && analysisResults && (
               <div className="animate-in fade-in space-y-6 duration-500">
                 {}
-                <Card className="relative overflow-hidden border-border p-6 shadow-sm">
+                <Card className="border-border relative overflow-hidden p-6 shadow-sm">
                   <div className="pointer-events-none absolute top-0 right-0 -mt-32 -mr-32 h-64 w-64 rounded-full bg-emerald-500/5 blur-3xl" />
 
                   <div className="relative z-10 flex flex-col justify-between gap-6 md:flex-row md:items-center">
@@ -750,10 +750,10 @@ export const GitHubAnalysisPage: React.FC = () => {
                         <FileCode className="h-8 w-8 text-white" />
                       </div>
                       <div>
-                        <h2 className="mb-1 text-2xl font-bold text-foreground dark:text-white">
+                        <h2 className="text-foreground mb-1 text-2xl font-bold dark:text-white">
                           Analysis Results
                         </h2>
-                        <div className="flex items-center gap-2 text-muted-foreground">
+                        <div className="text-muted-foreground flex items-center gap-2">
                           <GitBranch className="h-4 w-4" />
                           {analyzedRepoName}
                         </div>
@@ -762,9 +762,9 @@ export const GitHubAnalysisPage: React.FC = () => {
 
                     <div className="flex items-center gap-6">
                       <div className="text-right">
-                        <div className="text-4xl font-bold tracking-tight text-foreground dark:text-white">
+                        <div className="text-foreground text-4xl font-bold tracking-tight dark:text-white">
                           {analysisResults.summary.securityScore}
-                          <span className="text-xl font-medium text-muted-foreground">
+                          <span className="text-muted-foreground text-xl font-medium">
                             /100
                           </span>
                         </div>
@@ -772,7 +772,7 @@ export const GitHubAnalysisPage: React.FC = () => {
                           Security Score
                         </div>
                       </div>
-                      <div className="h-12 w-px bg-muted dark:bg-slate-700" />
+                      <div className="bg-muted h-12 w-px dark:bg-slate-700" />
                       <Button
                         variant="outline"
                         onClick={() => {
@@ -828,9 +828,9 @@ export const GitHubAnalysisPage: React.FC = () => {
                           stat.color === "yellow" &&
                             "border-yellow-100 bg-yellow-50 dark:border-yellow-900/30 dark:bg-yellow-900/10",
                           stat.color === "blue" &&
-                            "border-blue-100 bg-muted dark:border-blue-900/30 dark:bg-teal-900/10",
+                            "bg-muted border-blue-100 dark:border-blue-900/30 dark:bg-teal-900/10",
                           stat.color === "slate" &&
-                            "border-slate-100 bg-muted/50"
+                            "bg-muted/50 border-slate-100"
                         )}
                       >
                         <div
@@ -844,8 +844,7 @@ export const GitHubAnalysisPage: React.FC = () => {
                               "text-yellow-600 dark:text-yellow-400",
                             stat.color === "blue" &&
                               "text-primary dark:text-primary",
-                            stat.color === "slate" &&
-                              "text-muted-foreground"
+                            stat.color === "slate" && "text-muted-foreground"
                           )}
                         >
                           {stat.value}
@@ -861,8 +860,7 @@ export const GitHubAnalysisPage: React.FC = () => {
                               "text-yellow-700 dark:text-yellow-300",
                             stat.color === "blue" &&
                               "text-teal-600 dark:text-teal-300",
-                            stat.color === "slate" &&
-                              "text-muted-foreground"
+                            stat.color === "slate" && "text-muted-foreground"
                           )}
                         >
                           {stat.label}
@@ -876,7 +874,7 @@ export const GitHubAnalysisPage: React.FC = () => {
                 <Suspense
                   fallback={
                     <div className="flex flex-col items-center justify-center py-12">
-                      <div className="mb-4 h-12 w-12 animate-spin rounded-full border-4 border-border border-t-blue-600" />
+                      <div className="border-border mb-4 h-12 w-12 animate-spin rounded-full border-4 border-t-blue-600" />
                       <p className="text-muted-foreground">
                         Loading detailed analysis...
                       </p>

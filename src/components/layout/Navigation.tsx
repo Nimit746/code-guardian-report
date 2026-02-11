@@ -24,7 +24,12 @@ import { AuthModal } from "@/components/auth/AuthModal";
 import NotificationCenter from "@/components/notifications/NotificationCenter";
 import { PWAQuickActions } from "@/components/pwa/PWAQuickActions";
 import { ThemeToggle } from "@/components/common/ThemeToggle";
-import { motion, AnimatePresence } from "framer-motion";
+import {
+  motion,
+  AnimatePresence,
+  useScroll,
+  useMotionValueEvent,
+} from "framer-motion";
 
 interface NavigationProps {
   className?: string;
@@ -35,10 +40,14 @@ export const Navigation: React.FC<NavigationProps> = ({
 }) => {
   const [isMobileMenuOpen, setIsMobileMenuOpen] = useState(false);
   const [isScrolled, setIsScrolled] = useState(false);
+  const [isVisible, setIsVisible] = useState(true);
   const [mounted, setMounted] = useState(false);
   const [showAuthModal, setShowAuthModal] = useState(false);
   const [showUserDropdown, setShowUserDropdown] = useState(false);
   const userDropdownRef = useRef<HTMLDivElement>(null);
+
+  const { scrollY } = useScroll();
+  const lastScrollY = useRef(0);
 
   const { user, userProfile, logout } = useAuth();
   const { currentSection, navigateTo } = useNavigation();
@@ -81,6 +90,16 @@ export const Navigation: React.FC<NavigationProps> = ({
     return () => window.removeEventListener("scroll", handleScroll);
   }, []);
 
+  useMotionValueEvent(scrollY, "change", (latest) => {
+    const previous = lastScrollY.current;
+    if (latest > previous && latest > 150 && !isMobileMenuOpen) {
+      setIsVisible(false);
+    } else {
+      setIsVisible(true);
+    }
+    lastScrollY.current = latest;
+  });
+
   const handleNavigate = (sectionId: string) => {
     navigateTo(sectionId);
     setIsMobileMenuOpen(false);
@@ -116,8 +135,8 @@ export const Navigation: React.FC<NavigationProps> = ({
   const navContent = (
     <motion.nav
       initial={{ y: -100 }}
-      animate={{ y: 0 }}
-      transition={{ duration: 0.5, ease: "circOut" }}
+      animate={{ y: isVisible ? 0 : -100 }}
+      transition={{ duration: 0.4, ease: [0.32, 0.72, 0, 1] }}
       className={cn(
         "fixed top-0 right-0 left-0 z-50 w-full transition-all duration-300",
         isScrolled
@@ -138,7 +157,7 @@ export const Navigation: React.FC<NavigationProps> = ({
             <div className="from-primary/20 to-primary/5 relative flex h-9 w-9 items-center justify-center rounded-xl bg-gradient-to-tr transition-transform group-hover:scale-105">
               <Shield className="text-primary h-5 w-5 transition-colors" />
             </div>
-            <span className="font-display text-foreground text-xl font-medium tracking-tight">
+            <span className="font-display text-foreground hidden text-xl font-medium tracking-tight sm:block">
               Code Guardian
             </span>
           </button>
@@ -191,9 +210,43 @@ export const Navigation: React.FC<NavigationProps> = ({
             </div>
           </div>
 
-          {/* Tablet Nav (Simplified) */}
-          <div className="hidden flex-1 items-center justify-center gap-2 md:flex lg:hidden">
-            {/* Can be hidden or simplified, sticking to menu for tablet often better or just icons */}
+          {/* Tablet Nav (Icon Only) */}
+          <div className="bg-muted/30 border-border/20 hidden items-center justify-center rounded-full border p-1 backdrop-blur-sm md:flex lg:hidden">
+            <div className="flex items-center gap-1">
+              {navItems.slice(0, 4).map((item) => {
+                const active = isActive(item.id);
+                return (
+                  <button
+                    key={item.id}
+                    onClick={() => handleNavigate(item.id)}
+                    className={cn(
+                      "relative flex h-9 w-9 items-center justify-center rounded-full transition-colors",
+                      active
+                        ? "text-primary-foreground"
+                        : "text-muted-foreground hover:text-foreground hover:bg-muted"
+                    )}
+                    aria-label={item.label}
+                  >
+                    {active && (
+                      <motion.div
+                        layoutId="active-nav-tablet-pill"
+                        className="bg-primary absolute inset-0 rounded-full shadow-sm"
+                        transition={{
+                          type: "spring",
+                          bounce: 0.2,
+                          duration: 0.6,
+                        }}
+                      />
+                    )}
+                    <span className="relative z-10">
+                      {React.cloneElement(item.icon as React.ReactElement, {
+                        className: "h-4 w-4",
+                      })}
+                    </span>
+                  </button>
+                );
+              })}
+            </div>
           </div>
 
           {/* Right Actions */}
