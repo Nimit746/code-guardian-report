@@ -212,20 +212,23 @@ export const HowItWorksSection: React.FC = () => {
 
   return (
     <section className="relative overflow-hidden py-20">
-      {/* Background Effects */}
-      <div className="dark:from-background dark:via-muted/5 dark:to-muted/10 absolute inset-0 bg-gradient-to-br from-slate-50 via-blue-50/30 to-purple-50/30"></div>
-      <div className="absolute top-0 left-1/4 h-72 w-72 animate-pulse rounded-full bg-blue-300 opacity-20 mix-blend-multiply blur-xl filter"></div>
-      <div className="absolute right-1/4 bottom-0 h-72 w-72 animate-pulse rounded-full bg-purple-300 opacity-20 mix-blend-multiply blur-xl filter delay-1000"></div>
+      {/* Background Effects - Light Mode */}
+      <div className="absolute inset-0 bg-gradient-to-br from-slate-50 via-blue-50/30 to-purple-50/30 dark:hidden"></div>
+      {/* Background Effects - Dark Mode */}
+      <div className="absolute inset-0 hidden bg-gradient-to-br from-neutral-950 via-neutral-900 to-neutral-950 dark:block"></div>
+      {/* Ambient glow blobs */}
+      <div className="absolute top-0 left-1/4 h-72 w-72 animate-pulse rounded-full bg-blue-300/20 blur-xl dark:bg-blue-500/10"></div>
+      <div className="absolute right-1/4 bottom-0 h-72 w-72 animate-pulse rounded-full bg-purple-300/20 blur-xl delay-1000 dark:bg-purple-500/10"></div>
 
       <div className="relative z-10 container mx-auto px-6">
         {/* Section Header */}
         <div className="mb-16 text-center">
-          <h2 className="mb-6 text-4xl font-bold md:text-5xl">
-            <span className="bg-gradient-to-r from-blue-600 via-purple-600 to-teal-600 bg-clip-text text-transparent">
+          <h2 className="mb-6 text-4xl font-bold md:text-5xl dark:text-white">
+            <span className="bg-gradient-to-r from-blue-600 via-purple-600 to-teal-600 bg-clip-text text-transparent dark:from-blue-400 dark:via-purple-400 dark:to-teal-400">
               How Our Analysis Engine Works
             </span>
           </h2>
-          <p className="text-muted-foreground mx-auto max-w-3xl text-xl">
+          <p className="text-muted-foreground mx-auto max-w-3xl text-xl dark:text-gray-300">
             Deep dive into our comprehensive, multi-layered analysis system that
             provides real-time security, quality, and performance insights with
             industry-leading accuracy
@@ -234,7 +237,7 @@ export const HowItWorksSection: React.FC = () => {
 
         {/* Analysis Steps */}
         <div className="mb-20">
-          <h3 className="text-foreground mb-12 text-center text-3xl font-bold dark:text-slate-200">
+          <h3 className="text-foreground mb-12 text-center text-3xl font-bold dark:text-white">
             5-Stage Analysis Pipeline
           </h3>
 
@@ -247,7 +250,7 @@ export const HowItWorksSection: React.FC = () => {
                 className={`flex items-center gap-3 rounded-full px-6 py-3 transition-all duration-300 ${
                   activeStep === step.id
                     ? `bg-gradient-to-r ${step.color} scale-105 text-white shadow-lg`
-                    : "bg-muted/50 text-muted-foreground hover:bg-muted/80"
+                    : "bg-muted/50 text-muted-foreground hover:bg-muted/80 dark:bg-neutral-800 dark:text-gray-300 dark:hover:bg-neutral-700"
                 }`}
               >
                 <span className="font-semibold">{index + 1}</span>
@@ -267,7 +270,7 @@ export const HowItWorksSection: React.FC = () => {
                   : "max-h-0 overflow-hidden opacity-0"
               }`}
             >
-              <div className="border-border/50 bg-card/80 dark:bg-card rounded-2xl border p-8 shadow-xl backdrop-blur-sm">
+              <div className="border-border/50 bg-card/80 rounded-2xl border p-8 shadow-xl backdrop-blur-sm dark:border-neutral-800 dark:bg-neutral-900">
                 <div className="grid gap-8 md:grid-cols-2">
                   {/* Description & Details */}
                   <div>
@@ -278,17 +281,17 @@ export const HowItWorksSection: React.FC = () => {
                         {step.icon}
                       </div>
                       <div>
-                        <h4 className="text-foreground text-2xl font-bold dark:text-slate-200">
+                        <h4 className="text-foreground text-2xl font-bold dark:text-white">
                           {step.title}
                         </h4>
-                        <p className="text-muted-foreground">
+                        <p className="text-muted-foreground dark:text-gray-300">
                           {step.description}
                         </p>
                       </div>
                     </div>
 
                     <div className="space-y-3">
-                      <h5 className="text-foreground flex items-center gap-2 font-semibold dark:text-slate-200">
+                      <h5 className="text-foreground flex items-center gap-2 font-semibold dark:text-white">
                         <Eye className="h-4 w-4" />
                         Analysis Components:
                       </h5>
@@ -296,7 +299,7 @@ export const HowItWorksSection: React.FC = () => {
                         {step.details.map((detail, index) => (
                           <div
                             key={index}
-                            className="text-muted-foreground flex items-center gap-3 text-sm"
+                            className="text-muted-foreground flex items-center gap-3 text-sm dark:text-gray-400"
                           >
                             <CheckCircle className="text-primary h-4 w-4 flex-shrink-0" />
                             <span>{detail}</span>
@@ -308,7 +311,7 @@ export const HowItWorksSection: React.FC = () => {
 
                   {/* Metrics */}
                   <div>
-                    <h5 className="text-foreground mb-4 flex items-center gap-2 font-semibold dark:text-slate-200">
+                    <h5 className="text-foreground mb-4 flex items-center gap-2 font-semibold dark:text-white">
                       <TrendingUp className="h-4 w-4" />
                       Generated Metrics:
                     </h5>
@@ -316,10 +319,10 @@ export const HowItWorksSection: React.FC = () => {
                       {step.metrics.map((metric, index) => (
                         <div
                           key={index}
-                          className="bg-muted/50 flex items-center gap-3 rounded-lg p-3"
+                          className="bg-muted/50 flex items-center gap-3 rounded-lg p-3 dark:bg-neutral-800"
                         >
                           <BarChart3 className="text-primary h-4 w-4" />
-                          <span className="text-foreground/80 text-sm font-medium">
+                          <span className="text-foreground/80 text-sm font-medium dark:text-gray-300">
                             {metric}
                           </span>
                         </div>
@@ -334,20 +337,20 @@ export const HowItWorksSection: React.FC = () => {
 
         {/* Advanced Metrics Grid */}
         <div className="mb-16">
-          <h3 className="text-foreground mb-12 text-center text-3xl font-bold dark:text-slate-200">
+          <h3 className="text-foreground mb-12 text-center text-3xl font-bold dark:text-white">
             Comprehensive Scoring System
           </h3>
           <div className="grid gap-6 md:grid-cols-2 lg:grid-cols-4">
             {advancedMetrics.map((category, index) => (
               <div
                 key={index}
-                className="border-border/50 bg-card/60 rounded-xl border p-6 backdrop-blur-sm transition-all duration-300 hover:shadow-lg"
+                className="border-border/50 bg-card/60 rounded-xl border p-6 backdrop-blur-sm transition-all duration-300 hover:shadow-lg dark:border-neutral-800 dark:bg-neutral-900"
               >
                 <div className="mb-4 flex items-center gap-3">
-                  <div className="bg-primary rounded-lg p-2 text-white">
+                  <div className="bg-primary/10 dark:bg-primary/20 rounded-lg p-2 text-primary">
                     {category.icon}
                   </div>
-                  <h4 className="text-foreground font-bold dark:text-slate-200">
+                  <h4 className="text-foreground font-bold dark:text-white">
                     {category.category}
                   </h4>
                 </div>
@@ -355,7 +358,7 @@ export const HowItWorksSection: React.FC = () => {
                   {category.items.map((item, itemIndex) => (
                     <div
                       key={itemIndex}
-                      className="text-muted-foreground flex items-center gap-2 text-sm"
+                      className="text-muted-foreground flex items-center gap-2 text-sm dark:text-gray-400"
                     >
                       <div className="bg-primary h-1.5 w-1.5 rounded-full"></div>
                       <span>{item}</span>
@@ -369,7 +372,7 @@ export const HowItWorksSection: React.FC = () => {
 
         {/* Technology Stack */}
         <div className="text-center">
-          <h3 className="text-foreground mb-8 text-3xl font-bold dark:text-slate-200">
+          <h3 className="text-foreground mb-8 text-3xl font-bold dark:text-white">
             Powered by Advanced Technology
           </h3>
           <div className="flex flex-wrap justify-center gap-4">
@@ -395,10 +398,10 @@ export const HowItWorksSection: React.FC = () => {
             ].map((tech, index) => (
               <div
                 key={index}
-                className="border-border/50 bg-muted/50 flex items-center gap-2 rounded-full border px-4 py-2"
+                className="border-border/50 bg-muted/50 flex items-center gap-2 rounded-full border px-4 py-2 dark:border-neutral-800 dark:bg-neutral-800/50"
               >
                 <div className="text-primary">{tech.icon}</div>
-                <span className="text-foreground/80 text-sm font-medium">
+                <span className="text-foreground/80 text-sm font-medium dark:text-gray-300">
                   {tech.name}
                 </span>
               </div>
