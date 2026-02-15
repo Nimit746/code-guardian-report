@@ -1,8 +1,8 @@
 @import url("https://fonts.googleapis.com/css2?family=Instrument+Serif:ital@0;1&display=swap");
 @import "tailwindcss";
+@import "./styles/base.css";
 
 @custom-variant dark (&:where(.dark, .dark *));
-@import "./styles/base.css";
 
 /* ============================================
    Refined Editorial — Instrument Serif + Geist Sans
