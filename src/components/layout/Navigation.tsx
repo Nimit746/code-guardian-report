@@ -128,17 +128,17 @@ export const Navigation: React.FC<NavigationProps> = ({
         paddingTop: "env(safe-area-inset-top)",
       }}
     >
-      <div className="mx-auto max-w-7xl px-4 sm:px-6 lg:px-8">
-        <div className="flex h-16 items-center justify-between">
+      <div className="mx-auto max-w-7xl px-3 sm:px-6 lg:px-8">
+        <div className="flex h-14 items-center justify-between sm:h-16">
           {/* Logo */}
           <button
             onClick={() => handleNavigate("home")}
-            className="group flex items-center gap-2.5 transition-opacity hover:opacity-90"
+            className="group flex items-center gap-2 transition-opacity hover:opacity-90 sm:gap-2.5"
           >
             <div className="from-primary/20 to-primary/5 relative flex h-9 w-9 items-center justify-center rounded-xl bg-gradient-to-tr transition-transform group-hover:scale-105">
               <Shield className="text-primary h-5 w-5 transition-colors" />
             </div>
-            <span className="font-display text-foreground hidden text-xl font-medium tracking-tight sm:block">
+            <span className="font-display text-foreground hidden text-lg font-medium tracking-tight whitespace-nowrap sm:block md:text-xl">
               Code Guardian
             </span>
           </button>
@@ -229,7 +229,7 @@ export const Navigation: React.FC<NavigationProps> = ({
           </div>
 
           {/* Right Actions */}
-          <div className="flex items-center gap-2 sm:gap-4">
+          <div className="flex items-center gap-1.5 sm:gap-4">
             {/* Auth — Desktop */}
             {user ? (
               <div className="relative hidden md:block" ref={userDropdownRef}>
@@ -354,7 +354,7 @@ export const Navigation: React.FC<NavigationProps> = ({
             animate={{ opacity: 1, height: "100vh" }}
             exit={{ opacity: 0, height: 0 }}
             transition={{ duration: 0.3, ease: "easeInOut" }}
-            className="bg-background/95 fixed inset-0 top-[64px] z-40 overflow-hidden backdrop-blur-3xl lg:hidden"
+            className="bg-background/95 fixed inset-0 top-14 z-40 overflow-hidden backdrop-blur-3xl sm:top-16 lg:hidden"
           >
             <div className="border-border/40 flex h-full flex-col overflow-y-auto border-t p-6">
               <nav className="flex-1 space-y-2">
