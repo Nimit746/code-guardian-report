@@ -19,7 +19,7 @@ interface MainLayoutProps {
 const SkipLink = () => (
   <a
     href="#main-content"
-    className="sr-only focus:not-sr-only focus:absolute focus:top-4 focus:left-4 focus:z-50 focus:rounded-lg focus:bg-primary focus:px-4 focus:py-2 focus:text-white focus:shadow-lg focus:ring-2 focus:ring-white focus:ring-offset-2 focus:ring-offset-blue-600 focus:outline-none"
+    className="focus:bg-primary sr-only focus:not-sr-only focus:absolute focus:top-4 focus:left-4 focus:z-50 focus:rounded-lg focus:px-4 focus:py-2 focus:text-white focus:shadow-lg focus:ring-2 focus:ring-white focus:ring-offset-2 focus:ring-offset-blue-600 focus:outline-none"
     onClick={(e) => {
       e.preventDefault();
       const mainContent = document.getElementById("main-content");
@@ -44,7 +44,7 @@ export function MainLayout({ children }: MainLayoutProps) {
 
   return (
     <div
-      className="flex min-h-screen flex-col"
+      className="flex min-h-screen w-full flex-col overflow-x-clip"
       role="application"
       aria-label="Code Guardian Security Analysis Application"
     >

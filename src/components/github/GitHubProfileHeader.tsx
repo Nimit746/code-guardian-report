@@ -30,9 +30,9 @@ export const GitHubProfileHeader: React.FC<GitHubProfileHeaderProps> = ({
   openConnectGitHubPrompt,
 }) => {
   return (
-    <div className="flex flex-col justify-between gap-8 lg:flex-row lg:items-center">
+    <div className="flex flex-col justify-between gap-6 sm:gap-8 lg:flex-row lg:items-center">
       {/* Profile Section */}
-      <div className="flex items-center gap-6">
+      <div className="flex flex-col items-start gap-4 sm:flex-row sm:items-center sm:gap-6">
         <div className="relative">
           {githubAvatarUrl ? (
             <img
@@ -50,15 +50,15 @@ export const GitHubProfileHeader: React.FC<GitHubProfileHeaderProps> = ({
           </div>
         </div>
 
-        <div>
-          <h1 className="text-foreground mb-1 text-3xl font-bold tracking-tight">
+        <div className="min-w-0">
+          <h1 className="text-foreground mb-1 text-2xl font-bold tracking-tight break-words sm:text-3xl">
             {isLoadingProfile ? (
               <span className="bg-muted inline-block h-8 w-48 animate-pulse rounded" />
             ) : (
               githubDisplayName || "GitHub User"
             )}
           </h1>
-          <div className="text-muted-foreground flex items-center gap-3">
+          <div className="text-muted-foreground flex flex-wrap items-center gap-2 sm:gap-3">
             {isLoadingProfile ? (
               <span className="bg-muted inline-block h-5 w-32 animate-pulse rounded" />
             ) : githubUsername ? (
@@ -91,7 +91,7 @@ export const GitHubProfileHeader: React.FC<GitHubProfileHeaderProps> = ({
       </div>
 
       {/* Stats Cards */}
-      <div className="grid grid-cols-3 gap-4 lg:min-w-[500px]">
+      <div className="grid w-full grid-cols-1 gap-3 sm:grid-cols-3 sm:gap-4 lg:min-w-[500px]">
         {[
           {
             label: "Analyzed",
@@ -114,7 +114,7 @@ export const GitHubProfileHeader: React.FC<GitHubProfileHeaderProps> = ({
         ].map((stat, i) => (
           <div
             key={i}
-            className="group border-border bg-card hover:border-primary/20 rounded-xl border p-4 shadow-sm transition-all hover:shadow-md"
+            className="group border-border bg-card hover:border-primary/20 rounded-xl border p-3 shadow-sm transition-all hover:shadow-md sm:p-4"
           >
             <div className="text-muted-foreground mb-1 text-xs font-medium tracking-wider uppercase">
               {stat.label}

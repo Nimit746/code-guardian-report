@@ -598,28 +598,29 @@ export const GitHubAnalysisPage: React.FC = () => {
           {}
           {repositories.length > 0 && (
             <div className="mb-8">
-              <Card className="border-border p-6 shadow-sm">
-                <div className="mb-6 flex items-center justify-between">
-                  <div className="flex items-center gap-3">
+              <Card className="border-border p-4 shadow-sm sm:p-6">
+                <div className="mb-6 flex flex-col gap-4 sm:flex-row sm:items-center sm:justify-between">
+                  <div className="flex min-w-0 items-center gap-3">
                     <div className="rounded-lg bg-purple-100 p-2 dark:bg-purple-900/30">
                       <Github className="h-5 w-5 text-purple-600 dark:text-purple-400" />
                     </div>
-                    <div>
+                    <div className="min-w-0">
                       <h2 className="text-foreground text-lg font-semibold dark:text-white">
                         Your GitHub Repositories
                       </h2>
-                      <p className="text-muted-foreground text-sm">
+                      <p className="text-muted-foreground text-sm break-words">
                         Select a repository to analyze ({repositories.length}{" "}
                         repos)
                       </p>
                     </div>
                   </div>
-                  <div className="flex items-center gap-2">
+                  <div className="flex w-full flex-col gap-2 sm:w-auto sm:flex-row sm:items-center">
                     <Button
                       variant="outline"
                       size="sm"
                       onClick={() => refreshRepositories?.()}
                       disabled={reposLoading}
+                      className="w-full sm:w-auto"
                     >
                       {reposLoading ? "Loading..." : "Refresh"}
                     </Button>
@@ -627,6 +628,7 @@ export const GitHubAnalysisPage: React.FC = () => {
                       variant="outline"
                       size="sm"
                       onClick={() => setShowGitHubRepos(!showGitHubRepos)}
+                      className="w-full sm:w-auto"
                     >
                       {showGitHubRepos ? "Hide List" : "Show List"}
                     </Button>
@@ -741,28 +743,28 @@ export const GitHubAnalysisPage: React.FC = () => {
             {selectedTab === "results" && analysisResults && (
               <div className="animate-in fade-in space-y-6 duration-500">
                 {}
-                <Card className="border-border relative overflow-hidden p-6 shadow-sm">
+                <Card className="border-border relative overflow-hidden p-4 shadow-sm sm:p-6">
                   <div className="pointer-events-none absolute top-0 right-0 -mt-32 -mr-32 h-64 w-64 rounded-full bg-emerald-500/5 blur-3xl" />
 
                   <div className="relative z-10 flex flex-col justify-between gap-6 md:flex-row md:items-center">
-                    <div className="flex items-center gap-5">
-                      <div className="flex h-16 w-16 items-center justify-center rounded-2xl bg-gradient-to-br from-emerald-500 to-teal-600 shadow-lg shadow-emerald-500/20">
+                    <div className="flex min-w-0 items-center gap-4 sm:gap-5">
+                      <div className="flex h-14 w-14 items-center justify-center rounded-2xl bg-gradient-to-br from-emerald-500 to-teal-600 shadow-lg shadow-emerald-500/20 sm:h-16 sm:w-16">
                         <FileCode className="h-8 w-8 text-white" />
                       </div>
-                      <div>
-                        <h2 className="text-foreground mb-1 text-2xl font-bold dark:text-white">
+                      <div className="min-w-0">
+                        <h2 className="text-foreground mb-1 text-xl font-bold sm:text-2xl dark:text-white">
                           Analysis Results
                         </h2>
-                        <div className="text-muted-foreground flex items-center gap-2">
+                        <div className="text-muted-foreground flex min-w-0 items-center gap-2">
                           <GitBranch className="h-4 w-4" />
-                          {analyzedRepoName}
+                          <span className="truncate">{analyzedRepoName}</span>
                         </div>
                       </div>
                     </div>
 
-                    <div className="flex items-center gap-6">
-                      <div className="text-right">
-                        <div className="text-foreground text-4xl font-bold tracking-tight dark:text-white">
+                    <div className="flex w-full flex-col gap-4 sm:w-auto sm:flex-row sm:items-center sm:gap-6">
+                      <div className="text-left sm:text-right">
+                        <div className="text-foreground text-3xl font-bold tracking-tight sm:text-4xl dark:text-white">
                           {analysisResults.summary.securityScore}
                           <span className="text-muted-foreground text-xl font-medium">
                             /100
@@ -772,7 +774,7 @@ export const GitHubAnalysisPage: React.FC = () => {
                           Security Score
                         </div>
                       </div>
-                      <div className="bg-muted h-12 w-px dark:bg-slate-700" />
+                      <div className="bg-muted hidden h-12 w-px sm:block dark:bg-slate-700" />
                       <Button
                         variant="outline"
                         onClick={() => {
@@ -780,7 +782,7 @@ export const GitHubAnalysisPage: React.FC = () => {
                           setAnalyzedRepoName("");
                           setSelectedTab("overview");
                         }}
-                        className="hover:bg-muted"
+                        className="hover:bg-muted w-full sm:w-auto"
                       >
                         <ArrowLeft className="mr-2 h-4 w-4" />
                         Back

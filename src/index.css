@@ -13,6 +13,7 @@
 
 html {
   scroll-behavior: smooth;
+  overflow-x: clip;
 }
 
 body {
@@ -28,6 +29,22 @@ body {
   color: hsl(var(--foreground));
   -webkit-font-smoothing: antialiased;
   -moz-osx-font-smoothing: grayscale;
+  overflow-x: hidden;
+}
+
+/* stylelint-disable selector-id-pattern */
+#__next,
+[data-nextjs-scroll-focus-boundary] {
+  max-width: 100%;
+}
+/* stylelint-enable selector-id-pattern */
+
+img,
+svg,
+video,
+canvas,
+iframe {
+  max-width: 100%;
 }
 
 /* Subtle Noise Texture */
@@ -307,5 +324,22 @@ body::before {
   footer,
   .no-print {
     display: none !important;
+  }
+}
+
+@media (width <= 640px) {
+  h1 {
+    font-size: 1.75rem;
+    line-height: 1.2;
+  }
+
+  h2 {
+    font-size: 1.375rem;
+    line-height: 1.25;
+  }
+
+  .container {
+    padding-left: 1rem;
+    padding-right: 1rem;
   }
 }

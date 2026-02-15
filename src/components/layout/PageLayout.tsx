@@ -13,9 +13,11 @@ export const PageLayout: React.FC<PageLayoutProps> = ({
   noContainer = false,
 }) => {
   return (
-    <div className="relative min-h-screen bg-background">
+    <div className="bg-background relative min-h-screen w-full overflow-x-clip">
       {showNavigation && <Navigation />}
-      <main className={noContainer ? "" : "container mx-auto px-4 sm:px-6 lg:px-8"}>
+      <main
+        className={noContainer ? "" : "container mx-auto px-4 sm:px-6 lg:px-8"}
+      >
         {children}
       </main>
     </div>

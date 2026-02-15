@@ -1,5 +1,6 @@
 import type { Metadata, Viewport } from "next";
 import "@/styles/base.css";
+import "@/styles/responsive-utilities.css";
 import "@/index.css";
 import "@/styles/enhanced-ui.css";
 import "@/styles/about-page-enhancements.css";
