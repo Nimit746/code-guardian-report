@@ -1,4 +1,4 @@
-import React, { useState } from "react";
+import React, { useEffect, useMemo, useRef, useState } from "react";
 import {
   Github,
   Loader2,
@@ -6,6 +6,7 @@ import {
   AlertCircle,
   Download,
   Info,
+  Search,
 } from "lucide-react";
 import { Button } from "@/components/ui/button";
 import { Input } from "@/components/ui/input";
@@ -13,37 +14,218 @@ import { Alert, AlertDescription } from "@/components/ui/alert";
 import { Progress } from "@/components/ui/progress";
 import { githubRepositoryService } from "@/services/githubRepositoryService";
 import { Card } from "@/components/ui/card";
+import { useAuth } from "@/lib/auth-context";
+import { useGitHubRepositories } from "@/hooks/useGitHubRepositories";
 
 import { logger } from "@/utils/logger";
 interface GitHubRepoInputProps {
   onFileReady: (file: File) => void;
 }
 
+interface RepoSuggestion {
+  id: string;
+  source: "account" | "public";
+  fullName: string;
+  description: string | null;
+  language: string | null;
+  stars?: number;
+  htmlUrl: string;
+}
+
 export const GitHubRepoInput: React.FC<GitHubRepoInputProps> = ({
   onFileReady,
 }) => {
+  const searchContainerRef = useRef<HTMLDivElement | null>(null);
+  const { user, userProfile, isGitHubUser } = useAuth();
+  const {
+    repositories,
+    loading: reposLoading,
+    setManualUsername,
+    refreshRepositories,
+  } = useGitHubRepositories({
+    email: userProfile?.email || null,
+    enabled: !!user,
+  });
+
   const [repoUrl, setRepoUrl] = useState("");
   const [isLoading, setIsLoading] = useState(false);
   const [isFetchingInfo, setIsFetchingInfo] = useState(false);
+  const [isSearching, setIsSearching] = useState(false);
   const [error, setError] = useState<string | null>(null);
   const [progress, setProgress] = useState(0);
   const [progressMessage, setProgressMessage] = useState("");
   const [repoInfo, setRepoInfo] = useState<any>(null);
   const [estimatedSize, setEstimatedSize] = useState<any>(null);
+  const [publicSuggestions, setPublicSuggestions] = useState<RepoSuggestion[]>(
+    []
+  );
+  const [showSuggestions, setShowSuggestions] = useState(false);
+  const [hasBootstrappedAccountRepos, setHasBootstrappedAccountRepos] =
+    useState(false);
 
-  const handleUrlChange = async (e: React.ChangeEvent<HTMLInputElement>) => {
-    const url = e.target.value;
+  const normalizeRepoInput = (rawValue: string) => {
+    if (rawValue.trimStart().startsWith("github.com/")) {
+      return `https://${rawValue.trimStart()}`;
+    }
+    return rawValue;
+  };
+
+  const userSuggestions = useMemo<RepoSuggestion[]>(() => {
+    if (!repositories.length) return [];
+
+    const normalizedQuery = repoUrl.trim().toLowerCase();
+    const filtered = normalizedQuery
+      ? repositories.filter(
+          (repo) =>
+            repo.name.toLowerCase().includes(normalizedQuery) ||
+            repo.full_name.toLowerCase().includes(normalizedQuery)
+        )
+      : repositories;
+
+    return filtered.slice(0, 8).map((repo) => ({
+      id: `account-${repo.id}`,
+      source: "account" as const,
+      fullName: repo.full_name,
+      description: repo.description,
+      language: repo.language,
+      stars: repo.stargazers_count,
+      htmlUrl: repo.html_url,
+    }));
+  }, [repositories, repoUrl]);
+
+  const mergedSuggestions = useMemo<RepoSuggestion[]>(() => {
+    const merged = [...userSuggestions];
+    for (const suggestion of publicSuggestions) {
+      const exists = merged.some(
+        (item) => item.fullName === suggestion.fullName
+      );
+      if (!exists) merged.push(suggestion);
+      if (merged.length >= 10) break;
+    }
+    return merged;
+  }, [userSuggestions, publicSuggestions]);
+
+  const handleUrlChange = (e: React.ChangeEvent<HTMLInputElement>) => {
+    const raw = e.target.value;
+    const url = normalizeRepoInput(raw);
     setRepoUrl(url);
     setError(null);
     setRepoInfo(null);
     setEstimatedSize(null);
+    setShowSuggestions(true);
 
-    // Security: Validate URL format before making any requests
-    // Only fetch info if URL starts with https://github.com/ (not just contains it)
-    if (url.startsWith("https://github.com/") && url.split("/").length >= 5) {
-      await fetchRepositoryInfo(url);
+    const trimmed = url.trim();
+    if (!trimmed) {
+      setPublicSuggestions([]);
+      return;
+    }
+
+    const parsed = githubRepositoryService.parseGitHubUrl(trimmed);
+    if (parsed) {
+      void fetchRepositoryInfo(trimmed);
+      setPublicSuggestions([]);
     }
   };
+
+  const handleSuggestionSelect = (suggestion: RepoSuggestion) => {
+    setRepoUrl(suggestion.htmlUrl);
+    setShowSuggestions(false);
+    setPublicSuggestions([]);
+    setError(null);
+    void fetchRepositoryInfo(suggestion.htmlUrl);
+  };
+
+  const handleSuggestionsWheel = (e: React.WheelEvent<HTMLDivElement>) => {
+    e.stopPropagation();
+  };
+
+  const handleSuggestionsTouchMove = (e: React.TouchEvent<HTMLDivElement>) => {
+    e.stopPropagation();
+  };
+
+  useEffect(() => {
+    const username =
+      userProfile?.githubUsername || userProfile?.githubMetadata?.login || null;
+    if (!isGitHubUser || !username || hasBootstrappedAccountRepos) return;
+
+    if (repositories.length === 0 && !reposLoading) {
+      setHasBootstrappedAccountRepos(true);
+      void setManualUsername(username);
+    } else if (repositories.length > 0) {
+      setHasBootstrappedAccountRepos(true);
+      refreshRepositories?.();
+    }
+  }, [
+    hasBootstrappedAccountRepos,
+    isGitHubUser,
+    userProfile?.githubUsername,
+    userProfile?.githubMetadata?.login,
+    repositories.length,
+    reposLoading,
+    refreshRepositories,
+    setManualUsername,
+  ]);
+
+  useEffect(() => {
+    const query = repoUrl.trim();
+    if (query.length < 2 || githubRepositoryService.parseGitHubUrl(query)) {
+      setIsSearching(false);
+      setPublicSuggestions([]);
+      return;
+    }
+
+    const timeoutId = window.setTimeout(async () => {
+      setIsSearching(true);
+      try {
+        const response = await fetch(
+          `https://api.github.com/search/repositories?q=${encodeURIComponent(query.trim())}&per_page=6&sort=stars&order=desc`
+        );
+        if (!response.ok) {
+          setPublicSuggestions([]);
+          return;
+        }
+
+        const data = await response.json();
+        if (!Array.isArray(data?.items)) {
+          setPublicSuggestions([]);
+          return;
+        }
+
+        const suggestions: RepoSuggestion[] = data.items.map((item: any) => ({
+          id: `public-${item.id}`,
+          source: "public",
+          fullName: item.full_name,
+          description: item.description,
+          language: item.language,
+          stars: item.stargazers_count,
+          htmlUrl: item.html_url,
+        }));
+
+        setPublicSuggestions(suggestions);
+      } catch (err) {
+        logger.debug("Live repository search failed:", err);
+        setPublicSuggestions([]);
+      } finally {
+        setIsSearching(false);
+      }
+    }, 350);
+
+    return () => window.clearTimeout(timeoutId);
+  }, [repoUrl]);
+
+  useEffect(() => {
+    const handleOutsideClick = (event: MouseEvent) => {
+      if (!searchContainerRef.current) return;
+      if (!searchContainerRef.current.contains(event.target as Node)) {
+        setShowSuggestions(false);
+      }
+    };
+
+    document.addEventListener("mousedown", handleOutsideClick);
+    return () => {
+      document.removeEventListener("mousedown", handleOutsideClick);
+    };
+  }, []);
 
   const fetchRepositoryInfo = async (url: string) => {
     const parsedRepo = githubRepositoryService.parseGitHubUrl(url);
@@ -72,19 +254,22 @@ export const GitHubRepoInput: React.FC<GitHubRepoInputProps> = ({
   };
 
   const handleAnalyze = async () => {
-    if (!repoUrl.trim()) {
+    const normalizedUrl = repoUrl.trim();
+    if (!normalizedUrl) {
       setError("Please enter a GitHub repository URL");
       return;
     }
 
     // Security: Additional URL validation before processing
-    if (!repoUrl.startsWith("https://github.com/")) {
+    if (!normalizedUrl.startsWith("https://github.com/")) {
       setError(
         "Invalid URL. Please use a valid GitHub URL starting with https://github.com/"
       );
       return;
     }
 
+    setRepoUrl(normalizedUrl);
+    setShowSuggestions(false);
     setIsLoading(true);
     setError(null);
     setProgress(0);
@@ -92,7 +277,7 @@ export const GitHubRepoInput: React.FC<GitHubRepoInputProps> = ({
 
     try {
       // Parse GitHub URL with security validation
-      const parsedRepo = githubRepositoryService.parseGitHubUrl(repoUrl);
+      const parsedRepo = githubRepositoryService.parseGitHubUrl(normalizedUrl);
 
       if (!parsedRepo) {
         throw new Error(
@@ -161,23 +346,81 @@ export const GitHubRepoInput: React.FC<GitHubRepoInputProps> = ({
   return (
     <div className="space-y-4 sm:space-y-6">
       <div className="flex flex-col gap-3">
-        <div className="relative w-full">
+        <div ref={searchContainerRef} className="relative w-full">
           <Github className="text-muted-foreground pointer-events-none absolute top-1/2 left-3 z-10 h-4 w-4 -translate-y-1/2 transform sm:h-5 sm:w-5" />
           <Input
-            type="url"
-            placeholder="https://github.com/owner/repository"
+            type="text"
+            placeholder="Search repos or paste a GitHub URL"
             value={repoUrl}
             onChange={handleUrlChange}
             onKeyPress={handleKeyPress}
+            onFocus={() => {
+              if (repoUrl.trim() || mergedSuggestions.length > 0) {
+                setShowSuggestions(true);
+              }
+            }}
             disabled={isLoading}
-            pattern="https://github\.com/[^\/]+/[^\/]+(/.*)?"
-            title="Enter a valid GitHub repository URL"
+            autoComplete="off"
+            title="Search repositories or paste a GitHub URL"
             className="focus:border-primary h-11 w-full border-2 pr-10 pl-9 text-sm transition-all sm:h-12 sm:pl-10 sm:text-base"
           />
-          {isFetchingInfo && (
+          {(isFetchingInfo || isSearching) && (
             <Loader2 className="text-primary absolute top-1/2 right-3 h-4 w-4 -translate-y-1/2 transform animate-spin sm:h-5 sm:w-5" />
           )}
+          {!isFetchingInfo && !isSearching && (
+            <Search className="text-muted-foreground pointer-events-none absolute top-1/2 right-3 h-4 w-4 -translate-y-1/2 transform sm:h-5 sm:w-5" />
+          )}
+
+          {showSuggestions && mergedSuggestions.length > 0 && (
+            <div
+              className="absolute top-full right-0 left-0 z-50 mt-1"
+              style={{ overscrollBehavior: "contain" }}
+            >
+              <Card
+                data-lenis-prevent
+                onWheelCapture={handleSuggestionsWheel}
+                onTouchMoveCapture={handleSuggestionsTouchMove}
+                className="border-border bg-background max-h-64 overflow-y-auto overscroll-contain border p-1 shadow-lg"
+              >
+                <div className="flex flex-col gap-0.5">
+                  {mergedSuggestions.map((suggestion) => (
+                    <button
+                      key={suggestion.id}
+                      type="button"
+                      className="hover:bg-muted/70 focus:bg-muted/70 flex w-full flex-col items-start gap-0.5 rounded-md px-3 py-2 text-left outline-none"
+                      onClick={() => handleSuggestionSelect(suggestion)}
+                    >
+                      <div className="flex w-full items-center justify-between gap-2">
+                        <span className="text-foreground truncate text-sm font-medium">
+                          {suggestion.fullName}
+                        </span>
+                        <span className="text-muted-foreground shrink-0 text-[10px] uppercase">
+                          {suggestion.source === "account"
+                            ? "Your repo"
+                            : "Public"}
+                        </span>
+                      </div>
+                      <div className="text-muted-foreground flex w-full items-center gap-2 text-xs">
+                        {suggestion.language && (
+                          <span>{suggestion.language}</span>
+                        )}
+                        {typeof suggestion.stars === "number" && (
+                          <span>★ {suggestion.stars}</span>
+                        )}
+                      </div>
+                      {suggestion.description && (
+                        <span className="text-muted-foreground line-clamp-1 w-full text-xs">
+                          {suggestion.description}
+                        </span>
+                      )}
+                    </button>
+                  ))}
+                </div>
+              </Card>
+            </div>
+          )}
         </div>
+
         <Button
           onClick={handleAnalyze}
           disabled={isLoading || !repoUrl.trim()}
