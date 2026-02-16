@@ -345,8 +345,8 @@ export const GitHubRepoInput: React.FC<GitHubRepoInputProps> = ({
 
   return (
     <div className="space-y-4 sm:space-y-6">
-      <div className="flex flex-col gap-3">
-        <div ref={searchContainerRef} className="relative w-full">
+      <div className="relative z-30 flex flex-col gap-3">
+        <div ref={searchContainerRef} className="relative isolate z-40 w-full">
           <Github className="text-muted-foreground pointer-events-none absolute top-1/2 left-3 z-10 h-4 w-4 -translate-y-1/2 transform sm:h-5 sm:w-5" />
           <Input
             type="text"
@@ -373,21 +373,21 @@ export const GitHubRepoInput: React.FC<GitHubRepoInputProps> = ({
 
           {showSuggestions && mergedSuggestions.length > 0 && (
             <div
-              className="absolute top-full right-0 left-0 z-50 mt-1"
+              className="absolute top-full right-0 left-0 z-[120] mt-1"
               style={{ overscrollBehavior: "contain" }}
             >
               <Card
                 data-lenis-prevent
                 onWheelCapture={handleSuggestionsWheel}
                 onTouchMoveCapture={handleSuggestionsTouchMove}
-                className="border-border bg-background max-h-64 overflow-y-auto overscroll-contain border p-1 shadow-lg"
+                className="border-border max-h-64 overflow-y-auto overscroll-contain border bg-white p-1 shadow-xl dark:bg-slate-950"
               >
                 <div className="flex flex-col gap-0.5">
                   {mergedSuggestions.map((suggestion) => (
                     <button
                       key={suggestion.id}
                       type="button"
-                      className="hover:bg-muted/70 focus:bg-muted/70 flex w-full flex-col items-start gap-0.5 rounded-md px-3 py-2 text-left outline-none"
+                      className="flex w-full flex-col items-start gap-0.5 rounded-md bg-white px-3 py-2 text-left transition-colors outline-none hover:bg-slate-50 focus:bg-slate-50 dark:bg-slate-950 dark:hover:bg-slate-900 dark:focus:bg-slate-900"
                       onClick={() => handleSuggestionSelect(suggestion)}
                     >
                       <div className="flex w-full items-center justify-between gap-2">
@@ -424,7 +424,7 @@ export const GitHubRepoInput: React.FC<GitHubRepoInputProps> = ({
         <Button
           onClick={handleAnalyze}
           disabled={isLoading || !repoUrl.trim()}
-          className="bg-primary hover:bg-primary/90 h-11 w-full px-4 text-sm font-semibold text-white shadow-lg transition-all hover:shadow-xl sm:h-12 sm:px-6 sm:text-base"
+          className="bg-primary hover:bg-primary/90 relative z-10 h-11 w-full px-4 text-sm font-semibold text-white shadow-lg transition-all hover:shadow-xl sm:h-12 sm:px-6 sm:text-base"
         >
           {isLoading ? (
             <>
