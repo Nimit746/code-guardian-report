@@ -51,15 +51,18 @@ export const UploadForm: React.FC<UploadFormProps> = ({
     <div className="mx-auto w-full max-w-3xl">
       <Card className="border-muted/40 dark:border-white/5/50 overflow-hidden shadow-2xl shadow-black/5 backdrop-blur-xl dark:shadow-black/20">
         <CardHeader className="border-border/40 bg-muted/20 border-b pt-10 pb-8 text-center dark:bg-white/[0.02]">
-          <div className="mx-auto mb-4 flex h-16 w-16 items-center justify-center rounded-2xl bg-emerald-100 ring-4 ring-emerald-50 dark:bg-emerald-900/30 dark:ring-emerald-900/20">
-            <FileCode className="h-8 w-8 text-emerald-600 dark:text-emerald-400" />
+          <div className="border-primary bg-primary/10 relative mx-auto mb-6 flex h-20 w-20 items-center justify-center border">
+            <span className="border-primary absolute -top-1 -right-1 h-3 w-3 border-t-2 border-r-2" />
+            <span className="border-primary absolute -bottom-1 -left-1 h-3 w-3 border-b-2 border-l-2" />
+            <FileCode className="text-primary h-10 w-10" strokeWidth={1.5} />
           </div>
-          <CardTitle className="text-foreground text-3xl font-extrabold tracking-tight sm:text-4xl">
-            Analyze Your Code
+          <CardTitle className="font-display text-foreground text-4xl tracking-widest uppercase">
+            Guardian <span className="text-primary font-bold">Analysis</span>
           </CardTitle>
-          <CardDescription className="text-muted-foreground/80 mx-auto mt-3 max-w-lg text-base">
-            Securely analyze your codebase for patterns, languages, and quality
-            metrics using our local-first engine.
+          <CardDescription className="text-muted-foreground border-border mx-auto mt-4 max-w-lg border-t border-dashed pt-4 font-mono text-xs tracking-wider uppercase">
+            // Local Static Analysis Engine //
+            <br />
+            Scanning protocol initialized.
           </CardDescription>
         </CardHeader>
 

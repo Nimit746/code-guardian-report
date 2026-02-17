@@ -1,62 +1,66 @@
 @layer base {
   :root {
-    /* Refined Editorial — Light Mode */
-    --background: 0 0% 98%;
-    --foreground: 0 0% 4%;
+    /* Industrial Guardian — Light Mode */
+
+    /* Concept: Technical documentation, high contrast, signal orange */
+    --background: 210 20% 98%; /* Ice White */
+    --foreground: 220 40% 10%; /* Tech Black */
     --card: 0 0% 100%;
-    --card-foreground: 0 0% 4%;
+    --card-foreground: 220 40% 10%;
     --popover: 0 0% 100%;
-    --popover-foreground: 0 0% 4%;
-    --primary: 160 84% 39%;
+    --popover-foreground: 220 40% 10%;
+    --primary: 16 100% 50%; /* International Orange */
     --primary-foreground: 0 0% 100%;
-    --secondary: 0 0% 96%;
-    --secondary-foreground: 0 0% 9%;
-    --muted: 0 0% 96%;
-    --muted-foreground: 0 0% 45%;
-    --accent: 0 0% 96%;
-    --accent-foreground: 0 0% 9%;
+    --secondary: 210 10% 90%; /* Light Tech Grey */
+    --secondary-foreground: 220 40% 10%;
+    --muted: 210 10% 94%;
+    --muted-foreground: 220 10% 40%;
+    --accent: 16 100% 95%; /* Faint Orange tint */
+    --accent-foreground: 16 100% 40%;
     --destructive: 0 84% 60%;
     --destructive-foreground: 0 0% 100%;
-    --border: 0 0% 90%;
-    --input: 0 0% 90%;
-    --ring: 160 84% 39%;
-    --radius: 0.5rem;
-    --glow: 160 84% 39%;
-    --card-hover: 0 0% 99%;
-    --chart-1: 160 84% 39%;
-    --chart-2: 160 60% 50%;
-    --chart-3: 0 0% 55%;
-    --chart-4: 0 0% 40%;
+    --border: 220 10% 85%;
+    --input: 220 10% 90%;
+    --ring: 16 100% 50%;
+    --radius: 0px; /* Brutalist boxy feel - 0px radius */
+    --glow: 16 100% 50%;
+    --card-hover: 210 20% 96%;
+    --chart-1: 16 100% 50%; /* Orange */
+    --chart-2: 200 90% 40%; /* Tech Blue */
+    --chart-3: 150 80% 30%; /* Success Green */
+    --chart-4: 45 100% 50%; /* Warning Yellow */
     --chart-5: 0 0% 25%;
   }
 
   .dark {
-    /* Refined Editorial — Dark Mode */
-    --background: 0 0% 4%;
-    --foreground: 0 0% 98%;
-    --card: 0 0% 6%;
-    --card-foreground: 0 0% 98%;
-    --popover: 0 0% 7%;
-    --popover-foreground: 0 0% 98%;
-    --primary: 160 84% 39%;
+    /* Industrial Guardian — Dark Mode */
+
+    /* Concept: Night-shift control room, dark slate, glowing orange */
+    --background: 222 47% 6%; /* Deep Slate */
+    --foreground: 210 20% 96%; /* Off-white */
+    --card: 222 47% 8%;
+    --card-foreground: 210 20% 96%;
+    --popover: 222 47% 8%;
+    --popover-foreground: 210 20% 96%;
+    --primary: 16 100% 55%; /* Bright Signal Orange */
     --primary-foreground: 0 0% 100%;
-    --secondary: 0 0% 12%;
-    --secondary-foreground: 0 0% 98%;
-    --muted: 0 0% 12%;
-    --muted-foreground: 0 0% 55%;
-    --accent: 0 0% 12%;
-    --accent-foreground: 0 0% 98%;
+    --secondary: 217 33% 17%; /* Dark Tech Grey */
+    --secondary-foreground: 210 20% 90%;
+    --muted: 217 33% 12%;
+    --muted-foreground: 215 20% 65%;
+    --accent: 16 100% 15%; /* Dark Orange Glow */
+    --accent-foreground: 16 100% 65%;
     --destructive: 0 62% 50%;
     --destructive-foreground: 0 0% 98%;
-    --border: 0 0% 14%;
-    --input: 0 0% 14%;
-    --ring: 160 84% 39%;
-    --glow: 160 84% 45%;
-    --card-hover: 0 0% 8%;
-    --chart-1: 160 84% 39%;
-    --chart-2: 160 60% 50%;
-    --chart-3: 0 0% 55%;
-    --chart-4: 0 0% 70%;
+    --border: 217 33% 20%;
+    --input: 217 33% 20%;
+    --ring: 16 100% 55%;
+    --glow: 16 100% 55%;
+    --card-hover: 222 47% 10%;
+    --chart-1: 16 100% 55%;
+    --chart-2: 200 90% 50%;
+    --chart-3: 150 80% 45%;
+    --chart-4: 45 100% 50%;
     --chart-5: 0 0% 85%;
   }
 }

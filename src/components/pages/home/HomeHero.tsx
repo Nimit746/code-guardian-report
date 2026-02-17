@@ -1,7 +1,7 @@
 import React from "react";
 import { Button } from "@/components/ui/button";
 import { HeroSection } from "@/components/layout/HeroSection";
-import { ArrowRight, Shield } from "lucide-react";
+import { ArrowRight } from "lucide-react";
 
 interface HomeHeroProps {
   onStartAnalysis: () => void;
@@ -13,53 +13,86 @@ export const HomeHero: React.FC<HomeHeroProps> = ({ onStartAnalysis }) => {
       title=""
       description=""
       variant="gradient"
-      className="section-glow relative flex items-center justify-center px-4 sm:px-6"
+      className="section-glow border-border relative flex min-h-[80vh] flex-col items-center justify-center border-b border-dashed px-4 py-20 sm:px-6"
     >
-      <div className="relative z-10 mx-auto max-w-3xl space-y-8 text-center sm:space-y-10">
-        {/* Tagline */}
-        <div className="animate-fade-in space-y-5">
-          <div className="border-primary/20 bg-card shadow-primary/5 inline-flex items-center gap-2 rounded-full border px-4 py-1.5 shadow-sm">
-            <Shield className="text-primary h-3.5 w-3.5" />
-            <span className="text-muted-foreground text-xs font-medium tracking-wide uppercase">
-              Security Analysis Platform
-            </span>
-          </div>
+      {/* Technical Grid Overlay */}
+      <div
+        className="pointer-events-none absolute inset-0 opacity-20"
+        style={{
+          backgroundImage:
+            "linear-gradient(to right, hsl(var(--border)) 1px, transparent 1px), linear-gradient(to bottom, hsl(var(--border)) 1px, transparent 1px)",
+          backgroundSize: "60px 60px",
+        }}
+      />
 
-          <h1 className="font-display text-4xl leading-[1.1] tracking-tight sm:text-5xl md:text-6xl lg:text-7xl">
-            Protect your code{" "}
-            <span className="text-primary">before it ships</span>
+      <div className="relative z-10 mx-auto max-w-5xl space-y-12 text-center">
+        {/* Tagline */}
+        {/* Top Technical Marker */}
+        <div className="mb-8 flex justify-center">
+          <div className="border-primary/30 bg-primary/5 text-primary relative border px-3 py-1 font-mono text-xs tracking-[0.2em] uppercase">
+            <span className="border-primary absolute -top-1 -left-1 h-2 w-2 border-t border-l"></span>
+            <span className="border-primary absolute -right-1 -bottom-1 h-2 w-2 border-r border-b"></span>
+            System Status: Online // Monitoring Active
+          </div>
+        </div>
+
+        <div className="animate-fade-in space-y-6">
+          <h1 className="font-display text-foreground text-5xl leading-none tracking-tight uppercase sm:text-7xl md:text-8xl">
+            Code{" "}
+            <span
+              className="text-transparent"
+              style={{
+                WebkitTextStroke: "1px hsl(var(--primary))",
+                color: "transparent",
+              }}
+            >
+              Guardian
+            </span>
+            <br />
+            <span className="text-primary">Enterprise</span>
           </h1>
 
-          <p className="text-muted-foreground mx-auto max-w-xl text-base leading-relaxed sm:text-lg">
-            Enterprise-grade static analysis powered by AI. Detects
-            vulnerabilities, bugs, and quality issues in real-time.
+          <div className="text-muted-foreground flex flex-wrap items-center justify-center gap-4 font-mono text-xs tracking-widest uppercase">
+            <span>[ Static Analysis ]</span>
+            <span className="text-primary">•</span>
+            <span>[ Vulnerability Detection ]</span>
+            <span className="text-primary">•</span>
+            <span>[ Automated Repair ]</span>
+          </div>
+
+          <p className="text-muted-foreground border-border mx-auto mt-8 max-w-2xl border-t border-dashed pt-4 font-mono text-sm leading-relaxed">
+            Mission-critical code security infrastructure. Deploy autonomous
+            vulnerability scanning agents directly to your repository.
           </p>
         </div>
 
         {/* CTA */}
-        <div className="animate-fade-in-delay-1 flex flex-col items-center justify-center gap-3 sm:flex-row sm:gap-4">
+        <div className="animate-fade-in-delay-1 mt-12 flex flex-col items-center justify-center gap-4 sm:flex-row">
           <Button
             onClick={onStartAnalysis}
             size="lg"
-            className="btn-ultra-primary shadow-primary/25 hover:shadow-primary/35 w-full shadow-lg sm:w-auto"
+            className="btn-primary hover:bg-primary/90 border-primary bg-primary text-primary-foreground h-14 w-full rounded-none border px-8 text-base font-bold tracking-wider uppercase shadow-none hover:translate-y-0 sm:w-auto"
           >
-            Start Analysis
+            Initiate Scan
             <ArrowRight className="ml-2 h-4 w-4" />
           </Button>
 
           <Button
             variant="outline"
             size="lg"
-            className="w-full border border-slate-200 !bg-white !text-black shadow-sm hover:bg-slate-50 sm:w-auto dark:border-white/20 dark:!bg-transparent dark:!text-white dark:hover:bg-white/10"
+            className="border-foreground/20 text-foreground hover:bg-foreground hover:text-background h-14 w-full rounded-none border bg-transparent px-8 font-mono text-base font-bold tracking-wider uppercase shadow-none sm:w-auto"
           >
-            Live Demo
+            View System Demo
           </Button>
         </div>
 
-        {/* Social proof — minimal */}
-        <p className="animate-fade-in-delay-2 text-muted-foreground text-sm">
-          Trusted by 10,000+ developers worldwide
-        </p>
+        {/* System Logs */}
+        <div className="animate-fade-in-delay-2 mt-16 flex flex-col items-center gap-4 opacity-60 transition-opacity hover:opacity-100">
+          <div className="bg-border h-px w-24"></div>
+          <p className="text-muted-foreground font-mono text-[10px] tracking-[0.2em] uppercase">
+            System Status: Operational
+          </p>
+        </div>
       </div>
 
       {/* Gradient divider */}
