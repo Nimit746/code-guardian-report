@@ -5,6 +5,7 @@ import { PageLayout } from "@/components/layout/PageLayout";
 import { HomeHero } from "@/components/pages/home/HomeHero";
 import { AnalysisTabs } from "@/components/pages/home/AnalysisTabs";
 import { StorageBanner } from "@/components/pages/home/StorageBanner";
+import { ContributorsSection } from "@/components/pages/home/ContributorsSection";
 import { useAnalysisHandlers } from "@/components/pages/home/AnalysisHandlers";
 import { useEnhancedAnalysis } from "@/hooks/useEnhancedAnalysis";
 import { AnalysisResults } from "@/hooks/useAnalysis";
@@ -127,7 +128,7 @@ export const HomeSection: React.FC = () => {
   return (
     <section
       id="home"
-      className="relative min-h-screen overflow-hidden bg-background"
+      className="bg-background relative min-h-screen overflow-hidden"
     >
       <AnimatedBackground />
       <PageLayout showNavigation={false}>
@@ -147,7 +148,7 @@ export const HomeSection: React.FC = () => {
           <div className="mx-auto mb-6 max-w-6xl">
             <Suspense
               fallback={
-                <div className="h-32 animate-pulse rounded-lg bg-muted dark:bg-foreground"></div>
+                <div className="bg-muted dark:bg-foreground h-32 animate-pulse rounded-lg"></div>
               }
             >
               <StorageStatus
@@ -172,6 +173,8 @@ export const HomeSection: React.FC = () => {
           onAnalysisComplete={handleAnalysisCompleteWithRedirect}
           isRedirecting={isRedirecting}
         />
+
+        <ContributorsSection />
 
         {/* Analysis History Modal */}
         <Suspense fallback={null}>

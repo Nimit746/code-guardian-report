@@ -198,6 +198,26 @@ class GitHubRepositoryService {
   }
 
   /**
+   * Get repository contributors
+   */
+  async getContributors(owner: string, repo: string): Promise<any[]> {
+    try {
+      const response = await fetch(
+        `${this.baseUrl}/repos/${owner}/${repo}/contributors?per_page=100`
+      );
+
+      if (!response.ok) {
+        throw new Error(`Failed to fetch contributors: ${response.statusText}`);
+      }
+
+      return await response.json();
+    } catch (error) {
+      logger.error("Error fetching contributors:", error);
+      return [];
+    }
+  }
+
+  /**
    * Get file tree from repository
    */
   async getRepositoryTree(
