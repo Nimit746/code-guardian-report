@@ -18,10 +18,10 @@ export const FileUploadArea: React.FC<FileUploadAreaProps> = ({
 }) => {
   return (
     <div
-      className={`group focus-within:ring-primary relative overflow-hidden rounded-2xl border-2 border-dashed p-6 text-center transition-all duration-300 focus-within:ring-2 focus-within:ring-offset-2 sm:p-8 lg:p-12 ${
+      className={`group focus-within:ring-primary relative overflow-hidden rounded-none border-2 border-dashed p-6 text-center transition-all duration-300 focus-within:ring-2 focus-within:ring-offset-2 sm:p-8 lg:p-12 ${
         isDragOver
-          ? "border-primary bg-muted/50 scale-[1.02] dark:bg-blue-950/20"
-          : "border-border hover:border-primary hover:bg-muted/50 dark:hover:border-primary/50/50"
+          ? "border-primary bg-primary/5 dark:bg-primary/5 scale-[1.01]"
+          : "border-border hover:border-primary hover:bg-muted/50 dark:hover:border-primary/50"
       }`}
       onDragOver={onDragOver}
       onDragLeave={onDragLeave}
@@ -58,7 +58,7 @@ export const FileUploadArea: React.FC<FileUploadAreaProps> = ({
         <div className="space-y-4">
           <label
             htmlFor="file-upload"
-            className="focus-ring bg-primary text-primary-foreground hover:bg-primary/90 inline-flex transform cursor-pointer items-center rounded-lg border-0 px-6 py-2 text-base font-semibold shadow-lg transition-all duration-300 hover:shadow-xl sm:px-8 sm:py-3 sm:text-lg"
+            className="focus-ring bg-primary text-primary-foreground hover:bg-primary/90 border-primary inline-flex transform cursor-pointer items-center rounded-none border-2 px-6 py-2 text-base font-bold tracking-wider uppercase shadow-[4px_4px_0px_0px_rgba(0,0,0,1)] transition-all duration-200 hover:-translate-y-0.5 hover:shadow-[6px_6px_0px_0px_rgba(0,0,0,1)] active:translate-y-0 active:shadow-none sm:px-8 sm:py-3 sm:text-lg"
             tabIndex={0}
             onKeyDown={(e) => {
               if (e.key === "Enter" || e.key === " ") {
@@ -85,16 +85,16 @@ export const FileUploadArea: React.FC<FileUploadAreaProps> = ({
           onChange={onFileInput}
           aria-label="Choose zip file to upload"
         />
-        <div className="bg-muted/80 mt-4 rounded-lg p-3 text-xs sm:mt-6 sm:p-4 sm:text-sm">
+        <div className="bg-muted border-border mt-4 border p-3 font-mono text-xs sm:mt-6 sm:p-4 sm:text-sm">
           <div className="space-y-1">
             <p className="text-foreground">
-              <strong>Maximum file size:</strong>{" "}
+              <strong>MAX_FILE_SIZE:</strong>{" "}
               <span className="text-muted-foreground">50MB</span>
             </p>
             <p className="text-foreground">
-              <strong>Supported languages:</strong>{" "}
+              <strong>SUPPORTED_LANGUAGES:</strong>{" "}
               <span className="text-muted-foreground">
-                Python, JavaScript, TypeScript, React, Node.js
+                [Python, JavaScript, TypeScript, React, Node.js]
               </span>
             </p>
           </div>

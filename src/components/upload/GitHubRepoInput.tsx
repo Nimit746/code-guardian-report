@@ -362,7 +362,7 @@ export const GitHubRepoInput: React.FC<GitHubRepoInputProps> = ({
             disabled={isLoading}
             autoComplete="off"
             title="Search repositories or paste a GitHub URL"
-            className="focus:border-primary h-11 w-full border-2 pr-10 pl-9 text-sm transition-all sm:h-12 sm:pl-10 sm:text-base"
+            className="focus:border-primary h-12 w-full rounded-none border-2 pr-10 pl-9 font-mono text-sm transition-all focus:shadow-[4px_4px_0px_0px_hsl(var(--primary))] sm:h-14 sm:pl-10 sm:text-base"
           />
           {(isFetchingInfo || isSearching) && (
             <Skeleton className="absolute top-1/2 right-3 h-4 w-4 -translate-y-1/2 rounded-full sm:h-5 sm:w-5" />
@@ -380,14 +380,14 @@ export const GitHubRepoInput: React.FC<GitHubRepoInputProps> = ({
                 data-lenis-prevent
                 onWheelCapture={handleSuggestionsWheel}
                 onTouchMoveCapture={handleSuggestionsTouchMove}
-                className="border-border max-h-64 overflow-y-auto overscroll-contain border bg-white p-1 shadow-xl dark:bg-slate-950"
+                className="border-border bg-background animate-in fade-in zoom-in-95 max-h-64 overflow-y-auto overscroll-contain rounded-none border-2 p-0 shadow-xl dark:bg-slate-950"
               >
-                <div className="flex flex-col gap-0.5">
+                <div className="divide-border flex flex-col gap-0 divide-y">
                   {mergedSuggestions.map((suggestion) => (
                     <button
                       key={suggestion.id}
                       type="button"
-                      className="flex w-full flex-col items-start gap-0.5 rounded-md bg-white px-3 py-2 text-left transition-colors outline-none hover:bg-slate-50 focus:bg-slate-50 dark:bg-slate-950 dark:hover:bg-slate-900 dark:focus:bg-slate-900"
+                      className="bg-background hover:bg-muted focus:bg-muted flex w-full flex-col items-start gap-0.5 rounded-none px-4 py-3 text-left transition-colors outline-none"
                       onClick={() => handleSuggestionSelect(suggestion)}
                     >
                       <div className="flex w-full items-center justify-between gap-2">
@@ -424,7 +424,7 @@ export const GitHubRepoInput: React.FC<GitHubRepoInputProps> = ({
         <Button
           onClick={handleAnalyze}
           disabled={isLoading || !repoUrl.trim()}
-          className="bg-primary hover:bg-primary/90 relative z-10 h-11 w-full px-4 text-sm font-semibold text-white shadow-lg transition-all hover:shadow-xl sm:h-12 sm:px-6 sm:text-base"
+          className="bg-primary hover:bg-primary/90 text-primary-foreground border-primary relative z-10 h-12 w-full rounded-none border-2 px-4 text-sm font-bold tracking-wider uppercase shadow-[4px_4px_0px_0px_rgba(0,0,0,1)] transition-all hover:-translate-y-0.5 hover:shadow-[6px_6px_0px_0px_rgba(0,0,0,1)] active:translate-y-0 active:shadow-none sm:h-14 sm:px-6 sm:text-base"
         >
           {isLoading ? (
             <>
@@ -441,9 +441,9 @@ export const GitHubRepoInput: React.FC<GitHubRepoInputProps> = ({
       </div>
 
       {repoInfo && (
-        <Card className="border-border bg-muted/50 p-3 sm:p-4 dark:from-slate-800 dark:to-slate-900">
-          <div className="flex items-start gap-2 sm:gap-3">
-            <CheckCircle className="mt-0.5 h-4 w-4 flex-shrink-0 text-green-600 sm:h-5 sm:w-5 dark:text-green-400" />
+        <Card className="border-border bg-muted/20 rounded-none border-2 p-4 dark:from-slate-800 dark:to-slate-900">
+          <div className="flex items-start gap-2 sm:gap-4">
+            <CheckCircle className="text-primary mt-0.5 h-6 w-6 flex-shrink-0 sm:h-6 sm:w-6" />
             <div className="min-w-0 flex-1 space-y-2">
               <div>
                 <p className="text-foreground text-sm font-semibold break-words sm:text-base dark:text-white">
@@ -458,8 +458,8 @@ export const GitHubRepoInput: React.FC<GitHubRepoInputProps> = ({
 
               <div className="text-muted-foreground flex flex-wrap gap-2 text-xs sm:gap-3 sm:text-sm">
                 {repoInfo.language && (
-                  <span className="flex items-center gap-1">
-                    <span className="bg-muted h-2 w-2 flex-shrink-0 rounded-full sm:h-3 sm:w-3"></span>
+                  <span className="border-border bg-background flex items-center gap-2 border px-2 py-0.5 font-mono text-xs tracking-wider uppercase">
+                    <span className="bg-primary h-2 w-2 flex-shrink-0 rounded-none sm:h-2 sm:w-2"></span>
                     <span className="truncate">{repoInfo.language}</span>
                   </span>
                 )}

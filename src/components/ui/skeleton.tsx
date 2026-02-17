@@ -11,12 +11,12 @@ interface SkeletonProps {
 }
 
 const variantStyles = {
-  default: "bg-muted",
-  card: "bg-muted rounded-xl",
-  text: "bg-muted rounded",
-  avatar: "bg-muted rounded-full",
-  chart: "bg-muted rounded-lg",
-  button: "bg-muted rounded-md",
+  default: "bg-muted rounded-none",
+  card: "bg-muted rounded-none",
+  text: "bg-muted rounded-none",
+  avatar: "bg-muted rounded-none",
+  chart: "bg-muted rounded-none",
+  button: "bg-muted rounded-none",
 };
 
 const roundedStyles = {
