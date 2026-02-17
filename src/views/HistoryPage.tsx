@@ -41,6 +41,7 @@ import {
   Search,
   X,
   AlertTriangle,
+  Terminal,
 } from "lucide-react";
 import {
   firebaseAnalysisStorage,
@@ -382,18 +383,24 @@ export const HistoryPage = ({
   if (!currentUser) {
     return (
       <div className="container mx-auto py-8">
-        <Card>
+        <Card className="border-white/10 bg-black/40 backdrop-blur-sm">
           <CardHeader>
-            <CardTitle className="flex items-center gap-2">
-              <User className="h-5 w-5" />
+            <CardTitle className="flex items-center gap-2 text-white">
+              <User className="text-primary h-5 w-5" />
               Authentication Required
             </CardTitle>
-            <CardDescription>
+            <CardDescription className="text-slate-400">
               Please sign in to view your analysis history.
             </CardDescription>
           </CardHeader>
           <CardContent>
-            <Button onClick={onNavigateBack}>Back to Home</Button>
+            <Button
+              onClick={onNavigateBack}
+              className="border-primary/50 text-primary hover:bg-primary/10"
+              variant="outline"
+            >
+              Back to Home
+            </Button>
           </CardContent>
         </Card>
       </div>
@@ -401,25 +408,32 @@ export const HistoryPage = ({
   }
 
   return (
-    <div className="bg-muted relative min-h-screen overflow-hidden">
-      {}
+    <div className="bg-background text-foreground selection:bg-primary/20 selection:text-primary relative min-h-screen overflow-hidden">
+      {/* Industrial Background */}
+      <div className="fixed inset-0 z-0">
+        <div className="absolute inset-0 bg-[linear-gradient(to_right,#80808012_1px,transparent_1px),linear-gradient(to_bottom,#80808012_1px,transparent_1px)] bg-[size:60px_60px] opacity-20" />
+        <div className="absolute inset-0 bg-[radial-gradient(circle_at_center,transparent_0%,#000000_100%)] opacity-80" />
+      </div>
 
       <div className="relative z-10 container mx-auto space-y-6 px-4 py-8 sm:space-y-8 sm:py-12">
-        {}
+        {/* Header Section */}
         <div className="mb-8">
-          <div className="border-border bg-card rounded-lg border p-4 shadow-sm sm:p-6">
-            <div className="flex flex-col gap-6 lg:flex-row lg:items-center lg:justify-between">
+          <div className="group hover:border-primary/30 relative overflow-hidden rounded-lg border border-white/10 bg-black/40 p-6 backdrop-blur-sm transition-all duration-300">
+            <div className="absolute top-0 right-0 p-3 opacity-10 transition-opacity group-hover:opacity-20">
+              <Terminal className="text-primary h-16 w-16" />
+            </div>
+            <div className="relative z-10 flex flex-col gap-6 lg:flex-row lg:items-center lg:justify-between">
               <div className="space-y-3">
                 <div className="flex items-center gap-3 sm:gap-4">
-                  <div className="bg-primary rounded-md p-3 text-white shadow-sm">
+                  <div className="border-primary/30 bg-primary/10 text-primary rounded-full border p-3 shadow-[0_0_15px_-3px_rgba(16,185,129,0.3)]">
                     <History className="h-6 w-6" />
                   </div>
                   <div>
-                    <h1 className="text-foreground text-2xl font-bold tracking-tight sm:text-3xl dark:text-white">
-                      Analysis History
+                    <h1 className="font-display text-2xl font-bold tracking-tight text-white sm:text-3xl">
+                      ANALYSIS <span className="text-primary">HISTORY</span>
                     </h1>
-                    <p className="text-muted-foreground mt-1 text-sm sm:text-base">
-                      Your personal security analysis results & statistics
+                    <p className="mt-1 font-mono text-xs text-slate-400">
+                      SYSTEM_LOGS // ARCHIVED_SCANS
                     </p>
                   </div>
                 </div>
@@ -430,14 +444,14 @@ export const HistoryPage = ({
                   <Button
                     variant="outline"
                     onClick={onNavigateBack}
-                    className="border-border text-foreground/80 hover:bg-muted w-full sm:w-auto"
+                    className="border-white/10 bg-white/5 text-slate-300 hover:border-white/20 hover:bg-white/10 hover:text-white"
                   >
                     Back to Home
                   </Button>
                 )}
                 <Button
                   onClick={exportAnalysisHistory}
-                  className="bg-primary hover:bg-primary/90 w-full text-white shadow-sm sm:w-auto"
+                  className="bg-primary hover:bg-primary/90 font-bold text-black shadow-[0_0_20px_-5px_rgba(16,185,129,0.4)] transition-all hover:scale-105"
                 >
                   <Download className="mr-2 h-4 w-4" />
                   Export History
@@ -447,7 +461,7 @@ export const HistoryPage = ({
           </div>
         </div>
 
-        {}
+        {/* User Stats Grid */}
         {userStats && (
           <div className="grid grid-cols-2 gap-4 md:grid-cols-4">
             {[
@@ -455,42 +469,50 @@ export const HistoryPage = ({
                 label: "Total Analyses",
                 value: userStats.totalAnalyses || 0,
                 icon: Database,
-                gradient: "from-blue-500 to-cyan-500",
-                glow: "blue",
+                color: "text-blue-400",
+                bg: "bg-blue-500/10",
+                border: "border-blue-500/20",
               },
               {
                 label: "Issues Found",
                 value: userStats.totalIssuesFound || 0,
                 icon: Bug,
-                gradient: "from-amber-500 to-orange-500",
-                glow: "amber",
+                color: "text-amber-400",
+                bg: "bg-amber-500/10",
+                border: "border-amber-500/20",
               },
               {
                 label: "Files Analyzed",
                 value: userStats.totalFilesAnalyzed || 0,
                 icon: FileText,
-                gradient: "from-emerald-500 to-teal-500",
-                glow: "emerald",
+                color: "text-emerald-400",
+                bg: "bg-emerald-500/10",
+                border: "border-emerald-500/20",
               },
               {
                 label: "Avg Score",
                 value: userStats.averageSecurityScore || "--",
                 icon: Shield,
+                color: "text-purple-400",
+                bg: "bg-purple-500/10",
+                border: "border-purple-500/20",
               },
             ].map((stat, index) => (
               <div
                 key={index}
-                className="border-border bg-card rounded-lg border p-4 shadow-sm sm:p-6"
+                className={`rounded-lg border p-4 backdrop-blur-sm transition-all duration-300 hover:-translate-y-1 ${stat.border} ${stat.bg}`}
               >
                 <div className="flex items-center gap-4">
-                  <div className="bg-muted text-muted-foreground rounded-md p-2.5">
+                  <div className={`rounded-md bg-black/20 p-2 ${stat.color}`}>
                     <stat.icon className="h-5 w-5" />
                   </div>
                   <div>
-                    <p className="text-muted-foreground text-sm font-medium">
+                    <p className="font-mono text-xs tracking-wider text-slate-400 uppercase">
                       {stat.label}
                     </p>
-                    <p className="text-foreground text-2xl font-bold dark:text-white">
+                    <p
+                      className={`font-display text-2xl font-bold ${stat.color}`}
+                    >
                       {stat.value}
                     </p>
                   </div>
@@ -500,13 +522,13 @@ export const HistoryPage = ({
           </div>
         )}
 
-        {}
-        <div className="border-border bg-card rounded-lg border p-4 shadow-sm sm:p-6">
+        {/* Filter Bar */}
+        <div className="rounded-lg border border-white/10 bg-black/40 p-4 shadow-sm backdrop-blur-sm sm:p-6">
           <div className="mb-5 flex items-center justify-between gap-3">
             <div className="flex items-center gap-3">
-              <Filter className="text-muted-foreground h-5 w-5" />
-              <span className="text-foreground font-semibold dark:text-white">
-                Filters & Search
+              <Filter className="text-primary h-5 w-5" />
+              <span className="font-mono text-sm font-semibold tracking-wider text-white uppercase">
+                System Filters
               </span>
             </div>
             {(searchTerm ||
@@ -520,21 +542,21 @@ export const HistoryPage = ({
                   setSelectedTimeRange("all");
                   setSelectedSeverity("all");
                 }}
-                className="text-muted-foreground h-8 rounded-lg hover:bg-white/5 hover:text-white"
+                className="h-8 font-mono text-xs text-slate-400 hover:bg-white/10 hover:text-white"
               >
                 <X className="mr-2 h-3 w-3" />
-                Clear Filters
+                RESET_FILTERS
               </Button>
             )}
           </div>
           <div className="grid grid-cols-1 gap-4 sm:grid-cols-2 lg:grid-cols-12">
             <div className="relative lg:col-span-4">
-              <Search className="text-muted-foreground absolute top-1/2 left-3 h-4 w-4 -translate-y-1/2" />
+              <Search className="absolute top-1/2 left-3 h-4 w-4 -translate-y-1/2 text-slate-500" />
               <Input
-                placeholder="Search by filename, tags, or issue..."
+                placeholder="Search logs..."
                 value={searchTerm}
                 onChange={(e) => setSearchTerm(e.target.value)}
-                className="h-10 w-full pl-9"
+                className="focus:border-primary/50 focus:ring-primary/20 h-10 w-full border-white/10 bg-black/20 pl-9 text-slate-200 placeholder:text-slate-600"
               />
             </div>
 
@@ -547,10 +569,10 @@ export const HistoryPage = ({
                   )
                 }
               >
-                <SelectTrigger className="h-10">
+                <SelectTrigger className="focus:border-primary/50 focus:ring-primary/20 h-10 border-white/10 bg-black/20 text-slate-200">
                   <SelectValue placeholder="Time Range" />
                 </SelectTrigger>
-                <SelectContent>
+                <SelectContent className="border-white/10 bg-black/90 text-slate-200">
                   <SelectItem value="all">All Time</SelectItem>
                   <SelectItem value="week">Past Week</SelectItem>
                   <SelectItem value="month">Past Month</SelectItem>
@@ -568,10 +590,10 @@ export const HistoryPage = ({
                   )
                 }
               >
-                <SelectTrigger className="h-10">
+                <SelectTrigger className="focus:border-primary/50 focus:ring-primary/20 h-10 border-white/10 bg-black/20 text-slate-200">
                   <SelectValue placeholder="Severity" />
                 </SelectTrigger>
-                <SelectContent>
+                <SelectContent className="border-white/10 bg-black/90 text-slate-200">
                   <SelectItem value="all">All Severities</SelectItem>
                   <SelectItem value="critical">Critical</SelectItem>
                   <SelectItem value="high">High</SelectItem>
@@ -584,65 +606,57 @@ export const HistoryPage = ({
             <div className="lg:col-span-2">
               <Button
                 onClick={loadAnalysisHistory}
-                className="bg-primary hover:bg-primary/90 h-10 w-full text-white"
+                className="text-primary border-primary/20 hover:border-primary/50 h-10 w-full border bg-white/5 shadow-[0_0_10px_-4px_rgba(16,185,129,0.2)] hover:bg-white/10"
               >
-                <Filter className="mr-2 h-4 w-4" />
-                Refresh
+                <Terminal className="mr-2 h-4 w-4" />
+                REFRESH
               </Button>
             </div>
           </div>
         </div>
 
-        {}
-        <div className="border-border bg-card rounded-lg border shadow-sm">
-          {}
-          <div className="border-border border-b px-4 py-4 sm:px-6">
+        {/* Results List */}
+        <div className="overflow-hidden rounded-lg border border-white/10 bg-black/40 backdrop-blur-sm">
+          {/* List Header */}
+          <div className="border-b border-white/10 bg-black/20 px-4 py-4 sm:px-6">
             <div className="flex items-center justify-between">
               <div>
-                <h2 className="text-foreground flex items-center gap-3 text-xl font-bold dark:text-white">
-                  <div className="bg-primary h-6 w-1.5 rounded-full" />
-                  Your Analysis Results
-                  <span className="bg-muted text-muted-foreground ml-2 rounded-full px-2.5 py-0.5 text-sm font-medium">
-                    {filteredHistory.length}
+                <h2 className="font-display flex items-center gap-3 text-lg font-bold tracking-wide text-white">
+                  <div className="bg-primary h-2 w-2 animate-pulse rounded-full shadow-[0_0_10px_rgba(16,185,129,0.8)]" />
+                  ANALYSIS RESULTS
+                  <span className="ml-2 rounded bg-white/5 px-2 py-0.5 font-mono text-xs text-slate-400">
+                    COUNT: {filteredHistory.length}
                   </span>
                 </h2>
-                {filteredHistory.length !== analysisHistory.length && (
-                  <p className="text-muted-foreground mt-1 text-sm">
-                    Showing {filteredHistory.length} of {analysisHistory.length}{" "}
-                    analyses
-                  </p>
-                )}
               </div>
             </div>
           </div>
 
-          {}
+          {/* List Body */}
           <div className="p-4 sm:p-6">
             {isLoading ? (
               <div className="flex flex-col items-center justify-center py-16">
-                <Skeleton className="h-16 w-16 rounded-full" />
-                <Skeleton className="mt-4 h-4 w-48" />
-                <span className="text-muted-foreground mt-2">
-                  Loading your analysis history...
+                <Skeleton className="h-16 w-16 rounded-full bg-white/5" />
+                <Skeleton className="mt-4 h-4 w-48 bg-white/5" />
+                <span className="mt-2 font-mono text-sm text-slate-500">
+                  LOADING_DATA...
                 </span>
               </div>
             ) : filteredHistory.length === 0 ? (
               <div className="py-16 text-center">
                 <div className="relative inline-block">
-                  <div className="absolute inset-0 rounded-full bg-gradient-to-br from-violet-500/20 to-fuchsia-500/20 blur-2xl" />
-                  <div className="relative rounded-full border border-white/10 bg-white/5 p-6">
-                    <History className="text-muted-foreground h-16 w-16" />
+                  <div className="bg-primary/20 absolute inset-0 rounded-full blur-xl" />
+                  <div className="border-primary/30 relative rounded-full border bg-black/50 p-6">
+                    <Terminal className="text-primary h-12 w-12" />
                   </div>
                 </div>
-                <h3 className="mt-6 mb-2 text-xl font-semibold text-white">
-                  {analysisHistory.length === 0
-                    ? "No Analysis History Yet"
-                    : "No Results Found"}
+                <h3 className="font-display mt-6 mb-2 text-xl font-bold tracking-wide text-white">
+                  NO_DATA_FOUND
                 </h3>
-                <p className="text-muted-foreground mx-auto max-w-md">
+                <p className="mx-auto max-w-md font-mono text-sm text-slate-400">
                   {analysisHistory.length === 0
-                    ? "Start analyzing your code to see results here. Your analysis history will appear once you upload and scan some code."
-                    : "Try adjusting your search filters to find what you're looking for."}
+                    ? "INITIATE_FIRST_SCAN"
+                    : "ADJUST_FILTER_PARAMETERS"}
                 </p>
               </div>
             ) : (
@@ -650,21 +664,21 @@ export const HistoryPage = ({
                 {filteredHistory.map((analysis) => (
                   <div
                     key={analysis.id}
-                    className="group border-border hover:bg-muted/50 cursor-pointer border-b p-6 last:border-0"
+                    className="group hover:border-primary/50 relative cursor-pointer rounded-lg border border-white/5 bg-black/20 p-6 transition-all duration-300 hover:bg-black/40 hover:shadow-[0_0_20px_-10px_rgba(16,185,129,0.2)]"
                     onClick={(e) => handleViewAnalysis(analysis, e)}
                   >
-                    <div className="flex flex-col gap-5 lg:flex-row lg:items-center lg:justify-between">
+                    <div className="relative z-10 flex flex-col gap-5 lg:flex-row lg:items-center lg:justify-between">
                       <div className="flex-1 space-y-4">
-                        {}
+                        {/* Title Row */}
                         <div className="flex flex-wrap items-center gap-3">
-                          <h3 className="text-foreground text-lg font-bold dark:text-white">
+                          <h3 className="group-hover:text-primary font-mono text-lg font-bold tracking-tight text-white transition-colors">
                             {analysis.fileName}
                           </h3>
                           <span
-                            className={`rounded-full px-2.5 py-0.5 text-xs font-medium ${
+                            className={`rounded border px-2 py-0.5 text-[10px] font-bold tracking-wider uppercase ${
                               analysis.syncStatus === "synced"
-                                ? "bg-emerald-100 text-emerald-800 dark:bg-emerald-900/30 dark:text-emerald-400"
-                                : "bg-amber-100 text-amber-800 dark:bg-amber-900/30 dark:text-amber-400"
+                                ? "border-emerald-500/30 bg-emerald-500/10 text-emerald-400"
+                                : "border-amber-500/30 bg-amber-500/10 text-amber-400"
                             }`}
                           >
                             {analysis.syncStatus}
@@ -674,7 +688,7 @@ export const HistoryPage = ({
                               {analysis.tags.map((tag, idx) => (
                                 <span
                                   key={idx}
-                                  className="bg-muted text-muted-foreground rounded-md px-2 py-0.5 text-xs"
+                                  className="rounded border border-white/10 bg-white/5 px-2 py-0.5 font-mono text-[10px] text-slate-400"
                                 >
                                   {tag}
                                 </span>
@@ -683,7 +697,7 @@ export const HistoryPage = ({
                           )}
                         </div>
 
-                        {}
+                        {/* Stats Row */}
                         <div className="grid grid-cols-2 gap-4 md:grid-cols-4">
                           {[
                             {
@@ -705,15 +719,15 @@ export const HistoryPage = ({
                           ].map((item, idx) => (
                             <div
                               key={idx}
-                              className="text-muted-foreground flex items-center gap-2 text-sm"
+                              className="flex items-center gap-2 font-mono text-xs text-slate-400"
                             >
-                              <item.icon className="text-muted-foreground h-4 w-4" />
+                              <item.icon className="text-primary/50 h-3.5 w-3.5" />
                               <span>{item.value}</span>
                             </div>
                           ))}
                         </div>
 
-                        {}
+                        {/* Severity Tags */}
                         {analysis.results.issues &&
                           analysis.results.issues.length > 0 && (
                             <div className="flex flex-wrap gap-2">
@@ -731,17 +745,17 @@ export const HistoryPage = ({
                                   const severityStyles: Record<string, string> =
                                     {
                                       critical:
-                                        "bg-red-100 text-red-800 dark:bg-red-900/30 dark:text-red-400",
-                                      high: "bg-orange-100 text-orange-800 dark:bg-orange-900/30 dark:text-orange-400",
+                                        "border-red-500/30 bg-red-500/10 text-red-400",
+                                      high: "border-orange-500/30 bg-orange-500/10 text-orange-400",
                                       medium:
-                                        "bg-amber-100 text-amber-800 dark:bg-amber-900/30 dark:text-amber-400",
-                                      low: "bg-emerald-100 text-emerald-800 dark:bg-emerald-900/30 dark:text-emerald-400",
+                                        "border-amber-500/30 bg-amber-500/10 text-amber-400",
+                                      low: "border-emerald-500/30 bg-emerald-500/10 text-emerald-400",
                                     };
 
                                   return (
                                     <span
                                       key={severity}
-                                      className={`rounded-md px-2.5 py-1 text-xs font-medium uppercase ${severityStyles[severity]}`}
+                                      className={`rounded border px-2 py-0.5 text-[10px] font-bold tracking-wider uppercase ${severityStyles[severity]} font-mono`}
                                     >
                                       {severity}: {count}
                                     </span>
@@ -752,20 +766,20 @@ export const HistoryPage = ({
                           )}
                       </div>
 
-                      {}
+                      {/* Actions */}
                       <div className="flex items-center gap-2 lg:flex-col lg:gap-2">
                         <Button
                           onClick={(e) => handleViewAnalysis(analysis, e)}
-                          className="bg-primary hover:bg-primary/90 w-full text-white"
+                          className="hover:bg-primary text-primary border-primary/30 w-full border bg-white/5 transition-all duration-300 hover:font-bold hover:text-black"
                           size="sm"
                         >
                           <Eye className="mr-1.5 h-4 w-4" />
-                          View
+                          VIEW
                         </Button>
                         <Button
                           onClick={(e) => confirmDelete(analysis.id, e)}
-                          variant="outline"
-                          className="border-border text-foreground/80 w-full hover:bg-red-50 hover:text-red-600 dark:hover:bg-red-900/20 dark:hover:text-red-400"
+                          variant="ghost"
+                          className="w-full text-slate-500 hover:bg-red-500/10 hover:text-red-400"
                           size="sm"
                         >
                           <Trash2 className="h-4 w-4" />
@@ -779,25 +793,33 @@ export const HistoryPage = ({
           </div>
         </div>
 
-        {}
+        {/* Delete Dialog */}
         <Dialog open={isDeleteOpen} onOpenChange={setIsDeleteOpen}>
-          <DialogContent className="sm:max-w-md">
+          <DialogContent className="border-red-500/30 bg-black/95 text-slate-200 sm:max-w-md">
             <DialogHeader>
-              <DialogTitle className="flex items-center gap-2 text-red-600 dark:text-red-400">
+              <DialogTitle className="font-display flex items-center gap-2 tracking-wide text-red-500">
                 <AlertTriangle className="h-5 w-5" />
-                Confirm Deletion
+                CONFIRM_DELETION
               </DialogTitle>
-              <DialogDescription>
-                Are you sure you want to delete this analysis? This action
-                cannot be undone.
+              <DialogDescription className="font-mono text-xs text-slate-400">
+                WARNING: This action is irreversible. The analysis data will be
+                permanently purged from the system.
               </DialogDescription>
             </DialogHeader>
             <DialogFooter className="gap-2 sm:gap-0">
-              <Button variant="ghost" onClick={() => setIsDeleteOpen(false)}>
+              <Button
+                variant="ghost"
+                onClick={() => setIsDeleteOpen(false)}
+                className="text-slate-400 hover:bg-white/10 hover:text-white"
+              >
                 Cancel
               </Button>
-              <Button variant="destructive" onClick={executeDelete}>
-                Delete Analysis
+              <Button
+                variant="destructive"
+                onClick={executeDelete}
+                className="border border-red-500/50 bg-red-500/20 text-red-400 hover:bg-red-500/40"
+              >
+                PURGE_DATA
               </Button>
             </DialogFooter>
           </DialogContent>
