@@ -1,8 +1,14 @@
-import React from "react";
-import { FileCode, X, CheckCircle, Sparkles, Clock } from "lucide-react";
+import React, { useEffect, useRef, useState } from "react";
+import {
+  FileCode,
+  X,
+  CheckCircle,
+  Clock,
+  Activity,
+  Cpu,
+  Wifi,
+} from "lucide-react";
 import { Button } from "@/components/ui/button";
-import { Progress } from "@/components/ui/progress";
-import { Alert, AlertDescription } from "@/components/ui/alert";
 import { AnalysisProgress } from "@/hooks/useFileUpload";
 
 interface FileStatusProps {
@@ -16,18 +22,71 @@ interface FileStatusProps {
 }
 
 const formatTimeRemaining = (seconds: number): string => {
-  if (seconds <= 0) return "Almost done...";
-  if (seconds < 1) return "Less than a second";
+  if (seconds <= 0) return "CALC...";
+  if (seconds < 1) return "< 1 SEC";
   if (seconds < 60) {
     const s = Math.ceil(seconds);
-    return s === 1 ? "~1 second" : `~${s} seconds`;
+    return `${s} SEC`;
   }
   const minutes = Math.floor(seconds / 60);
   const remainingSeconds = Math.ceil(seconds % 60);
   if (remainingSeconds === 0) {
-    return minutes === 1 ? "~1 minute" : `~${minutes} minutes`;
+    return `${minutes} MIN`;
   }
-  return `~${minutes}m ${remainingSeconds}s`;
+  return `${minutes}M ${remainingSeconds}S`;
+};
+
+const TerminalLog = ({ active }: { active: boolean }) => {
+  const [logs, setLogs] = useState<string[]>([]);
+  const scrollRef = useRef<HTMLDivElement>(null);
+
+  const logMessages = [
+    "INITIALIZING_SCAN_PROTOCOLS...",
+    "MOUNTING_VIRTUAL_VOLUMES...",
+    "PARSING_BINARY_DATA...",
+    "DETECTING_ENCRYPTION_LAYERS...",
+    "ANALYZING_FILE_STRUCTURE...",
+    "CHECKING_INTEGRITY_HASHES...",
+    "LOADING_SECURITY_DEFINITIONS...",
+    "EXECUTING_STATIC_ANALYSIS...",
+    "SEARCHING_FOR_VULNERABILITIES...",
+    "CROSS_REFERENCING_CPE_DATABASE...",
+    "OPTIMIZING_REPORT_GENERATION...",
+  ];
+
+  useEffect(() => {
+    if (!active) return;
+
+    let index = 0;
+    const interval = setInterval(() => {
+      if (index < logMessages.length) {
+        setLogs((prev) => [
+          ...prev.slice(-4),
+          `> ${logMessages[index]} ${Math.random() > 0.5 ? "[OK]" : ""}`,
+        ]);
+        index = (index + 1) % logMessages.length; // Loop for visual effect
+      }
+    }, 800);
+
+    return () => clearInterval(interval);
+  }, [active]);
+
+  return (
+    <div className="relative h-24 overflow-hidden border border-green-500/20 bg-black/90 p-2 font-mono text-[10px] text-green-500 shadow-inner">
+      <div className="absolute top-0 right-0 p-1 opacity-50">
+        <Activity className="h-3 w-3 animate-pulse" />
+      </div>
+      <div className="space-y-1" ref={scrollRef}>
+        {logs.map((log, i) => (
+          <div key={i} className="animate-fade-in truncate opacity-90">
+            {log}
+          </div>
+        ))}
+        <div className="animate-pulse">_</div>
+      </div>
+      <div className="pointer-events-none absolute bottom-0 left-0 h-4 w-full bg-gradient-to-t from-black/80 to-transparent" />
+    </div>
+  );
 };
 
 export const FileStatus: React.FC<FileStatusProps> = ({
@@ -40,142 +99,168 @@ export const FileStatus: React.FC<FileStatusProps> = ({
   analysisProgress,
 }) => {
   return (
-    <div className="animate-slide-up space-y-4 sm:space-y-6">
-      <div className="border-primary/20 bg-muted/10 dark:border-primary/20 flex flex-col items-start justify-between gap-4 rounded-none border-2 p-4 sm:flex-row sm:items-center sm:p-6">
-        <div className="flex min-w-0 flex-1 items-center gap-3 sm:gap-4">
-          <div className="bg-primary flex-shrink-0 rounded-none p-2 shadow-sm sm:p-3">
-            <FileCode className="text-primary-foreground h-6 w-6 sm:h-8 sm:w-8" />
+    <div className="animate-slide-up w-full space-y-4">
+      {/* Main File Card */}
+      <div className="group bg-background border-primary/20 hover:border-primary/50 relative overflow-hidden border-2 p-4 transition-colors">
+        {/* Decorative Corner Markers */}
+        <div className="border-primary/40 absolute top-0 left-0 h-2 w-2 border-t-2 border-l-2" />
+        <div className="border-primary/40 absolute top-0 right-0 h-2 w-2 border-t-2 border-r-2" />
+        <div className="border-primary/40 absolute bottom-0 left-0 h-2 w-2 border-b-2 border-l-2" />
+        <div className="border-primary/40 absolute right-0 bottom-0 h-2 w-2 border-r-2 border-b-2" />
+
+        <div className="flex flex-col items-start justify-between gap-4 sm:flex-row sm:items-center">
+          <div className="flex min-w-0 items-center gap-4">
+            <div className="relative">
+              <div className="bg-primary/10 relative z-10 p-3">
+                <FileCode className="text-primary h-6 w-6" />
+              </div>
+              {/* Glitch Effect Layer */}
+              <div className="bg-primary/20 absolute inset-0 animate-pulse blur-sm" />
+            </div>
+
+            <div className="min-w-0">
+              <div className="flex items-center gap-2">
+                <p
+                  className="text-foreground group-hover:text-primary truncate font-mono text-sm font-bold tracking-wider uppercase transition-colors sm:text-base"
+                  title={selectedFile.name}
+                >
+                  {selectedFile.name}
+                </p>
+                <span className="bg-muted text-muted-foreground px-1 py-0.5 font-mono text-[10px] uppercase">
+                  {(selectedFile.size / 1024 / 1024).toFixed(2)} MB
+                </span>
+              </div>
+              <div className="text-muted-foreground mt-1 flex items-center gap-2 font-mono text-xs">
+                <span className="h-2 w-2 animate-pulse rounded-full bg-green-500/50" />
+                <span>SECURE_ENCLAVE_READY</span>
+              </div>
+            </div>
           </div>
-          <div className="min-w-0 flex-1">
-            <p
-              className="text-foreground truncate font-mono text-base font-bold tracking-wide uppercase sm:text-lg"
-              title={selectedFile.name}
-            >
-              {selectedFile.name}
-            </p>
-            <p className="text-muted-foreground font-mono text-xs">
-              FILE_SIZE: {(selectedFile.size / 1024 / 1024).toFixed(2)} MB
-            </p>
-          </div>
+
+          <Button
+            variant="ghost"
+            size="sm"
+            onClick={onRemoveFile}
+            disabled={isUploading || isAnalyzing}
+            className="hover:bg-destructive hover:text-destructive-foreground focus:ring-destructive rounded-none focus:ring-1"
+          >
+            <X className="h-4 w-4" />
+            <span className="sr-only">ABORT</span>
+          </Button>
         </div>
-        <Button
-          variant="ghost"
-          size="sm"
-          onClick={onRemoveFile}
-          className="focus-ring text-destructive hover:bg-destructive/10 hover:text-destructive flex-shrink-0 rounded-none"
-          disabled={isUploading || isAnalyzing}
-          aria-label="Remove selected file"
-        >
-          <X className="h-4 w-4 sm:h-5 sm:w-5" />
-        </Button>
+
+        {/* Scan Line Animation Overlay */}
+        {(isUploading || isAnalyzing) && (
+          <div className="pointer-events-none absolute inset-0 overflow-hidden opacity-10">
+            <div className="via-primary h-full w-full animate-[scan-line_3s_linear_infinite] bg-gradient-to-b from-transparent to-transparent" />
+          </div>
+        )}
       </div>
 
+      {/* Upload Status Panel */}
       {isUploading && (
-        <div className="animate-fade-in border-primary/30 bg-background relative overflow-hidden rounded-none border-2 p-4 sm:p-6">
-          <div className="relative space-y-4">
-            <div className="flex items-center justify-between gap-3">
-              <div className="flex items-center gap-3">
-                <div className="bg-primary/10 border-primary/20 flex h-10 w-10 items-center justify-center border">
-                  <div className="border-primary h-5 w-5 animate-spin rounded-full border-2 border-t-transparent" />
-                </div>
-                <div className="space-y-1">
-                  <p className="text-primary font-mono text-xs tracking-wider uppercase">
-                    Status: Uploading...
-                  </p>
-                  <p className="text-muted-foreground font-mono text-[10px]">
-                    Transferring data packets
-                  </p>
-                </div>
-              </div>
-              <div className="flex flex-col items-end gap-2">
-                <span className="text-primary font-mono text-sm font-bold">
-                  {uploadProgress}%
-                </span>
-              </div>
+        <div className="border-primary/30 bg-primary/5 animate-in fade-in slide-in-from-top-2 border p-4">
+          <div className="mb-2 flex items-center justify-between">
+            <div className="flex items-center gap-2">
+              <Wifi className="text-primary h-4 w-4 animate-pulse" />
+              <span className="text-primary font-mono text-xs font-bold tracking-widest uppercase">
+                Uplink Active // {uploadProgress}%
+              </span>
             </div>
-            <div className="space-y-2">
-              <Progress
-                value={uploadProgress}
-                className="bg-muted h-2 w-full rounded-none"
-              />
-            </div>
+          </div>
+          <div className="bg-primary/20 relative h-2 w-full overflow-hidden">
+            <div
+              className="bg-primary absolute top-0 left-0 h-full transition-all duration-300 ease-out"
+              style={{ width: `${uploadProgress}%` }}
+            />
+            {/* Striped progress effect */}
+            <div className="absolute inset-0 animate-[slide_1s_linear_infinite] bg-[linear-gradient(45deg,transparent_25%,rgba(0,0,0,0.1)_25%,rgba(0,0,0,0.1)_50%,transparent_50%,transparent_75%,rgba(0,0,0,0.1)_75%,rgba(0,0,0,0.1))] bg-[length:10px_10px]" />
           </div>
         </div>
       )}
 
+      {/* Analysis Status Panel */}
       {isAnalyzing && (
-        <div className="animate-fade-in border-primary bg-background relative overflow-hidden rounded-none border-2 p-4 shadow-[4px_4px_0px_0px_rgba(0,0,0,0.1)] sm:p-6">
-          <div className="relative space-y-5">
-            <div className="flex flex-col gap-3 sm:flex-row sm:items-center sm:justify-between">
-              <div className="flex items-center gap-3">
-                <div className="border-primary/20 bg-primary/5 relative border p-2">
-                  <Sparkles
-                    className="text-primary h-6 w-6 animate-pulse"
-                    aria-hidden="true"
-                  />
-                </div>
-                <div className="space-y-1">
-                  <p className="text-primary font-mono text-sm font-bold tracking-wider uppercase">
-                    System Analysis Active
-                  </p>
-                  <p className="text-muted-foreground font-mono text-xs">
-                    Processing logic cores...
-                  </p>
+        <div className="border-primary bg-background animate-in fade-in zoom-in-95 border p-1 shadow-lg">
+          <div className="bg-primary/5 space-y-4 p-4">
+            {/* Header */}
+            <div className="border-primary/20 flex items-center justify-between border-b pb-2">
+              <div className="flex items-center gap-2">
+                <Cpu className="text-primary h-4 w-4 animate-[spin_3s_linear_infinite]" />
+                <span className="text-primary font-mono text-sm font-bold tracking-widest uppercase">
+                  Processing // Core Logic
+                </span>
+              </div>
+              <div className="text-primary/80 font-mono text-xs">
+                THREAD_ID:{" "}
+                {Math.floor(Math.random() * 99999)
+                  .toString()
+                  .padStart(5, "0")}
+              </div>
+            </div>
+
+            {/* Terminal Output */}
+            <TerminalLog active={isAnalyzing} />
+
+            {/* Progress Bar & Phase Info */}
+            <div className="space-y-2">
+              <div className="flex items-end justify-between font-mono text-xs">
+                <span className="text-muted-foreground uppercase">
+                  Phase: {analysisProgress?.phase || "INITIALIZING"}
+                </span>
+                <span className="text-primary font-bold">
+                  {Math.round(analysisProgress?.percentComplete ?? 0)}%
+                </span>
+              </div>
+
+              <div className="bg-muted border-border relative h-4 w-full border">
+                <div
+                  className="bg-primary relative h-full overflow-hidden transition-all duration-500 ease-out"
+                  style={{
+                    width: `${analysisProgress?.percentComplete ?? 0}%`,
+                  }}
+                >
+                  <div className="absolute inset-0 h-full w-full animate-[shimmer_2s_infinite] bg-white/20" />
                 </div>
               </div>
-              <div className="flex flex-wrap items-center gap-3">
-                {analysisProgress && analysisProgress.phaseNumber > 0 && (
-                  <span className="border-primary bg-primary text-primary-foreground border px-3 py-1 font-mono text-xs font-bold tracking-wider uppercase">
-                    Phase {analysisProgress.phaseNumber}/
-                    {analysisProgress.totalPhases}
+
+              <div className="flex items-center justify-between pt-1">
+                <div className="text-muted-foreground flex items-center gap-2 font-mono text-[10px]">
+                  <Clock className="h-3 w-3" />
+                  <span>
+                    EST:{" "}
+                    {analysisProgress?.estimatedTimeRemaining
+                      ? formatTimeRemaining(
+                          analysisProgress.estimatedTimeRemaining
+                        )
+                      : "CALC..."}
                   </span>
-                )}
-                <span className="border-border bg-muted text-muted-foreground border px-3 py-1 font-mono text-xs font-bold tracking-wider uppercase">
-                  {analysisProgress?.phase || "In Progress"}
-                </span>
-              </div>
-            </div>
-
-            <div className="border-border relative border p-1">
-              <Progress
-                value={analysisProgress?.percentComplete ?? 0}
-                className="bg-muted h-4 w-full rounded-none"
-              />
-              <div className="absolute inset-0 flex items-center justify-center">
-                <span className="text-foreground bg-background/50 px-1 font-mono text-[10px] font-bold">
-                  {Math.round(analysisProgress?.percentComplete ?? 0)}% COMPLETE
-                </span>
-              </div>
-            </div>
-
-            <div className="border-border flex flex-col gap-2 border-t border-dashed pt-3 sm:flex-row sm:items-center sm:justify-between">
-              <p className="text-muted-foreground font-mono text-xs uppercase">
-                &gt; Extracting files... &gt; Pattern match... &gt; Vuln scan...
-              </p>
-              {analysisProgress &&
-                analysisProgress.estimatedTimeRemaining > 0 && (
-                  <div className="text-primary flex items-center gap-2 font-mono text-xs font-bold tracking-wider uppercase">
-                    <Clock className="h-4 w-4" aria-hidden="true" />
-                    <span>
-                      ETA:{" "}
-                      {formatTimeRemaining(
-                        analysisProgress.estimatedTimeRemaining
-                      )}
-                    </span>
+                </div>
+                {analysisProgress && (
+                  <div className="bg-primary/10 text-primary px-2 py-0.5 font-mono text-[10px]">
+                    PHASE {analysisProgress.phaseNumber}/
+                    {analysisProgress.totalPhases}
                   </div>
                 )}
+              </div>
             </div>
           </div>
         </div>
       )}
 
+      {/* Completion Banner */}
       {uploadComplete && !isAnalyzing && (
-        <Alert className="animate-bounce-in rounded-none border-2 border-green-500 bg-green-500/10 dark:border-green-500 dark:bg-green-500/10">
-          <CheckCircle className="h-5 w-5 text-green-600 dark:text-green-500" />
-          <AlertDescription className="font-mono text-xs font-bold tracking-wider text-green-800 uppercase dark:text-green-200">
-            Upload Complete // Analysis Initiated
-          </AlertDescription>
-        </Alert>
+        <div className="animate-in slide-in-from-left-2 flex items-center gap-4 border-l-4 border-green-500 bg-green-500/10 p-4">
+          <CheckCircle className="h-5 w-5 text-green-500" />
+          <div className="space-y-1">
+            <h4 className="font-mono text-sm font-bold tracking-wider text-green-700 uppercase dark:text-green-400">
+              Sequence Complete
+            </h4>
+            <p className="font-mono text-xs text-green-600/80 dark:text-green-400/80">
+              Artifact successfully uploaded to secure storage.
+            </p>
+          </div>
+        </div>
       )}
     </div>
   );

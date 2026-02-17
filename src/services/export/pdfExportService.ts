@@ -1,8 +1,8 @@
-import jsPDF from "jspdf";
-import html2canvas from "html2canvas";
 import { AnalysisResults } from "@/hooks/useAnalysis";
+import type { jsPDF } from "jspdf";
 
 import { logger } from "@/utils/logger";
+
 export interface PDFReportOptions {
   includeCharts?: boolean;
   includeCodeSnippets?: boolean;
@@ -11,21 +11,24 @@ export interface PDFReportOptions {
 }
 
 export class PDFExportService {
-  private doc: jsPDF;
+  private doc: jsPDF | null = null;
   private currentY: number = 20;
   private pageWidth: number = 210;
   private pageHeight: number = 297;
   private margin: number = 20;
-
-  constructor() {
-    this.doc = new jsPDF();
-  }
 
   async generateReport(
     results: AnalysisResults,
     options: PDFReportOptions = {}
   ): Promise<Blob> {
     try {
+      const { jsPDF } = await import("jspdf");
+
+      this.doc = new jsPDF();
+
+      // Reset cursor
+      this.currentY = 20;
+
       // Set up document
       this.doc.setFont("helvetica");
       this.doc.setFontSize(20);
@@ -64,6 +67,8 @@ export class PDFExportService {
   }
 
   private addMetadata(results: AnalysisResults): void {
+    if (!this.doc) return;
+
     this.doc.setFontSize(12);
     this.doc.setFont("helvetica", "bold");
     this.doc.text("Report Metadata", this.margin, this.currentY);
@@ -81,6 +86,7 @@ export class PDFExportService {
     ];
 
     metadata.forEach((item) => {
+      if (!this.doc) return;
       this.doc.text(item, this.margin + 5, this.currentY);
       this.currentY += 5;
     });
@@ -89,6 +95,8 @@ export class PDFExportService {
   }
 
   private addExecutiveSummary(results: AnalysisResults): void {
+    if (!this.doc) return;
+
     this.doc.setFontSize(12);
     this.doc.setFont("helvetica", "bold");
     this.doc.text("Executive Summary", this.margin, this.currentY);
@@ -107,6 +115,7 @@ export class PDFExportService {
     ];
 
     summary.forEach((item) => {
+      if (!this.doc) return;
       this.doc.text(item, this.margin + 5, this.currentY);
       this.currentY += 5;
     });
@@ -115,6 +124,8 @@ export class PDFExportService {
   }
 
   private addSecurityIssues(results: AnalysisResults): void {
+    if (!this.doc) return;
+
     if (results.issues.length === 0) {
       this.doc.setFontSize(12);
       this.doc.setFont("helvetica", "bold");
@@ -145,6 +156,7 @@ export class PDFExportService {
     this.doc.setFontSize(10);
 
     results.issues.forEach((issue, index) => {
+      if (!this.doc) return;
       if (this.currentY > this.pageHeight - 50) {
         this.doc.addPage();
         this.currentY = 20;
@@ -190,6 +202,8 @@ export class PDFExportService {
   }
 
   private addMetrics(results: AnalysisResults): void {
+    if (!this.doc) return;
+
     this.doc.setFontSize(12);
     this.doc.setFont("helvetica", "bold");
     this.doc.text("Quality Metrics", this.margin, this.currentY);
@@ -210,6 +224,7 @@ export class PDFExportService {
     }
 
     metrics.forEach((item) => {
+      if (!this.doc) return;
       this.doc.text(item, this.margin + 5, this.currentY);
       this.currentY += 5;
     });
@@ -218,6 +233,8 @@ export class PDFExportService {
   }
 
   private addLanguageDetection(detection: any): void {
+    if (!this.doc) return;
+
     this.doc.setFontSize(12);
     this.doc.setFont("helvetica", "bold");
     this.doc.text("Language Detection", this.margin, this.currentY);
@@ -249,6 +266,7 @@ export class PDFExportService {
 
   async captureElementAsImage(element: HTMLElement): Promise<string> {
     try {
+      const html2canvas = (await import("html2canvas")).default;
       const canvas = await html2canvas(element, {
         scale: 2,
         useCORS: true,

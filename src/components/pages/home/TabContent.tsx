@@ -11,7 +11,6 @@ import { TabsContent } from "@/components/ui/tabs";
 import { UploadForm } from "@/components/UploadForm";
 import { LoadingSpinner } from "../../common/LoadingSpinner";
 import { AnalysisResults } from "@/hooks/useAnalysis";
-import { EnhancedSecurityResults } from "../../analysis/EnhancedSecurityResults";
 import PromptGenerator from "../../ai/PromptGenerator";
 
 // Lazy load heavy components
@@ -23,6 +22,11 @@ const ResultsTable = React.lazy(() =>
 const AIKeyManager = React.lazy(() =>
   import("../../ai/AIKeyManager").then((module) => ({
     default: module.AIKeyManager,
+  }))
+);
+const EnhancedSecurityResults = React.lazy(() =>
+  import("../../analysis/EnhancedSecurityResults").then((module) => ({
+    default: module.EnhancedSecurityResults,
   }))
 );
 
@@ -109,10 +113,10 @@ export const TabContent: React.FC<TabContentProps> = ({
                 {/* Suspicious files (compact) */}
                 {analysisResults.zipAnalysis.fileStructure.suspiciousFiles
                   .length > 0 && (
-                  <Card className="border-2 border-amber-200/60 bg-card shadow-xl transition-all duration-300 hover:shadow-2xl dark:border-amber-800/40 dark:from-amber-950/20 dark:via-orange-950/10 dark:to-yellow-950/20">
+                  <Card className="bg-card border-2 border-amber-200/60 shadow-xl transition-all duration-300 hover:shadow-2xl dark:border-amber-800/40 dark:from-amber-950/20 dark:via-orange-950/10 dark:to-yellow-950/20">
                     <CardHeader className="pb-4">
                       <div className="flex items-center gap-3">
-                        <div className="rounded-xl bg-primary p-2.5 shadow-lg">
+                        <div className="bg-primary rounded-xl p-2.5 shadow-lg">
                           <AlertTriangle className="h-5 w-5 text-white" />
                         </div>
                         <div>
@@ -132,9 +136,9 @@ export const TabContent: React.FC<TabContentProps> = ({
                           .map((file) => (
                             <div
                               key={file}
-                              className="group flex items-center gap-3 rounded-xl border-2 border-amber-300/50 bg-muted/60 p-3.5 transition-all duration-200 hover:-translate-y-0.5 hover:border-amber-400/70 hover:shadow-lg dark:border-amber-700/30 dark:from-amber-900/40 dark:via-orange-900/30 dark:to-yellow-900/40 dark:hover:border-amber-600/50"
+                              className="group bg-muted/60 flex items-center gap-3 rounded-xl border-2 border-amber-300/50 p-3.5 transition-all duration-200 hover:-translate-y-0.5 hover:border-amber-400/70 hover:shadow-lg dark:border-amber-700/30 dark:from-amber-900/40 dark:via-orange-900/30 dark:to-yellow-900/40 dark:hover:border-amber-600/50"
                             >
-                              <div className="rounded-lg bg-primary p-1.5 shadow-sm transition-transform duration-200 group-hover:scale-110">
+                              <div className="bg-primary rounded-lg p-1.5 shadow-sm transition-transform duration-200 group-hover:scale-110">
                                 <AlertTriangle className="h-3.5 w-3.5 text-white" />
                               </div>
                               <span className="flex-1 truncate font-mono text-sm font-medium text-amber-900 dark:text-amber-100">
@@ -175,16 +179,16 @@ export const TabContent: React.FC<TabContentProps> = ({
         ) : (
           <Card className="bg-card/90 border-0 shadow-xl backdrop-blur-sm">
             <CardContent className="p-8 text-center sm:p-12">
-              <div className="mx-auto mb-4 flex h-16 w-16 items-center justify-center rounded-full bg-muted p-4 sm:mb-6 sm:h-24 sm:w-24 sm:p-6 dark:from-blue-900/30 dark:to-indigo-900/30">
+              <div className="bg-muted mx-auto mb-4 flex h-16 w-16 items-center justify-center rounded-full p-4 sm:mb-6 sm:h-24 sm:w-24 sm:p-6 dark:from-blue-900/30 dark:to-indigo-900/30">
                 <FileCode
-                  className="h-8 w-8 text-primary sm:h-12 sm:w-12 dark:text-primary"
+                  className="text-primary dark:text-primary h-8 w-8 sm:h-12 sm:w-12"
                   aria-hidden="true"
                 />
               </div>
               <h3 className="text-foreground mb-3 text-xl font-bold sm:mb-4 sm:text-2xl">
                 No Analysis Results
               </h3>
-              <p className="mx-auto max-w-md text-base text-muted-foreground sm:text-lg">
+              <p className="text-muted-foreground mx-auto max-w-md text-base sm:text-lg">
                 Upload and analyze a zip file to see comprehensive results here.
               </p>
             </CardContent>
