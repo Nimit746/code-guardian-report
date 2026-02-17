@@ -24,6 +24,7 @@ import {
   Search,
   Filter,
 } from "lucide-react";
+import { Skeleton } from "@/components/ui/skeleton";
 import {
   firebaseAnalysisStorage,
   FirebaseAnalysisData,
@@ -251,9 +252,11 @@ export const FirebaseAnalyticsDashboard = ({
                 onClick={handleRefresh}
                 disabled={isLoading}
               >
-                <RefreshCw
-                  className={`h-4 w-4 ${isLoading ? "animate-spin" : ""}`}
-                />
+                {isLoading ? (
+                  <Skeleton className="h-4 w-4 rounded-full" />
+                ) : (
+                  <RefreshCw className="h-4 w-4" />
+                )}
                 Refresh
               </Button>
             </div>
@@ -300,8 +303,11 @@ export const FirebaseAnalyticsDashboard = ({
             <Card>
               <CardContent className="pt-6">
                 <div className="flex items-center justify-center py-8">
-                  <RefreshCw className="h-6 w-6 animate-spin" />
-                  <span className="ml-2">Loading analysis history...</span>
+                  <Skeleton className="h-6 w-6 rounded-full" />
+                  <div className="ml-2 flex flex-col gap-2">
+                    <Skeleton className="h-3 w-40" />
+                    <span>Loading analysis history...</span>
+                  </div>
                 </div>
               </CardContent>
             </Card>

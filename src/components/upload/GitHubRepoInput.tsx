@@ -1,7 +1,6 @@
 import React, { useEffect, useMemo, useRef, useState } from "react";
 import {
   Github,
-  Loader2,
   CheckCircle,
   AlertCircle,
   Download,
@@ -16,6 +15,7 @@ import { githubRepositoryService } from "@/services/githubRepositoryService";
 import { Card } from "@/components/ui/card";
 import { useAuth } from "@/lib/auth-context";
 import { useGitHubRepositories } from "@/hooks/useGitHubRepositories";
+import { Skeleton } from "@/components/ui/skeleton";
 
 import { logger } from "@/utils/logger";
 interface GitHubRepoInputProps {
@@ -365,7 +365,7 @@ export const GitHubRepoInput: React.FC<GitHubRepoInputProps> = ({
             className="focus:border-primary h-11 w-full border-2 pr-10 pl-9 text-sm transition-all sm:h-12 sm:pl-10 sm:text-base"
           />
           {(isFetchingInfo || isSearching) && (
-            <Loader2 className="text-primary absolute top-1/2 right-3 h-4 w-4 -translate-y-1/2 transform animate-spin sm:h-5 sm:w-5" />
+            <Skeleton className="absolute top-1/2 right-3 h-4 w-4 -translate-y-1/2 rounded-full sm:h-5 sm:w-5" />
           )}
           {!isFetchingInfo && !isSearching && (
             <Search className="text-muted-foreground pointer-events-none absolute top-1/2 right-3 h-4 w-4 -translate-y-1/2 transform sm:h-5 sm:w-5" />
@@ -428,8 +428,8 @@ export const GitHubRepoInput: React.FC<GitHubRepoInputProps> = ({
         >
           {isLoading ? (
             <>
-              <Loader2 className="mr-2 h-4 w-4 animate-spin sm:h-5 sm:w-5" />
-              Analyzing...
+              <Skeleton className="mr-2 h-4 w-4 rounded-full sm:h-5 sm:w-5" />
+              <Skeleton className="h-3 w-24 sm:w-32" />
             </>
           ) : (
             <>

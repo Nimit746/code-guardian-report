@@ -1,7 +1,8 @@
 import React, { useState } from "react";
-import { Github, Check, X, Loader2 } from "lucide-react";
+import { Github, Check, X } from "lucide-react";
 import { Button } from "@/components/ui/button";
 import { logger } from "@/utils/logger";
+import { Skeleton } from "@/components/ui/skeleton";
 import {
   isValidGitHubUsername,
   getGitHubUsernameError,
@@ -145,8 +146,8 @@ const GitHubUsernameInput: React.FC<GitHubUsernameInputProps> = ({
                 >
                   {verifying ? (
                     <>
-                      <Loader2 className="mr-2 h-4 w-4 animate-spin" />
-                      Verifying...
+                      <Skeleton className="mr-2 h-4 w-4 rounded-full" />
+                      <Skeleton className="h-3 w-20" />
                     </>
                   ) : (
                     <>

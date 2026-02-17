@@ -1,6 +1,7 @@
 import React, { useState } from "react";
-import { Download, FileText, Loader2 } from "lucide-react";
+import { Download, FileText } from "lucide-react";
 import { Button } from "@/components/ui/button";
+import { Skeleton } from "@/components/ui/skeleton";
 import { pdfExportService } from "../../services/export/pdfExportService";
 import { AnalysisResults } from "@/hooks/useAnalysis";
 import { NotificationTemplates } from "@/utils/notificationTemplates";
@@ -76,13 +77,20 @@ export const PDFDownloadButton: React.FC<PDFDownloadButtonProps> = ({
       className={`${className} ${isGenerating ? "cursor-not-allowed" : ""}`}
     >
       {isGenerating ? (
-        <Loader2 className="mr-2 h-4 w-4 animate-spin" />
-      ) : showIcon ? (
-        <Download className="mr-2 h-4 w-4" />
+        <span className="flex items-center gap-2">
+          <Skeleton className="h-4 w-4 rounded-full" />
+          <Skeleton className="h-3 w-24" />
+        </span>
       ) : (
-        <FileText className="mr-2 h-4 w-4" />
+        <>
+          {showIcon ? (
+            <Download className="mr-2 h-4 w-4" />
+          ) : (
+            <FileText className="mr-2 h-4 w-4" />
+          )}
+          Download Report
+        </>
       )}
-      {isGenerating ? "Generating PDF..." : "Download Report"}
     </Button>
   );
 };

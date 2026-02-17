@@ -21,6 +21,7 @@ import {
   Lightbulb,
 } from "lucide-react";
 import { Progress } from "@/components/ui/progress";
+import { Skeleton } from "@/components/ui/skeleton";
 
 export function CopilotAnalyticsDashboard() {
   const [analytics, setAnalytics] = useState<CopilotAnalyticsData | null>(null);
@@ -56,10 +57,13 @@ export function CopilotAnalyticsDashboard() {
   if (!analytics) {
     return (
       <div className="flex items-center justify-center p-8">
-        <RefreshCw className="h-6 w-6 animate-spin text-primary" />
-        <span className="text-muted-foreground ml-2 text-sm">
-          Loading analytics...
-        </span>
+        <Skeleton className="h-6 w-6 rounded-full" />
+        <div className="ml-2 flex flex-col gap-2">
+          <Skeleton className="h-3 w-28" />
+          <span className="text-muted-foreground text-sm">
+            Loading analytics...
+          </span>
+        </div>
       </div>
     );
   }
@@ -104,7 +108,7 @@ export function CopilotAnalyticsDashboard() {
                 <p className="text-2xl font-bold">{analytics.totalRequests}</p>
               </div>
               <div className="rounded-full bg-teal-100 p-3 dark:bg-teal-900/30">
-                <BarChart3 className="h-6 w-6 text-primary dark:text-primary" />
+                <BarChart3 className="text-primary dark:text-primary h-6 w-6" />
               </div>
             </div>
             <div className="text-muted-foreground mt-2 flex items-center text-xs">
@@ -180,7 +184,7 @@ export function CopilotAnalyticsDashboard() {
         </CardHeader>
         <CardContent className="space-y-4">
           <div className="grid grid-cols-1 gap-4 md:grid-cols-3">
-            <div className="rounded-lg border border-border bg-muted p-4 dark:border-border dark:bg-blue-950/20">
+            <div className="border-border bg-muted dark:border-border rounded-lg border p-4 dark:bg-blue-950/20">
               <p className="text-muted-foreground mb-1 text-xs">
                 Fastest Model
               </p>
@@ -227,7 +231,7 @@ export function CopilotAnalyticsDashboard() {
             {Object.values(analytics.modelStats).map((stats) => (
               <div
                 key={stats.modelId}
-                className="rounded-lg border p-4 transition-colors hover:bg-muted/50 dark:hover:bg-foreground/50"
+                className="hover:bg-muted/50 dark:hover:bg-foreground/50 rounded-lg border p-4 transition-colors"
               >
                 <div className="mb-3 flex items-center justify-between">
                   <div>

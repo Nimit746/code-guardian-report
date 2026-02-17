@@ -12,12 +12,12 @@ import {
   Mail,
   X,
   HelpCircle,
-  Loader2,
   ArrowRight,
   ShieldCheck,
   Lock,
 } from "lucide-react";
 import { cn } from "@/lib/utils";
+import { Skeleton } from "@/components/ui/skeleton";
 
 export interface AccountConflictModalProps {
   isOpen: boolean;
@@ -240,8 +240,8 @@ export const AccountConflictModal: React.FC<AccountConflictModalProps> = ({
             <div className="relative flex items-center justify-center gap-2">
               {isLinking ? (
                 <>
-                  <Loader2 className="h-5 w-5 animate-spin" />
-                  Connecting Accounts...
+                  <Skeleton className="h-5 w-5 rounded-full" />
+                  <Skeleton className="h-3 w-40" />
                 </>
               ) : (
                 <>

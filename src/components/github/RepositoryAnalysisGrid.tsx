@@ -23,6 +23,8 @@ import { EnhancedAnalysisEngine } from "@/services/enhancedAnalysisEngine";
 import { toast } from "sonner";
 import { logger } from "@/utils/logger";
 import { cn } from "@/lib/utils";
+import { RepositoryCardSkeleton } from "@/components/ui/skeleton-variants";
+import { Skeleton } from "@/components/ui/skeleton";
 
 interface Repository {
   id: string;
@@ -375,20 +377,7 @@ export const RepositoryAnalysisGrid: React.FC<RepositoryAnalysisGridProps> = ({
     return (
       <div className="grid grid-cols-1 gap-6 md:grid-cols-2 lg:grid-cols-3">
         {Array.from({ length: 6 }).map((_, i) => (
-          <Card key={i} className="border-border p-6">
-            <div className="mb-4 flex items-start justify-between">
-              <div className="flex-1">
-                <div className="bg-muted mb-2 h-5 w-40 animate-pulse rounded"></div>
-                <div className="bg-muted h-4 w-56 animate-pulse rounded"></div>
-              </div>
-              <div className="bg-muted h-8 w-8 animate-pulse rounded-full"></div>
-            </div>
-            <div className="bg-muted mb-4 h-16 w-full animate-pulse rounded"></div>
-            <div className="flex gap-2">
-              <div className="bg-muted h-8 w-24 animate-pulse rounded"></div>
-              <div className="bg-muted h-8 w-24 animate-pulse rounded"></div>
-            </div>
-          </Card>
+          <RepositoryCardSkeleton key={i} />
         ))}
       </div>
     );
@@ -435,8 +424,8 @@ export const RepositoryAnalysisGrid: React.FC<RepositoryAnalysisGridProps> = ({
                 >
                   {isAnalyzing ? (
                     <>
-                      <RefreshCw className="mr-2 h-4 w-4 animate-spin" />
-                      Analyzing...
+                      <Skeleton className="mr-2 h-4 w-4 rounded-full" />
+                      <Skeleton className="h-3 w-20" />
                     </>
                   ) : (
                     <>
@@ -540,9 +529,7 @@ export const RepositoryAnalysisGrid: React.FC<RepositoryAnalysisGridProps> = ({
             <span className="rounded-full bg-purple-100 px-2 py-0.5 text-xs font-medium text-purple-600 dark:bg-purple-900/30 dark:text-purple-400">
               {filteredLiveRepos.length} repos
             </span>
-            {isLoadingLive && (
-              <RefreshCw className="text-muted-foreground h-4 w-4 animate-spin" />
-            )}
+            {isLoadingLive && <Skeleton className="h-4 w-4 rounded-full" />}
           </div>
 
           <div className="grid grid-cols-1 gap-4 md:grid-cols-2 lg:grid-cols-3">
@@ -614,8 +601,8 @@ export const RepositoryAnalysisGrid: React.FC<RepositoryAnalysisGridProps> = ({
                       >
                         {isAnalyzing && analyzingRepoId === String(repo.id) ? (
                           <>
-                            <RefreshCw className="mr-1.5 h-3 w-3 animate-spin" />
-                            Analyzing...
+                            <Skeleton className="mr-1.5 h-3 w-3 rounded-full" />
+                            <Skeleton className="h-3 w-16" />
                           </>
                         ) : analyzed ? (
                           <>
@@ -777,12 +764,11 @@ export const RepositoryAnalysisGrid: React.FC<RepositoryAnalysisGridProps> = ({
                         onClick={() => handleReanalyze(repo)}
                         disabled={analyzingRepoId === repo.id}
                       >
-                        <RefreshCw
-                          className={cn(
-                            "mr-2 h-4 w-4",
-                            analyzingRepoId === repo.id && "animate-spin"
-                          )}
-                        />
+                        {analyzingRepoId === repo.id ? (
+                          <Skeleton className="mr-2 h-4 w-4 rounded-full" />
+                        ) : (
+                          <RefreshCw className="mr-2 h-4 w-4" />
+                        )}
                         Re-Analyze
                       </Button>
                     </div>

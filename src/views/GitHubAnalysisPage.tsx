@@ -34,6 +34,7 @@ import { AnalysisResults } from "@/hooks/useAnalysis";
 import { cn } from "@/lib/utils";
 import { GitHubProfileHeader } from "@/components/github/GitHubProfileHeader";
 import { GitHubNavigationTabs } from "@/components/github/GitHubNavigationTabs";
+import { Skeleton } from "@/components/ui/skeleton";
 
 const EnhancedSecurityResults = lazy(() =>
   import("@/components/analysis/EnhancedSecurityResults").then((m) => ({
@@ -679,13 +680,86 @@ export const GitHubAnalysisPage: React.FC = () => {
           {}
           {reposLoading && repositories.length === 0 && (
             <div className="mb-8">
-              <Card className="border-border p-8 text-center">
-                <div className="mx-auto mb-4 flex h-16 w-16 items-center justify-center">
-                  <div className="border-border h-10 w-10 animate-spin rounded-full border-4 border-t-purple-600 dark:border-t-purple-400" />
+              <Card className="relative overflow-hidden border border-purple-200/70 bg-gradient-to-br from-purple-50 via-white to-slate-50 p-6 sm:p-8 dark:border-purple-900/60 dark:from-purple-950/40 dark:via-slate-950 dark:to-slate-900/60">
+                <div
+                  className="absolute inset-0 bg-[radial-gradient(circle_at_top,_rgba(124,58,237,0.16),_transparent_60%)] dark:bg-[radial-gradient(circle_at_top,_rgba(168,85,247,0.2),_transparent_60%)]"
+                  aria-hidden="true"
+                ></div>
+                <div className="relative space-y-6">
+                  <div className="flex flex-col items-center gap-4 text-center">
+                    <Skeleton
+                      variant="avatar"
+                      width={64}
+                      height={64}
+                      className="bg-purple-200/70 dark:bg-purple-900/70"
+                    />
+                    <div className="space-y-2">
+                      <Skeleton
+                        variant="text"
+                        width={220}
+                        height={16}
+                        className="bg-purple-200/70 dark:bg-purple-900/70"
+                      />
+                      <Skeleton
+                        variant="text"
+                        width={160}
+                        height={12}
+                        className="bg-slate-200 dark:bg-slate-800"
+                      />
+                    </div>
+                  </div>
+                  <div className="grid gap-3 sm:grid-cols-2">
+                    {Array.from({ length: 4 }).map((_, index) => (
+                      <div
+                        key={`repo-skeleton-${index}`}
+                        className="border-border/60 rounded-xl border bg-white/70 p-4 shadow-sm dark:border-slate-800/80 dark:bg-slate-900/60"
+                      >
+                        <div className="flex items-start gap-3">
+                          <Skeleton
+                            variant="avatar"
+                            width={36}
+                            height={36}
+                            className="bg-slate-200 dark:bg-slate-800"
+                          />
+                          <div className="flex-1 space-y-2">
+                            <Skeleton
+                              variant="text"
+                              width="70%"
+                              height={12}
+                              className="bg-slate-200 dark:bg-slate-800"
+                            />
+                            <Skeleton
+                              variant="text"
+                              width="90%"
+                              height={10}
+                              className="bg-slate-200 dark:bg-slate-800"
+                            />
+                            <Skeleton
+                              variant="text"
+                              width="60%"
+                              height={10}
+                              className="bg-slate-200 dark:bg-slate-800"
+                            />
+                          </div>
+                        </div>
+                        <div className="mt-4 flex items-center justify-between">
+                          <Skeleton
+                            variant="text"
+                            width={90}
+                            height={10}
+                            className="bg-slate-200 dark:bg-slate-800"
+                          />
+                          <Skeleton
+                            variant="button"
+                            width={70}
+                            height={28}
+                            className="bg-slate-200 dark:bg-slate-800"
+                          />
+                        </div>
+                      </div>
+                    ))}
+                  </div>
                 </div>
-                <p className="text-muted-foreground">
-                  Loading your repositories...
-                </p>
               </Card>
             </div>
           )}
@@ -876,8 +950,9 @@ export const GitHubAnalysisPage: React.FC = () => {
                 <Suspense
                   fallback={
                     <div className="flex flex-col items-center justify-center py-12">
-                      <div className="border-border mb-4 h-12 w-12 animate-spin rounded-full border-4 border-t-blue-600" />
-                      <p className="text-muted-foreground">
+                      <Skeleton className="mb-4 h-12 w-12 rounded-full" />
+                      <Skeleton className="h-4 w-48" />
+                      <p className="text-muted-foreground mt-2">
                         Loading detailed analysis...
                       </p>
                     </div>

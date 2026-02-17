@@ -68,3 +68,15 @@ export { PDFDownloadButton } from "./export/PDFDownloadButton";
 export { default as GitHubRepositoryPermissionModal } from "./github/GitHubRepositoryPermissionModal";
 export { default as GitHubRepositoryList } from "./github/GitHubRepositoryList";
 export { default as GitHubUsernameInput } from "./github/GitHubUsernameInput";
+
+// Skeleton components (for loading states)
+export { Skeleton } from "./ui/skeleton";
+export {
+  CardSkeleton,
+  ChartSkeleton,
+  MetricCardSkeleton,
+  InsightCardSkeleton,
+  RepositoryCardSkeleton,
+  TabContentSkeleton,
+  ListSkeleton,
+} from "./ui/skeleton-variants";

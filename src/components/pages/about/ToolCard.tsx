@@ -76,7 +76,7 @@ export const ToolCard: React.FC<ToolCardProps> = ({
                 <ToolIcon className="h-6 w-6" />
               </div>
               <div>
-                <h4 className="text-foreground text-xl font-bold transition-colors group-hover:text-primary">
+                <h4 className="text-foreground group-hover:text-primary text-xl font-bold transition-colors">
                   {tool.name}
                 </h4>
                 <div className="mt-1 flex items-center gap-2">
@@ -96,13 +96,13 @@ export const ToolCard: React.FC<ToolCardProps> = ({
                 <Star className="h-4 w-4 fill-current" />
                 <span className="text-sm font-medium">{tool.rating}</span>
               </div>
-              <div className="flex items-center gap-1 text-muted-foreground">
+              <div className="text-muted-foreground flex items-center gap-1">
                 <Download className="h-4 w-4" />
                 <span className="text-sm">{tool.downloads}</span>
               </div>
               <button
                 onClick={() => setIsExpanded(!isExpanded)}
-                className="rounded-lg p-2 transition-colors hover:bg-muted"
+                className="hover:bg-muted rounded-lg p-2 transition-colors"
               >
                 {isExpanded ? (
                   <ChevronUp className="h-4 w-4" />
@@ -114,7 +114,7 @@ export const ToolCard: React.FC<ToolCardProps> = ({
           </div>
 
           {/* Description */}
-          <p className="mt-4 leading-relaxed text-muted-foreground">
+          <p className="text-muted-foreground mt-4 leading-relaxed">
             {tool.description}
           </p>
 
@@ -128,7 +128,7 @@ export const ToolCard: React.FC<ToolCardProps> = ({
                 {tool.features.map((feature, idx) => (
                   <div
                     key={idx}
-                    className="group/feature flex cursor-pointer items-start gap-2 text-sm text-muted-foreground transition-colors duration-200 hover:text-foreground dark:hover:text-slate-200"
+                    className="group/feature text-muted-foreground hover:text-foreground flex cursor-pointer items-start gap-2 text-sm transition-colors duration-200 dark:hover:text-slate-200"
                   >
                     <div
                       className={`h-1.5 w-1.5 rounded-full bg-gradient-to-r ${tool.gradient} mt-2 flex-shrink-0 transition-transform group-hover/feature:scale-125`}
@@ -148,7 +148,7 @@ export const ToolCard: React.FC<ToolCardProps> = ({
   // Grid view (default)
   return (
     <Card
-      className="group border-border/50 bg-card/80 relative cursor-pointer overflow-hidden border backdrop-blur-sm transition-all duration-500 hover:-translate-y-2 hover:scale-[1.02] hover:border-primary/50 hover:shadow-2xl hover:shadow-blue-500/10"
+      className="group border-border/50 bg-card/80 hover:border-primary/50 relative cursor-pointer overflow-hidden border backdrop-blur-sm transition-all duration-500 hover:-translate-y-2 hover:scale-[1.02] hover:shadow-2xl hover:shadow-blue-500/10"
       onMouseEnter={() => setIsHovered(true)}
       onMouseLeave={() => setIsHovered(false)}
     >
@@ -166,7 +166,7 @@ export const ToolCard: React.FC<ToolCardProps> = ({
       {tool.comingSoon && (
         <div className="absolute top-6 right-6 z-10">
           <Badge className="animate-pulse border-0 bg-gradient-to-r from-purple-500 to-pink-500 text-white shadow-lg transition-transform duration-300 hover:scale-110 hover:animate-none">
-            <Sparkles className="mr-1 h-3 w-3 animate-spin" />
+            <Sparkles className="mr-1 h-3 w-3" />
             Coming Soon
           </Badge>
         </div>
@@ -184,26 +184,26 @@ export const ToolCard: React.FC<ToolCardProps> = ({
             )}
           </div>
           <div className="flex items-center gap-2 rounded-full bg-amber-50 px-3 py-2 transition-all duration-300 group-hover:scale-110 group-hover:bg-amber-100 dark:bg-amber-950/30 dark:group-hover:bg-amber-900/40">
-            <Star className="h-4 w-4 fill-amber-400 text-amber-400 group-hover:animate-spin" />
+            <Star className="h-4 w-4 fill-amber-400 text-amber-400" />
             <span className="text-sm font-bold text-amber-600 dark:text-amber-400">
               {tool.rating}
             </span>
           </div>
         </div>
 
-        <CardTitle className="text-foreground mb-4 text-2xl leading-tight font-bold transition-all duration-300 group-hover:text-primary">
+        <CardTitle className="text-foreground group-hover:text-primary mb-4 text-2xl leading-tight font-bold transition-all duration-300">
           {tool.name}
         </CardTitle>
 
         <div className="mb-4 flex items-center gap-3">
           <Badge
-            className={`bg-gradient-to-r px-3 py-1 text-sm font-medium ${tool.gradient} border-0 text-white shadow-md transition-all duration-300 group- group-hover:shadow-lg`}
+            className={`bg-gradient-to-r px-3 py-1 text-sm font-medium ${tool.gradient} group- border-0 text-white shadow-md transition-all duration-300 group-hover:shadow-lg`}
           >
             {tool.language}
           </Badge>
           <Badge
             variant="outline"
-            className="bg-card/80 px-3 py-1 text-sm font-medium backdrop-blur-sm transition-all duration-300 group-hover:border-primary group-hover:bg-muted group-hover:text-primary "
+            className="bg-card/80 group-hover:border-primary group-hover:bg-muted group-hover:text-primary px-3 py-1 text-sm font-medium backdrop-blur-sm transition-all duration-300"
           >
             {tool.type}
           </Badge>
@@ -211,7 +211,7 @@ export const ToolCard: React.FC<ToolCardProps> = ({
       </CardHeader>
 
       <CardContent className="space-y-6 p-6 pt-0">
-        <p className="text-base leading-relaxed text-muted-foreground transition-colors duration-300 group-hover:text-foreground/80 dark:group-hover:text-muted-foreground">
+        <p className="text-muted-foreground group-hover:text-foreground/80 dark:group-hover:text-muted-foreground text-base leading-relaxed transition-colors duration-300">
           {tool.description}
         </p>
 
@@ -226,7 +226,7 @@ export const ToolCard: React.FC<ToolCardProps> = ({
             {tool.features.slice(0, 4).map((feature, idx) => (
               <div
                 key={idx}
-                className="group/feature flex cursor-pointer items-start gap-3 rounded-lg p-2 text-sm text-muted-foreground transition-all duration-300 hover:bg-muted hover:text-foreground/50 dark:hover:text-slate-200"
+                className="group/feature text-muted-foreground hover:bg-muted hover:text-foreground/50 flex cursor-pointer items-start gap-3 rounded-lg p-2 text-sm transition-all duration-300 dark:hover:text-slate-200"
               >
                 <div
                   className={`h-2 w-2 rounded-full bg-gradient-to-r ${tool.gradient} mt-2 flex-shrink-0 transition-all duration-300 group-hover/feature:scale-150 group-hover/feature:shadow-lg`}
@@ -237,7 +237,7 @@ export const ToolCard: React.FC<ToolCardProps> = ({
               </div>
             ))}
             {tool.features.length > 4 && (
-              <div className="mt-3 inline-block rounded-lg bg-muted px-2 py-1 text-sm text-muted-foreground">
+              <div className="bg-muted text-muted-foreground mt-3 inline-block rounded-lg px-2 py-1 text-sm">
                 +{tool.features.length - 4} more features
               </div>
             )}
@@ -245,9 +245,9 @@ export const ToolCard: React.FC<ToolCardProps> = ({
         </div>
 
         <div className="border-border flex items-center justify-between border-t pt-4 transition-all duration-300 group-hover:border-teal-300">
-          <div className="group/download flex cursor-pointer items-center gap-2 rounded-full bg-muted px-3 py-2 transition-all duration-300 hover:bg-muted dark:hover:bg-blue-950/30">
-            <Download className="h-4 w-4 text-muted-foreground transition-all duration-300 group-hover/download:animate-bounce group-hover/download:text-primary" />
-            <span className="text-sm font-medium text-muted-foreground transition-all duration-300 group-hover/download:text-primary dark:group-hover/download:text-primary">
+          <div className="group/download bg-muted hover:bg-muted flex cursor-pointer items-center gap-2 rounded-full px-3 py-2 transition-all duration-300 dark:hover:bg-blue-950/30">
+            <Download className="text-muted-foreground group-hover/download:text-primary h-4 w-4 transition-all duration-300 group-hover/download:animate-bounce" />
+            <span className="text-muted-foreground group-hover/download:text-primary dark:group-hover/download:text-primary text-sm font-medium transition-all duration-300">
               {tool.downloads}
             </span>
           </div>
@@ -259,7 +259,7 @@ export const ToolCard: React.FC<ToolCardProps> = ({
               </span>
             </div>
             {isHovered && (
-              <button className="animate-fade-in rounded-full bg-primary p-2 text-white shadow-lg transition-all duration-300 hover:scale-110 hover:bg-primary/90 hover:shadow-xl">
+              <button className="animate-fade-in bg-primary hover:bg-primary/90 rounded-full p-2 text-white shadow-lg transition-all duration-300 hover:scale-110 hover:shadow-xl">
                 <ExternalLink className="h-4 w-4" />
               </button>
             )}

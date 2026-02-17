@@ -21,7 +21,6 @@ import {
   Play,
   ChevronDown,
   ChevronRight,
-  Loader2,
   Zap,
   Shield,
   Target,
@@ -34,6 +33,7 @@ import {
   FixSuggestionRequest,
 } from "@/services/ai/aiFixSuggestionsService";
 import { toast } from "sonner";
+import { Skeleton } from "@/components/ui/skeleton";
 
 interface AIFixSuggestionsCardProps {
   issue: SecurityIssue;
@@ -139,7 +139,9 @@ export const AIFixSuggestionsCard: React.FC<AIFixSuggestionsCardProps> = ({
       <Star
         key={i}
         className={`h-3 w-3 ${
-          i < priority ? "fill-current text-yellow-400" : "text-muted-foreground"
+          i < priority
+            ? "fill-current text-yellow-400"
+            : "text-muted-foreground"
         }`}
       />
     ));
@@ -147,7 +149,7 @@ export const AIFixSuggestionsCard: React.FC<AIFixSuggestionsCardProps> = ({
 
   if (isLoading) {
     return (
-      <Card className="border-purple-200 bg-muted/50 dark:border-purple-800 dark:from-purple-950/20 dark:to-blue-900/20">
+      <Card className="bg-muted/50 border-purple-200 dark:border-purple-800 dark:from-purple-950/20 dark:to-blue-900/20">
         <CardHeader>
           <CardTitle className="flex items-center gap-2">
             <Brain className="h-5 w-5 text-purple-600" />
@@ -165,10 +167,13 @@ export const AIFixSuggestionsCard: React.FC<AIFixSuggestionsCardProps> = ({
         </CardHeader>
         <CardContent>
           <div className="flex items-center justify-center py-8">
-            <Loader2 className="h-8 w-8 animate-spin text-purple-600" />
-            <span className="ml-3 text-muted-foreground">
-              Generating intelligent fix suggestions...
-            </span>
+            <Skeleton className="h-8 w-8 rounded-full" />
+            <div className="ml-3 flex flex-col gap-2">
+              <Skeleton className="h-3 w-48" />
+              <span className="text-muted-foreground">
+                Generating intelligent fix suggestions...
+              </span>
+            </div>
           </div>
         </CardContent>
       </Card>
@@ -233,7 +238,7 @@ export const AIFixSuggestionsCard: React.FC<AIFixSuggestionsCardProps> = ({
   }
 
   return (
-    <Card className="border-purple-200 bg-muted/50 dark:border-purple-800 dark:from-purple-950/20 dark:to-blue-900/20">
+    <Card className="bg-muted/50 border-purple-200 dark:border-purple-800 dark:from-purple-950/20 dark:to-blue-900/20">
       <CardHeader>
         <CardTitle className="flex items-center gap-2">
           <Brain className="h-5 w-5 text-purple-600" />
@@ -253,7 +258,7 @@ export const AIFixSuggestionsCard: React.FC<AIFixSuggestionsCardProps> = ({
       <CardContent>
         {!suggestions || suggestions.length === 0 ? (
           <div className="py-8 text-center">
-            <Lightbulb className="mx-auto mb-4 h-12 w-12 text-muted-foreground" />
+            <Lightbulb className="text-muted-foreground mx-auto mb-4 h-12 w-12" />
             <p className="text-muted-foreground">
               No fix suggestions available for this issue.
             </p>
@@ -276,7 +281,7 @@ export const AIFixSuggestionsCard: React.FC<AIFixSuggestionsCardProps> = ({
                 <button
                   type="button"
                   onClick={() => toggleSuggestionExpansion(suggestion.id)}
-                  className="w-full p-4 text-left transition-colors hover:bg-muted"
+                  className="hover:bg-muted w-full p-4 text-left transition-colors"
                 >
                   <div className="flex items-start justify-between">
                     <div className="flex-1">
@@ -299,7 +304,7 @@ export const AIFixSuggestionsCard: React.FC<AIFixSuggestionsCardProps> = ({
                       <h3 className="text-foreground mb-1 font-semibold">
                         {suggestion.title}
                       </h3>
-                      <p className="text-sm text-muted-foreground">
+                      <p className="text-muted-foreground text-sm">
                         {suggestion.description}
                       </p>
                     </div>
@@ -314,7 +319,7 @@ export const AIFixSuggestionsCard: React.FC<AIFixSuggestionsCardProps> = ({
                 </button>
 
                 {expandedSuggestion === suggestion.id && (
-                  <div className="border-t bg-muted p-4/50">
+                  <div className="bg-muted p-4/50 border-t">
                     <Tabs defaultValue="overview" className="w-full">
                       <TabsList className="grid w-full grid-cols-2 gap-1 sm:grid-cols-4">
                         <TabsTrigger value="overview">Overview</TabsTrigger>
@@ -329,7 +334,7 @@ export const AIFixSuggestionsCard: React.FC<AIFixSuggestionsCardProps> = ({
                             <Info className="h-4 w-4" />
                             Explanation
                           </h4>
-                          <p className="text-sm text-muted-foreground">
+                          <p className="text-muted-foreground text-sm">
                             {suggestion.explanation}
                           </p>
                         </div>
@@ -339,7 +344,7 @@ export const AIFixSuggestionsCard: React.FC<AIFixSuggestionsCardProps> = ({
                             <Shield className="h-4 w-4" />
                             Security Benefit
                           </h4>
-                          <p className="text-sm text-muted-foreground">
+                          <p className="text-muted-foreground text-sm">
                             {suggestion.securityBenefit}
                           </p>
                         </div>
@@ -349,7 +354,7 @@ export const AIFixSuggestionsCard: React.FC<AIFixSuggestionsCardProps> = ({
                             <AlertTriangle className="h-4 w-4" />
                             Risk Assessment
                           </h4>
-                          <p className="text-sm text-muted-foreground">
+                          <p className="text-muted-foreground text-sm">
                             {suggestion.riskAssessment}
                           </p>
                         </div>
@@ -448,7 +453,7 @@ export const AIFixSuggestionsCard: React.FC<AIFixSuggestionsCardProps> = ({
                               </pre>
                             </div>
 
-                            <p className="text-xs text-muted-foreground italic">
+                            <p className="text-muted-foreground text-xs italic">
                               {change.reasoning}
                             </p>
                           </div>

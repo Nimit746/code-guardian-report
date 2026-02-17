@@ -8,6 +8,7 @@ import {
 } from "@/components/ui/card";
 import { Badge } from "@/components/ui/badge";
 import { Button } from "@/components/ui/button";
+import { Skeleton } from "@/components/ui/skeleton";
 import { Progress } from "@/components/ui/progress";
 import { Tabs, TabsContent, TabsList, TabsTrigger } from "@/components/ui/tabs";
 import {
@@ -23,7 +24,6 @@ import {
   Activity,
   Database,
   Settings,
-  RefreshCw,
   Download,
   Upload,
 } from "lucide-react";
@@ -368,7 +368,7 @@ export const CodeProvenanceCard: React.FC<CodeProvenanceCardProps> = ({
               ) : (
                 <Button onClick={performIntegrityScan} disabled={isScanning}>
                   {isScanning ? (
-                    <RefreshCw className="mr-2 h-4 w-4 animate-spin" />
+                    <Skeleton className="mr-2 h-4 w-4 rounded-full" />
                   ) : (
                     <Scan className="mr-2 h-4 w-4" />
                   )}

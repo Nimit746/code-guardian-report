@@ -1,5 +1,6 @@
 // src/components/LoadingSpinner.tsx
 import React from "react";
+import { Skeleton } from "@/components/ui/skeleton";
 
 interface LoadingSpinnerProps {
   size?: "sm" | "md" | "lg";
@@ -13,17 +14,27 @@ export const LoadingSpinner: React.FC<LoadingSpinnerProps> = ({
   message,
 }) => {
   const sizeClasses = {
-    sm: "w-4 h-4",
-    md: "w-8 h-8",
-    lg: "w-12 h-12",
+    sm: "h-4 w-4",
+    md: "h-8 w-8",
+    lg: "h-12 w-12",
+  };
+  const lineClasses = {
+    sm: "h-3 w-24",
+    md: "h-3 w-36",
+    lg: "h-3 w-48",
   };
 
   return (
     <div className={`flex flex-col items-center justify-center ${className}`}>
-      <div
-        className={`animate-spin rounded-full border-2 border-border border-t-blue-600 ${sizeClasses[size]}`}
-      />
-      {message && <p className="mt-2 text-sm text-gray-600">{message}</p>}
+      <Skeleton className={`rounded-full ${sizeClasses[size]}`} />
+      {message ? (
+        <div className="mt-2 flex flex-col items-center gap-2">
+          <p className="text-muted-foreground text-sm">{message}</p>
+          <Skeleton className={lineClasses[size]} />
+        </div>
+      ) : (
+        <Skeleton className={`mt-2 ${lineClasses[size]}`} />
+      )}
     </div>
   );
 };

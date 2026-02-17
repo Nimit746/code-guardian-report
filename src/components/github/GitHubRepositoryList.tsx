@@ -2,6 +2,8 @@
 import React, { useState } from "react";
 import { Github, Star, GitFork, ExternalLink, TrendingUp } from "lucide-react";
 import { logger } from "@/utils/logger";
+import { RepositoryCardSkeleton } from "@/components/ui/skeleton-variants";
+import { Skeleton } from "@/components/ui/skeleton";
 
 interface GitHubRepository {
   id: number;
@@ -42,13 +44,10 @@ const GitHubRepositoryList: React.FC<GitHubRepositoryListProps> = ({
 
   if (loading) {
     return (
-      <div className="border-border bg-muted/5 rounded-lg border p-6 shadow-sm backdrop-blur-sm">
-        <div className="flex items-center justify-center py-8">
-          <div className="h-8 w-8 animate-spin rounded-full border-b-2 border-purple-500"></div>
-          <span className="ml-3 text-muted-foreground">
-            Loading repositories...
-          </span>
-        </div>
+      <div className="space-y-3">
+        {Array.from({ length: 4 }).map((_, i) => (
+          <RepositoryCardSkeleton key={i} />
+        ))}
       </div>
     );
   }
@@ -57,10 +56,8 @@ const GitHubRepositoryList: React.FC<GitHubRepositoryListProps> = ({
     return (
       <div className="border-border bg-muted/5 rounded-lg border p-6 shadow-sm backdrop-blur-sm">
         <div className="py-8 text-center">
-          <Github className="mx-auto mb-4 h-12 w-12 text-muted-foreground" />
-          <p className="text-muted-foreground">
-            No repositories found
-          </p>
+          <Github className="text-muted-foreground mx-auto mb-4 h-12 w-12" />
+          <p className="text-muted-foreground">No repositories found</p>
         </div>
       </div>
     );
@@ -78,7 +75,7 @@ const GitHubRepositoryList: React.FC<GitHubRepositoryListProps> = ({
             <div className="min-w-0 flex-1">
               {/* Repository name and visibility */}
               <div className="mb-2 flex flex-wrap items-center gap-2">
-                <Github className="h-5 w-5 flex-shrink-0 text-muted-foreground transition-colors group-hover:text-muted-foreground" />
+                <Github className="text-muted-foreground group-hover:text-muted-foreground h-5 w-5 flex-shrink-0 transition-colors" />
                 <h3 className="text-foreground truncate text-base font-semibold transition-colors hover:text-purple-600 sm:text-lg">
                   <a
                     href={repo.html_url}
@@ -99,13 +96,13 @@ const GitHubRepositoryList: React.FC<GitHubRepositoryListProps> = ({
 
               {/* Description */}
               {repo.description && (
-                <p className="mb-3 line-clamp-2 text-xs text-muted-foreground sm:text-sm">
+                <p className="text-muted-foreground mb-3 line-clamp-2 text-xs sm:text-sm">
                   {repo.description}
                 </p>
               )}
 
               {/* Repository stats - Responsive wrap */}
-              <div className="flex flex-wrap items-center gap-2 text-xs text-muted-foreground sm:gap-4 sm:text-sm">
+              <div className="text-muted-foreground flex flex-wrap items-center gap-2 text-xs sm:gap-4 sm:text-sm">
                 {repo.language && (
                   <div className="flex items-center gap-1">
                     <span className="h-3 w-3 rounded-full bg-purple-500"></span>
@@ -141,8 +138,8 @@ const GitHubRepositoryList: React.FC<GitHubRepositoryListProps> = ({
               >
                 {analyzingRepo === repo.full_name ? (
                   <>
-                    <div className="h-4 w-4 animate-spin rounded-full border-b-2 border-slate-400"></div>
-                    <span>Analyzing...</span>
+                    <Skeleton className="h-4 w-4 rounded-full" />
+                    <Skeleton className="h-3 w-20" />
                   </>
                 ) : (
                   <>

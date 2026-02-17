@@ -5,7 +5,6 @@ import {
   AlertTriangle,
   TrendingUp,
   Target,
-  Loader2,
   RefreshCw,
   CheckCircle,
   XCircle,
@@ -31,12 +30,13 @@ import { Button } from "@/components/ui/button";
 import { Badge } from "@/components/ui/badge";
 import { Tabs, TabsContent, TabsList, TabsTrigger } from "@/components/ui/tabs";
 import { Alert, AlertDescription } from "@/components/ui/alert";
-import { Progress } from "@/components/ui/progress";
 import { AIService } from "../../services/ai/aiService";
 import { AnalysisResults } from "@/hooks/useAnalysis";
 import { formatAIError, getAIFeatureStatus } from "@/utils/aiUtils";
 import { toast } from "sonner";
 import { CopilotEnabledBanner } from "./CopilotEnabledBanner";
+import { InsightCardSkeleton } from "@/components/ui/skeleton-variants";
+import { Skeleton } from "@/components/ui/skeleton";
 
 interface AISecurityInsightsProps {
   results: AnalysisResults;
@@ -453,26 +453,26 @@ export const AISecurityInsights: React.FC<AISecurityInsightsProps> = ({
           <CardHeader className="space-y-3">
             <div className="flex flex-col gap-3 sm:flex-row sm:items-center sm:justify-between">
               <CardTitle className="flex items-center gap-3">
-                <Brain className="h-5 w-5 flex-shrink-0 text-muted-foreground" />
+                <Brain className="text-muted-foreground h-5 w-5 flex-shrink-0" />
                 <span className="text-foreground font-bold">
                   AI Security Insights
                 </span>
               </CardTitle>
               <Badge
                 variant="outline"
-                className="w-fit border-gray-400 bg-muted/50 px-3 py-1 text-sm font-semibold text-gray-600 dark:border-border dark:bg-gray-950/30 dark:text-muted-foreground"
+                className="bg-muted/50 dark:border-border dark:text-muted-foreground w-fit border-gray-400 px-3 py-1 text-sm font-semibold text-gray-600 dark:bg-gray-950/30"
               >
                 Not Supported
               </Badge>
             </div>
-            <CardDescription className="leading-relaxed text-muted-foreground">
+            <CardDescription className="text-muted-foreground leading-relaxed">
               AI features are not supported in this environment
             </CardDescription>
           </CardHeader>
           <CardContent>
             <Alert className="border-border bg-muted/50/50 dark:border-gray-800 dark:bg-gray-950/20">
               <XCircle className="h-4 w-4 text-gray-600" />
-              <AlertDescription className="leading-relaxed text-foreground/80">
+              <AlertDescription className="text-foreground/80 leading-relaxed">
                 AI security insights require a modern browser with localStorage
                 and fetch API support.
               </AlertDescription>
@@ -503,14 +503,14 @@ export const AISecurityInsights: React.FC<AISecurityInsightsProps> = ({
                 API Keys Required
               </Badge>
             </div>
-            <CardDescription className="leading-relaxed text-muted-foreground">
+            <CardDescription className="text-muted-foreground leading-relaxed">
               {aiFeatureStatus.message}
             </CardDescription>
           </CardHeader>
           <CardContent>
             <Alert className="border-orange-200 bg-orange-50/50 dark:border-orange-800 dark:bg-orange-950/20">
               <Info className="h-4 w-4 text-orange-600" />
-              <AlertDescription className="leading-relaxed text-foreground/80">
+              <AlertDescription className="text-foreground/80 leading-relaxed">
                 Please configure your AI API keys in the AI Configuration tab to
                 enable intelligent security analysis, OWASP explanations, and
                 personalized remediation strategies.
@@ -542,7 +542,7 @@ export const AISecurityInsights: React.FC<AISecurityInsightsProps> = ({
                     : "API Connected"}
                 </Badge>
               </div>
-              <CardDescription className="leading-relaxed text-muted-foreground">
+              <CardDescription className="text-muted-foreground leading-relaxed">
                 {aiFeatureStatus.message}
               </CardDescription>
             </div>
@@ -562,8 +562,8 @@ export const AISecurityInsights: React.FC<AISecurityInsightsProps> = ({
                 const summary = getInsightsSummary();
                 return (
                   summary.loading > 0 && (
-                    <div className="flex items-center justify-center gap-3 rounded-2xl border border-border bg-muted p-4 dark:border-border dark:from-blue-950/30 dark:to-indigo-950/30">
-                      <Loader2 className="h-5 w-5 animate-spin text-primary" />
+                    <div className="border-border bg-muted dark:border-border flex items-center justify-center gap-3 rounded-2xl border p-4 dark:from-blue-950/30 dark:to-indigo-950/30">
+                      <Skeleton className="h-5 w-5 rounded-full" />
                       <span className="text-sm font-semibold text-teal-600 dark:text-teal-300">
                         {summary.loading} generating...
                       </span>
@@ -576,10 +576,10 @@ export const AISecurityInsights: React.FC<AISecurityInsightsProps> = ({
         </CardHeader>
         <CardContent>
           <Tabs defaultValue="overview" className="w-full">
-            <TabsList className="grid h-auto w-full grid-cols-2 gap-2 rounded-2xl border bg-white/90 p-2 shadow-xl backdrop-blur-xl sm:grid-cols-3 lg:grid-cols-6/90">
+            <TabsList className="lg:grid-cols-6/90 grid h-auto w-full grid-cols-2 gap-2 rounded-2xl border bg-white/90 p-2 shadow-xl backdrop-blur-xl sm:grid-cols-3">
               <TabsTrigger
                 value="overview"
-                className="flex flex-col items-center justify-center gap-2 rounded-xl px-2 py-3 text-xs font-semibold transition-all duration-300  data-[state=active]:bg-gradient-to-r data-[state=active]:from-blue-500 data-[state=active]:to-indigo-500 data-[state=active]:text-white data-[state=active]:shadow-lg sm:flex-row sm:text-sm"
+                className="flex flex-col items-center justify-center gap-2 rounded-xl px-2 py-3 text-xs font-semibold transition-all duration-300 data-[state=active]:bg-gradient-to-r data-[state=active]:from-blue-500 data-[state=active]:to-indigo-500 data-[state=active]:text-white data-[state=active]:shadow-lg sm:flex-row sm:text-sm"
               >
                 <Shield className="h-4 w-4 flex-shrink-0" />
                 <span className="text-center leading-tight whitespace-nowrap">
@@ -588,7 +588,7 @@ export const AISecurityInsights: React.FC<AISecurityInsightsProps> = ({
               </TabsTrigger>
               <TabsTrigger
                 value="remediation"
-                className="flex flex-col items-center justify-center gap-2 rounded-xl px-2 py-3 text-xs font-semibold transition-all duration-300  data-[state=active]:bg-gradient-to-r data-[state=active]:from-purple-500 data-[state=active]:to-pink-500 data-[state=active]:text-white data-[state=active]:shadow-lg sm:flex-row sm:text-sm"
+                className="flex flex-col items-center justify-center gap-2 rounded-xl px-2 py-3 text-xs font-semibold transition-all duration-300 data-[state=active]:bg-gradient-to-r data-[state=active]:from-purple-500 data-[state=active]:to-pink-500 data-[state=active]:text-white data-[state=active]:shadow-lg sm:flex-row sm:text-sm"
               >
                 <Target className="h-4 w-4 flex-shrink-0" />
                 <span className="text-center leading-tight whitespace-nowrap">
@@ -597,7 +597,7 @@ export const AISecurityInsights: React.FC<AISecurityInsightsProps> = ({
               </TabsTrigger>
               <TabsTrigger
                 value="owasp"
-                className="flex flex-col items-center justify-center gap-2 rounded-xl px-2 py-3 text-xs font-semibold transition-all duration-300  data-[state=active]:bg-gradient-to-r data-[state=active]:from-orange-500 data-[state=active]:to-red-500 data-[state=active]:text-white data-[state=active]:shadow-lg sm:flex-row sm:text-sm"
+                className="flex flex-col items-center justify-center gap-2 rounded-xl px-2 py-3 text-xs font-semibold transition-all duration-300 data-[state=active]:bg-gradient-to-r data-[state=active]:from-orange-500 data-[state=active]:to-red-500 data-[state=active]:text-white data-[state=active]:shadow-lg sm:flex-row sm:text-sm"
               >
                 <BookOpen className="h-4 w-4 flex-shrink-0" />
                 <span className="text-center leading-tight whitespace-nowrap">
@@ -606,7 +606,7 @@ export const AISecurityInsights: React.FC<AISecurityInsightsProps> = ({
               </TabsTrigger>
               <TabsTrigger
                 value="threats"
-                className="flex flex-col items-center justify-center gap-2 rounded-xl px-2 py-3 text-xs font-semibold transition-all duration-300  data-[state=active]:bg-gradient-to-r data-[state=active]:from-emerald-500 data-[state=active]:to-teal-500 data-[state=active]:text-white data-[state=active]:shadow-lg sm:flex-row sm:text-sm"
+                className="flex flex-col items-center justify-center gap-2 rounded-xl px-2 py-3 text-xs font-semibold transition-all duration-300 data-[state=active]:bg-gradient-to-r data-[state=active]:from-emerald-500 data-[state=active]:to-teal-500 data-[state=active]:text-white data-[state=active]:shadow-lg sm:flex-row sm:text-sm"
               >
                 <Radar className="h-4 w-4 flex-shrink-0" />
                 <span className="text-center leading-tight whitespace-nowrap">
@@ -615,7 +615,7 @@ export const AISecurityInsights: React.FC<AISecurityInsightsProps> = ({
               </TabsTrigger>
               <TabsTrigger
                 value="compliance"
-                className="flex flex-col items-center justify-center gap-2 rounded-xl px-2 py-3 text-xs font-semibold transition-all duration-300  data-[state=active]:bg-gradient-to-r data-[state=active]:from-yellow-500 data-[state=active]:to-orange-500 data-[state=active]:text-white data-[state=active]:shadow-lg sm:flex-row sm:text-sm"
+                className="flex flex-col items-center justify-center gap-2 rounded-xl px-2 py-3 text-xs font-semibold transition-all duration-300 data-[state=active]:bg-gradient-to-r data-[state=active]:from-yellow-500 data-[state=active]:to-orange-500 data-[state=active]:text-white data-[state=active]:shadow-lg sm:flex-row sm:text-sm"
               >
                 <Lock className="h-4 w-4 flex-shrink-0" />
                 <span className="text-center leading-tight whitespace-nowrap">
@@ -624,7 +624,7 @@ export const AISecurityInsights: React.FC<AISecurityInsightsProps> = ({
               </TabsTrigger>
               <TabsTrigger
                 value="advanced"
-                className="flex flex-col items-center justify-center gap-2 rounded-xl px-2 py-3 text-xs font-semibold transition-all duration-300  data-[state=active]:bg-gradient-to-r data-[state=active]:from-indigo-500 data-[state=active]:to-purple-500 data-[state=active]:text-white data-[state=active]:shadow-lg sm:flex-row sm:text-sm"
+                className="flex flex-col items-center justify-center gap-2 rounded-xl px-2 py-3 text-xs font-semibold transition-all duration-300 data-[state=active]:bg-gradient-to-r data-[state=active]:from-indigo-500 data-[state=active]:to-purple-500 data-[state=active]:text-white data-[state=active]:shadow-lg sm:flex-row sm:text-sm"
               >
                 <Sparkles className="h-4 w-4 flex-shrink-0" />
                 <span className="text-center leading-tight whitespace-nowrap">
@@ -645,7 +645,7 @@ export const AISecurityInsights: React.FC<AISecurityInsightsProps> = ({
                   size="sm"
                 >
                   {securityInsights.isLoading ? (
-                    <Loader2 className="mr-2 h-4 w-4 animate-spin" />
+                    <Skeleton className="mr-2 h-4 w-4 rounded-full" />
                   ) : (
                     <RefreshCw className="mr-2 h-4 w-4" />
                   )}
@@ -654,21 +654,7 @@ export const AISecurityInsights: React.FC<AISecurityInsightsProps> = ({
               </div>
 
               {securityInsights.isLoading && (
-                <div className="flex items-center justify-center p-8">
-                  <div className="space-y-4 text-center">
-                    <Loader2 className="mx-auto h-8 w-8 animate-spin text-purple-600" />
-                    <div className="space-y-2">
-                      <p className="text-sm font-medium">
-                        Analyzing security posture...
-                      </p>
-                      <Progress value={undefined} className="w-64" />
-                      <p className="text-xs text-muted-foreground">
-                        AI is analyzing {results.issues.length} issues across{" "}
-                        {results.totalFiles} files
-                      </p>
-                    </div>
-                  </div>
-                </div>
+                <InsightCardSkeleton className="border-purple-200 dark:border-purple-800" />
               )}
 
               {securityInsights.error && (
@@ -684,12 +670,12 @@ export const AISecurityInsights: React.FC<AISecurityInsightsProps> = ({
               {securityInsights.content && (
                 <div className="space-y-4">
                   <div className="rounded-lg border border-purple-200 bg-purple-50 p-4 dark:border-purple-800 dark:bg-purple-950/20">
-                    <div className="text-sm whitespace-pre-wrap text-foreground/80">
+                    <div className="text-foreground/80 text-sm whitespace-pre-wrap">
                       {securityInsights.content}
                     </div>
                   </div>
                   {securityInsights.lastGenerated && (
-                    <div className="flex items-center gap-2 text-xs text-muted-foreground">
+                    <div className="text-muted-foreground flex items-center gap-2 text-xs">
                       <CheckCircle className="h-3 w-3" />
                       Generated on{" "}
                       {formatTimestamp(securityInsights.lastGenerated)}
@@ -709,7 +695,7 @@ export const AISecurityInsights: React.FC<AISecurityInsightsProps> = ({
                       <Brain className="mr-2 h-4 w-4" />
                       Generate Security Insights
                     </Button>
-                    <p className="mt-2 text-sm text-muted-foreground">
+                    <p className="text-muted-foreground mt-2 text-sm">
                       Get AI-powered analysis of your security posture and risk
                       assessment
                     </p>
@@ -729,7 +715,7 @@ export const AISecurityInsights: React.FC<AISecurityInsightsProps> = ({
                   size="sm"
                 >
                   {remediationStrategy.isLoading ? (
-                    <Loader2 className="mr-2 h-4 w-4 animate-spin" />
+                    <Skeleton className="mr-2 h-4 w-4 rounded-full" />
                   ) : (
                     <Zap className="mr-2 h-4 w-4" />
                   )}
@@ -740,23 +726,7 @@ export const AISecurityInsights: React.FC<AISecurityInsightsProps> = ({
               </div>
 
               {remediationStrategy.isLoading && (
-                <div className="flex items-center justify-center p-8">
-                  <div className="space-y-4 text-center">
-                    <Loader2 className="mx-auto h-8 w-8 animate-spin text-primary" />
-                    <div className="space-y-2">
-                      <p className="text-sm font-medium">
-                        Creating remediation strategy...
-                      </p>
-                      <Progress value={undefined} className="w-64" />
-                      <p className="text-xs text-muted-foreground">
-                        Prioritizing{" "}
-                        {results.summary.criticalIssues +
-                          results.summary.highIssues}{" "}
-                        critical/high issues
-                      </p>
-                    </div>
-                  </div>
-                </div>
+                <InsightCardSkeleton className="border-blue-200 dark:border-blue-800" />
               )}
 
               {remediationStrategy.error && (
@@ -771,13 +741,13 @@ export const AISecurityInsights: React.FC<AISecurityInsightsProps> = ({
 
               {remediationStrategy.content && (
                 <div className="space-y-4">
-                  <div className="rounded-lg border border-border bg-muted p-4 dark:border-border dark:bg-blue-950/20">
-                    <div className="text-sm whitespace-pre-wrap text-foreground/80">
+                  <div className="border-border bg-muted dark:border-border rounded-lg border p-4 dark:bg-blue-950/20">
+                    <div className="text-foreground/80 text-sm whitespace-pre-wrap">
                       {remediationStrategy.content}
                     </div>
                   </div>
                   {remediationStrategy.lastGenerated && (
-                    <div className="flex items-center gap-2 text-xs text-muted-foreground">
+                    <div className="text-muted-foreground flex items-center gap-2 text-xs">
                       <CheckCircle className="h-3 w-3" />
                       Generated on{" "}
                       {formatTimestamp(remediationStrategy.lastGenerated)}
@@ -797,7 +767,7 @@ export const AISecurityInsights: React.FC<AISecurityInsightsProps> = ({
                       <Target className="mr-2 h-4 w-4" />
                       Generate Remediation Strategy
                     </Button>
-                    <p className="mt-2 text-sm text-muted-foreground">
+                    <p className="text-muted-foreground mt-2 text-sm">
                       Get a prioritized action plan based on risk, effort, and
                       business impact
                     </p>
@@ -810,7 +780,7 @@ export const AISecurityInsights: React.FC<AISecurityInsightsProps> = ({
                 <h3 className="mb-4 text-lg font-semibold">
                   OWASP Top 10 Analysis
                 </h3>
-                <p className="mb-6 text-sm text-muted-foreground">
+                <p className="text-muted-foreground mb-6 text-sm">
                   Get detailed explanations for each OWASP category detected in
                   your codebase
                 </p>
@@ -863,7 +833,7 @@ export const AISecurityInsights: React.FC<AISecurityInsightsProps> = ({
                               size="sm"
                             >
                               {categoryState.isLoading ? (
-                                <Loader2 className="mr-2 h-4 w-4 animate-spin" />
+                                <Skeleton className="mr-2 h-4 w-4 rounded-full" />
                               ) : (
                                 <Lightbulb className="mr-2 h-4 w-4" />
                               )}
@@ -879,16 +849,15 @@ export const AISecurityInsights: React.FC<AISecurityInsightsProps> = ({
                           categoryState.error) && (
                           <CardContent>
                             {categoryState.isLoading && (
-                              <div className="flex items-center gap-3 p-4">
-                                <Loader2 className="h-5 w-5 animate-spin text-orange-600" />
-                                <div>
-                                  <p className="text-sm font-medium">
-                                    Analyzing {categoryName}...
-                                  </p>
-                                  <p className="text-xs text-muted-foreground">
-                                    Examining {relatedIssues.length} related
-                                    issue{relatedIssues.length !== 1 ? "s" : ""}
-                                  </p>
+                              <div className="space-y-3 p-4">
+                                <div className="flex items-center gap-3">
+                                  <div className="h-5 w-5 animate-pulse rounded-full bg-orange-200 dark:bg-orange-800" />
+                                  <div className="bg-muted h-4 w-48 animate-pulse rounded" />
+                                </div>
+                                <div className="space-y-2">
+                                  <div className="bg-muted h-3 w-full animate-pulse rounded" />
+                                  <div className="bg-muted h-3 w-3/4 animate-pulse rounded" />
+                                  <div className="bg-muted h-3 w-1/2 animate-pulse rounded" />
                                 </div>
                               </div>
                             )}
@@ -906,12 +875,12 @@ export const AISecurityInsights: React.FC<AISecurityInsightsProps> = ({
                             {categoryState.content && (
                               <div className="space-y-3">
                                 <div className="rounded-lg border border-orange-200 bg-orange-50 p-4 dark:border-orange-800 dark:bg-orange-950/20">
-                                  <div className="text-sm whitespace-pre-wrap text-foreground/80">
+                                  <div className="text-foreground/80 text-sm whitespace-pre-wrap">
                                     {categoryState.content}
                                   </div>
                                 </div>
                                 {categoryState.lastGenerated && (
-                                  <div className="flex items-center gap-2 text-xs text-muted-foreground">
+                                  <div className="text-muted-foreground flex items-center gap-2 text-xs">
                                     <CheckCircle className="h-3 w-3" />
                                     Generated on{" "}
                                     {formatTimestamp(
@@ -942,7 +911,7 @@ export const AISecurityInsights: React.FC<AISecurityInsightsProps> = ({
                   size="sm"
                 >
                   {threatModeling.isLoading ? (
-                    <Loader2 className="mr-2 h-4 w-4 animate-spin" />
+                    <Skeleton className="mr-2 h-4 w-4 rounded-full" />
                   ) : (
                     <Radar className="mr-2 h-4 w-4" />
                   )}
@@ -953,20 +922,7 @@ export const AISecurityInsights: React.FC<AISecurityInsightsProps> = ({
               </div>
 
               {threatModeling.isLoading && (
-                <div className="flex items-center justify-center p-8">
-                  <div className="space-y-4 text-center">
-                    <Loader2 className="mx-auto h-8 w-8 animate-spin text-red-600" />
-                    <div className="space-y-2">
-                      <p className="text-sm font-medium">
-                        Modeling potential threats...
-                      </p>
-                      <Progress value={undefined} className="w-64" />
-                      <p className="text-xs text-muted-foreground">
-                        Analyzing attack surfaces and threat vectors
-                      </p>
-                    </div>
-                  </div>
-                </div>
+                <InsightCardSkeleton className="border-red-200 dark:border-red-800" />
               )}
 
               {threatModeling.error && (
@@ -981,12 +937,12 @@ export const AISecurityInsights: React.FC<AISecurityInsightsProps> = ({
               {threatModeling.content && (
                 <div className="space-y-4">
                   <div className="rounded-lg border border-red-200 bg-red-50 p-4 dark:border-red-800 dark:bg-red-950/20">
-                    <div className="text-sm whitespace-pre-wrap text-foreground/80">
+                    <div className="text-foreground/80 text-sm whitespace-pre-wrap">
                       {threatModeling.content}
                     </div>
                   </div>
                   {threatModeling.lastGenerated && (
-                    <div className="flex items-center gap-2 text-xs text-muted-foreground">
+                    <div className="text-muted-foreground flex items-center gap-2 text-xs">
                       <CheckCircle className="h-3 w-3" />
                       Generated on{" "}
                       {formatTimestamp(threatModeling.lastGenerated)}
@@ -1006,7 +962,7 @@ export const AISecurityInsights: React.FC<AISecurityInsightsProps> = ({
                       <Radar className="mr-2 h-4 w-4" />
                       Generate Threat Model
                     </Button>
-                    <p className="mt-2 text-sm text-muted-foreground">
+                    <p className="text-muted-foreground mt-2 text-sm">
                       Identify potential attack vectors and security threats
                       specific to your codebase
                     </p>
@@ -1026,7 +982,7 @@ export const AISecurityInsights: React.FC<AISecurityInsightsProps> = ({
                   size="sm"
                 >
                   {complianceAnalysis.isLoading ? (
-                    <Loader2 className="mr-2 h-4 w-4 animate-spin" />
+                    <Skeleton className="mr-2 h-4 w-4 rounded-full" />
                   ) : (
                     <Lock className="mr-2 h-4 w-4" />
                   )}
@@ -1037,20 +993,7 @@ export const AISecurityInsights: React.FC<AISecurityInsightsProps> = ({
               </div>
 
               {complianceAnalysis.isLoading && (
-                <div className="flex items-center justify-center p-8">
-                  <div className="space-y-4 text-center">
-                    <Loader2 className="mx-auto h-8 w-8 animate-spin text-green-600" />
-                    <div className="space-y-2">
-                      <p className="text-sm font-medium">
-                        Analyzing compliance requirements...
-                      </p>
-                      <Progress value={undefined} className="w-64" />
-                      <p className="text-xs text-muted-foreground">
-                        Checking against security standards and regulations
-                      </p>
-                    </div>
-                  </div>
-                </div>
+                <InsightCardSkeleton className="border-green-200 dark:border-green-800" />
               )}
 
               {complianceAnalysis.error && (
@@ -1066,12 +1009,12 @@ export const AISecurityInsights: React.FC<AISecurityInsightsProps> = ({
               {complianceAnalysis.content && (
                 <div className="space-y-4">
                   <div className="rounded-lg border border-green-200 bg-green-50 p-4 dark:border-green-800 dark:bg-green-950/20">
-                    <div className="text-sm whitespace-pre-wrap text-foreground/80">
+                    <div className="text-foreground/80 text-sm whitespace-pre-wrap">
                       {complianceAnalysis.content}
                     </div>
                   </div>
                   {complianceAnalysis.lastGenerated && (
-                    <div className="flex items-center gap-2 text-xs text-muted-foreground">
+                    <div className="text-muted-foreground flex items-center gap-2 text-xs">
                       <CheckCircle className="h-3 w-3" />
                       Generated on{" "}
                       {formatTimestamp(complianceAnalysis.lastGenerated)}
@@ -1091,7 +1034,7 @@ export const AISecurityInsights: React.FC<AISecurityInsightsProps> = ({
                       <Lock className="mr-2 h-4 w-4" />
                       Generate Compliance Analysis
                     </Button>
-                    <p className="mt-2 text-sm text-muted-foreground">
+                    <p className="text-muted-foreground mt-2 text-sm">
                       Assess compliance with security standards like SOC 2, PCI
                       DSS, GDPR, and more
                     </p>
@@ -1116,7 +1059,7 @@ export const AISecurityInsights: React.FC<AISecurityInsightsProps> = ({
                         size="sm"
                       >
                         {riskAssessment.isLoading ? (
-                          <Loader2 className="h-3 w-3 animate-spin" />
+                          <Skeleton className="h-3 w-3 rounded-full" />
                         ) : (
                           <BarChart3 className="h-3 w-3" />
                         )}
@@ -1128,15 +1071,14 @@ export const AISecurityInsights: React.FC<AISecurityInsightsProps> = ({
                   </CardHeader>
                   <CardContent>
                     {riskAssessment.isLoading && (
-                      <div className="flex items-center gap-3 p-4">
-                        <Loader2 className="h-5 w-5 animate-spin text-yellow-600" />
-                        <div>
-                          <p className="text-sm font-medium">
-                            Calculating risk metrics...
-                          </p>
-                          <p className="text-xs text-muted-foreground">
-                            Analyzing business impact
-                          </p>
+                      <div className="space-y-3 p-4">
+                        <div className="flex items-center gap-3">
+                          <div className="h-5 w-5 animate-pulse rounded-full bg-yellow-200 dark:bg-yellow-800" />
+                          <div className="bg-muted h-4 w-40 animate-pulse rounded" />
+                        </div>
+                        <div className="space-y-2">
+                          <div className="bg-muted h-3 w-full animate-pulse rounded" />
+                          <div className="bg-muted h-3 w-4/5 animate-pulse rounded" />
                         </div>
                       </div>
                     )}
@@ -1173,7 +1115,7 @@ export const AISecurityInsights: React.FC<AISecurityInsightsProps> = ({
                         size="sm"
                       >
                         {performanceImpact.isLoading ? (
-                          <Loader2 className="h-3 w-3 animate-spin" />
+                          <Skeleton className="h-3 w-3 rounded-full" />
                         ) : (
                           <Activity className="h-3 w-3" />
                         )}
@@ -1185,15 +1127,14 @@ export const AISecurityInsights: React.FC<AISecurityInsightsProps> = ({
                   </CardHeader>
                   <CardContent>
                     {performanceImpact.isLoading && (
-                      <div className="flex items-center gap-3 p-4">
-                        <Loader2 className="h-5 w-5 animate-spin text-cyan-600" />
-                        <div>
-                          <p className="text-sm font-medium">
-                            Analyzing performance...
-                          </p>
-                          <p className="text-xs text-muted-foreground">
-                            Measuring security overhead
-                          </p>
+                      <div className="space-y-3 p-4">
+                        <div className="flex items-center gap-3">
+                          <div className="h-5 w-5 animate-pulse rounded-full bg-cyan-200 dark:bg-cyan-800" />
+                          <div className="bg-muted h-4 w-40 animate-pulse rounded" />
+                        </div>
+                        <div className="space-y-2">
+                          <div className="bg-muted h-3 w-full animate-pulse rounded" />
+                          <div className="bg-muted h-3 w-4/5 animate-pulse rounded" />
                         </div>
                       </div>
                     )}
@@ -1231,7 +1172,7 @@ export const AISecurityInsights: React.FC<AISecurityInsightsProps> = ({
                         size="sm"
                       >
                         {codeQualityInsights.isLoading ? (
-                          <Loader2 className="h-3 w-3 animate-spin" />
+                          <Skeleton className="h-3 w-3 rounded-full" />
                         ) : (
                           <FileText className="h-3 w-3" />
                         )}
@@ -1243,20 +1184,19 @@ export const AISecurityInsights: React.FC<AISecurityInsightsProps> = ({
                   </CardHeader>
                   <CardContent>
                     {codeQualityInsights.isLoading && (
-                      <div className="flex items-center gap-3 p-4">
-                        <Loader2 className="h-5 w-5 animate-spin text-teal-600" />
-                        <div>
-                          <p className="text-sm font-medium">
-                            Analyzing code quality...
-                          </p>
-                          <p className="text-xs text-muted-foreground">
-                            Evaluating maintainability
-                          </p>
+                      <div className="space-y-3 p-4">
+                        <div className="flex items-center gap-3">
+                          <div className="h-5 w-5 animate-pulse rounded-full bg-teal-200 dark:bg-teal-800" />
+                          <div className="bg-muted h-4 w-40 animate-pulse rounded" />
+                        </div>
+                        <div className="space-y-2">
+                          <div className="bg-muted h-3 w-full animate-pulse rounded" />
+                          <div className="bg-muted h-3 w-4/5 animate-pulse rounded" />
                         </div>
                       </div>
                     )}
                     {codeQualityInsights.content && (
-                      <div className="rounded bg-muted p-3 text-sm dark:bg-teal-950/20">
+                      <div className="bg-muted rounded p-3 text-sm dark:bg-teal-950/20">
                         {codeQualityInsights.content.substring(0, 200)}...
                       </div>
                     )}
@@ -1289,7 +1229,7 @@ export const AISecurityInsights: React.FC<AISecurityInsightsProps> = ({
                         size="sm"
                       >
                         {trendsAnalysis.isLoading ? (
-                          <Loader2 className="h-3 w-3 animate-spin" />
+                          <Skeleton className="h-3 w-3 rounded-full" />
                         ) : (
                           <TrendingUp className="h-3 w-3" />
                         )}
@@ -1301,15 +1241,14 @@ export const AISecurityInsights: React.FC<AISecurityInsightsProps> = ({
                   </CardHeader>
                   <CardContent>
                     {trendsAnalysis.isLoading && (
-                      <div className="flex items-center gap-3 p-4">
-                        <Loader2 className="h-5 w-5 animate-spin text-pink-600" />
-                        <div>
-                          <p className="text-sm font-medium">
-                            Analyzing trends...
-                          </p>
-                          <p className="text-xs text-muted-foreground">
-                            Comparing with industry data
-                          </p>
+                      <div className="space-y-3 p-4">
+                        <div className="flex items-center gap-3">
+                          <div className="h-5 w-5 animate-pulse rounded-full bg-pink-200 dark:bg-pink-800" />
+                          <div className="bg-muted h-4 w-40 animate-pulse rounded" />
+                        </div>
+                        <div className="space-y-2">
+                          <div className="bg-muted h-3 w-full animate-pulse rounded" />
+                          <div className="bg-muted h-3 w-4/5 animate-pulse rounded" />
                         </div>
                       </div>
                     )}
@@ -1364,12 +1303,12 @@ export const AISecurityInsights: React.FC<AISecurityInsightsProps> = ({
                         <div
                           className={`bg-${colors[index]}-50 dark:bg-${colors[index]}-950/20 rounded-lg border p-4 border-${colors[index]}-200 dark:border-${colors[index]}-800`}
                         >
-                          <div className="text-sm whitespace-pre-wrap text-foreground/80">
+                          <div className="text-foreground/80 text-sm whitespace-pre-wrap">
                             {insight.content}
                           </div>
                         </div>
                         {insight.lastGenerated && (
-                          <div className="mt-3 flex items-center gap-2 text-xs text-muted-foreground">
+                          <div className="text-muted-foreground mt-3 flex items-center gap-2 text-xs">
                             <CheckCircle className="h-3 w-3" />
                             Generated on{" "}
                             {formatTimestamp(insight.lastGenerated)}

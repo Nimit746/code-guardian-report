@@ -10,6 +10,7 @@ import {
 } from "@/components/ui/card";
 import { Button } from "@/components/ui/button";
 import { Input } from "@/components/ui/input";
+import { Skeleton } from "@/components/ui/skeleton";
 import {
   Select,
   SelectContent,
@@ -619,17 +620,9 @@ export const HistoryPage = ({
           <div className="p-4 sm:p-6">
             {isLoading ? (
               <div className="flex flex-col items-center justify-center py-16">
-                <div className="relative">
-                  <div className="h-16 w-16 animate-spin rounded-full border-4 border-white/10 border-t-violet-500" />
-                  <div
-                    className="absolute inset-0 h-16 w-16 animate-spin rounded-full border-4 border-transparent border-r-fuchsia-500"
-                    style={{
-                      animationDirection: "reverse",
-                      animationDuration: "1.5s",
-                    }}
-                  />
-                </div>
-                <span className="text-muted-foreground mt-4">
+                <Skeleton className="h-16 w-16 rounded-full" />
+                <Skeleton className="mt-4 h-4 w-48" />
+                <span className="text-muted-foreground mt-2">
                   Loading your analysis history...
                 </span>
               </div>

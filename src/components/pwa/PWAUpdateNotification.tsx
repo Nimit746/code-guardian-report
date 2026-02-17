@@ -5,6 +5,7 @@ import { Button } from "../ui/button";
 import { Card } from "../ui/card";
 import { RefreshCw, X, Sparkles, ArrowRight, CheckCircle2 } from "lucide-react";
 import { usePWA } from "../../hooks/usePWA";
+import { Skeleton } from "../ui/skeleton";
 
 export function PWAUpdateNotification() {
   const { isUpdateAvailable, updateApp, metrics } = usePWA();
@@ -102,8 +103,8 @@ export function PWAUpdateNotification() {
           >
             {isUpdating ? (
               <>
-                <RefreshCw className="h-4 w-4 animate-spin" />
-                Updating...
+                <Skeleton className="h-4 w-4 rounded-full" />
+                <Skeleton className="h-3 w-20" />
               </>
             ) : (
               <>

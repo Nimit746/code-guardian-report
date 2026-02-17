@@ -5,7 +5,6 @@ import {
   FileSpreadsheet,
   Code,
   Image,
-  Loader2,
   CheckCircle,
 } from "lucide-react";
 import { Button } from "@/components/ui/button";
@@ -27,6 +26,7 @@ import { Checkbox } from "@/components/ui/checkbox";
 import { Badge } from "@/components/ui/badge";
 import { Progress } from "@/components/ui/progress";
 import { toast } from "sonner";
+import { Skeleton } from "@/components/ui/skeleton";
 
 export interface ExportData {
   issues: Array<{
@@ -511,7 +511,7 @@ const DataExport: React.FC<DataExportProps> = ({ data, className = "" }) => {
       <CardContent className="space-y-6">
         {/* Format Selection */}
         <div>
-          <label className="mb-3 block text-sm font-medium text-foreground/80">
+          <label className="text-foreground/80 mb-3 block text-sm font-medium">
             Export Format
           </label>
           <Select
@@ -530,7 +530,7 @@ const DataExport: React.FC<DataExportProps> = ({ data, className = "" }) => {
                     {format.icon}
                     <div>
                       <div className="font-medium">{format.label}</div>
-                      <div className="text-xs text-muted-foreground">
+                      <div className="text-muted-foreground text-xs">
                         {format.description}
                       </div>
                     </div>
@@ -543,7 +543,7 @@ const DataExport: React.FC<DataExportProps> = ({ data, className = "" }) => {
 
         {/* Export Options */}
         <div className="space-y-4">
-          <h4 className="text-sm font-medium text-foreground/80">
+          <h4 className="text-foreground/80 text-sm font-medium">
             Export Options
           </h4>
 
@@ -617,7 +617,7 @@ const DataExport: React.FC<DataExportProps> = ({ data, className = "" }) => {
 
         {/* Severity Filter */}
         <div>
-          <h4 className="mb-3 text-sm font-medium text-foreground/80">
+          <h4 className="text-foreground/80 mb-3 text-sm font-medium">
             Filter by Severity (optional)
           </h4>
           <div className="flex flex-wrap gap-2">
@@ -637,7 +637,7 @@ const DataExport: React.FC<DataExportProps> = ({ data, className = "" }) => {
             ))}
           </div>
           {options.filterBySeverity.length > 0 && (
-            <p className="mt-2 text-xs text-muted-foreground">
+            <p className="text-muted-foreground mt-2 text-xs">
               {filteredIssueCount} of {data.issues.length} issues will be
               exported
             </p>
@@ -657,7 +657,7 @@ const DataExport: React.FC<DataExportProps> = ({ data, className = "" }) => {
 
         {/* Last Export Info */}
         {lastExport && !isExporting && (
-          <div className="flex items-center gap-2 text-sm text-muted-foreground">
+          <div className="text-muted-foreground flex items-center gap-2 text-sm">
             <CheckCircle className="h-4 w-4 text-green-600" />
             <span>
               Last exported as {lastExport.format} on{" "}
@@ -674,10 +674,10 @@ const DataExport: React.FC<DataExportProps> = ({ data, className = "" }) => {
           size="lg"
         >
           {isExporting ? (
-            <>
-              <Loader2 className="mr-2 h-4 w-4 animate-spin" />
-              Exporting...
-            </>
+            <span className="flex items-center gap-2">
+              <Skeleton className="h-4 w-4 rounded-full" />
+              <Skeleton className="h-3 w-20" />
+            </span>
           ) : (
             <>
               <Download className="mr-2 h-4 w-4" />
@@ -687,7 +687,7 @@ const DataExport: React.FC<DataExportProps> = ({ data, className = "" }) => {
         </Button>
 
         {data.issues.length === 0 && (
-          <p className="text-center text-sm text-muted-foreground">
+          <p className="text-muted-foreground text-center text-sm">
             No analysis results available to export.
           </p>
         )}

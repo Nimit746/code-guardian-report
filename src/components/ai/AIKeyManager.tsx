@@ -15,7 +15,6 @@ import {
   Sparkles,
   Clock,
   Star,
-  RefreshCw,
   Code2,
   Volume2,
   Brain,
@@ -39,6 +38,7 @@ import {
 } from "@/components/ui/select";
 import { Badge } from "@/components/ui/badge";
 import { Alert, AlertDescription } from "@/components/ui/alert";
+import { Skeleton } from "@/components/ui/skeleton";
 import {
   setLocalStorageItem,
   removeLocalStorageItem,
@@ -491,7 +491,7 @@ export const AIKeyManager: React.FC = () => {
                 <CardTitle className="bg-gradient-to-r from-purple-600 via-blue-600 to-indigo-600 bg-clip-text text-2xl font-bold text-transparent sm:text-3xl dark:from-purple-400 dark:via-blue-400 dark:to-indigo-400">
                   AI Analysis Integration
                 </CardTitle>
-                <CardDescription className="mt-1 text-base text-muted-foreground">
+                <CardDescription className="text-muted-foreground mt-1 text-base">
                   Supercharge your code analysis with AI-powered insights
                 </CardDescription>
               </div>
@@ -549,10 +549,10 @@ export const AIKeyManager: React.FC = () => {
                 <Card
                   key={provider.id}
                   variant="glass"
-                  className={`group relative overflow-hidden transition-all duration-300  ${
+                  className={`group relative overflow-hidden transition-all duration-300 ${
                     isConfigured
                       ? "bg-green-50/50 ring-2 ring-green-400/50 dark:bg-green-900/20 dark:ring-green-500/50"
-                      : "hover:ring-2 hover:ring-primary/50 dark:hover:ring-primary/50"
+                      : "hover:ring-primary/50 dark:hover:ring-primary/50 hover:ring-2"
                   }`}
                 >
                   {isConfigured && (
@@ -567,14 +567,14 @@ export const AIKeyManager: React.FC = () => {
                   )}
                   <CardHeader className="pb-3">
                     <div className="flex items-center gap-3">
-                      <div className="rounded-xl border border-white/30 bg-white/50 p-2 text-foreground/80 transition-transform duration-200 group-hover:scale-110 dark:border-white/10 dark:bg-black/20 dark:text-slate-200">
+                      <div className="text-foreground/80 rounded-xl border border-white/30 bg-white/50 p-2 transition-transform duration-200 group-hover:scale-110 dark:border-white/10 dark:bg-black/20 dark:text-slate-200">
                         {provider.icon}
                       </div>
                       <div className="min-w-0 flex-1">
                         <h4 className="text-foreground truncate text-base font-semibold">
                           {provider.name}
                         </h4>
-                        <p className="line-clamp-2 text-sm text-muted-foreground">
+                        <p className="text-muted-foreground line-clamp-2 text-sm">
                           {provider.description}
                         </p>
                       </div>
@@ -587,12 +587,12 @@ export const AIKeyManager: React.FC = () => {
                           <Sparkles className="mr-1 h-3 w-3" />
                           Live Discovery
                         </Badge>
-                        <div className="flex items-center gap-1 text-xs text-muted-foreground">
+                        <div className="text-muted-foreground flex items-center gap-1 text-xs">
                           <Clock className="h-3 w-3" />
                           <span>Real-time</span>
                         </div>
                       </div>
-                      <div className="text-xs text-muted-foreground">
+                      <div className="text-muted-foreground text-xs">
                         Models are discovered automatically from the API when
                         you add your key
                       </div>
@@ -640,12 +640,12 @@ export const AIKeyManager: React.FC = () => {
           {apiKeys.length === 0 && !isAdding && (
             <div className="animate-fade-in py-12 text-center">
               <div className="mx-auto mb-4 flex h-16 w-16 items-center justify-center rounded-2xl bg-gradient-to-br from-slate-100 to-slate-200 dark:from-slate-800 dark:to-slate-900">
-                <Key className="h-8 w-8 text-muted-foreground" />
+                <Key className="text-muted-foreground h-8 w-8" />
               </div>
               <h3 className="text-foreground mb-2 text-lg font-semibold">
                 No API Keys Configured
               </h3>
-              <p className="mx-auto mb-6 max-w-md text-muted-foreground">
+              <p className="text-muted-foreground mx-auto mb-6 max-w-md">
                 Add your first API key to unlock AI-powered code analysis,
                 intelligent insights, and chat assistance.
               </p>
@@ -669,12 +669,12 @@ export const AIKeyManager: React.FC = () => {
                 <Card
                   key={key.id}
                   variant="glass"
-                  className="group relative overflow-hidden border border-border/50 transition-all duration-300 hover:scale-[1.02]/50"
+                  className="group border-border/50 hover:scale-[1.02]/50 relative overflow-hidden border transition-all duration-300"
                 >
                   <CardContent className="p-4">
                     <div className="flex items-start justify-between gap-4">
                       <div className="flex min-w-0 flex-1 items-start gap-3">
-                        <div className="rounded-xl border border-border/50 bg-gradient-to-br from-white to-slate-50 p-2 transition-transform duration-200 group-hover:scale-110/50 dark:from-slate-800 dark:to-slate-900">
+                        <div className="border-border/50 group-hover:scale-110/50 rounded-xl border bg-gradient-to-br from-white to-slate-50 p-2 transition-transform duration-200 dark:from-slate-800 dark:to-slate-900">
                           <span className="text-lg">{provider?.icon}</span>
                         </div>
                         <div className="min-w-0 flex-1">
@@ -706,7 +706,7 @@ export const AIKeyManager: React.FC = () => {
                               <div className="flex items-center gap-1">
                                 {model.capabilities.includes("code") && (
                                   <div className="flex h-5 w-5 items-center justify-center rounded-full bg-teal-100 dark:bg-teal-900/30">
-                                    <Code2 className="h-3 w-3 text-primary dark:text-teal-300" />
+                                    <Code2 className="text-primary h-3 w-3 dark:text-teal-300" />
                                   </div>
                                 )}
                                 {model.capabilities.includes("vision") && (
@@ -720,8 +720,8 @@ export const AIKeyManager: React.FC = () => {
 
                           <div className="flex items-center gap-3">
                             <div className="min-w-0 flex-1">
-                              <div className="flex items-center gap-2 rounded-lg border border-border/50 bg-muted p-2/50/50">
-                                <span className="flex-1 truncate font-mono text-xs text-muted-foreground">
+                              <div className="border-border/50 bg-muted p-2/50/50 flex items-center gap-2 rounded-lg border">
+                                <span className="text-muted-foreground flex-1 truncate font-mono text-xs">
                                   {showKeys[key.id]
                                     ? key.key
                                     : maskKey(key.key)}
@@ -730,7 +730,7 @@ export const AIKeyManager: React.FC = () => {
                                   variant="ghost"
                                   size="sm"
                                   onClick={() => toggleKeyVisibility(key.id)}
-                                  className="h-6 w-6 p-0 hover:bg-muted dark:hover:bg-slate-700"
+                                  className="hover:bg-muted h-6 w-6 p-0 dark:hover:bg-slate-700"
                                   aria-label={
                                     showKeys[key.id]
                                       ? "Hide API key"
@@ -761,8 +761,8 @@ export const AIKeyManager: React.FC = () => {
                     </div>
 
                     {model && (
-                      <div className="mt-3 border-t border-border/50 pt-3/50">
-                        <div className="flex items-center justify-between text-xs text-muted-foreground">
+                      <div className="border-border/50 pt-3/50 mt-3 border-t">
+                        <div className="text-muted-foreground flex items-center justify-between text-xs">
                           <span>
                             Max Context:{" "}
                             {model.maxTokens?.toLocaleString() || "N/A"} tokens
@@ -812,7 +812,7 @@ export const AIKeyManager: React.FC = () => {
                     <div className="space-y-2">
                       <Label
                         htmlFor="provider-select"
-                        className="text-sm font-medium text-foreground/80"
+                        className="text-foreground/80 text-sm font-medium"
                       >
                         AI Provider <span className="text-red-500">*</span>
                       </Label>
@@ -830,12 +830,12 @@ export const AIKeyManager: React.FC = () => {
                         >
                           <SelectValue placeholder="Choose your AI provider" />
                         </SelectTrigger>
-                        <SelectContent className="rounded-xl border-2 border-border bg-white/95 shadow-2xl backdrop-blur-xl/95">
+                        <SelectContent className="border-border backdrop-blur-xl/95 rounded-xl border-2 bg-white/95 shadow-2xl">
                           {aiProviders.map((provider) => (
                             <SelectItem
                               key={provider.id}
                               value={provider.id}
-                              className="my-1 rounded-lg hover:bg-muted dark:hover:bg-slate-700/50"
+                              className="hover:bg-muted my-1 rounded-lg dark:hover:bg-slate-700/50"
                             >
                               <div className="flex items-center gap-3 py-1">
                                 <div className="text-foreground/80 dark:text-slate-200">
@@ -845,7 +845,7 @@ export const AIKeyManager: React.FC = () => {
                                   <div className="font-medium">
                                     {provider.name}
                                   </div>
-                                  <div className="text-xs text-muted-foreground">
+                                  <div className="text-muted-foreground text-xs">
                                     {provider.description}
                                   </div>
                                 </div>
@@ -865,7 +865,7 @@ export const AIKeyManager: React.FC = () => {
                     <div className="space-y-2">
                       <Label
                         htmlFor="model-select"
-                        className="text-sm font-medium text-foreground/80"
+                        className="text-foreground/80 text-sm font-medium"
                       >
                         AI Model <span className="text-red-500">*</span>
                         {discoveredModels.length > 0 && (
@@ -889,7 +889,7 @@ export const AIKeyManager: React.FC = () => {
                           id="model-select"
                           className={`h-12 rounded-xl border-2 transition-all duration-200 ${
                             !newKey.provider
-                              ? "cursor-not-allowed bg-muted opacity-60/50"
+                              ? "bg-muted opacity-60/50 cursor-not-allowed"
                               : errors.model
                                 ? "border-red-300 focus:border-red-500 focus:ring-red-200"
                                 : "border-border focus:border-primary focus:ring-ring/30 dark:focus:border-primary"
@@ -905,12 +905,12 @@ export const AIKeyManager: React.FC = () => {
                             }
                           />
                         </SelectTrigger>
-                        <SelectContent className="max-h-96 rounded-xl border-2 border-border bg-white/95 shadow-2xl backdrop-blur-xl/95">
+                        <SelectContent className="border-border backdrop-blur-xl/95 max-h-96 rounded-xl border-2 bg-white/95 shadow-2xl">
                           {newKey.provider ? (
                             <>
                               {discoveredModels.length > 0 ? (
                                 <>
-                                  <div className="sticky top-0 z-10 bg-gradient-to-r from-green-50 to-blue-50 px-2 py-1.5 text-xs font-semibold text-muted-foreground dark:from-green-900/20 dark:to-blue-900/20">
+                                  <div className="text-muted-foreground sticky top-0 z-10 bg-gradient-to-r from-green-50 to-blue-50 px-2 py-1.5 text-xs font-semibold dark:from-green-900/20 dark:to-blue-900/20">
                                     <div className="flex items-center gap-2">
                                       <Sparkles className="h-3 w-3 text-green-600 dark:text-green-400" />
                                       Available Models (
@@ -921,7 +921,7 @@ export const AIKeyManager: React.FC = () => {
                                     <SelectItem
                                       key={model.id}
                                       value={model.id}
-                                      className="my-1 rounded-lg hover:bg-muted dark:hover:bg-slate-700/50"
+                                      className="hover:bg-muted my-1 rounded-lg dark:hover:bg-slate-700/50"
                                     >
                                       <div className="flex flex-col items-start py-1">
                                         <div className="flex items-center gap-2">
@@ -937,7 +937,7 @@ export const AIKeyManager: React.FC = () => {
                                                 className="text-xs"
                                                 title="Code"
                                               >
-                                                <Code2 className="h-3 w-3 text-primary" />
+                                                <Code2 className="text-primary h-3 w-3" />
                                               </span>
                                             )}
                                             {model.capabilities.includes(
@@ -972,7 +972,7 @@ export const AIKeyManager: React.FC = () => {
                                             )}
                                           </div>
                                         </div>
-                                        <span className="line-clamp-1 text-xs text-muted-foreground">
+                                        <span className="text-muted-foreground line-clamp-1 text-xs">
                                           {model.description}
                                         </span>
                                         <span className="mt-0.5 text-xs font-medium text-green-600 dark:text-green-400">
@@ -984,10 +984,10 @@ export const AIKeyManager: React.FC = () => {
                                   ))}
                                 </>
                               ) : (
-                                <div className="p-4 text-center text-sm text-muted-foreground">
+                                <div className="text-muted-foreground p-4 text-center text-sm">
                                   {isScanning ? (
                                     <div className="flex items-center justify-center gap-2">
-                                      <RefreshCw className="h-4 w-4 animate-spin" />
+                                      <Skeleton className="h-4 w-4 rounded-full" />
                                       <span>
                                         Scanning for available models...
                                       </span>
@@ -1004,7 +1004,7 @@ export const AIKeyManager: React.FC = () => {
                                     </div>
                                   ) : (
                                     <div className="flex flex-col items-center gap-2">
-                                      <Sparkles className="h-8 w-8 text-primary" />
+                                      <Sparkles className="text-primary h-8 w-8" />
                                       <span className="font-medium">
                                         Enter your API key to discover models
                                       </span>
@@ -1018,9 +1018,9 @@ export const AIKeyManager: React.FC = () => {
                               )}
                             </>
                           ) : (
-                            <div className="p-4 text-center text-sm text-muted-foreground">
+                            <div className="text-muted-foreground p-4 text-center text-sm">
                               <div className="flex flex-col items-center gap-2">
-                                <Key className="h-8 w-8 text-muted-foreground" />
+                                <Key className="text-muted-foreground h-8 w-8" />
                                 <span className="font-medium">
                                   Select a provider first
                                 </span>
@@ -1039,7 +1039,7 @@ export const AIKeyManager: React.FC = () => {
                         discoveredModels.length === 0 &&
                         !isScanning &&
                         !scanStatus && (
-                          <p className="mt-1 flex items-center gap-1 text-xs text-primary dark:text-primary">
+                          <p className="text-primary dark:text-primary mt-1 flex items-center gap-1 text-xs">
                             <Sparkles className="h-3 w-3" />
                             Tip: Models will be discovered automatically from
                             the API
@@ -1051,7 +1051,7 @@ export const AIKeyManager: React.FC = () => {
                   <div className="space-y-2">
                     <Label
                       htmlFor="key-name"
-                      className="text-sm font-medium text-foreground/80"
+                      className="text-foreground/80 text-sm font-medium"
                     >
                       Display Name <span className="text-red-500">*</span>
                     </Label>
@@ -1086,7 +1086,7 @@ export const AIKeyManager: React.FC = () => {
                   <div className="space-y-2">
                     <Label
                       htmlFor="api-key"
-                      className="text-sm font-medium text-foreground/80"
+                      className="text-foreground/80 text-sm font-medium"
                     >
                       API Key <span className="text-red-500">*</span>
                     </Label>
@@ -1113,7 +1113,7 @@ export const AIKeyManager: React.FC = () => {
                       />
                       {isScanning && (
                         <div className="absolute top-1/2 right-3 -translate-y-1/2">
-                          <RefreshCw className="h-5 w-5 animate-spin text-primary dark:text-primary" />
+                          <Skeleton className="h-5 w-5 rounded-full" />
                         </div>
                       )}
                       {scanStatus?.type === "success" && (
@@ -1151,7 +1151,7 @@ export const AIKeyManager: React.FC = () => {
                         ) : scanStatus.type === "error" ? (
                           <AlertTriangle className="h-4 w-4 text-red-600" />
                         ) : (
-                          <RefreshCw className="h-4 w-4 animate-spin text-primary" />
+                          <Skeleton className="h-4 w-4 rounded-full" />
                         )}
                         <AlertDescription
                           className={
@@ -1170,14 +1170,11 @@ export const AIKeyManager: React.FC = () => {
                     )}
                   </div>
                   {newKey.provider && (
-                    <Card
-                      variant="glass"
-                      className="bg-muted/50/30"
-                    >
+                    <Card variant="glass" className="bg-muted/50/30">
                       <CardContent className="p-4">
                         <div className="mb-3 flex items-center gap-2">
-                          <Shield className="h-4 w-4 text-primary dark:text-primary" />
-                          <h5 className="text-sm font-semibold text-foreground dark:text-slate-200">
+                          <Shield className="text-primary dark:text-primary h-4 w-4" />
+                          <h5 className="text-foreground text-sm font-semibold dark:text-slate-200">
                             Configuration Preview
                           </h5>
                         </div>
@@ -1237,7 +1234,7 @@ export const AIKeyManager: React.FC = () => {
                                 <span className="text-muted-foreground">
                                   Max Context:
                                 </span>
-                                <span className="text-xs font-medium text-foreground dark:text-slate-200">
+                                <span className="text-foreground text-xs font-medium dark:text-slate-200">
                                   {aiProviders
                                     .find((p) => p.id === newKey.provider)
                                     ?.models.find((m) => m.id === newKey.model)
@@ -1274,8 +1271,8 @@ export const AIKeyManager: React.FC = () => {
                     >
                       {isSubmitting ? (
                         <>
-                          <div className="mr-2 h-4 w-4 animate-spin rounded-full border-2 border-white border-t-transparent" />
-                          Adding Key...
+                          <Skeleton className="mr-2 h-4 w-4 rounded-full" />
+                          <Skeleton className="h-3 w-20" />
                         </>
                       ) : (
                         <>
@@ -1333,7 +1330,7 @@ export const AIKeyManager: React.FC = () => {
           <div className="grid grid-cols-1 gap-4 md:grid-cols-3">
             <Card
               variant="glass"
-              className={`group transition-all duration-300  ${
+              className={`group transition-all duration-300 ${
                 apiKeys.length > 0
                   ? "bg-gradient-to-br from-purple-50/50 to-blue-50/50 ring-2 ring-purple-200/50 dark:from-purple-900/20 dark:to-blue-900/20 dark:ring-purple-800/50"
                   : "bg-gradient-to-br from-slate-50/50 to-slate-100/50 dark:from-slate-800/20 dark:to-slate-900/20"
@@ -1356,12 +1353,12 @@ export const AIKeyManager: React.FC = () => {
                         AI Fix Suggestions
                       </h4>
                       {apiKeys.length > 0 ? (
-                        <CheckCircle className="h-4 w-4 text-primary" />
+                        <CheckCircle className="text-primary h-4 w-4" />
                       ) : (
-                        <Clock className="h-4 w-4 text-muted-foreground" />
+                        <Clock className="text-muted-foreground h-4 w-4" />
                       )}
                     </div>
-                    <p className="mb-2 text-sm text-muted-foreground">
+                    <p className="text-muted-foreground mb-2 text-sm">
                       Intelligent code fixes and security recommendations
                     </p>
                     <div className="flex items-center gap-1">
@@ -1385,7 +1382,7 @@ export const AIKeyManager: React.FC = () => {
 
             <Card
               variant="glass"
-              className="group bg-gradient-to-br from-blue-50/50 to-indigo-50/50 ring-2 ring-border transition-all duration-300  dark:from-blue-900/20 dark:to-indigo-900/20 dark:ring-border"
+              className="group ring-border dark:ring-border bg-gradient-to-br from-blue-50/50 to-indigo-50/50 ring-2 transition-all duration-300 dark:from-blue-900/20 dark:to-indigo-900/20"
             >
               <CardContent className="p-4">
                 <div className="flex items-start gap-3">
@@ -1397,9 +1394,9 @@ export const AIKeyManager: React.FC = () => {
                       <h4 className="text-foreground font-semibold">
                         Secure Code Search
                       </h4>
-                      <CheckCircle className="h-4 w-4 text-primary" />
+                      <CheckCircle className="text-primary h-4 w-4" />
                     </div>
-                    <p className="mb-2 text-sm text-muted-foreground">
+                    <p className="text-muted-foreground mb-2 text-sm">
                       Advanced pattern matching and vulnerability detection
                     </p>
                     <div className="flex items-center gap-1">
@@ -1415,7 +1412,7 @@ export const AIKeyManager: React.FC = () => {
 
             <Card
               variant="glass"
-              className="group bg-gradient-to-br from-emerald-50/50 to-teal-50/50 ring-2 ring-emerald-200/50 transition-all duration-300  dark:from-emerald-900/20 dark:to-teal-900/20 dark:ring-emerald-800/50"
+              className="group bg-gradient-to-br from-emerald-50/50 to-teal-50/50 ring-2 ring-emerald-200/50 transition-all duration-300 dark:from-emerald-900/20 dark:to-teal-900/20 dark:ring-emerald-800/50"
             >
               <CardContent className="p-4">
                 <div className="flex items-start gap-3">
@@ -1427,9 +1424,9 @@ export const AIKeyManager: React.FC = () => {
                       <h4 className="text-foreground font-semibold">
                         Code Provenance
                       </h4>
-                      <CheckCircle className="h-4 w-4 text-primary" />
+                      <CheckCircle className="text-primary h-4 w-4" />
                     </div>
-                    <p className="mb-2 text-sm text-muted-foreground">
+                    <p className="text-muted-foreground mb-2 text-sm">
                       Track code origins and identify potential supply chain
                       risks
                     </p>
@@ -1489,30 +1486,30 @@ export const AIKeyManager: React.FC = () => {
       >
         <CardContent className="p-6">
           <div className="flex items-start gap-4">
-            <div className="rounded-2xl bg-muted p-3 dark:bg-slate-700">
-              <Shield className="h-6 w-6 text-muted-foreground" />
+            <div className="bg-muted rounded-2xl p-3 dark:bg-slate-700">
+              <Shield className="text-muted-foreground h-6 w-6" />
             </div>
             <div>
               <h4 className="text-foreground mb-2 font-semibold">
                 Privacy & Security Guarantee
               </h4>
-              <p className="text-sm leading-relaxed text-muted-foreground">
+              <p className="text-muted-foreground text-sm leading-relaxed">
                 Your API keys are encrypted and stored locally in your browser.
                 They are never transmitted to our servers and are only used to
                 communicate directly with your chosen AI providers. You maintain
                 complete control over your credentials at all times.
               </p>
-              <div className="mt-3 flex items-center gap-4 text-xs text-muted-foreground">
+              <div className="text-muted-foreground mt-3 flex items-center gap-4 text-xs">
                 <div className="flex items-center gap-1">
-                  <CheckCircle className="h-3 w-3 text-primary" />
+                  <CheckCircle className="text-primary h-3 w-3" />
                   <span>Local Storage Only</span>
                 </div>
                 <div className="flex items-center gap-1">
-                  <CheckCircle className="h-3 w-3 text-primary" />
+                  <CheckCircle className="text-primary h-3 w-3" />
                   <span>End-to-End Encryption</span>
                 </div>
                 <div className="flex items-center gap-1">
-                  <CheckCircle className="h-3 w-3 text-primary" />
+                  <CheckCircle className="text-primary h-3 w-3" />
                   <span>Zero Server Access</span>
                 </div>
               </div>

@@ -18,7 +18,6 @@ import {
   Building,
   Globe,
   Github,
-  Loader2,
 } from "lucide-react";
 import {
   githubService,
@@ -26,6 +25,7 @@ import {
 } from "@/services/api/githubService";
 
 import { logger } from "@/utils/logger";
+import { Skeleton } from "@/components/ui/skeleton";
 import {
   getContributorRole,
   getContributorBadgeColor,
@@ -67,8 +67,9 @@ const GitHubContributorsSection = () => {
       <section className="bg-gradient-to-br from-slate-50 to-blue-50 py-16 dark:from-slate-900 dark:to-slate-800">
         <div className="container mx-auto px-4">
           <div className="mx-auto max-w-6xl text-center">
-            <Loader2 className="mx-auto mb-4 h-8 w-8 animate-spin" />
-            <p className="text-muted-foreground">
+            <Skeleton className="mx-auto mb-4 h-8 w-8 rounded-full" />
+            <Skeleton className="mx-auto h-4 w-48" />
+            <p className="text-muted-foreground mt-2">
               Loading GitHub contributors...
             </p>
           </div>

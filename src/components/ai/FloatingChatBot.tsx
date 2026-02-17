@@ -1,9 +1,10 @@
 import React, { useState, useRef, useEffect, useCallback } from "react";
-import { Bot, Send, X, MessageCircle, Loader2 } from "lucide-react";
+import { Bot, Send, X, MessageCircle } from "lucide-react";
 import { Button } from "@/components/ui/button";
 import { Input } from "@/components/ui/input";
 import { Card, CardContent, CardHeader, CardTitle } from "@/components/ui/card";
 import { ScrollArea } from "@/components/ui/scroll-area";
+import { Skeleton } from "@/components/ui/skeleton";
 import { AIService } from "../../services/ai/aiService";
 import { toast } from "sonner";
 import { AnalysisResults } from "@/hooks/useAnalysis";
@@ -152,7 +153,7 @@ How can I help you today?`,
       {!isOpen && (
         <Button
           onClick={() => setIsOpen(true)}
-          className="focus-ring animate-float fixed right-4 bottom-4 z-50 h-12 w-12 rounded-full bg-primary shadow-lg transition-all duration-300 hover:bg-primary/90 hover:shadow-xl sm:right-6 sm:bottom-6 sm:h-14 sm:w-14"
+          className="focus-ring animate-float bg-primary hover:bg-primary/90 fixed right-4 bottom-4 z-50 h-12 w-12 rounded-full shadow-lg transition-all duration-300 hover:shadow-xl sm:right-6 sm:bottom-6 sm:h-14 sm:w-14"
           size="sm"
           aria-label="Open AI chat assistant"
         >
@@ -163,7 +164,7 @@ How can I help you today?`,
       {/* Chat Window */}
       {isOpen && (
         <Card className="animate-slide-up fixed right-4 bottom-4 z-50 h-[70vh] max-h-[500px] w-[calc(100vw-2rem)] max-w-sm border-0 bg-white/95 shadow-2xl backdrop-blur-sm sm:right-6 sm:bottom-6 sm:w-96/95">
-          <CardHeader className="rounded-t-lg bg-primary pb-3 text-white">
+          <CardHeader className="bg-primary rounded-t-lg pb-3 text-white">
             <div className="flex items-center justify-between">
               <CardTitle className="flex items-center gap-2 text-base sm:text-lg">
                 <Bot className="h-4 w-4 sm:h-5 sm:w-5" />
@@ -212,11 +213,14 @@ How can I help you today?`,
                 ))}
                 {isLoading && (
                   <div className="animate-fade-in flex justify-start">
-                    <div className="flex items-center gap-2 rounded-lg bg-muted p-2 sm:p-3">
-                      <Loader2 className="h-3 w-3 animate-spin sm:h-4 sm:w-4" />
-                      <span className="text-xs text-muted-foreground sm:text-sm">
-                        AI is thinking...
-                      </span>
+                    <div className="bg-muted flex items-center gap-2 rounded-lg p-2 sm:p-3">
+                      <Skeleton className="h-3 w-3 rounded-full sm:h-4 sm:w-4" />
+                      <div className="flex flex-col gap-1">
+                        <Skeleton className="h-3 w-20 sm:w-24" />
+                        <span className="text-muted-foreground text-xs sm:text-sm">
+                          AI is thinking...
+                        </span>
+                      </div>
                     </div>
                   </div>
                 )}
@@ -224,7 +228,7 @@ How can I help you today?`,
             </ScrollArea>
 
             {/* Input Area */}
-            <div className="border-t border-border p-3 sm:p-4">
+            <div className="border-border border-t p-3 sm:p-4">
               <div className="flex gap-2">
                 <Input
                   value={input}
@@ -239,7 +243,7 @@ How can I help you today?`,
                   onClick={handleSendMessage}
                   disabled={!input.trim() || isLoading}
                   size="sm"
-                  className="focus-ring flex-shrink-0 bg-primary hover:bg-primary/90"
+                  className="focus-ring bg-primary hover:bg-primary/90 flex-shrink-0"
                   aria-label="Send message"
                 >
                   <Send className="h-3 w-3 sm:h-4 sm:w-4" />

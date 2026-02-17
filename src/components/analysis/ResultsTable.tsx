@@ -10,7 +10,6 @@ import {
   ChevronRight,
   Brain,
   MapPin,
-  Loader2,
   BarChart3,
 } from "lucide-react";
 import {
@@ -22,6 +21,7 @@ import {
 } from "@/components/ui/card";
 import { Badge } from "@/components/ui/badge";
 import { Button } from "@/components/ui/button";
+import { Skeleton } from "@/components/ui/skeleton";
 import {
   Table,
   TableBody,
@@ -294,14 +294,14 @@ export const ResultsTable: React.FC<ResultsTableProps> = ({
             <CardContent className="p-3 sm:p-4 lg:p-6">
               <div className="flex items-center gap-2 sm:gap-3">
                 <Code
-                  className="h-4 w-4 flex-shrink-0 text-primary sm:h-5 sm:w-5 lg:h-6 lg:w-6 dark:text-primary"
+                  className="text-primary dark:text-primary h-4 w-4 flex-shrink-0 sm:h-5 sm:w-5 lg:h-6 lg:w-6"
                   aria-hidden="true"
                 />
                 <div className="min-w-0">
                   <p className="text-base font-bold text-blue-800 sm:text-lg lg:text-2xl dark:text-blue-200">
                     {totalFiles}
                   </p>
-                  <p className="text-xs leading-tight text-primary sm:text-sm dark:text-primary">
+                  <p className="text-primary dark:text-primary text-xs leading-tight sm:text-sm">
                     Files Analyzed
                   </p>
                 </div>
@@ -420,15 +420,16 @@ export const ResultsTable: React.FC<ResultsTableProps> = ({
               <CardContent>
                 {isGeneratingSummary ? (
                   <div className="py-8 text-center">
-                    <Loader2 className="mx-auto mb-4 h-8 w-8 animate-spin text-purple-600" />
-                    <p className="text-sm text-muted-foreground">
+                    <Skeleton className="mx-auto mb-4 h-8 w-8 rounded-full" />
+                    <Skeleton className="mx-auto mb-2 h-3 w-64" />
+                    <p className="text-muted-foreground text-sm">
                       Generating AI summary using your configured API keys...
                     </p>
                   </div>
                 ) : aiSummary ? (
                   <div className="space-y-4">
                     <div className="rounded-lg border border-purple-200 bg-purple-50 p-4 dark:border-purple-800 dark:bg-purple-950/20">
-                      <div className="text-sm whitespace-pre-wrap text-foreground/80">
+                      <div className="text-foreground/80 text-sm whitespace-pre-wrap">
                         {aiSummary}
                       </div>
                     </div>
@@ -462,7 +463,7 @@ export const ResultsTable: React.FC<ResultsTableProps> = ({
                       <Brain className="mr-2 h-4 w-4" />
                       Generate AI Summary
                     </Button>
-                    <p className="mt-2 text-sm text-muted-foreground">
+                    <p className="text-muted-foreground mt-2 text-sm">
                       {hasApiKeys
                         ? "Click to generate detailed insights and recommendations"
                         : "Please configure your AI API keys in the AI Configuration tab first"}
@@ -521,7 +522,7 @@ export const ResultsTable: React.FC<ResultsTableProps> = ({
       <div className="flex flex-col gap-2 sm:flex-row sm:gap-3">
         <Button
           variant="outline"
-          className="btn-responsive touch-target flex items-center justify-center gap-2 hover:bg-muted dark:hover:bg-blue-950/20"
+          className="btn-responsive touch-target hover:bg-muted flex items-center justify-center gap-2 dark:hover:bg-blue-950/20"
         >
           <Download className="h-4 w-4 flex-shrink-0" />
           <span className="hidden sm:inline">Export Detailed Report (PDF)</span>
@@ -576,7 +577,7 @@ const DetailedIssuesTable: React.FC<DetailedIssuesTableProps> = ({
       <Card className="bg-card/90 border-0 shadow-xl backdrop-blur-sm">
         <CardContent className="py-12 text-center">
           <div className="bg-muted mx-auto mb-4 flex h-16 w-16 items-center justify-center rounded-full p-4">
-            <AlertTriangle className="h-8 w-8 text-muted-foreground" />
+            <AlertTriangle className="text-muted-foreground h-8 w-8" />
           </div>
           <h3 className="text-foreground mb-2 text-lg font-medium">
             No Issues Found
@@ -610,7 +611,7 @@ const DetailedIssuesTable: React.FC<DetailedIssuesTableProps> = ({
               <button
                 type="button"
                 onClick={() => toggleIssueExpansion(index)}
-                className="touch-target hover:bg-muted/50 w-full p-3 text-left transition-colors focus:ring-2 focus:ring-primary focus:outline-none focus:ring-inset sm:p-4"
+                className="touch-target hover:bg-muted/50 focus:ring-primary w-full p-3 text-left transition-colors focus:ring-2 focus:outline-none focus:ring-inset sm:p-4"
                 aria-expanded={expandedIssues.has(index)}
                 aria-controls={`issue-details-${index}`}
               >
@@ -632,15 +633,15 @@ const DetailedIssuesTable: React.FC<DetailedIssuesTableProps> = ({
                     <h4 className="text-foreground mb-1 text-sm leading-tight font-medium sm:text-base">
                       {issue.message}
                     </h4>
-                    <p className="truncate text-xs text-muted-foreground sm:text-sm">
+                    <p className="text-muted-foreground truncate text-xs sm:text-sm">
                       {issue.filename}:{issue.line}
                     </p>
                   </div>
                   <div className="ml-2 flex-shrink-0">
                     {expandedIssues.has(index) ? (
-                      <ChevronDown className="h-5 w-5 text-muted-foreground" />
+                      <ChevronDown className="text-muted-foreground h-5 w-5" />
                     ) : (
-                      <ChevronRight className="h-5 w-5 text-muted-foreground" />
+                      <ChevronRight className="text-muted-foreground h-5 w-5" />
                     )}
                   </div>
                 </div>
@@ -657,7 +658,7 @@ const DetailedIssuesTable: React.FC<DetailedIssuesTableProps> = ({
                         <AlertTriangle className="h-4 w-4 text-amber-500" />
                         Recommendation
                       </h5>
-                      <p className="text-sm leading-relaxed text-muted-foreground">
+                      <p className="text-muted-foreground text-sm leading-relaxed">
                         {issue.recommendation}
                       </p>
                     </div>
@@ -665,10 +666,10 @@ const DetailedIssuesTable: React.FC<DetailedIssuesTableProps> = ({
                     {issue.aiSummary && (
                       <div>
                         <h5 className="text-foreground mb-2 flex items-center gap-2 text-sm font-medium">
-                          <Brain className="h-4 w-4 text-muted-foreground" />
+                          <Brain className="text-muted-foreground h-4 w-4" />
                           AI Analysis
                         </h5>
-                        <p className="text-sm leading-relaxed text-muted-foreground">
+                        <p className="text-muted-foreground text-sm leading-relaxed">
                           {issue.aiSummary}
                         </p>
                       </div>
@@ -677,10 +678,10 @@ const DetailedIssuesTable: React.FC<DetailedIssuesTableProps> = ({
                     {issue.codeSnippet && (
                       <div>
                         <h5 className="text-foreground mb-2 flex items-center gap-2 text-sm font-medium">
-                          <Code className="h-4 w-4 text-primary" />
+                          <Code className="text-primary h-4 w-4" />
                           Code Context
                         </h5>
-                        <pre className="overflow-x-auto rounded-lg bg-muted p-3 text-xs">
+                        <pre className="bg-muted overflow-x-auto rounded-lg p-3 text-xs">
                           <code>{issue.codeSnippet}</code>
                         </pre>
                       </div>
@@ -722,7 +723,7 @@ const DetailedIssuesTable: React.FC<DetailedIssuesTableProps> = ({
           <TableBody>
             {issues.map((issue, index) => (
               <React.Fragment key={index}>
-                <TableRow className="transition-colors hover:bg-muted/50">
+                <TableRow className="hover:bg-muted/50 transition-colors">
                   <TableCell>
                     <Collapsible>
                       <CollapsibleTrigger asChild>
@@ -745,12 +746,12 @@ const DetailedIssuesTable: React.FC<DetailedIssuesTableProps> = ({
                   <TableCell>
                     <div className="space-y-1">
                       <div
-                        className="max-w-xs truncate font-mono text-sm text-primary dark:text-primary"
+                        className="text-primary dark:text-primary max-w-xs truncate font-mono text-sm"
                         title={issue.filename}
                       >
                         {issue.filename}
                       </div>
-                      <div className="flex items-center gap-2 text-xs text-muted-foreground">
+                      <div className="text-muted-foreground flex items-center gap-2 text-xs">
                         <MapPin className="h-3 w-3" />
                         <span>Line {issue.line}</span>
                         {issue.startColumn && (
@@ -780,7 +781,7 @@ const DetailedIssuesTable: React.FC<DetailedIssuesTableProps> = ({
                         {issue.severity}
                       </Badge>
                       {issue.category && (
-                        <div className="text-xs text-muted-foreground">
+                        <div className="text-muted-foreground text-xs">
                           Category: {issue.category}
                         </div>
                       )}
@@ -796,7 +797,7 @@ const DetailedIssuesTable: React.FC<DetailedIssuesTableProps> = ({
                         {issue.message}
                       </p>
                       <p
-                        className="truncate text-xs text-muted-foreground"
+                        className="text-muted-foreground truncate text-xs"
                         title={issue.recommendation}
                       >
                         Recommendation: {issue.recommendation}
@@ -820,7 +821,7 @@ const DetailedIssuesTable: React.FC<DetailedIssuesTableProps> = ({
                           <span>AI Analysis</span>
                         </div>
                         <p
-                          className="line-clamp-2 text-sm text-foreground/80"
+                          className="text-foreground/80 line-clamp-2 text-sm"
                           title={issue.aiSummary}
                         >
                           {issue.aiSummary}
@@ -831,13 +832,13 @@ const DetailedIssuesTable: React.FC<DetailedIssuesTableProps> = ({
                           </div>
                         )}
                         {issue.effort && (
-                          <div className="text-xs text-primary dark:text-primary">
+                          <div className="text-primary dark:text-primary text-xs">
                             Effort: {issue.effort}
                           </div>
                         )}
                       </div>
                     ) : (
-                      <div className="text-xs text-muted-foreground italic">
+                      <div className="text-muted-foreground text-xs italic">
                         AI analysis not available
                       </div>
                     )}
@@ -869,10 +870,7 @@ const DetailedIssuesTable: React.FC<DetailedIssuesTableProps> = ({
 
                 {expandedIssues.has(index) && (
                   <TableRow>
-                    <TableCell
-                      colSpan={7}
-                      className="bg-muted/30"
-                    >
+                    <TableCell colSpan={7} className="bg-muted/30">
                       <Collapsible open={expandedIssues.has(index)}>
                         <CollapsibleContent>
                           <div className="space-y-4 p-4">
@@ -883,7 +881,7 @@ const DetailedIssuesTable: React.FC<DetailedIssuesTableProps> = ({
                                   <Code className="h-4 w-4" />
                                   Code Context
                                 </h4>
-                                <pre className="overflow-x-auto rounded-lg bg-muted p-3 text-sm">
+                                <pre className="bg-muted overflow-x-auto rounded-lg p-3 text-sm">
                                   <code>{issue.codeSnippet}</code>
                                 </pre>
                               </div>
@@ -897,7 +895,7 @@ const DetailedIssuesTable: React.FC<DetailedIssuesTableProps> = ({
                                   Detailed AI Analysis
                                 </h4>
                                 <div className="rounded-lg border border-purple-200 bg-purple-50 p-3 dark:border-purple-800 dark:bg-purple-950/20">
-                                  <p className="text-sm text-foreground/80">
+                                  <p className="text-foreground/80 text-sm">
                                     {issue.aiSummary}
                                   </p>
                                 </div>
@@ -911,7 +909,7 @@ const DetailedIssuesTable: React.FC<DetailedIssuesTableProps> = ({
                                 Recommended Actions
                               </h4>
                               <div className="rounded-lg border border-amber-200 bg-amber-50 p-3 dark:border-amber-800 dark:bg-amber-950/20">
-                                <p className="text-sm text-foreground/80">
+                                <p className="text-foreground/80 text-sm">
                                   {issue.recommendation}
                                 </p>
                               </div>
