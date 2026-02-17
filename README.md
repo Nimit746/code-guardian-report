@@ -1022,8 +1022,6 @@ npm run test             # Run tests
 npm run test:watch       # Watch mode
 npm run test:coverage    # Generate coverage report
 npm run test:ui          # Interactive test UI
-npm run test:e2e-zip     # E2E ZIP analysis test
-npm run test:multi-language  # Multi-language tests
 
 # CI/CD
 npm run ci:validate      # Run all validation checks
@@ -3673,11 +3671,6 @@ All files                  |   85.42 |    78.33 |   88.89 |   85.42 |
 
 #### E2E ZIP Analysis Test
 
-```bash
-# Run E2E ZIP analysis test
-npm run test:e2e-zip
-```
-
 Test implementation:
 
 ```typescript
@@ -3712,11 +3705,6 @@ runE2ETest().catch(console.error);
 ```
 
 #### Multi-Language Testing
-
-```bash
-# Run multi-language tests
-npm run test:multi-language
-```
 
 Test multiple language parsers:
 
@@ -4983,7 +4971,7 @@ git checkout -b fix/bug-description
 
 #### 4. Test Your Changes
 
-```bash
+````bash
 # Run linting
 npm run lint
 
@@ -4992,10 +4980,6 @@ npm run type-check
 
 # Run tests
 npm run test
-
-# Run E2E tests
-npm run test:e2e-zip
-```
 
 #### 5. Commit Changes
 
@@ -5006,7 +4990,7 @@ git add .
 git commit -m "feat: add AI-powered vulnerability description"
 git commit -m "fix: resolve XSS detection false positive"
 git commit -m "docs: update API documentation"
-```
+````
 
 #### 6. Push and Create Pull Request
 
@@ -5188,7 +5172,145 @@ We take security seriously and will respond within 48 hours.
 
 Special thanks to all contributors who have helped make Code Guardian Report better!
 
+<h3 style="color: white; margin-bottom: 20px;">**Repository Statistics**</h3>
+
+  <table style="margin: 0 auto;">
+    <tr>
+      <td align="center" style="padding: 15px;">
+        <div style="background: rgba(255,255,255,0.2); padding: 15px; border-radius: 10px;">
+          <h4 style="color: white; margin: 0; font-size: 24px;">Stars: 47</h4>
+          <p style="color: rgba(255,255,255,0.8); margin: 5px 0 0 0; font-size: 14px;">Stars</p>
+        </div>
+      </td>
+      <td align="center" style="padding: 15px;">
+        <div style="background: rgba(255,255,255,0.2); padding: 15px; border-radius: 10px;">
+          <h4 style="color: white; margin: 0; font-size: 24px;">Forks: 37</h4>
+          <p style="color: rgba(255,255,255,0.8); margin: 5px 0 0 0; font-size: 14px;">Forks</p>
+        </div>
+      </td>
+      <td align="center" style="padding: 15px;">
+        <div style="background: rgba(255,255,255,0.2); padding: 15px; border-radius: 10px;">
+          <h4 style="color: white; margin: 0; font-size: 24px;">Contributors: 17</h4>
+          <p style="color: rgba(255,255,255,0.8); margin: 5px 0 0 0; font-size: 14px;">Contributors</p>
+        </div>
+      </td>
+      <td align="center" style="padding: 15px;">
+        <div style="background: rgba(255,255,255,0.2); padding: 15px; border-radius: 10px;">
+          <h4 style="color: white; margin: 0; font-size: 24px;">Watchers: 1</h4>
+          <p style="color: rgba(255,255,255,0.8); margin: 5px 0 0 0; font-size: 14px;">Watchers</p>
+        </div>
+      </td>
+    </tr>
+  </table>
+
 #### Real-Time Contributors
+
+**Top Contributors**
+
+<table style="margin: 0 auto;">
+    <tr>
+
+      <td align="center" style="padding: 20px;">
+        <img src="https://avatars.githubusercontent.com/u/115968670?v=4" width="100" height="100" style="border-radius: 50%; border: 4px solid white; box-shadow: 0 6px 16px rgba(0,0,0,0.4);"/>
+        <br/><strong style="color: white; font-size: 16px;">Xenonesis</strong>
+        <br/><span style="color: rgba(255,255,255,0.9); font-size: 14px;">@Xenonesis</span>
+        <br/><span style="background: rgba(255,255,255,0.3); padding: 4px 12px; border-radius: 15px; font-size: 12px; color: white; margin-top: 8px; display: inline-block;">Contributor</span>
+        <br/><span style="color: rgba(255,255,255,0.8); font-size: 12px; margin-top: 5px; display: block;">Contributor</span>
+        <div style="margin-top: 10px;">
+          <span style="background: rgba(255,255,255,0.2); padding: 2px 6px; border-radius: 8px; font-size: 10px; color: white; margin: 2px;">358 commits</span>
+        </div>
+      </td>
+
+
+      <td align="center" style="padding: 20px;">
+        <img src="https://avatars.githubusercontent.com/in/15368?v=4" width="100" height="100" style="border-radius: 50%; border: 4px solid white; box-shadow: 0 6px 16px rgba(0,0,0,0.4);"/>
+        <br/><strong style="color: white; font-size: 16px;">github-actions[bot]</strong>
+        <br/><span style="color: rgba(255,255,255,0.9); font-size: 14px;">@github-actions[bot]</span>
+        <br/><span style="background: rgba(255,255,255,0.3); padding: 4px 12px; border-radius: 15px; font-size: 12px; color: white; margin-top: 8px; display: inline-block;">Contributor</span>
+        <br/><span style="color: rgba(255,255,255,0.8); font-size: 12px; margin-top: 5px; display: block;">Contributor</span>
+        <div style="margin-top: 10px;">
+          <span style="background: rgba(255,255,255,0.2); padding: 2px 6px; border-radius: 8px; font-size: 10px; color: white; margin: 2px;">30 commits</span>
+        </div>
+      </td>
+
+
+      <td align="center" style="padding: 20px;">
+        <img src="https://avatars.githubusercontent.com/u/65916846?v=4" width="100" height="100" style="border-radius: 50%; border: 4px solid white; box-shadow: 0 6px 16px rgba(0,0,0,0.4);"/>
+        <br/><strong style="color: white; font-size: 16px;">actions-user</strong>
+        <br/><span style="color: rgba(255,255,255,0.9); font-size: 14px;">@actions-user</span>
+        <br/><span style="background: rgba(255,255,255,0.3); padding: 4px 12px; border-radius: 15px; font-size: 12px; color: white; margin-top: 8px; display: inline-block;">Contributor</span>
+        <br/><span style="color: rgba(255,255,255,0.8); font-size: 12px; margin-top: 5px; display: block;">Contributor</span>
+        <div style="margin-top: 10px;">
+          <span style="background: rgba(255,255,255,0.2); padding: 2px 6px; border-radius: 8px; font-size: 10px; color: white; margin: 2px;">21 commits</span>
+        </div>
+      </td>
+
+
+      <td align="center" style="padding: 20px;">
+        <img src="https://avatars.githubusercontent.com/u/186174121?v=4" width="100" height="100" style="border-radius: 50%; border: 4px solid white; box-shadow: 0 6px 16px rgba(0,0,0,0.4);"/>
+        <br/><strong style="color: white; font-size: 16px;">Muneerali199</strong>
+        <br/><span style="color: rgba(255,255,255,0.9); font-size: 14px;">@Muneerali199</span>
+        <br/><span style="background: rgba(255,255,255,0.3); padding: 4px 12px; border-radius: 15px; font-size: 12px; color: white; margin-top: 8px; display: inline-block;">Contributor</span>
+        <br/><span style="color: rgba(255,255,255,0.8); font-size: 12px; margin-top: 5px; display: block;">Contributor</span>
+        <div style="margin-top: 10px;">
+          <span style="background: rgba(255,255,255,0.2); padding: 2px 6px; border-radius: 8px; font-size: 10px; color: white; margin: 2px;">5 commits</span>
+        </div>
+      </td>
+
+    </tr>
+
+<tr>
+
+      <td align="center" style="padding: 20px;">
+        <img src="https://avatars.githubusercontent.com/u/142787780?v=4" width="100" height="100" style="border-radius: 50%; border: 4px solid white; box-shadow: 0 6px 16px rgba(0,0,0,0.4);"/>
+        <br/><strong style="color: white; font-size: 16px;">Adez017</strong>
+        <br/><span style="color: rgba(255,255,255,0.9); font-size: 14px;">@Adez017</span>
+        <br/><span style="background: rgba(255,255,255,0.3); padding: 4px 12px; border-radius: 15px; font-size: 12px; color: white; margin-top: 8px; display: inline-block;">Contributor</span>
+        <br/><span style="color: rgba(255,255,255,0.8); font-size: 12px; margin-top: 5px; display: block;">Contributor</span>
+        <div style="margin-top: 10px;">
+          <span style="background: rgba(255,255,255,0.2); padding: 2px 6px; border-radius: 8px; font-size: 10px; color: white; margin: 2px;">4 commits</span>
+        </div>
+      </td>
+
+
+      <td align="center" style="padding: 20px;">
+        <img src="https://avatars.githubusercontent.com/u/164482191?v=4" width="100" height="100" style="border-radius: 50%; border: 4px solid white; box-shadow: 0 6px 16px rgba(0,0,0,0.4);"/>
+        <br/><strong style="color: white; font-size: 16px;">sudharshanpaul</strong>
+        <br/><span style="color: rgba(255,255,255,0.9); font-size: 14px;">@sudharshanpaul</span>
+        <br/><span style="background: rgba(255,255,255,0.3); padding: 4px 12px; border-radius: 15px; font-size: 12px; color: white; margin-top: 8px; display: inline-block;">Contributor</span>
+        <br/><span style="color: rgba(255,255,255,0.8); font-size: 12px; margin-top: 5px; display: block;">Contributor</span>
+        <div style="margin-top: 10px;">
+          <span style="background: rgba(255,255,255,0.2); padding: 2px 6px; border-radius: 8px; font-size: 10px; color: white; margin: 2px;">4 commits</span>
+        </div>
+      </td>
+
+
+      <td align="center" style="padding: 20px;">
+        <img src="https://avatars.githubusercontent.com/u/176881379?v=4" width="100" height="100" style="border-radius: 50%; border: 4px solid white; box-shadow: 0 6px 16px rgba(0,0,0,0.4);"/>
+        <br/><strong style="color: white; font-size: 16px;">Jils31</strong>
+        <br/><span style="color: rgba(255,255,255,0.9); font-size: 14px;">@Jils31</span>
+        <br/><span style="background: rgba(255,255,255,0.3); padding: 4px 12px; border-radius: 15px; font-size: 12px; color: white; margin-top: 8px; display: inline-block;">Contributor</span>
+        <br/><span style="color: rgba(255,255,255,0.8); font-size: 12px; margin-top: 5px; display: block;">Contributor</span>
+        <div style="margin-top: 10px;">
+          <span style="background: rgba(255,255,255,0.2); padding: 2px 6px; border-radius: 8px; font-size: 10px; color: white; margin: 2px;">3 commits</span>
+        </div>
+      </td>
+
+
+      <td align="center" style="padding: 20px;">
+        <img src="https://avatars.githubusercontent.com/u/118842369?v=4" width="100" height="100" style="border-radius: 50%; border: 4px solid white; box-shadow: 0 6px 16px rgba(0,0,0,0.4);"/>
+        <br/><strong style="color: white; font-size: 16px;">raghavendra-24</strong>
+        <br/><span style="color: rgba(255,255,255,0.9); font-size: 14px;">@raghavendra-24</span>
+        <br/><span style="background: rgba(255,255,255,0.3); padding: 4px 12px; border-radius: 15px; font-size: 12px; color: white; margin-top: 8px; display: inline-block;">Contributor</span>
+        <br/><span style="color: rgba(255,255,255,0.8); font-size: 12px; margin-top: 5px; display: block;">Contributor</span>
+        <div style="margin-top: 10px;">
+          <span style="background: rgba(255,255,255,0.2); padding: 2px 6px; border-radius: 8px; font-size: 10px; color: white; margin: 2px;">3 commits</span>
+        </div>
+      </td>
+
+    </tr>
+
+</table>
 
 <div align="center">
   <a href="https://github.com/Xenonesis/code-guardian-report/graphs/contributors">
@@ -5213,7 +5335,7 @@ We welcome contributions from developers of all skill levels! Here's how you can
 - **Star the Project**: Show your support by starring on GitHub
 - **Spread the Word**: Share Code Guardian with your network
 
-See our [Contributing Guide](CONTRIBUTING.md) for detailed information.
+See our [Contributing Guide](md/CONTRIBUTING.md) for detailed information.
 
 #### Contribution Recognition
 
@@ -5684,7 +5806,7 @@ Detailed security control mapping available in SECURITY.md.
 - Fixed GitHub OAuth token refresh
 - Corrected PDF export formatting issues
 
-See [CHANGELOG.md](md/changelogs.md) for complete version history.
+See [CHANGELOG.md](CHANGELOG.md) for complete version history.
 
 ---
 
