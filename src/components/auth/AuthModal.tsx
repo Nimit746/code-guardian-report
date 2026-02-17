@@ -46,7 +46,7 @@ export const AuthModal: React.FC<AuthModalProps> = ({ isOpen, onClose }) => {
           <h2 className="text-2xl font-bold">Sign In</h2>
           <button
             onClick={onClose}
-            className="text-xl font-bold text-muted-foreground hover:text-foreground dark:text-muted-foreground dark:hover:text-white"
+            className="text-foreground/70 hover:text-foreground dark:text-muted-foreground text-xl font-bold dark:hover:text-white"
           >
             ×
           </button>
@@ -65,7 +65,7 @@ export const AuthModal: React.FC<AuthModalProps> = ({ isOpen, onClose }) => {
           </div>
         </div>
 
-        <p className="mb-6 text-center text-gray-600 dark:text-muted-foreground">
+        <p className="text-foreground/75 dark:text-muted-foreground mb-6 text-center">
           Sign in with your GitHub account to access Code Guardian and analyze
           your repositories.
         </p>
@@ -81,13 +81,13 @@ export const AuthModal: React.FC<AuthModalProps> = ({ isOpen, onClose }) => {
           {loading ? "Signing in..." : "Continue with GitHub"}
         </button>
 
-        <p className="mt-6 text-center text-sm text-muted-foreground dark:text-muted-foreground">
+        <p className="text-foreground/70 dark:text-muted-foreground mt-6 text-center text-sm">
           Don't have a GitHub account?{" "}
           <a
             href="https://github.com/signup"
             target="_blank"
             rel="noopener noreferrer"
-            className="font-medium text-primary hover:underline dark:text-primary"
+            className="text-primary dark:text-primary font-semibold hover:underline"
           >
             Sign up for free
           </a>
