@@ -2,7 +2,6 @@
 
 import React from "react";
 import {
-  HelpCircle,
   BookOpen,
   Mail,
   Github,
@@ -11,8 +10,8 @@ import {
   Settings,
   BarChart3,
   Lightbulb,
+  Terminal,
 } from "lucide-react";
-import { AnimatedBackground } from "@/components/pages/about/AnimatedBackground";
 
 interface HelpPageProps {
   className?: string;
@@ -132,52 +131,71 @@ export const HelpPage: React.FC<HelpPageProps> = ({ className = "" }) => {
 
   return (
     <div
-      className={`bg-background relative min-h-screen overflow-hidden ${className}`}
+      className={`bg-background text-foreground selection:bg-primary/20 selection:text-primary relative min-h-screen overflow-hidden ${className}`}
     >
-      <AnimatedBackground />
+      {/* Industrial Background */}
+      <div className="fixed inset-0 z-0">
+        <div className="absolute inset-0 bg-[linear-gradient(to_right,#80808012_1px,transparent_1px),linear-gradient(to_bottom,#80808012_1px,transparent_1px)] bg-[size:60px_60px] opacity-20" />
+        <div className="absolute inset-0 bg-[radial-gradient(circle_at_center,transparent_0%,#000000_100%)] opacity-80" />
+      </div>
+
       <div className="relative z-10 pt-16">
         <div className="container mx-auto px-4 py-16 sm:px-6 lg:px-8">
           <div className="mx-auto max-w-6xl">
             {/* Header */}
             <div className="mb-16 text-center">
-              <div className="mb-6 inline-flex h-16 w-16 items-center justify-center rounded-full bg-teal-100 dark:bg-teal-900/30">
-                <HelpCircle className="text-primary dark:text-primary h-8 w-8" />
+              <div className="border-primary/30 bg-primary/5 text-primary mb-6 inline-flex items-center gap-2 rounded-full border px-3 py-1 text-xs font-medium backdrop-blur-sm">
+                <span className="relative flex h-2 w-2">
+                  <span className="bg-primary absolute inline-flex h-full w-full animate-ping rounded-full opacity-75"></span>
+                  <span className="bg-primary relative inline-flex h-2 w-2 rounded-full"></span>
+                </span>
+                <span className="font-mono tracking-wider">
+                  SYSTEM DOCUMENTATION
+                </span>
               </div>
-              <h1 className="text-foreground mb-4 text-4xl font-bold">
-                Help & Documentation
+
+              <h1 className="font-display mb-6 text-4xl font-bold tracking-tight text-white sm:text-5xl md:text-6xl">
+                HELP &{" "}
+                <span className="from-primary bg-gradient-to-r to-emerald-400 bg-clip-text text-transparent">
+                  SUPPORT
+                </span>
               </h1>
-              <p className="text-muted-foreground mx-auto max-w-3xl text-xl">
-                Everything you need to know about using Code Guardian for secure
-                code analysis
+
+              <p className="text-muted-foreground mx-auto max-w-2xl text-lg leading-relaxed font-light md:text-xl">
+                Everything you need to operate the Code Guardian system securely
+                and efficiently.
               </p>
             </div>
 
             {/* Help Sections */}
-            <div className="mb-16 grid grid-cols-1 gap-8 md:grid-cols-2">
+            <div className="mb-16 grid grid-cols-1 gap-6 md:grid-cols-2">
               {helpSections.map((section, index) => (
                 <div
                   key={index}
-                  className="border-border/50 bg-card/80 backdrop-blur-sm/50/80 rounded-xl border p-6"
+                  className="group hover:border-primary/50 relative overflow-hidden rounded-xl border border-white/10 bg-black/40 p-6 backdrop-blur-sm transition-all duration-300 hover:bg-black/60 hover:shadow-[0_0_30px_-10px_rgba(16,185,129,0.3)]"
                 >
-                  <div className="mb-4 flex items-center gap-3">
-                    <div className="rounded-lg bg-teal-100 p-2 dark:bg-teal-900/30">
+                  <div className="mb-6 flex items-center gap-4 border-b border-white/5 pb-4">
+                    <div className="bg-primary/10 text-primary ring-primary/20 group-hover:bg-primary/20 rounded-lg p-3 ring-1 transition-all duration-300 group-hover:scale-110 group-hover:shadow-[0_0_15px_-3px_rgba(16,185,129,0.4)]">
                       {section.icon}
                     </div>
-                    <h3 className="text-foreground text-lg font-semibold">
+                    <h3 className="font-display text-xl font-bold tracking-wide text-white">
                       {section.title}
                     </h3>
                   </div>
-                  <div className="space-y-3">
+                  <div className="space-y-4">
                     {section.items.map((item, itemIndex) => (
-                      <div key={itemIndex} className="group">
+                      <div key={itemIndex}>
                         <a
                           href={item.link}
-                          className="hover:bg-muted block rounded-lg p-3 transition-colors duration-200 dark:hover:bg-slate-700/50"
+                          className="group/item flex flex-col gap-1 rounded-lg p-2 transition-all duration-200 hover:bg-white/5"
                         >
-                          <h4 className="text-foreground group-hover:text-primary dark:group-hover:text-primary font-medium transition-colors duration-200 dark:text-white">
-                            {item.title}
-                          </h4>
-                          <p className="text-muted-foreground mt-1 text-sm">
+                          <div className="flex items-center gap-2">
+                            <Terminal className="text-primary/50 group-hover/item:text-primary h-3 w-3 transition-colors" />
+                            <h4 className="group-hover/item:text-primary font-mono text-sm font-medium text-slate-200 transition-colors">
+                              {item.title}
+                            </h4>
+                          </div>
+                          <p className="pl-5 text-xs text-slate-400 group-hover/item:text-slate-300">
                             {item.description}
                           </p>
                         </a>
@@ -189,73 +207,55 @@ export const HelpPage: React.FC<HelpPageProps> = ({ className = "" }) => {
             </div>
 
             {/* Support Options */}
-            <div className="border-border/50 bg-card/80 backdrop-blur-sm/50/80 rounded-xl border p-8">
-              <h2 className="text-foreground mb-6 text-center text-2xl font-bold">
-                Need More Help?
+            <div className="relative overflow-hidden rounded-xl border border-white/10 bg-black/40 p-8 backdrop-blur-sm">
+              <div className="absolute inset-0 bg-[linear-gradient(45deg,transparent_25%,rgba(68,68,68,.2)_50%,transparent_75%,transparent_100%)] bg-[length:20px_20px]" />
+              <h2 className="font-display relative mb-8 text-center text-2xl font-bold tracking-wide text-white">
+                NEED <span className="text-primary">ASSISTANCE?</span>
               </h2>
-              <div className="grid grid-cols-1 gap-6 md:grid-cols-3">
+              <div className="relative grid grid-cols-1 gap-6 md:grid-cols-3">
                 {supportOptions.map((option, index) => (
                   <a
                     key={index}
                     href={option.link}
                     target={option.external ? "_blank" : undefined}
                     rel={option.external ? "noopener noreferrer" : undefined}
-                    className="group bg-muted hover:border-border hover:bg-muted block rounded-lg border border-transparent p-6 transition-all duration-200 dark:bg-slate-700/50 dark:hover:border-slate-600 dark:hover:bg-slate-600/50"
+                    className="group hover:border-primary/30 hover:shadow-primary/5 flex flex-col items-center rounded-lg border border-transparent bg-white/5 p-6 text-center transition-all duration-200 hover:bg-white/10 hover:shadow-lg"
                   >
-                    <div className="mb-3 flex items-center gap-3">
-                      <div className="rounded-lg bg-teal-100 p-2 dark:bg-teal-900/30">
-                        {option.icon}
-                      </div>
-                      {option.external && (
-                        <ExternalLink className="text-muted-foreground group-hover:text-primary dark:group-hover:text-primary h-4 w-4 transition-colors duration-200" />
-                      )}
+                    <div className="bg-primary/10 text-primary group-hover:bg-primary/20 mb-4 rounded-full p-4 transition-transform duration-300 group-hover:scale-110">
+                      {option.icon}
                     </div>
-                    <h3 className="text-foreground group-hover:text-primary dark:group-hover:text-primary font-semibold transition-colors duration-200 dark:text-white">
+                    <h3 className="mb-2 font-mono text-lg font-semibold text-white">
                       {option.title}
                     </h3>
-                    <p className="text-muted-foreground mt-2 text-sm">
+                    <p className="mb-4 text-sm text-slate-400">
                       {option.description}
                     </p>
+                    {option.external && (
+                      <ExternalLink className="text-primary/70 group-hover:text-primary h-4 w-4 transition-colors" />
+                    )}
                   </a>
                 ))}
               </div>
             </div>
 
             {/* Quick Tips */}
-            <div className="border-border bg-muted dark:border-border mt-12 rounded-xl border p-6 dark:from-blue-900/20 dark:to-indigo-900/20">
-              <h3 className="text-foreground mb-4 flex items-center gap-2 text-lg font-semibold">
-                <Lightbulb className="h-5 w-5 text-amber-500" />
-                Quick Tips
+            <div className="mt-12 rounded-xl border-y border-r border-l-4 border-y-white/5 border-r-white/5 border-l-amber-500 bg-gradient-to-r from-amber-500/10 to-transparent p-6">
+              <h3 className="mb-4 flex items-center gap-3 text-lg font-semibold text-amber-500">
+                <Lightbulb className="h-5 w-5" />
+                <span className="font-mono tracking-wider">SYSTEM TIPS</span>
               </h3>
-              <div className="text-foreground/80 grid grid-cols-1 gap-4 text-sm md:grid-cols-2">
-                <div className="flex items-start gap-2">
-                  <div className="bg-muted mt-2 h-2 w-2 flex-shrink-0 rounded-full"></div>
-                  <span>
-                    Use the sidebar navigation to quickly switch between
-                    different analysis features
-                  </span>
-                </div>
-                <div className="flex items-start gap-2">
-                  <div className="bg-muted mt-2 h-2 w-2 flex-shrink-0 rounded-full"></div>
-                  <span>
-                    Configure your AI API keys in the AI Configuration tab for
-                    enhanced analysis
-                  </span>
-                </div>
-                <div className="flex items-start gap-2">
-                  <div className="bg-muted mt-2 h-2 w-2 flex-shrink-0 rounded-full"></div>
-                  <span>
-                    Export your analysis results to share with your team or for
-                    record keeping
-                  </span>
-                </div>
-                <div className="flex items-start gap-2">
-                  <div className="bg-muted mt-2 h-2 w-2 flex-shrink-0 rounded-full"></div>
-                  <span>
-                    Use custom prompts to tailor the analysis to your specific
-                    security requirements
-                  </span>
-                </div>
+              <div className="grid grid-cols-1 gap-4 text-sm md:grid-cols-2">
+                {[
+                  "Use the sidebar navigation to quickly switch between different analysis features",
+                  "Configure your AI API keys in the AI Configuration tab for enhanced analysis",
+                  "Export your analysis results to share with your team or for record keeping",
+                  "Use custom prompts to tailor the analysis to your specific security requirements",
+                ].map((tip, i) => (
+                  <div key={i} className="flex items-start gap-3">
+                    <span className="mt-1.5 h-1.5 w-1.5 shrink-0 rounded-full bg-amber-500/50" />
+                    <span className="text-slate-300">{tip}</span>
+                  </div>
+                ))}
               </div>
             </div>
           </div>
@@ -264,3 +264,5 @@ export const HelpPage: React.FC<HelpPageProps> = ({ className = "" }) => {
     </div>
   );
 };
+
+export default HelpPage;
