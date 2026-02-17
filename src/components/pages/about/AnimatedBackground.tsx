@@ -1,66 +1,31 @@
 /**
- * AnimatedBackground - Premium ambient decoration
- * Subtle gradient orbs that add visual depth without distraction
+ * AnimatedBackground - Industrial Grid Overlay
+ * Technical grid pattern with scanning lines
  */
 import React from "react";
 
 const AnimatedBackgroundComponent: React.FC = () => {
   return (
     <div
-      className="pointer-events-none absolute inset-0 overflow-hidden"
+      className="bg-background pointer-events-none absolute inset-0 overflow-hidden"
       style={{ zIndex: 0 }}
       aria-hidden="true"
     >
-      {/* Primary orb — top center */}
-      <div
-        className="animate-ambient-pulse-1 absolute"
-        style={{
-          top: "-5%",
-          left: "50%",
-          transform: "translateX(-50%)",
-          width: "clamp(400px, 60vw, 800px)",
-          height: "clamp(300px, 40vw, 500px)",
-          background:
-            "radial-gradient(ellipse at center, hsl(var(--glow) / 0.05) 0%, transparent 70%)",
-          borderRadius: "50%",
-          filter: "blur(60px)",
-        }}
-      />
-      {/* Secondary orb — bottom right */}
-      <div
-        className="animate-ambient-pulse-2 absolute"
-        style={{
-          bottom: "10%",
-          right: "-5%",
-          width: "clamp(300px, 40vw, 600px)",
-          height: "clamp(250px, 30vw, 400px)",
-          background:
-            "radial-gradient(ellipse at center, hsl(var(--glow) / 0.04) 0%, transparent 70%)",
-          borderRadius: "50%",
-          filter: "blur(50px)",
-        }}
-      />
-      {/* Inline keyframes for ambient pulse */}
+      {/* Base Grid */}
+      <div className="absolute inset-0 bg-[linear-gradient(to_right,#80808012_1px,transparent_1px),linear-gradient(to_bottom,#80808012_1px,transparent_1px)] bg-[size:24px_24px]"></div>
+
+      {/* Radial Vignette */}
+      <div className="bg-background/90 absolute inset-0 [mask-image:radial-gradient(ellipse_60%_50%_at_50%_0%,#000_70%,transparent_100%)]"></div>
+
+      {/* Scanning Line */}
+      <div className="pointer-events-none absolute inset-0 z-0 overflow-hidden opacity-20">
+        <div className="h-[500%] w-[500%] animate-[scan_60s_linear_infinite] bg-[repeating-linear-gradient(0deg,transparent,transparent_1px,#000_1px,#000_2px)] opacity-[0.03] dark:bg-[repeating-linear-gradient(0deg,transparent,transparent_1px,#fff_1px,#fff_2px)]" />
+      </div>
+
       <style>{`
-        @keyframes ambient-pulse-1 {
-          0%, 100% { opacity: 0.6; transform: translateX(-50%) scale(1); }
-          50% { opacity: 1; transform: translateX(-50%) scale(1.05); }
-        }
-        @keyframes ambient-pulse-2 {
-          0%, 100% { opacity: 0.5; transform: scale(1); }
-          50% { opacity: 0.8; transform: scale(1.08); }
-        }
-        .animate-ambient-pulse-1 {
-          animation: ambient-pulse-1 7s ease-in-out infinite;
-        }
-        .animate-ambient-pulse-2 {
-          animation: ambient-pulse-2 9s ease-in-out infinite;
-        }
-        @media (prefers-reduced-motion: reduce) {
-          .animate-ambient-pulse-1,
-          .animate-ambient-pulse-2 {
-            animation: none;
-          }
+        @keyframes scan {
+          0% { transform: translateY(-50%) rotate(0deg); }
+          100% { transform: translateY(0%) rotate(0deg); }
         }
       `}</style>
     </div>

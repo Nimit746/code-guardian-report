@@ -1,26 +1,18 @@
-import {
-  Card,
-  CardContent,
-  CardDescription,
-  CardHeader,
-  CardTitle,
-} from "@/components/ui/card";
-import { Badge } from "@/components/ui/badge";
 import { Button } from "@/components/ui/button";
 import {
   Users,
   ExternalLink,
-  Trophy,
-  Code,
-  Shield,
+  Code2,
+  ShieldAlert,
   Crown,
   User,
   Zap,
   Star,
   Globe,
-  Rocket,
-  Wrench,
-  Lightbulb,
+  Hash,
+  Cpu,
+  Activity,
+  Brain,
 } from "lucide-react";
 import { openUrlInNewTab } from "./utils";
 
@@ -28,381 +20,224 @@ const MeetDeveloperSection = () => {
   const teamMembers = [
     {
       name: "Aditya Kumar Tiwari",
-      role: "Team Leader & Security Expert",
-      icon: <Crown className="h-5 w-5" />,
+      role: "Team_Lead // Security_Arch",
+      id: "OP-01",
+      icon: <Crown className="h-4 w-4" />,
       description:
-        "Cybersecurity expert and lead developer specializing in security architecture and vulnerability analysis",
-      expertise: [
-        "Team Leadership",
-        "Cybersecurity",
-        "Penetration Testing",
-        "Security Architecture",
-        "Vulnerability Assessment",
-        "Project Management",
-      ],
+        "Lead operative specializing in security architecture and vulnerability heuristics.",
+      expertise: ["Leadership", "Pen_Testing", "Sec_Arch", "Vuln_Analysis"],
     },
     {
       name: "Mohammad Ehshan",
-      role: "Backend Developer",
-      icon: <Code className="h-5 w-5" />,
+      role: "Backend_Ops // API_Core",
+      id: "OP-02",
+      icon: <Code2 className="h-4 w-4" />,
       description:
-        "Backend development specialist focused on API design and server-side architecture",
-      expertise: [
-        "Backend Development",
-        "API Development",
-        "Database Design",
-        "Server Architecture",
-        "Node.js",
-        "System Integration",
-      ],
+        "Server-side infrastructure and API throughput optimization specialist.",
+      expertise: ["Backend_Sys", "API_Design", "DB_Schema", "Node.js"],
     },
     {
       name: "Vishupal Goyal",
-      role: "Frontend Developer",
-      icon: <User className="h-5 w-5" />,
-      description: "Frontend development and user experience design specialist",
-      expertise: [
-        "Frontend Development",
-        "UI/UX Design",
-        "React Development",
-        "User Experience",
-        "Responsive Design",
-        "Component Architecture",
-      ],
+      role: "Frontend_Ops // UI_UX",
+      id: "OP-03",
+      icon: <User className="h-4 w-4" />,
+      description:
+        "Interface architecture and user experience protocol designer.",
+      expertise: ["React_Core", "UI_Protocol", "UX_Flow", "Responsive_Grid"],
     },
     {
       name: "Aayush Tonk",
-      role: "Full-Stack Developer",
-      icon: <Zap className="h-5 w-5" />,
-      description: "Full-stack development and system architecture specialist",
-      expertise: [
-        "Full-Stack Development",
-        "System Design",
-        "DevOps",
-        "Database Management",
-        "Performance Optimization",
-        "Technical Documentation",
-      ],
+      role: "Full_Stack // Sys_Admin",
+      id: "OP-04",
+      icon: <Zap className="h-4 w-4" />,
+      description: "Full-stack integration and system performance architect.",
+      expertise: ["Sys_Design", "DevOps", "Perf_Opt", "Analysis"],
     },
     {
       name: "Muneer Ali",
-      role: "Developer",
-      icon: <Star className="h-5 w-5" />,
-      description: "Developer contributing to various aspects of the project",
-      expertise: [
-        "Software Development",
-        "Code Review",
-        "Testing",
-        "Documentation",
-        "Collaboration",
-      ],
-    },
-  ];
-
-  const projectHighlights = [
-    {
-      icon: <Trophy className="h-5 w-5" />,
-      title: "Latest v3.3.0 Release",
-      description: "Enhanced with persistent storage and advanced analytics",
-    },
-    {
-      icon: <Zap className="h-5 w-5" />,
-      title: "AI-Powered Innovation",
+      role: "Dev_Ops // QA_Testing",
+      id: "OP-05",
+      icon: <Star className="h-4 w-4" />,
       description:
-        "Advanced GPT-4 & Claude integration with intelligent key management",
-    },
-    {
-      icon: <Star className="h-5 w-5" />,
-      title: "Developer-Centric",
-      description:
-        "Persistent results with cross-tab synchronization and export capabilities",
-    },
-    {
-      icon: <Globe className="h-5 w-5" />,
-      title: "Production Ready",
-      description:
-        "Enterprise-grade security analysis with comprehensive reporting",
+        "Quality assurance and code integrity verification specialist.",
+      expertise: ["Code_Review", "Unit_Test", "Documentation", "Integ_Test"],
     },
   ];
 
   const technologies = [
-    "React 19.x",
-    "TypeScript 5.x",
-    "Next.js 15.x",
-    "Tailwind CSS 4.x",
-    "AI Services (GPT-4, Claude)",
-    "Recharts 3.x",
-    "Radix UI",
-    "shadcn/ui",
+    "React_19x",
+    "TypeScript_5x",
+    "Next.js_15x",
+    "Tailwind_4x",
+    "LLM_Integ",
+    "Recharts_3x",
+    "Radix_UI",
     "Node.js",
-    "Static Analysis Tools",
-    "Security Frameworks",
-    "Persistent Storage API",
-    "Web Crypto API",
+    "Web_Crypto",
     "IndexedDB",
-    "Service Workers",
-    "Bundle Analysis",
+    "WASM",
   ];
 
   return (
-    <section className="dark:from-background dark:to-muted/30 bg-gradient-to-br from-slate-50 to-blue-50 py-16">
-      <div className="container mx-auto px-4">
-        <div className="mx-auto max-w-6xl">
-          {/* Section Header */}
-          <div className="mb-12 text-center">
-            <h2 className="text-foreground mb-4 text-3xl font-bold sm:text-4xl">
-              Meet the Development Team
+    <section className="border-border bg-background relative overflow-hidden border-t py-24">
+      {/* Background Decor */}
+      <div className="pointer-events-none absolute top-0 right-0 p-12 opacity-5">
+        <Users className="h-96 w-96" />
+      </div>
+
+      <div className="relative z-10 container mx-auto px-4">
+        <div className="mx-auto max-w-7xl">
+          {/* Header */}
+          <div className="mb-16 text-center">
+            <div className="mb-4 flex items-center justify-center gap-2">
+              <Hash className="text-primary h-4 w-4" />
+              <span className="text-primary font-mono text-xs font-bold tracking-widest uppercase">
+                Personnel_Data
+              </span>
+            </div>
+            <h2 className="mb-6 font-mono text-3xl font-bold tracking-tight uppercase md:text-5xl">
+              Command Unit: Team Blitz
             </h2>
-            <p className="text-muted-foreground mx-auto mb-6 max-w-3xl text-lg">
-              Code Guardian is proudly developed by Team Blitz - a passionate
-              group of developers and security experts committed to making code
-              security accessible to everyone.
-            </p>
+            <div className="mb-8 flex justify-center">
+              <div className="bg-muted/10 border-border flex items-center gap-4 border px-4 py-2">
+                <span className="text-muted-foreground font-mono text-xs uppercase">
+                  Status: ACTIVE
+                </span>
+                <span className="bg-border h-3 w-[1px]" />
+                <span className="text-primary font-mono text-xs uppercase">
+                  Clearance: Lvl_5
+                </span>
+              </div>
+            </div>
 
-            {/* Team Blitz Card */}
-            <Card className="bg-primary text-primary-foreground mx-auto mb-8 max-w-2xl border-0">
-              <CardHeader>
-                <div className="mb-2 flex items-center justify-center gap-3">
-                  <Users className="h-6 w-6" />
-                  <CardTitle className="text-2xl">Team Blitz</CardTitle>
-                </div>
-                <CardDescription className="text-primary-foreground/90">
-                  Innovative development team focused on AI-powered security
-                  solutions
-                </CardDescription>
-              </CardHeader>
-              <CardContent>
-                <div className="flex flex-col items-center justify-center gap-4 sm:flex-row">
-                  <Button
-                    variant="secondary"
-                    className="border-primary/30 bg-primary/20 text-primary-foreground hover:bg-primary/30"
-                    onClick={() =>
-                      openUrlInNewTab("https://teamblitz.netlify.app/")
-                    }
-                  >
-                    <Globe className="mr-2 h-4 w-4" />
-                    Visit Team Website
-                    <ExternalLink className="ml-2 h-4 w-4" />
-                  </Button>
-                  <Badge
-                    variant="secondary"
-                    className="bg-primary/20 text-primary-foreground"
-                  >
-                    Hackathon Winners
-                  </Badge>
-                </div>
-              </CardContent>
-            </Card>
-          </div>
-
-          {/* Project Highlights */}
-          <div className="mb-12 grid grid-cols-1 gap-6 sm:grid-cols-2 lg:grid-cols-4">
-            {projectHighlights.map((highlight, index) => (
-              <Card key={index} className="text-center">
-                <CardContent className="p-6">
-                  <div className="mb-3 flex justify-center">
-                    <div className="text-primary dark:text-primary rounded-lg bg-teal-100 p-3 dark:bg-teal-900/30">
-                      {highlight.icon}
-                    </div>
-                  </div>
-                  <h3 className="text-foreground mb-2 font-semibold">
-                    {highlight.title}
-                  </h3>
-                  <p className="text-muted-foreground text-sm">
-                    {highlight.description}
-                  </p>
-                </CardContent>
-              </Card>
-            ))}
-          </div>
-
-          {/* Team Members */}
-          <div className="mb-12">
-            <h3 className="text-foreground mb-8 text-center text-2xl font-bold">
-              Our Team Members
-            </h3>
-            <div className="grid grid-cols-1 gap-6 md:grid-cols-2">
-              {teamMembers
-                .filter((member) => member.name === "Aditya Kumar Tiwari")
-                .map((member, index) => (
-                  <Card
-                    key={index}
-                    className="transition-shadow hover:shadow-lg"
-                  >
-                    <CardHeader>
-                      <div className="flex items-start gap-4">
-                        <div className="bg-primary rounded-lg p-3 text-white">
-                          {member.icon}
-                        </div>
-                        <div className="flex-1">
-                          <CardTitle className="text-lg">
-                            {member.name}
-                          </CardTitle>
-                          <CardDescription className="text-primary dark:text-primary font-medium">
-                            {member.role}
-                          </CardDescription>
-                        </div>
-                      </div>
-                    </CardHeader>
-                    <CardContent>
-                      <p className="text-muted-foreground mb-4">
-                        {member.description}
-                      </p>
-                      <div className="flex flex-wrap gap-2">
-                        {member.expertise.map((skill, skillIndex) => (
-                          <Badge
-                            key={skillIndex}
-                            variant="outline"
-                            className="text-xs"
-                          >
-                            {skill}
-                          </Badge>
-                        ))}
-                      </div>
-                    </CardContent>
-                  </Card>
-                ))}
+            {/* Team Blitz Link */}
+            <div className="flex justify-center">
+              <Button
+                variant="outline"
+                className="group border-primary/50 text-primary hover:bg-primary hover:text-primary-foreground font-mono text-xs tracking-wider uppercase"
+                onClick={() =>
+                  openUrlInNewTab("https://teamblitz.netlify.app/")
+                }
+              >
+                <Globe className="mr-2 h-4 w-4" />
+                Access_Team_Portal
+                <ExternalLink className="icon-xs ml-2 h-3 w-3 opacity-50" />
+              </Button>
             </div>
           </div>
 
-          {/* Project Details */}
-          <Card className="mb-8">
-            <CardHeader>
-              <CardTitle className="flex items-center gap-2">
-                <Code className="h-5 w-5" />
-                Project Details
-              </CardTitle>{" "}
-              <CardDescription>
-                Code Guardian v3.3.0 - Revolutionary AI-powered security
-                analysis platform with persistent storage, enhanced analytics,
-                and intelligent AI integration
-              </CardDescription>
-            </CardHeader>
-            <CardContent className="space-y-6">
-              {/* USP */}
-              <div>
-                <h4 className="text-foreground mb-3 flex items-center gap-2 font-semibold">
-                  <Rocket className="h-4 w-4 text-cyan-600" />
-                  Unique Selling Proposition (USP)
-                </h4>
-                <div className="grid grid-cols-1 gap-4 md:grid-cols-3">
-                  <div className="bg-muted rounded-lg p-4 dark:bg-blue-950/30">
-                    <h5 className="mb-2 font-medium text-blue-900 dark:text-blue-100">
-                      Persistent Intelligence
-                    </h5>
-                    <p className="text-sm text-blue-800 dark:text-blue-200">
-                      Advanced storage system with cross-tab sync and
-                      intelligent history management for continuous analysis
-                    </p>
+          {/* Team Grid */}
+          <div className="mb-24 grid grid-cols-1 gap-6 md:grid-cols-2 lg:grid-cols-3">
+            {teamMembers.map((member) => (
+              <div key={member.id} className="group relative">
+                {/* Card Body */}
+                <div className="border-border bg-background/50 hover:bg-muted/10 relative h-full overflow-hidden border p-6 transition-colors">
+                  {/* Hover Corner Access */}
+                  <div className="bg-primary/10 border-primary/20 absolute top-0 right-0 flex h-8 w-8 items-center justify-center border-b border-l opacity-0 transition-opacity group-hover:opacity-100">
+                    <ExternalLink className="text-primary h-4 w-4" />
                   </div>
-                  <div className="rounded-lg bg-green-50 p-4 dark:bg-green-950/30">
-                    <h5 className="mb-2 font-medium text-green-900 dark:text-green-100">
-                      Enhanced AI Integration
-                    </h5>
-                    <p className="text-sm text-green-800 dark:text-green-200">
-                      Advanced AI key management with GPT-4 and Claude
-                      integration for superior vulnerability detection
-                    </p>
+
+                  <div className="mb-4 flex items-start justify-between">
+                    <div className="border-border bg-background border p-2">
+                      {member.icon}
+                    </div>
+                    <span className="text-muted-foreground font-mono text-[10px] tracking-widest uppercase">
+                      ID: {member.id}
+                    </span>
                   </div>
-                  <div className="rounded-lg bg-purple-50 p-4 dark:bg-purple-950/30">
-                    <h5 className="mb-2 font-medium text-purple-900 dark:text-purple-100">
-                      Performance Analytics
-                    </h5>
-                    <p className="text-sm text-purple-800 dark:text-purple-200">
-                      Comprehensive bundle monitoring and performance tracking
-                      with real-time analytics dashboard
-                    </p>
+
+                  <h3 className="group-hover:text-primary mb-1 font-mono text-lg font-bold tracking-tight uppercase transition-colors">
+                    {member.name}
+                  </h3>
+                  <div className="text-primary/80 mb-4 font-mono text-xs uppercase">
+                    {member.role}
+                  </div>
+
+                  <p className="text-muted-foreground mb-6 line-clamp-2 text-sm">
+                    {member.description}
+                  </p>
+
+                  <div className="mt-auto flex flex-wrap gap-1.5">
+                    {member.expertise.map((skill) => (
+                      <span
+                        key={skill}
+                        className="border-border bg-muted/20 text-muted-foreground border px-1.5 py-0.5 font-mono text-[10px] uppercase"
+                      >
+                        {skill}
+                      </span>
+                    ))}
                   </div>
                 </div>
               </div>
+            ))}
+          </div>
 
-              {/* Technologies */}
-              <div>
-                <h4 className="text-foreground mb-3 flex items-center gap-2 font-semibold">
-                  <Wrench className="text-muted-foreground h-4 w-4" />
-                  Technologies Used
-                </h4>
-                <div className="flex flex-wrap gap-2">
-                  {technologies.map((tech, index) => (
-                    <Badge key={index} variant="secondary">
-                      {tech}
-                    </Badge>
-                  ))}
-                </div>
-              </div>
+          {/* Tech Stack Matrix */}
+          <div className="border-border bg-muted/5 relative border">
+            <div className="bg-primary text-primary-foreground absolute top-0 left-0 px-3 py-1 font-mono text-[10px] font-bold tracking-wider uppercase">
+              System_Architecture_V3.3.0
+            </div>
 
-              {/* Impact */}
-              <div>
-                <h4 className="text-foreground mb-3 flex items-center gap-2 font-semibold">
-                  <Lightbulb className="h-4 w-4 text-amber-500" />
-                  Why It Matters
-                </h4>
-                <div className="grid grid-cols-1 gap-4 md:grid-cols-3">
-                  <div className="flex items-start gap-3">
-                    <Shield className="mt-0.5 h-5 w-5 text-red-500" />
-                    <div>
-                      <h5 className="text-foreground font-medium">
-                        Persistent Security
-                      </h5>
-                      <p className="text-muted-foreground text-sm">
-                        Continuous analysis with persistent results that
-                        maintain security insights across sessions
-                      </p>
-                    </div>
-                  </div>
-                  <div className="flex items-start gap-3">
-                    <Zap className="mt-0.5 h-5 w-5 text-yellow-500" />
-                    <div>
-                      <h5 className="text-foreground font-medium">
-                        Enhanced Productivity
-                      </h5>
-                      <p className="text-muted-foreground text-sm">
-                        Advanced storage and analytics reduce analysis time
-                        while improving code quality insights
-                      </p>
-                    </div>
-                  </div>
-                  <div className="flex items-start gap-3">
-                    <Star className="text-primary mt-0.5 h-5 w-5" />
-                    <div>
-                      <h5 className="text-foreground font-medium">
-                        Enterprise Features
-                      </h5>
-                      <p className="text-muted-foreground text-sm">
-                        Production-ready with comprehensive reporting, export
-                        capabilities, and performance monitoring
-                      </p>
-                    </div>
+            <div className="p-8 pt-12">
+              <div className="grid gap-12 md:grid-cols-2">
+                {/* Tech Specs */}
+                <div>
+                  <h4 className="text-foreground mb-6 flex items-center gap-2 font-mono text-sm font-bold tracking-wider uppercase">
+                    <Cpu className="h-4 w-4" />
+                    Tech_Integ_Matrix
+                  </h4>
+                  <div className="flex flex-wrap gap-2">
+                    {technologies.map((tech) => (
+                      <div
+                        key={tech}
+                        className="bg-background border-border flex items-center gap-2 border px-3 py-1.5"
+                      >
+                        <div className="bg-primary h-1.5 w-1.5 rounded-none" />
+                        <span className="text-muted-foreground font-mono text-xs uppercase">
+                          {tech}
+                        </span>
+                      </div>
+                    ))}
                   </div>
                 </div>
-              </div>
-            </CardContent>
-          </Card>
 
-          {/* Call to Action */}
-          <div className="text-center">
-            <Card className="bg-primary border-0 text-white">
-              <CardContent className="p-8">
-                <h3 className="mb-4 text-2xl font-bold">Join Our Mission</h3>
-                <p className="mx-auto mb-6 max-w-2xl text-blue-100">
-                  Help us make code security accessible to developers worldwide.
-                  Visit our team website to learn more about our projects and
-                  initiatives.
-                </p>
-                <Button
-                  variant="secondary"
-                  size="lg"
-                  className="bg-background text-primary hover:bg-muted"
-                  onClick={() =>
-                    openUrlInNewTab("https://teamblitz.netlify.app/")
-                  }
-                >
-                  <Users className="mr-2 h-5 w-5" />
-                  Visit Team Blitz
-                  <ExternalLink className="ml-2 h-4 w-4" />
-                </Button>
-              </CardContent>
-            </Card>
+                {/* USP Data */}
+                <div>
+                  <h4 className="text-foreground mb-6 flex items-center gap-2 font-mono text-sm font-bold tracking-wider uppercase">
+                    <ShieldAlert className="h-4 w-4" />
+                    Mission_Critical_Caps
+                  </h4>
+                  <div className="space-y-4">
+                    <div className="flex items-start gap-4">
+                      <div className="bg-primary/10 border-primary/20 mt-0.5 border p-1.5">
+                        <Activity className="text-primary h-3 w-3" />
+                      </div>
+                      <div>
+                        <h5 className="text-foreground font-mono text-xs font-bold uppercase">
+                          Persistent_Intel
+                        </h5>
+                        <p className="text-muted-foreground mt-1 text-xs">
+                          Cross-session storage with indexed heuristics.
+                        </p>
+                      </div>
+                    </div>
+                    <div className="flex items-start gap-4">
+                      <div className="bg-primary/10 border-primary/20 mt-0.5 border p-1.5">
+                        <Brain className="text-primary h-3 w-3" />
+                      </div>
+                      <div>
+                        <h5 className="text-foreground font-mono text-xs font-bold uppercase">
+                          Neural_Coupling
+                        </h5>
+                        <p className="text-muted-foreground mt-1 text-xs">
+                          Direct LLM context injection for patch synthesis.
+                        </p>
+                      </div>
+                    </div>
+                  </div>
+                </div>
+              </div>
+            </div>
           </div>
         </div>
       </div>

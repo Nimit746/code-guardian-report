@@ -80,7 +80,7 @@ const AboutFeaturesComponent: React.FC = () => {
           title="Enterprise Capabilities"
           subtitle="Comprehensive security analysis tools designed for modern development environments"
           columns={2}
-          variant="modern"
+          variant="industrial"
         />
       </div>
     </div>

@@ -1,104 +1,130 @@
-import React from "react";
-import { Download } from "lucide-react";
+import React, { useState, useEffect } from "react";
+import {
+  Terminal,
+  ArrowRight,
+  ShieldCheck,
+  Lock,
+  Activity,
+} from "lucide-react";
 import { Button } from "@/components/ui/button";
-import { Card, CardContent } from "@/components/ui/card";
-import { TRUST_INDICATORS, SECTION_IDS } from "./constants";
+import { SECTION_IDS } from "./constants";
 import { scrollToElement } from "./utils";
 import type { BaseSectionProps } from "./types";
+import { cn } from "@/lib/utils";
 
 export const CallToActionSection: React.FC<BaseSectionProps> = ({
   className = "",
 }) => {
+  const [cursorVisible, setCursorVisible] = useState(true);
+
+  useEffect(() => {
+    const interval = setInterval(() => {
+      setCursorVisible((v) => !v);
+    }, 530);
+    return () => clearInterval(interval);
+  }, []);
+
   const scrollToHome = () => {
     scrollToElement(SECTION_IDS.HOME);
   };
 
+  const statusIndicators = [
+    {
+      label: "ENCRYPTION_LAYER",
+      status: "ACTIVE",
+      icon: <Lock className="h-3 w-3" />,
+      color: "text-green-500",
+    },
+    {
+      label: "THREAT_DB",
+      status: "ONLINE",
+      icon: <ShieldCheck className="h-3 w-3" />,
+      color: "text-green-500",
+    },
+    {
+      label: "ANALYSIS_CORE",
+      status: "READY",
+      icon: <Activity className="h-3 w-3" />,
+      color: "text-primary",
+    },
+  ];
+
   return (
-    <section className={`relative py-16 text-center sm:py-20 ${className}`}>
-      {/* Enhanced Background Effects */}
-      <div className="pointer-events-none absolute inset-0 overflow-hidden">
-        <div className="absolute top-1/2 left-1/4 hidden h-40 w-40 rounded-full bg-gradient-to-r from-blue-500/30 via-purple-500/20 to-pink-500/30 blur-3xl"></div>
-        <div className="delay-2s absolute top-1/3 right-1/4 hidden h-32 w-32 rounded-full bg-gradient-to-r from-emerald-500/25 to-teal-500/25 blur-2xl"></div>
-        <div className="delay-4s absolute bottom-1/4 left-1/3 hidden h-24 w-24 rounded-full bg-gradient-to-r from-amber-500/20 to-orange-500/20 blur-xl"></div>
-      </div>
+    <section
+      className={cn(
+        "bg-background border-border relative border-t py-24",
+        className
+      )}
+    >
+      {/* Decorative Grid */}
+      <div className="pointer-events-none absolute inset-0 bg-[linear-gradient(to_right,#80808012_1px,transparent_1px),linear-gradient(to_bottom,#80808012_1px,transparent_1px)] bg-[size:14px_14px]" />
 
       <div className="relative z-10 container mx-auto px-4">
-        <Card className="glow-on-hover group border-border/50 hover:border-border/50/50/90 bg-card/90 dark:bg-card/90 relative mx-auto max-w-4xl overflow-hidden rounded-xl border shadow-sm backdrop-blur-sm transition-all duration-200">
-          {/* Enhanced Animated Gradient Overlay */}
-          <div className="animated-border absolute inset-0 opacity-0 transition-opacity duration-700 group-hover:opacity-100"></div>
+        <div className="border-border bg-background/80 group relative mx-auto max-w-4xl border backdrop-blur-sm">
+          {/* Corner Accents */}
+          <div className="border-primary absolute -top-1 -left-1 h-3 w-3 border-t-2 border-l-2" />
+          <div className="border-primary absolute -top-1 -right-1 h-3 w-3 border-t-2 border-r-2" />
+          <div className="border-primary absolute -bottom-1 -left-1 h-3 w-3 border-b-2 border-l-2" />
+          <div className="border-primary absolute -right-1 -bottom-1 h-3 w-3 border-r-2 border-b-2" />
 
-          {/* Enhanced Floating Elements */}
-          <div className="absolute top-6 right-6 hidden h-20 w-20 rounded-full bg-gradient-to-br from-blue-500/30 via-purple-500/20 to-pink-500/30 blur-2xl transition-transform duration-1000 group-hover:scale-150"></div>
-          <div className="delay-2s absolute bottom-6 left-6 hidden h-16 w-16 rounded-full bg-gradient-to-tr from-emerald-500/25 to-teal-500/25 blur-xl transition-transform delay-200 duration-1000 group-hover:scale-125"></div>
+          <div className="p-8 text-center md:p-12">
+            {/* Header Icon */}
+            <div className="bg-primary/10 border-primary/20 mb-8 inline-flex items-center justify-center rounded-none border p-4">
+              <Terminal className="text-primary h-8 w-8" />
+            </div>
 
-          {/* Particle System */}
-          <div className="particle-system opacity-0 transition-opacity duration-500 group-hover:opacity-100">
-            <div
-              className="particle"
-              style={{ left: "20%", animationDelay: "0s" }}
-            ></div>
-            <div
-              className="particle"
-              style={{ left: "80%", animationDelay: "3s" }}
-            ></div>
-            <div
-              className="particle"
-              style={{ left: "50%", animationDelay: "6s" }}
-            ></div>
-          </div>
+            <h2 className="mb-6 font-mono text-3xl font-bold tracking-tight uppercase md:text-5xl">
+              System_Initialization
+            </h2>
 
-          <CardContent className="relative z-10 p-10 sm:p-16">
-            <div className="mx-auto max-w-3xl">
-              {/* Enhanced Title */}
-              <h3 className="gradient-text-animated group- mb-8 text-4xl font-bold transition-transform duration-500 sm:text-5xl">
-                Ready to Secure Your Code?
-              </h3>
-
-              {/* Enhanced Description */}
-              <div className="border-border/50 hover:border-border/50/50/90 bg-card/50 mb-10 rounded-xl border p-6 shadow-sm backdrop-blur-sm transition-all duration-200">
-                <p className="text-foreground text-xl leading-relaxed">
-                  Start analyzing your codebase today with our comprehensive
-                  security and quality tools. Join thousands of developers who
-                  trust Code Guardian for their security needs.
-                </p>
-              </div>
-
-              {/* Enhanced CTA Button */}
-              <div className="relative mb-12 inline-block">
-                <Button
-                  onClick={scrollToHome}
-                  size="lg"
-                  className="btn-enhanced-cta hover:shadow-3xl bg-primary hover:bg-primary/90 text-primary-foreground focus:ring-primary/30 dark:focus:ring-primary/60 rounded-3xl border-0 px-12 py-6 text-xl font-bold shadow-2xl transition-all duration-500 hover:scale-110 focus:ring-4"
-                >
-                  <span className="relative z-10 flex items-center gap-4">
-                    Get Started Now
-                    <Download className="h-6 w-6 transition-transform duration-300 group-hover:animate-bounce" />
-                  </span>
-                </Button>
-              </div>
-
-              {/* Enhanced Trust Indicators */}
-              <div className="grid grid-cols-1 gap-6 sm:grid-cols-3">
-                {TRUST_INDICATORS.map((item, index) => (
-                  <div
-                    key={index}
-                    className="group border-border/50 hover:border-border/50/50/90 bg-card/50 rounded-xl border p-4 shadow-sm backdrop-blur-sm transition-all duration-200"
-                    style={{ animationDelay: item.delay }}
-                  >
-                    <div className="flex items-center justify-center gap-3">
-                      <div
-                        className={`h-3 w-3 bg-gradient-to-r ${item.color} animate-pulse rounded-full transition-transform duration-300 group-hover:scale-125`}
-                      ></div>
-                      <span className="text-foreground/80 group-hover:text-foreground text-sm font-semibold transition-colors duration-300">
-                        {item.label}
-                      </span>
-                    </div>
-                  </div>
-                ))}
+            <div className="mx-auto mb-10 max-w-2xl">
+              <div className="text-muted-foreground bg-muted/30 border-primary border-l-2 p-4 text-left font-mono text-sm md:text-base">
+                <span className="text-primary mr-2">$</span>
+                <span className="typing-text">
+                  Initiate comprehensive security audit sequence for local
+                  codebase. Awaiting user input command...
+                </span>
+                <span
+                  className={cn(
+                    "bg-primary ml-1 inline-block h-4 w-2.5 align-middle",
+                    cursorVisible ? "opacity-100" : "opacity-0"
+                  )}
+                />
               </div>
             </div>
-          </CardContent>
-        </Card>
+
+            {/* Action Button */}
+            <Button
+              onClick={scrollToHome}
+              className="bg-primary hover:bg-primary/90 text-primary-foreground hover:border-primary/50 group/btn relative h-14 overflow-hidden rounded-none border border-transparent px-8 font-mono text-lg font-bold uppercase transition-all"
+            >
+              <span className="relative z-10 flex items-center gap-3">
+                Execute_Sequence
+                <ArrowRight className="h-5 w-5 transition-transform group-hover/btn:translate-x-1" />
+              </span>
+              {/* Scanline effect on button */}
+              <div className="absolute inset-0 translate-x-[-100%] bg-gradient-to-r from-transparent via-white/10 to-transparent transition-transform duration-1000 group-hover/btn:translate-x-[100%]" />
+            </Button>
+
+            {/* System Status Indicators */}
+            <div className="border-border mt-12 flex flex-wrap justify-center gap-4 border-t pt-8 md:gap-12">
+              {statusIndicators.map((indicator, idx) => (
+                <div
+                  key={idx}
+                  className="flex items-center gap-3 font-mono text-xs uppercase"
+                >
+                  <span className="text-muted-foreground flex items-center gap-2">
+                    {indicator.icon}
+                    {indicator.label}:
+                  </span>
+                  <span className={cn("font-bold", indicator.color)}>
+                    [{indicator.status}]
+                  </span>
+                </div>
+              ))}
+            </div>
+          </div>
+        </div>
       </div>
     </section>
   );

@@ -1,12 +1,6 @@
 import React from "react";
-import {
-  Card,
-  CardContent,
-  CardDescription,
-  CardHeader,
-  CardTitle,
-} from "@/components/ui/card";
-import { ArrowUpRight, Sparkles } from "lucide-react";
+import { ArrowUpRight, Sparkles, Terminal } from "lucide-react";
+import { cn } from "@/lib/utils";
 
 interface Feature {
   icon: React.ReactNode;
@@ -23,7 +17,7 @@ interface FeatureGridProps {
   subtitle?: string;
   className?: string;
   columns?: "auto" | 2 | 3 | 4;
-  variant?: "default" | "modern" | "minimal";
+  variant?: "default" | "modern" | "minimal" | "industrial";
 }
 
 export const FeatureGrid: React.FC<FeatureGridProps> = ({
@@ -32,33 +26,37 @@ export const FeatureGrid: React.FC<FeatureGridProps> = ({
   subtitle,
   className = "",
   columns = "auto",
-  variant = "modern",
+  variant = "industrial",
 }) => {
   const getGridCols = () => {
     switch (columns) {
       case 2:
-        return "grid-cols-1 sm:grid-cols-2";
+        return "grid-cols-1 md:grid-cols-2";
       case 3:
-        return "grid-cols-1 sm:grid-cols-2 lg:grid-cols-3";
+        return "grid-cols-1 md:grid-cols-2 lg:grid-cols-3";
       case 4:
-        return "grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 xl:grid-cols-4";
+        return "grid-cols-1 md:grid-cols-2 lg:grid-cols-3 xl:grid-cols-4";
       default:
-        return "grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 xl:grid-cols-4";
+        return "grid-cols-1 md:grid-cols-2 lg:grid-cols-3 xl:grid-cols-4";
     }
   };
 
   return (
-    <section
-      className={`relative py-8 sm:py-12 md:py-16 lg:py-20 xl:py-24 ${className}`}
-    >
+    <section className={cn("relative py-12 md:py-24", className)}>
       {/* Section Header */}
       {title && (
-        <div className="mb-8 px-4 text-center sm:mb-12 sm:px-0 lg:mb-16">
-          <h2 className="text-foreground mb-3 text-3xl font-bold sm:mb-4 sm:text-4xl lg:text-5xl dark:text-white">
+        <div className="container mx-auto mb-16 px-4 text-center">
+          <div className="mb-4 flex items-center justify-center gap-2">
+            <Terminal className="text-primary h-4 w-4" />
+            <span className="text-primary font-mono text-xs font-bold tracking-widest uppercase">
+              System_Capabilities
+            </span>
+          </div>
+          <h2 className="mb-4 font-mono text-3xl font-bold tracking-tight uppercase md:text-4xl">
             {title}
           </h2>
           {subtitle && (
-            <p className="text-muted-foreground mx-auto max-w-3xl text-base sm:text-lg">
+            <p className="text-muted-foreground mx-auto max-w-2xl text-base md:text-lg">
               {subtitle}
             </p>
           )}
@@ -66,88 +64,95 @@ export const FeatureGrid: React.FC<FeatureGridProps> = ({
       )}
 
       {/* Features Grid */}
-      <div
-        className={`grid ${getGridCols()} container mx-auto gap-4 px-4 sm:gap-6 lg:gap-8`}
-      >
+      <div className={`grid ${getGridCols()} container mx-auto gap-6 px-4`}>
         {features.map((feature, index) => (
-          <Card
+          <div
             key={index}
-            className={`group relative cursor-pointer overflow-hidden transition-all duration-500 ${
-              variant === "modern"
-                ? "modern-card border-0 shadow-xl hover:shadow-2xl"
-                : "border bg-white/90 shadow-lg backdrop-blur-sm hover:shadow-xl/90"
-            }`}
+            className="group relative"
             style={{ animationDelay: `${index * 0.1}s` }}
           >
-            {/* Gradient Top Border */}
-            {feature.gradient && (
-              <div
-                className={`h-1 bg-gradient-to-r ${feature.gradient} transition-all duration-300 group-hover:h-2`}
-              ></div>
-            )}
-
-            {/* Coming Soon Badge */}
-            {feature.comingSoon && (
-              <div className="absolute top-3 right-3 z-10 sm:top-4 sm:right-4">
-                <div className="flex items-center gap-1 rounded-full bg-gradient-to-r from-purple-500 to-pink-500 px-2 py-1 text-xs font-medium text-white">
-                  <Sparkles className="h-2.5 w-2.5 sm:h-3 sm:w-3" />
-                  <span className="xs:inline hidden">Soon</span>
-                </div>
-              </div>
-            )}
-
-            <CardHeader className="p-4 pb-3 sm:p-6 sm:pb-4">
-              {/* Icon */}
-              <div className="mb-3 flex items-center justify-between sm:mb-4">
-                <div
-                  className={`rounded-lg p-2 transition-all duration-300 group-hover:scale-110 sm:rounded-xl sm:p-3 ${
-                    feature.gradient
-                      ? `bg-gradient-to-r ${feature.gradient} text-white shadow-lg`
-                      : "bg-muted text-muted-foreground dark:bg-slate-700"
-                  }`}
-                >
-                  <div className="h-5 w-5 sm:h-6 sm:w-6">{feature.icon}</div>
-                </div>
-                <ArrowUpRight className="text-muted-foreground group-hover:text-muted-foreground dark:group-hover:text-muted-foreground h-4 w-4 opacity-0 transition-colors group-hover:opacity-100 sm:h-5 sm:w-5" />
-              </div>
-
-              {/* Title */}
-              <CardTitle className="text-foreground group-hover:text-primary dark:group-hover:text-primary text-lg leading-tight font-bold transition-colors duration-300 sm:text-xl dark:text-white">
-                {feature.title}
-              </CardTitle>
-            </CardHeader>
-
-            <CardContent className="space-y-3 p-4 pt-0 sm:space-y-4 sm:p-6">
-              {/* Description */}
-              <CardDescription className="text-muted-foreground text-sm leading-relaxed sm:text-base">
-                {feature.description}
-              </CardDescription>
-
-              {/* Benefits List */}
-              {feature.benefits && (
-                <ul className="space-y-1.5 sm:space-y-2">
-                  {feature.benefits.map((benefit, benefitIndex) => (
-                    <li
-                      key={benefitIndex}
-                      className="text-muted-foreground flex items-start gap-2 text-xs sm:text-sm"
-                    >
-                      <div
-                        className={`mt-1.5 h-1.5 w-1.5 flex-shrink-0 rounded-full ${
-                          feature.gradient
-                            ? `bg-gradient-to-r ${feature.gradient}`
-                            : "bg-muted"
-                        }`}
-                      ></div>
-                      <span className="leading-relaxed">{benefit}</span>
-                    </li>
-                  ))}
-                </ul>
+            <div
+              className={cn(
+                "bg-background relative h-full overflow-hidden border transition-all duration-300",
+                variant === "industrial"
+                  ? "border-border hover:border-primary/50"
+                  : "border-border/50 rounded-xl shadow-lg"
               )}
-            </CardContent>
+            >
+              {variant === "industrial" && (
+                <>
+                  <div className="bg-muted/10 border-border/50 group-hover:bg-primary/10 group-hover:border-primary/50 absolute top-0 right-0 h-8 w-8 border-b border-l transition-colors" />
+                  <div className="border-border group-hover:border-primary absolute bottom-0 left-0 h-2 w-2 border-t border-r transition-colors" />
+                </>
+              )}
 
-            {/* Hover Effect Overlay */}
-            <div className="pointer-events-none absolute inset-0 bg-gradient-to-t from-transparent via-transparent to-blue-50/50 opacity-0 transition-opacity duration-300 group-hover:opacity-100 dark:to-blue-900/20"></div>
-          </Card>
+              {/* Coming Soon Badge */}
+              {feature.comingSoon && (
+                <div className="absolute top-4 right-4 z-10">
+                  <div className="bg-primary/10 border-primary/20 text-primary flex items-center gap-1 border px-2 py-0.5 font-mono text-[10px] font-bold uppercase">
+                    <Sparkles className="h-3 w-3" />
+                    <span>Planned_Update</span>
+                  </div>
+                </div>
+              )}
+
+              <div className="flex h-full flex-col p-6 md:p-8">
+                {/* Header */}
+                <div className="mb-6 flex items-start justify-between">
+                  <div
+                    className={cn(
+                      "border p-3 transition-colors",
+                      variant === "industrial"
+                        ? "bg-muted/10 border-border group-hover:border-primary/50 group-hover:bg-primary/5 text-primary"
+                        : "bg-primary/10 text-primary rounded-lg"
+                    )}
+                  >
+                    {feature.icon}
+                  </div>
+                  {variant !== "industrial" && (
+                    <ArrowUpRight className="text-muted-foreground h-5 w-5 opacity-0 transition-opacity group-hover:opacity-100" />
+                  )}
+                  {variant === "industrial" && (
+                    <span className="text-muted-foreground font-mono text-[10px] uppercase opacity-50 transition-opacity group-hover:opacity-100">
+                      MOD_{String(index + 1).padStart(2, "0")}
+                    </span>
+                  )}
+                </div>
+
+                <h3
+                  className={cn(
+                    "mb-3 text-xl font-bold transition-colors",
+                    variant === "industrial"
+                      ? "group-hover:text-primary font-mono tracking-tight uppercase"
+                      : ""
+                  )}
+                >
+                  {feature.title}
+                </h3>
+
+                <p className="text-muted-foreground mb-6 flex-grow text-sm leading-relaxed">
+                  {feature.description}
+                </p>
+
+                {/* Benefits List */}
+                {feature.benefits && (
+                  <div className="border-border/50 mt-auto border-t pt-6">
+                    <div className="grid grid-cols-1 gap-2">
+                      {feature.benefits.slice(0, 4).map((benefit, bIdx) => (
+                        <div
+                          key={bIdx}
+                          className="text-muted-foreground flex items-center gap-2 text-xs"
+                        >
+                          <div className="bg-primary h-1 w-1 rounded-none" />
+                          <span className="font-mono uppercase">{benefit}</span>
+                        </div>
+                      ))}
+                    </div>
+                  </div>
+                )}
+              </div>
+            </div>
+          </div>
         ))}
       </div>
     </section>

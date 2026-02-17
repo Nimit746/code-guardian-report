@@ -1,231 +1,280 @@
 import React from "react";
 import {
-  Card,
-  CardContent,
-  CardDescription,
-  CardHeader,
-  CardTitle,
-} from "@/components/ui/card";
-import {
   Webhook,
   Shield,
-  Zap,
-  CheckCircle,
   Languages,
   Code,
   Github,
   Award,
+  Activity,
+  Terminal,
+  Radio,
+  Workflow,
+  Server,
+  AlertTriangle,
+  Lock,
 } from "lucide-react";
 import { scrollToElement } from "./utils";
 import { SECTION_IDS } from "./constants";
 
 const MonitoringInfoSectionComponent: React.FC = () => {
   return (
-    <section id="real-time-monitoring" className="space-y-8">
-      <div className="text-center">
-        <h2 className="mb-4 bg-gradient-to-r from-purple-600 to-blue-600 bg-clip-text text-3xl font-bold text-transparent md:text-4xl">
-          Real-Time Repository Monitoring
-        </h2>
-        <p className="text-muted-foreground mx-auto max-w-3xl text-lg">
-          Continuous security scanning with automated alerts and PR checks.
-          Shift from reactive to proactive security monitoring.
-        </p>
-      </div>
+    <section
+      id="real-time-monitoring"
+      className="relative overflow-hidden py-24"
+    >
+      {/* Background Grid */}
+      <div className="absolute inset-0 bg-[linear-gradient(to_right,#80808012_1px,transparent_1px),linear-gradient(to_bottom,#80808012_1px,transparent_1px)] bg-[size:24px_24px]"></div>
+      <div className="bg-background/90 absolute inset-0 [mask-image:radial-gradient(ellipse_60%_50%_at_50%_0%,#000_70%,transparent_100%)]"></div>
 
-      {/* Features Grid */}
-      <div className="grid grid-cols-1 gap-6 md:grid-cols-2 lg:grid-cols-3">
-        <Card>
-          <CardHeader>
-            <Webhook className="text-primary mb-2 h-8 w-8" />
-            <CardTitle>GitHub/GitLab Webhooks</CardTitle>
-          </CardHeader>
-          <CardContent>
-            <CardDescription>
-              Connect your repositories and receive instant notifications on
-              every push, PR, or commit.
-            </CardDescription>
-          </CardContent>
-        </Card>
+      <div className="relative z-10 container mx-auto px-4">
+        <div className="mb-16 text-center">
+          <div className="mb-4 flex items-center justify-center gap-2">
+            <div className="bg-primary/20 h-px w-12"></div>
+            <span className="text-primary font-mono text-xs font-bold tracking-widest uppercase">
+              LIVE_FEED // SURVEILLANCE
+            </span>
+            <div className="bg-primary/20 h-px w-12"></div>
+          </div>
+          <h2 className="text-foreground mb-6 text-3xl font-bold tracking-tight md:text-5xl">
+            REAL-TIME <span className="text-primary">MONITORING</span>
+          </h2>
+          <p className="text-muted-foreground mx-auto max-w-2xl font-mono text-lg">
+            {">"} Active threat detection protocols engaged. Continuous repo
+            scanning operational.
+          </p>
+        </div>
 
-        <Card>
-          <CardHeader>
-            <Shield className="mb-2 h-8 w-8 text-purple-600" />
-            <CardTitle>Automated PR Checks</CardTitle>
-          </CardHeader>
-          <CardContent>
-            <CardDescription>
-              Automatically scan pull requests and block merges if critical
-              vulnerabilities are detected.
-            </CardDescription>
-          </CardContent>
-        </Card>
+        {/* Features Grid */}
+        <div className="mb-12 grid grid-cols-1 gap-6 md:grid-cols-2 lg:grid-cols-3">
+          <div className="border-primary/20 bg-card/50 hover:border-primary/50 group relative border p-6 transition-all duration-300">
+            <div className="text-primary/20 absolute top-0 right-0 p-2">
+              <Webhook className="h-12 w-12 opacity-20" />
+            </div>
+            <div className="mb-4 flex items-center gap-3">
+              <div className="bg-primary/10 border-primary/20 text-primary flex h-10 w-10 items-center justify-center border">
+                <Radio className="h-5 w-5" />
+              </div>
+              <h3 className="font-mono text-lg font-bold">SIGNAL_INTERCEPT</h3>
+            </div>
+            <p className="text-muted-foreground font-mono text-xs leading-relaxed">
+              {">"} Webhook integration established. Intercepting push events
+              and PR signals for immediate analysis.
+            </p>
+          </div>
 
-        <Card>
-          <CardHeader>
-            <Zap className="mb-2 h-8 w-8 text-orange-600" />
-            <CardTitle>Real-Time Alerts</CardTitle>
-          </CardHeader>
-          <CardContent>
-            <CardDescription>
-              Get instant notifications when new vulnerabilities are introduced
-              in your codebase.
-            </CardDescription>
-          </CardContent>
-        </Card>
-      </div>
+          <div className="border-primary/20 bg-card/50 hover:border-primary/50 group relative border p-6 transition-all duration-300">
+            <div className="text-primary/20 absolute top-0 right-0 p-2">
+              <Shield className="h-12 w-12 opacity-20" />
+            </div>
+            <div className="mb-4 flex items-center gap-3">
+              <div className="bg-primary/10 border-primary/20 text-primary flex h-10 w-10 items-center justify-center border">
+                <Workflow className="h-5 w-5" />
+              </div>
+              <h3 className="font-mono text-lg font-bold">AUTO_GATEKEEPER</h3>
+            </div>
+            <p className="text-muted-foreground font-mono text-xs leading-relaxed">
+              {">"} PR checks automated. Merge capability disabled upon threat
+              detection. Security clearance required.
+            </p>
+          </div>
 
-      {/* Benefits Section */}
-      <Card className="bg-gradient-to-r from-blue-50 to-purple-50 dark:from-blue-950 dark:to-purple-950">
-        <CardHeader>
-          <CardTitle className="flex items-center gap-2">
-            <CheckCircle className="h-6 w-6 text-green-600" />
-            Why Real-Time Monitoring?
-          </CardTitle>
-        </CardHeader>
-        <CardContent>
-          <div className="grid grid-cols-1 gap-6 md:grid-cols-2">
-            <div>
-              <h4 className="mb-2 font-semibold">Proactive vs Reactive</h4>
-              <p className="text-muted-foreground text-sm">
-                Catch vulnerabilities the moment they're introduced, not weeks
-                or months later. Prevent security debt from accumulating in your
-                codebase.
-              </p>
+          <div className="border-primary/20 bg-card/50 hover:border-primary/50 group relative border p-6 transition-all duration-300">
+            <div className="text-primary/20 absolute top-0 right-0 p-2">
+              <AlertTriangle className="h-12 w-12 opacity-20" />
+            </div>
+            <div className="mb-4 flex items-center gap-3">
+              <div className="bg-primary/10 border-primary/20 text-primary flex h-10 w-10 items-center justify-center border">
+                <Activity className="h-5 w-5" />
+              </div>
+              <h3 className="font-mono text-lg font-bold">INSTANT_ALERT</h3>
+            </div>
+            <p className="text-muted-foreground font-mono text-xs leading-relaxed">
+              {">"} Zero-latency notification protocol. Vulnerability
+              introduction triggers immediate operator alert.
+            </p>
+          </div>
+        </div>
+
+        {/* Benefits Section - Data Readout */}
+        <div className="border-primary/20 mb-12 border bg-black/40 p-1">
+          <div className="border-primary/10 bg-primary/5 border p-6 md:p-8">
+            <div className="mb-6 flex items-center gap-2">
+              <Terminal className="text-primary h-5 w-5" />
+              <h3 className="text-foreground font-mono text-xl font-bold">
+                OPERATIONAL_ADVANTAGES
+              </h3>
             </div>
 
-            <div>
-              <h4 className="mb-2 font-semibold">DevSecOps Integration</h4>
-              <p className="text-muted-foreground text-sm">
-                Seamlessly integrate security into your development workflow.
-                Security checks become part of your CI/CD pipeline.
-              </p>
-            </div>
-
-            <div>
-              <h4 className="mb-2 font-semibold">Faster Remediation</h4>
-              <p className="text-muted-foreground text-sm">
-                Fix issues while the code is fresh in developers' minds. Reduce
-                the cost and effort of security fixes by 10x.
-              </p>
-            </div>
-
-            <div>
-              <h4 className="mb-2 font-semibold">Compliance Ready</h4>
-              <p className="text-muted-foreground text-sm">
-                Maintain continuous compliance with security standards.
-                Automatic audit trails and security reports for every change.
-              </p>
+            <div className="grid grid-cols-1 gap-6 md:grid-cols-2 lg:grid-cols-4">
+              <div>
+                <h4 className="text-primary mb-2 font-mono text-xs font-bold">
+                  [PROACTIVE_DEFENSE]
+                </h4>
+                <p className="text-muted-foreground font-mono text-xs leading-relaxed">
+                  {">"} Threat neutralization at source. Prevents technical debt
+                  accumulation.
+                </p>
+              </div>
+              <div>
+                <h4 className="text-primary mb-2 font-mono text-xs font-bold">
+                  [DEV_SEC_OPS]
+                </h4>
+                <p className="text-muted-foreground font-mono text-xs leading-relaxed">
+                  {">"} Seamless pipeline integration. Automated security
+                  checkpoints active.
+                </p>
+              </div>
+              <div>
+                <h4 className="text-primary mb-2 font-mono text-xs font-bold">
+                  [RAPID_REMEDIATION]
+                </h4>
+                <p className="text-muted-foreground font-mono text-xs leading-relaxed">
+                  {">"} Fix deployment latency reduced by 90%. Cost efficiency
+                  maximized.
+                </p>
+              </div>
+              <div>
+                <h4 className="text-primary mb-2 font-mono text-xs font-bold">
+                  [COMPLIANCE_ALGO]
+                </h4>
+                <p className="text-muted-foreground font-mono text-xs leading-relaxed">
+                  {">"} Continuous audit trailing. SOC2/ISO standard
+                  verification.
+                </p>
+              </div>
             </div>
           </div>
-        </CardContent>
-      </Card>
+        </div>
 
-      {/* Technical Features */}
-      <div className="grid grid-cols-1 gap-8 md:grid-cols-2">
-        <Card>
-          <CardHeader>
-            <CardTitle>Supported Platforms</CardTitle>
-            <CardDescription>
-              Multi-language and multi-platform support
-            </CardDescription>
-          </CardHeader>
-          <CardContent className="space-y-4">
-            <div className="flex items-center gap-3">
-              <Languages className="text-primary h-5 w-5" />
-              <div>
-                <h5 className="font-medium">Multi-Language Analysis</h5>
-                <p className="text-muted-foreground text-sm">
-                  Python, JavaScript, TypeScript, Java, C#, Go, Rust, and more
-                </p>
+        {/* Technical Features & Supported Platforms */}
+        <div className="mb-12 grid grid-cols-1 gap-8 md:grid-cols-2">
+          {/* Supported Platforms */}
+          <div className="border-primary/20 bg-card/30 border">
+            <div className="border-primary/20 bg-primary/5 flex items-center justify-between border-b p-4">
+              <h3 className="font-mono text-sm font-bold">
+                TARGET_ENVIRONMENTS
+              </h3>
+              <div className="h-2 w-2 animate-pulse rounded-full bg-green-500"></div>
+            </div>
+            <div className="space-y-6 p-6">
+              <div className="flex gap-4">
+                <Languages className="text-primary mt-1 h-5 w-5" />
+                <div>
+                  <h5 className="text-foreground mb-1 font-mono text-xs font-bold">
+                    MULTI_LANG_ANALYSIS
+                  </h5>
+                  <div className="flex flex-wrap gap-2">
+                    {["PYTHON", "JS/TS", "JAVA", "C#", "GO", "RUST"].map(
+                      (lang) => (
+                        <span
+                          key={lang}
+                          className="bg-muted text-muted-foreground px-1.5 py-0.5 font-mono text-[10px]"
+                        >
+                          {lang}
+                        </span>
+                      )
+                    )}
+                  </div>
+                </div>
+              </div>
+              <div className="flex gap-4">
+                <Code className="text-primary mt-1 h-5 w-5" />
+                <div>
+                  <h5 className="text-foreground mb-1 font-mono text-xs font-bold">
+                    PATTERN_RECOGNITION
+                  </h5>
+                  <p className="text-muted-foreground text-justify font-mono text-xs">
+                    AI-driven vulnerability heuristics. Adapts to codebase
+                    structure.
+                  </p>
+                </div>
+              </div>
+              <div className="flex gap-4">
+                <Github className="text-primary mt-1 h-5 w-5" />
+                <div>
+                  <h5 className="text-foreground mb-1 font-mono text-xs font-bold">
+                    GIT_INTEGRATION
+                  </h5>
+                  <p className="text-muted-foreground text-justify font-mono text-xs">
+                    Native support for GitHub workflow protocols and actions.
+                  </p>
+                </div>
               </div>
             </div>
-            <div className="flex items-center gap-3">
-              <Code className="h-5 w-5 text-green-600" />
-              <div>
-                <h5 className="font-medium">Advanced Pattern Detection</h5>
-                <p className="text-muted-foreground text-sm">
-                  AI-powered vulnerability identification and security analysis
-                </p>
-              </div>
-            </div>
-            <div className="flex items-center gap-3">
-              <Github className="h-5 w-5 text-gray-600" />
-              <div>
-                <h5 className="font-medium">GitHub Integration</h5>
-                <p className="text-muted-foreground text-sm">
-                  Seamless integration with GitHub repositories and workflows
-                </p>
-              </div>
-            </div>
-          </CardContent>
-        </Card>
+          </div>
 
-        <Card>
-          <CardHeader>
-            <CardTitle>Enterprise Features</CardTitle>
-            <CardDescription>
-              Security and compliance for organizations
-            </CardDescription>
-          </CardHeader>
-          <CardContent className="space-y-4">
-            <div className="flex items-center gap-3">
-              <Award className="h-5 w-5 text-yellow-600" />
-              <div>
-                <h5 className="font-medium">Compliance Reporting</h5>
-                <p className="text-muted-foreground text-sm">
-                  Generate compliance reports for SOC 2, ISO 27001, and other
-                  standards
-                </p>
+          {/* Enterprise Features */}
+          <div className="border-primary/20 bg-card/30 border">
+            <div className="border-primary/20 bg-primary/5 flex items-center justify-between border-b p-4">
+              <h3 className="font-mono text-sm font-bold">
+                ENTERPRISE_MODULES
+              </h3>
+              <div className="h-2 w-2 rounded-full bg-blue-500"></div>
+            </div>
+            <div className="space-y-6 p-6">
+              <div className="flex gap-4">
+                <Award className="text-primary mt-1 h-5 w-5" />
+                <div>
+                  <h5 className="text-foreground mb-1 font-mono text-xs font-bold">
+                    COMPLIANCE_GENERATOR
+                  </h5>
+                  <p className="text-muted-foreground text-justify font-mono text-xs">
+                    Auto-generate reports for SOC 2, ISO 27001, HIPAA protocols.
+                  </p>
+                </div>
+              </div>
+              <div className="flex gap-4">
+                <Lock className="text-primary mt-1 h-5 w-5" />
+                <div>
+                  <h5 className="text-foreground mb-1 font-mono text-xs font-bold">
+                    AUDIT_LOGGING
+                  </h5>
+                  <p className="text-muted-foreground text-justify font-mono text-xs">
+                    Immutable event logs for forensic analysis and tracking.
+                  </p>
+                </div>
+              </div>
+              <div className="flex gap-4">
+                <Server className="text-primary mt-1 h-5 w-5" />
+                <div>
+                  <h5 className="text-foreground mb-1 font-mono text-xs font-bold">
+                    PERF_OPTIMIZATION
+                  </h5>
+                  <p className="text-muted-foreground text-justify font-mono text-xs">
+                    Resource allocation management for high-scale scanning ops.
+                  </p>
+                </div>
               </div>
             </div>
-            <div className="flex items-center gap-3">
-              <Shield className="h-5 w-5 text-red-600" />
-              <div>
-                <h5 className="font-medium">Security Auditing</h5>
-                <p className="text-muted-foreground text-sm">
-                  Complete audit trails and security event logging
-                </p>
-              </div>
-            </div>
-            <div className="flex items-center gap-3">
-              <Zap className="h-5 w-5 text-orange-600" />
-              <div>
-                <h5 className="font-medium">Performance Monitoring</h5>
-                <p className="text-muted-foreground text-sm">
-                  Track analysis performance and optimize scanning workflows
-                </p>
-              </div>
-            </div>
-          </CardContent>
-        </Card>
-      </div>
+          </div>
+        </div>
 
-      {/* Setup Information */}
-      <Card className="border-border bg-muted/50 dark:border-border border-2 border-dashed dark:bg-blue-950/30">
-        <CardHeader>
-          <CardTitle>Ready to Get Started?</CardTitle>
-          <CardDescription>
-            Real-time monitoring is available for authenticated users. Connect
-            your repositories and start securing your code today.
-          </CardDescription>
-        </CardHeader>
-        <CardContent>
-          <div className="flex flex-col gap-4 sm:flex-row">
+        {/* Setup Information */}
+        <div className="border-primary/30 bg-primary/5 border border-dashed p-8 text-center">
+          <h3 className="text-foreground mb-4 font-mono text-xl font-bold">
+            SYSTEM_READY_FOR_DEPLOYMENT
+          </h3>
+          <p className="text-muted-foreground mx-auto mb-8 max-w-xl font-mono text-xs">
+            {">"} Real-time monitoring capability available for authorized
+            users. Initiating security handshake...
+          </p>
+          <div className="flex flex-col justify-center gap-4 sm:flex-row">
             <button
               onClick={() => scrollToElement("github-analysis")}
-              className="bg-primary hover:bg-primary/90 rounded-lg px-6 py-3 font-medium text-white shadow-md transition-all duration-300 hover:shadow-lg"
+              className="bg-primary hover:bg-primary/90 text-primary-foreground px-8 py-3 font-mono text-xs font-bold uppercase transition-all"
             >
-              Analyze Your Repository
+              INITIALIZE_SCAN
             </button>
             <button
               onClick={() => scrollToElement(SECTION_IDS.ABOUT_SECTION)}
-              className="border-border text-foreground/80 hover:bg-muted rounded-lg border px-6 py-3 font-medium transition-all duration-300 dark:border-slate-600"
+              className="border-primary/50 text-foreground hover:bg-primary/10 border px-8 py-3 font-mono text-xs font-bold uppercase transition-all"
             >
-              Learn More
+              ACCESS_DOCS
             </button>
           </div>
-        </CardContent>
-      </Card>
+        </div>
+      </div>
     </section>
   );
 };

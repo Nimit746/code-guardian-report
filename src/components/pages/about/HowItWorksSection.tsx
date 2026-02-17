@@ -4,408 +4,324 @@ import {
   Shield,
   Brain,
   BarChart3,
-  Zap,
-  Lock,
-  Code,
-  Target,
-  CheckCircle,
-  TrendingUp,
-  Database,
+  Code2,
+  Share2,
   Cpu,
-  Eye,
-  Layers,
+  Terminal,
+  Activity,
+  GitBranch,
+  Network,
 } from "lucide-react";
+import { cn } from "@/lib/utils";
 
-interface AnalysisStep {
+interface AnalysisNode {
   id: string;
   title: string;
   description: string;
   icon: React.ReactNode;
   details: string[];
   metrics: string[];
-  color: string;
 }
 
 export const HowItWorksSection: React.FC = () => {
-  const [activeStep, setActiveStep] = useState<string>("upload");
+  const [activeNode, setActiveNode] = useState<string>("ingest");
 
-  const analysisSteps: AnalysisStep[] = [
+  const nodes: AnalysisNode[] = [
     {
-      id: "upload",
-      title: "File Processing & Extraction",
-      description:
-        "Advanced ZIP file analysis with intelligent content extraction and file type detection",
-      icon: <FileCode className="h-6 w-6" />,
+      id: "ingest",
+      title: "MODULE_01: INGESTION",
+      description: "Binary analysis & content extraction engine",
+      icon: <FileCode className="h-5 w-5" />,
       details: [
-        "JSZip-powered extraction engine",
-        "Multi-format file support (JS, TS, Python, PHP, Java, C#)",
-        "Intelligent encoding detection (UTF-8, Latin-1, ASCII)",
-        "Binary file filtering and optimization",
-        "Recursive directory structure analysis",
-        "Memory-efficient streaming for large files",
+        "JSZip streaming extraction",
+        "MIME-type heuristic detection",
+        "Polyglot language parser",
+        "Binary/Text segregation",
+        "Directory tree mapping",
       ],
       metrics: [
-        "File Count Analysis",
-        "Total Lines of Code",
-        "Language Distribution",
-        "File Size Metrics",
-        "Encoding Statistics",
+        "Throughput: >50MB/s",
+        "Format Support: 20+",
+        "Encoding: Auto-detect",
       ],
-      color: "from-blue-500 to-cyan-500",
     },
     {
       id: "security",
-      title: "Multi-Layer Security Analysis",
-      description:
-        "Comprehensive vulnerability detection using advanced pattern matching and threat intelligence",
-      icon: <Shield className="h-6 w-6" />,
+      title: "MODULE_02: THREAT_SCAN",
+      description: "Vulnerability heuristics & pattern matching",
+      icon: <Shield className="h-5 w-5" />,
       details: [
-        "OWASP Top 10 vulnerability scanning",
-        "CVE database pattern matching",
-        "SQL injection detection algorithms",
-        "XSS vulnerability identification",
-        "Hardcoded secrets detection",
-        "Insecure cryptography analysis",
-        "Command injection patterns",
-        "Path traversal vulnerability checks",
-        "Authentication bypass detection",
-        "Session management issues",
+        "OWASP compliance matrix",
+        "CVE signature matching",
+        "AST injection detection",
+        "Secrets entropy scan",
+        "Auth logic analysis",
       ],
       metrics: [
-        "Security Score (0-100)",
-        "Critical Vulnerabilities",
-        "High/Medium/Low Issues",
-        "CWE Classifications",
-        "CVSS Severity Ratings",
+        "False Positives: <5%",
+        "Scan Depth: Recursive",
+        "Rule Set: Extended",
       ],
-      color: "from-red-500 to-pink-500",
     },
     {
       id: "quality",
-      title: "Code Quality Assessment",
-      description:
-        "Deep code analysis with maintainability, complexity, and performance metrics",
-      icon: <Code className="h-6 w-6" />,
+      title: "MODULE_03: CODE_METRICS",
+      description: "Static analysis & complexity computation",
+      icon: <Code2 className="h-5 w-5" />,
       details: [
-        "Cyclomatic complexity calculation",
-        "Technical debt estimation",
-        "Maintainability index scoring",
-        "Code duplication detection",
-        "Performance bottleneck identification",
-        "Anti-pattern recognition",
-        "Best practices validation",
-        "Architecture quality assessment",
-        "Coupling and cohesion analysis",
-        "Test coverage estimation",
+        "Cyclomatic complexity",
+        "Halstead metrics",
+        "Maintainability index",
+        "Duplication fragments",
+        "Anti-pattern detection",
       ],
       metrics: [
-        "Quality Score (0-100)",
-        "Maintainability Index",
-        "Technical Debt (hours)",
-        "Complexity Rating",
-        "Architecture Score",
+        "Maintainability: 0-100",
+        "Tech Debt: HoursEstimate",
+        "Cognitive Load: High/Low",
       ],
-      color: "from-green-500 to-emerald-500",
     },
     {
       id: "ai",
-      title: "AI-Powered Analysis & Insights",
-      description:
-        "Advanced machine learning algorithms for intelligent pattern recognition and recommendations",
-      icon: <Brain className="h-6 w-6" />,
+      title: "MODULE_04: NEURAL_CORE",
+      description: "LLM-based pattern recognition & context",
+      icon: <Brain className="h-5 w-5" />,
       details: [
-        "Natural language processing for issue descriptions",
-        "Context-aware vulnerability assessment",
-        "Intelligent fix recommendations",
-        "Impact analysis and risk scoring",
-        "Learning from code patterns",
-        "Auto-generated remediation guides",
-        "Priority-based issue ranking",
-        "False positive reduction",
-        "Custom rule generation",
-        "Trend analysis and predictions",
+        "Context-aware analysis",
+        "Semantic understanding",
+        "Remediation synthesis",
+        "False positive filtering",
+        "Predictive risk modeling",
       ],
       metrics: [
-        "AI Confidence Scores",
-        "Risk Assessment",
-        "Priority Rankings",
-        "Fix Complexity",
-        "Impact Predictions",
+        "Model: Specialized",
+        "Context Window: 32k",
+        "Latency: Optimized",
       ],
-      color: "from-purple-500 to-indigo-500",
     },
     {
       id: "scoring",
-      title: "Advanced Scoring System",
-      description:
-        "Comprehensive multi-dimensional scoring with weighted algorithms and industry benchmarks",
-      icon: <BarChart3 className="h-6 w-6" />,
+      title: "MODULE_05: AGGREGATOR",
+      description: "Multi-dimensional scoring algorithm",
+      icon: <BarChart3 className="h-5 w-5" />,
       details: [
-        "Weighted severity scoring (Critical: 15pts, High: 8pts, Medium: 3pts, Low: 1pt)",
-        "Exponential penalty system for critical issues",
-        "Complexity-based adjustments",
-        "Issue diversity impact calculation",
-        "File distribution analysis",
-        "Logarithmic density scaling",
-        "Industry benchmark comparisons",
-        "Performance impact weighting",
-        "Security maturity assessment",
-        "Grade-based classification (A+ to F)",
+        "Weighted severity matrix",
+        "Exponential penalty logic",
+        "Benchmarking engine",
+        "Risk velocity calc",
+        "Grade classification",
       ],
-      metrics: [
-        "Overall Security Score",
-        "Quality Grade (A+ to F)",
-        "Performance Score",
-        "Security Maturity Level",
-        "Technical Risk Rating",
-      ],
-      color: "from-orange-500 to-yellow-500",
-    },
-  ];
-
-  const advancedMetrics = [
-    {
-      category: "Security Metrics",
-      icon: <Lock className="h-5 w-5" />,
-      items: [
-        "Vulnerability Density (issues per 1000 LOC)",
-        "Security Score (weighted by severity)",
-        "CWE Coverage Analysis",
-        "Threat Vector Assessment",
-        "Attack Surface Analysis",
-      ],
-    },
-    {
-      category: "Quality Metrics",
-      icon: <Target className="h-5 w-5" />,
-      items: [
-        "Maintainability Index (0-100)",
-        "Technical Debt (estimated hours)",
-        "Code Complexity Score",
-        "Duplication Percentage",
-        "Test Coverage Estimation",
-      ],
-    },
-    {
-      category: "Performance Metrics",
-      icon: <Zap className="h-5 w-5" />,
-      items: [
-        "Performance Score (0-100)",
-        "Bottleneck Detection",
-        "Memory Usage Patterns",
-        "Algorithm Efficiency",
-        "Resource Optimization",
-      ],
-    },
-    {
-      category: "Architecture Metrics",
-      icon: <Layers className="h-5 w-5" />,
-      items: [
-        "Architecture Score (0-100)",
-        "Coupling Analysis",
-        "Dependency Management",
-        "Design Pattern Usage",
-        "Structural Quality",
-      ],
+      metrics: ["Precision: 99.9%", "Dimensions: 5", "Output: JSON/PDF"],
     },
   ];
 
   return (
-    <section className="relative overflow-hidden py-20">
-      {/* Background Effects - Light Mode */}
-      <div className="absolute inset-0 bg-gradient-to-br from-slate-50 via-blue-50/30 to-purple-50/30 dark:hidden"></div>
-      {/* Background Effects - Dark Mode */}
-      <div className="absolute inset-0 hidden bg-gradient-to-br from-neutral-950 via-neutral-900 to-neutral-950 dark:block"></div>
-      {/* Ambient glow blobs */}
-      <div className="absolute top-0 left-1/4 h-72 w-72 animate-pulse rounded-full bg-blue-300/20 blur-xl dark:bg-blue-500/10"></div>
-      <div className="absolute right-1/4 bottom-0 h-72 w-72 animate-pulse rounded-full bg-purple-300/20 blur-xl delay-1000 dark:bg-purple-500/10"></div>
-
-      <div className="relative z-10 container mx-auto px-6">
-        {/* Section Header */}
-        <div className="mb-16 text-center">
-          <h2 className="mb-6 text-4xl font-bold md:text-5xl dark:text-white">
-            <span className="bg-gradient-to-r from-blue-600 via-purple-600 to-teal-600 bg-clip-text text-transparent dark:from-blue-400 dark:via-purple-400 dark:to-teal-400">
-              How Our Analysis Engine Works
+    <section className="border-border bg-background relative border-t py-24">
+      <div className="container mx-auto px-4">
+        {/* Header */}
+        <div className="mb-16 flex flex-col items-center">
+          <div className="mb-4 flex items-center gap-2">
+            <Network className="text-primary h-4 w-4" />
+            <span className="text-primary font-mono text-xs font-bold tracking-widest uppercase">
+              Core_Architecture
             </span>
+          </div>
+          <h2 className="text-center font-mono text-3xl font-bold tracking-tight uppercase lg:text-4xl">
+            System Logic Pipeline
           </h2>
-          <p className="text-muted-foreground mx-auto max-w-3xl text-xl dark:text-gray-300">
-            Deep dive into our comprehensive, multi-layered analysis system that
-            provides real-time security, quality, and performance insights with
-            industry-leading accuracy
-          </p>
         </div>
 
-        {/* Analysis Steps */}
-        <div className="mb-20">
-          <h3 className="text-foreground mb-12 text-center text-3xl font-bold dark:text-white">
-            5-Stage Analysis Pipeline
-          </h3>
+        <div className="grid gap-8 lg:grid-cols-12 lg:gap-12">
+          {/* Left: Pipeline Visualizer */}
+          <div className="relative lg:col-span-5">
+            <div className="bg-border absolute top-6 bottom-6 left-6 hidden w-0.5 lg:block" />
 
-          {/* Step Navigation */}
-          <div className="mb-12 flex flex-wrap justify-center gap-4">
-            {analysisSteps.map((step, index) => (
-              <button
-                key={step.id}
-                onClick={() => setActiveStep(step.id)}
-                className={`flex items-center gap-3 rounded-full px-6 py-3 transition-all duration-300 ${
-                  activeStep === step.id
-                    ? `bg-gradient-to-r ${step.color} scale-105 text-white shadow-lg`
-                    : "bg-muted/50 text-muted-foreground hover:bg-muted/80 dark:bg-neutral-800 dark:text-gray-300 dark:hover:bg-neutral-700"
-                }`}
-              >
-                <span className="font-semibold">{index + 1}</span>
-                {step.icon}
-                <span className="font-medium">{step.title}</span>
-              </button>
-            ))}
-          </div>
+            <div className="relative space-y-6">
+              {nodes.map((node, index) => (
+                <div
+                  key={node.id}
+                  className={cn(
+                    "group relative cursor-pointer pl-12 transition-all duration-300",
+                    activeNode === node.id
+                      ? "translate-x-2 opacity-100"
+                      : "opacity-60 hover:opacity-100"
+                  )}
+                  onClick={() => setActiveNode(node.id)}
+                >
+                  {/* Connector Node */}
+                  <div
+                    className={cn(
+                      "border-border bg-background absolute top-6 left-[21px] z-10 h-3 w-3 border transition-colors duration-300",
+                      activeNode === node.id
+                        ? "bg-primary border-primary"
+                        : "group-hover:border-primary"
+                    )}
+                  />
 
-          {/* Active Step Details */}
-          {analysisSteps.map((step) => (
-            <div
-              key={step.id}
-              className={`transition-all duration-500 ${
-                activeStep === step.id
-                  ? "max-h-full opacity-100"
-                  : "max-h-0 overflow-hidden opacity-0"
-              }`}
-            >
-              <div className="border-border/50 bg-card/80 rounded-2xl border p-8 shadow-xl backdrop-blur-sm dark:border-neutral-800 dark:bg-neutral-900">
-                <div className="grid gap-8 md:grid-cols-2">
-                  {/* Description & Details */}
-                  <div>
-                    <div className="mb-6 flex items-center gap-4">
+                  {/* Card */}
+                  <div
+                    className={cn(
+                      "relative overflow-hidden border p-4 transition-all duration-300",
+                      activeNode === node.id
+                        ? "bg-primary/5 border-primary shadow-[0_0_15px_rgba(var(--primary),0.1)]"
+                        : "bg-background border-border group-hover:border-primary/50"
+                    )}
+                  >
+                    {activeNode === node.id && (
+                      <div className="from-primary/10 pointer-events-none absolute top-0 right-0 h-16 w-16 bg-gradient-to-bl to-transparent" />
+                    )}
+
+                    <div className="flex items-start gap-4">
                       <div
-                        className={`rounded-xl bg-gradient-to-r p-3 ${step.color} text-white`}
+                        className={cn(
+                          "border p-2 transition-colors duration-300",
+                          activeNode === node.id
+                            ? "bg-primary text-primary-foreground border-primary"
+                            : "bg-muted/10 border-border"
+                        )}
                       >
-                        {step.icon}
+                        {node.icon}
                       </div>
                       <div>
-                        <h4 className="text-foreground text-2xl font-bold dark:text-white">
-                          {step.title}
-                        </h4>
-                        <p className="text-muted-foreground dark:text-gray-300">
-                          {step.description}
-                        </p>
-                      </div>
-                    </div>
-
-                    <div className="space-y-3">
-                      <h5 className="text-foreground flex items-center gap-2 font-semibold dark:text-white">
-                        <Eye className="h-4 w-4" />
-                        Analysis Components:
-                      </h5>
-                      <div className="grid gap-2">
-                        {step.details.map((detail, index) => (
-                          <div
-                            key={index}
-                            className="text-muted-foreground flex items-center gap-3 text-sm dark:text-gray-400"
-                          >
-                            <CheckCircle className="text-primary h-4 w-4 flex-shrink-0" />
-                            <span>{detail}</span>
-                          </div>
-                        ))}
-                      </div>
-                    </div>
-                  </div>
-
-                  {/* Metrics */}
-                  <div>
-                    <h5 className="text-foreground mb-4 flex items-center gap-2 font-semibold dark:text-white">
-                      <TrendingUp className="h-4 w-4" />
-                      Generated Metrics:
-                    </h5>
-                    <div className="space-y-3">
-                      {step.metrics.map((metric, index) => (
-                        <div
-                          key={index}
-                          className="bg-muted/50 flex items-center gap-3 rounded-lg p-3 dark:bg-neutral-800"
-                        >
-                          <BarChart3 className="text-primary h-4 w-4" />
-                          <span className="text-foreground/80 text-sm font-medium dark:text-gray-300">
-                            {metric}
-                          </span>
+                        <div className="text-muted-foreground mb-1 font-mono text-[10px] tracking-wider uppercase">
+                          0{index + 1} // {node.id.toUpperCase()}
                         </div>
-                      ))}
+                        <h3
+                          className={cn(
+                            "font-mono text-sm font-bold tracking-tight uppercase",
+                            activeNode === node.id
+                              ? "text-primary"
+                              : "text-foreground"
+                          )}
+                        >
+                          {node.description}
+                        </h3>
+                      </div>
                     </div>
                   </div>
                 </div>
-              </div>
+              ))}
             </div>
-          ))}
-        </div>
-
-        {/* Advanced Metrics Grid */}
-        <div className="mb-16">
-          <h3 className="text-foreground mb-12 text-center text-3xl font-bold dark:text-white">
-            Comprehensive Scoring System
-          </h3>
-          <div className="grid gap-6 md:grid-cols-2 lg:grid-cols-4">
-            {advancedMetrics.map((category, index) => (
-              <div
-                key={index}
-                className="border-border/50 bg-card/60 rounded-xl border p-6 backdrop-blur-sm transition-all duration-300 hover:shadow-lg dark:border-neutral-800 dark:bg-neutral-900"
-              >
-                <div className="mb-4 flex items-center gap-3">
-                  <div className="bg-primary/10 dark:bg-primary/20 rounded-lg p-2 text-primary">
-                    {category.icon}
-                  </div>
-                  <h4 className="text-foreground font-bold dark:text-white">
-                    {category.category}
-                  </h4>
-                </div>
-                <div className="space-y-2">
-                  {category.items.map((item, itemIndex) => (
-                    <div
-                      key={itemIndex}
-                      className="text-muted-foreground flex items-center gap-2 text-sm dark:text-gray-400"
-                    >
-                      <div className="bg-primary h-1.5 w-1.5 rounded-full"></div>
-                      <span>{item}</span>
-                    </div>
-                  ))}
-                </div>
-              </div>
-            ))}
           </div>
-        </div>
 
-        {/* Technology Stack */}
-        <div className="text-center">
-          <h3 className="text-foreground mb-8 text-3xl font-bold dark:text-white">
-            Powered by Advanced Technology
-          </h3>
-          <div className="flex flex-wrap justify-center gap-4">
-            {[
-              { name: "JSZip Engine", icon: <Database className="h-5 w-5" /> },
-              {
-                name: "Pattern Matching",
-                icon: <Target className="h-5 w-5" />,
-              },
-              { name: "AI Algorithms", icon: <Brain className="h-5 w-5" /> },
-              {
-                name: "Real-time Processing",
-                icon: <Cpu className="h-5 w-5" />,
-              },
-              {
-                name: "Security Intelligence",
-                icon: <Shield className="h-5 w-5" />,
-              },
-              {
-                name: "Performance Analytics",
-                icon: <Zap className="h-5 w-5" />,
-              },
-            ].map((tech, index) => (
-              <div
-                key={index}
-                className="border-border/50 bg-muted/50 flex items-center gap-2 rounded-full border px-4 py-2 dark:border-neutral-800 dark:bg-neutral-800/50"
-              >
-                <div className="text-primary">{tech.icon}</div>
-                <span className="text-foreground/80 text-sm font-medium dark:text-gray-300">
-                  {tech.name}
-                </span>
-              </div>
-            ))}
+          {/* Right: Detailed Analysis View */}
+          <div className="lg:col-span-7">
+            <div className="sticky top-24">
+              {nodes.map(
+                (node) =>
+                  activeNode === node.id && (
+                    <div
+                      key={node.id}
+                      className="animate-in fade-in slide-in-from-right-4 duration-300"
+                    >
+                      <div className="border-border bg-background/50 relative overflow-hidden border backdrop-blur-xl">
+                        {/* Tech decorations */}
+                        <div className="from-primary absolute top-0 left-0 h-1 w-full bg-gradient-to-r via-transparent to-transparent" />
+                        <div className="from-primary/30 absolute right-0 bottom-0 h-1 w-1/3 bg-gradient-to-l to-transparent" />
+
+                        <div className="p-8">
+                          {/* Header */}
+                          <div className="border-border/50 mb-8 flex items-center justify-between border-b pb-6">
+                            <div>
+                              <h3 className="text-foreground mb-2 font-mono text-2xl font-bold uppercase">
+                                {node.title}
+                              </h3>
+                              <p className="text-muted-foreground font-mono text-sm">
+                                Status:{" "}
+                                <span className="animate-pulse text-green-500">
+                                  ACTIVE
+                                </span>{" "}
+                                // Latency: 12ms
+                              </p>
+                            </div>
+                            <Cpu className="text-primary/10 h-12 w-12" />
+                          </div>
+
+                          <div className="grid gap-8 md:grid-cols-2">
+                            {/* Functionality */}
+                            <div>
+                              <div className="text-primary mb-4 flex items-center gap-2">
+                                <Terminal className="h-4 w-4" />
+                                <span className="font-mono text-xs font-bold tracking-wider uppercase">
+                                  Logic_Gates
+                                </span>
+                              </div>
+                              <ul className="space-y-3">
+                                {node.details.map((detail, idx) => (
+                                  <li
+                                    key={idx}
+                                    className="text-muted-foreground flex items-start gap-3 text-sm"
+                                  >
+                                    <span className="text-primary/50 mt-0.5 font-mono text-xs">
+                                      [{idx.toString().padStart(2, "0")}]
+                                    </span>
+                                    <span className="text-foreground/90">
+                                      {detail}
+                                    </span>
+                                  </li>
+                                ))}
+                              </ul>
+                            </div>
+
+                            {/* Metrics Panel */}
+                            <div className="bg-muted/5 border-border/50 border p-4">
+                              <div className="text-primary mb-4 flex items-center gap-2">
+                                <Activity className="h-4 w-4" />
+                                <span className="font-mono text-xs font-bold tracking-wider uppercase">
+                                  Performance_Telemetry
+                                </span>
+                              </div>
+                              <div className="space-y-3">
+                                {node.metrics.map((metric, idx) => (
+                                  <div key={idx} className="relative pt-2">
+                                    <div className="mb-1 flex justify-between font-mono text-xs">
+                                      <span className="text-muted-foreground">
+                                        {metric.split(":")[0]}
+                                      </span>
+                                      <span className="text-foreground font-bold">
+                                        {metric.split(":")[1]}
+                                      </span>
+                                    </div>
+                                    <div className="bg-muted h-0.5 w-full overflow-hidden">
+                                      <div
+                                        className="bg-primary h-full"
+                                        style={{
+                                          width: `${Math.random() * 40 + 60}%`,
+                                        }}
+                                      />
+                                    </div>
+                                  </div>
+                                ))}
+                              </div>
+                            </div>
+                          </div>
+
+                          {/* Footer / System Status */}
+                          <div className="border-border/50 mt-8 flex items-center justify-between border-t pt-6">
+                            <div className="flex items-center gap-4">
+                              <div className="bg-background border-border flex gap-2 border px-2 py-1">
+                                <div className="h-1.5 w-1.5 animate-pulse rounded-full bg-green-500" />
+                                <span className="text-muted-foreground font-mono text-[10px] uppercase">
+                                  System_Online
+                                </span>
+                              </div>
+                              <div className="bg-background border-border flex gap-2 border px-2 py-1">
+                                <GitBranch className="text-muted-foreground h-3 w-3" />
+                                <span className="text-muted-foreground font-mono text-[10px] uppercase">
+                                  v
+                                  {process.env.NEXT_PUBLIC_APP_VERSION ||
+                                    "2.0.0"}
+                                </span>
+                              </div>
+                            </div>
+                            <Share2 className="text-muted-foreground hover:text-foreground h-4 w-4 cursor-pointer transition-colors" />
+                          </div>
+                        </div>
+                      </div>
+                    </div>
+                  )
+              )}
+            </div>
           </div>
         </div>
       </div>

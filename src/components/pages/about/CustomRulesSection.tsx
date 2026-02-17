@@ -1,6 +1,7 @@
 /**
  * Custom Rules Section for About Page
  * Displays information about the custom rules engine feature
+ * Industrial Design Variant
  */
 
 import React from "react";
@@ -13,247 +14,206 @@ import {
 } from "@/components/ui/card";
 import {
   Code,
-  Zap,
-  Users,
   Target,
   ShieldCheck,
   CheckCircle2,
-  Building2,
   Gauge,
+  Terminal,
+  Share2,
+  Database,
 } from "lucide-react";
 
 const CustomRulesSectionComponent: React.FC = () => {
   return (
-    <div className="space-y-8">
-      {/* Section Header */}
-      <div className="text-center">
-        <h2 className="bg-primary mb-4 bg-clip-text text-3xl font-bold text-transparent md:text-4xl">
-          Custom Rules Engine
-        </h2>
-        <p className="text-muted-foreground mx-auto max-w-3xl text-lg">
-          Define your own security rules and patterns. Adapt Code Guardian to
-          your unique organizational needs and policies.
-        </p>
-      </div>
+    <section className="relative overflow-hidden py-24">
+      {/* Background Grid */}
+      <div className="absolute inset-0 bg-[linear-gradient(to_right,#80808012_1px,transparent_1px),linear-gradient(to_bottom,#80808012_1px,transparent_1px)] bg-[size:24px_24px]"></div>
+      <div className="bg-background/90 absolute inset-0 [mask-image:radial-gradient(ellipse_60%_50%_at_50%_0%,#000_70%,transparent_100%)]"></div>
 
-      {/* Features Grid */}
-      <div className="grid grid-cols-1 gap-6 md:grid-cols-3">
-        <Card className="border-2 transition-colors duration-300 hover:border-green-500">
-          <CardHeader>
-            <Code className="mb-2 h-8 w-8 text-green-600" />
-            <CardTitle>Custom Patterns</CardTitle>
-          </CardHeader>
-          <CardContent>
-            <CardDescription>
-              Create rules using regex, patterns, or AST queries. Target
-              specific code patterns unique to your codebase.
-            </CardDescription>
-          </CardContent>
-        </Card>
-
-        <Card className="hover:border-primary border-2 transition-colors duration-300">
-          <CardHeader>
-            <Target className="text-primary mb-2 h-8 w-8" />
-            <CardTitle>Company Policies</CardTitle>
-          </CardHeader>
-          <CardContent>
-            <CardDescription>
-              Enforce company-specific security policies and coding standards
-              automatically across all projects.
-            </CardDescription>
-          </CardContent>
-        </Card>
-
-        <Card className="border-2 transition-colors duration-300 hover:border-purple-500">
-          <CardHeader>
-            <Users className="text-primary mb-2 h-8 w-8" />
-            <CardTitle>Share & Collaborate</CardTitle>
-          </CardHeader>
-          <CardContent>
-            <CardDescription>
-              Share rules with your team or make them public for the community.
-              Import rules from others.
-            </CardDescription>
-          </CardContent>
-        </Card>
-      </div>
-
-      {/* Benefits Section */}
-      <Card className="border-2 bg-gradient-to-r from-green-50 to-blue-50 dark:from-green-950 dark:to-blue-950">
-        <CardHeader>
-          <CardTitle className="flex items-center gap-2">
-            <Zap className="h-6 w-6 text-yellow-600" />
-            Why Custom Rules?
-          </CardTitle>
-        </CardHeader>
-        <CardContent>
-          <div className="grid grid-cols-1 gap-6 md:grid-cols-2">
-            <div>
-              <h4 className="text-foreground mb-2 font-semibold">
-                Adaptability
-              </h4>
-              <p className="text-muted-foreground text-sm">
-                Every organization has unique security requirements. Custom
-                rules let you enforce policies specific to your industry,
-                frameworks, and internal standards.
-              </p>
-            </div>
-
-            <div>
-              <h4 className="text-foreground mb-2 font-semibold">
-                Increased Stickiness
-              </h4>
-              <p className="text-muted-foreground text-sm">
-                The more custom rules you create, the more valuable Code
-                Guardian becomes to your team. Your investment in rule creation
-                increases platform value over time.
-              </p>
-            </div>
-
-            <div>
-              <h4 className="text-foreground mb-2 font-semibold">
-                Differentiation
-              </h4>
-              <p className="text-muted-foreground text-sm">
-                Generic scanners can't catch everything. Custom rules let you
-                detect vulnerabilities and anti-patterns that are specific to
-                your technology stack.
-              </p>
-            </div>
-
-            <div>
-              <h4 className="text-foreground mb-2 font-semibold">
-                Knowledge Base
-              </h4>
-              <p className="text-muted-foreground text-sm">
-                Build an institutional knowledge base of security patterns and
-                anti-patterns. Onboard new developers faster with automated
-                policy enforcement.
-              </p>
-            </div>
+      <div className="relative z-10 container mx-auto px-4">
+        {/* Section Header */}
+        <div className="mb-16 text-center">
+          <div className="mb-4 flex items-center justify-center gap-2">
+            <div className="bg-primary/20 h-px w-12"></div>
+            <span className="text-primary font-mono text-xs font-bold tracking-widest uppercase">
+              SYS_MODULE_04 // POLICY_ENGINE
+            </span>
+            <div className="bg-primary/20 h-px w-12"></div>
           </div>
-        </CardContent>
-      </Card>
+          <h2 className="text-foreground mb-6 text-3xl font-bold tracking-tight md:text-5xl">
+            PROTOCOL <span className="text-primary">DEFINITION</span>
+          </h2>
+          <p className="text-muted-foreground mx-auto max-w-2xl font-mono text-lg">
+            {">"} Initiate custom security directives. Enforce organizational
+            policy through granular rule configuration.
+          </p>
+        </div>
 
-      {/* Rule Types Explanation */}
-      <Card className="border-2">
-        <CardHeader>
-          <CardTitle>Rule Types Explained</CardTitle>
-          <CardDescription>
-            Understanding different types of custom rules
-          </CardDescription>
-        </CardHeader>
-        <CardContent className="space-y-4">
-          <div>
-            <h4 className="text-foreground mb-2 font-semibold">Regex Rules</h4>
-            <p className="text-muted-foreground mb-2 text-sm">
-              Use regular expressions to match code patterns. Best for simple
-              text-based patterns.
-            </p>
-            <code className="bg-muted block rounded p-2 text-xs">
-              Pattern: api[_-]?key\s*=\s*["']([^"']+)["']
-            </code>
-            <p className="text-muted-foreground mt-1 text-xs">
-              Example: Detect hardcoded API keys
-            </p>
-          </div>
+        {/* Features Grid */}
+        <div className="mb-12 grid grid-cols-1 gap-6 md:grid-cols-3">
+          <Card className="border-primary/20 bg-card/50 hover:border-primary/50 group relative overflow-hidden rounded-none border transition-all duration-300">
+            <div className="translate-y--8 absolute top-0 right-0 h-16 w-16 translate-x-8 rotate-45 bg-gradient-to-b from-green-500/10 to-transparent"></div>
+            <CardHeader>
+              <div className="bg-primary/10 mb-4 flex h-12 w-12 items-center justify-center border border-green-500/20">
+                <Code className="h-6 w-6 text-green-500" />
+              </div>
+              <CardTitle className="font-mono text-xl">
+                PATTERN_MATCHING
+              </CardTitle>
+            </CardHeader>
+            <CardContent>
+              <CardDescription className="font-mono text-xs">
+                Deploy comprehensive regex and AST-based scanning logic
+                localized to project architecture.
+              </CardDescription>
+            </CardContent>
+          </Card>
 
-          <div>
-            <h4 className="text-foreground mb-2 font-semibold">
-              Pattern Rules
-            </h4>
-            <p className="text-muted-foreground mb-2 text-sm">
-              Simplified pattern matching with wildcards. Good for common code
-              smells.
-            </p>
-            <code className="bg-muted block rounded p-2 text-xs">
-              Pattern: console.log
-            </code>
-            <p className="text-muted-foreground mt-1 text-xs">
-              Example: Find console.log statements in production code
-            </p>
-          </div>
+          <Card className="border-primary/20 bg-card/50 hover:border-primary/50 group relative overflow-hidden rounded-none border transition-all duration-300">
+            <div className="bg-primary/10 translate-y--8 absolute top-0 right-0 h-16 w-16 translate-x-8 rotate-45 bg-gradient-to-b from-transparent to-transparent"></div>
+            <CardHeader>
+              <div className="bg-primary/10 mb-4 flex h-12 w-12 items-center justify-center border border-blue-500/20">
+                <Target className="text-primary h-6 w-6" />
+              </div>
+              <CardTitle className="font-mono text-xl">
+                GLOBAL_ENFORCEMENT
+              </CardTitle>
+            </CardHeader>
+            <CardContent>
+              <CardDescription className="font-mono text-xs">
+                Synchronize security standards across all operational units.
+                Mandate compliance via central directive.
+              </CardDescription>
+            </CardContent>
+          </Card>
 
-          <div>
-            <h4 className="text-foreground mb-2 font-semibold">
-              AST Query Rules
-            </h4>
-            <p className="text-muted-foreground mb-2 text-sm">
-              Advanced rules using Abstract Syntax Tree queries. Most powerful
-              and precise.
-            </p>
-            <code className="bg-muted block rounded p-2 text-xs">
-              Selector: FunctionDeclaration[async=true]:not(:has(TryStatement))
-            </code>
-            <p className="text-muted-foreground mt-1 text-xs">
-              Example: Find async functions without error handling
-            </p>
-          </div>
-        </CardContent>
-      </Card>
+          <Card className="border-primary/20 bg-card/50 hover:border-primary/50 group relative overflow-hidden rounded-none border transition-all duration-300">
+            <div className="translate-y--8 absolute top-0 right-0 h-16 w-16 translate-x-8 rotate-45 bg-gradient-to-b from-purple-500/10 to-transparent"></div>
+            <CardHeader>
+              <div className="bg-primary/10 mb-4 flex h-12 w-12 items-center justify-center border border-purple-500/20">
+                <Share2 className="h-6 w-6 text-purple-500" />
+              </div>
+              <CardTitle className="font-mono text-xl">
+                SHARED_INTELLIGENCE
+              </CardTitle>
+            </CardHeader>
+            <CardContent>
+              <CardDescription className="font-mono text-xs">
+                Export and import rule sets defined by community specialists and
+                internal security teams.
+              </CardDescription>
+            </CardContent>
+          </Card>
+        </div>
 
-      {/* Use Cases */}
-      <Card className="border-2">
-        <CardHeader>
-          <CardTitle>Common Use Cases</CardTitle>
-        </CardHeader>
-        <CardContent>
-          <div className="grid grid-cols-1 gap-6 md:grid-cols-2">
-            <div>
-              <h4 className="text-foreground mb-2 flex items-center gap-2 font-semibold">
-                <ShieldCheck className="h-4 w-4 text-emerald-600 dark:text-emerald-400" />
-                Security
+        <div className="grid grid-cols-1 gap-8 lg:grid-cols-2">
+          {/* Syntax Reference Terminal */}
+          <Card className="border-primary/20 rounded-none border bg-black/40 backdrop-blur-sm">
+            <CardHeader className="border-primary/10 border-b pb-4">
+              <div className="flex items-center justify-between">
+                <CardTitle className="flex items-center gap-2 font-mono text-lg">
+                  <Terminal className="text-primary h-5 w-5" />
+                  SYNTAX_DATABASE
+                </CardTitle>
+                <div className="flex gap-1.5">
+                  <div className="h-2 w-2 rounded-full bg-red-500/50"></div>
+                  <div className="h-2 w-2 rounded-full bg-yellow-500/50"></div>
+                  <div className="h-2 w-2 rounded-full bg-green-500/50"></div>
+                </div>
+              </div>
+            </CardHeader>
+            <CardContent className="space-y-6 pt-6">
+              <div className="space-y-2">
+                <div className="text-muted-foreground flex items-center justify-between text-xs">
+                  <span className="font-mono text-blue-400">
+                    TYPE: REGEX_SCAN
+                  </span>
+                  <span className="font-mono">ID: R-01</span>
+                </div>
+                <div className="border-primary/20 bg-muted/20 relative rounded-sm border p-3 font-mono text-xs">
+                  <span className="text-green-500">{">"}</span> pattern:{" "}
+                  <span className="text-orange-400">
+                    api[_-]?key\s*=\s*["']([^"']+)["']
+                  </span>
+                  <div className="text-muted-foreground mt-2 border-t border-white/5 pt-2">
+                    // Detect hardcoded API keys
+                  </div>
+                </div>
+              </div>
+
+              <div className="space-y-2">
+                <div className="text-muted-foreground flex items-center justify-between text-xs">
+                  <span className="font-mono text-purple-400">
+                    TYPE: AST_QUERY
+                  </span>
+                  <span className="font-mono">ID: A-04</span>
+                </div>
+                <div className="border-primary/20 bg-muted/20 relative rounded-sm border p-3 font-mono text-xs">
+                  <span className="text-green-500">{">"}</span> selector:{" "}
+                  <span className="text-blue-400">
+                    FunctionDeclaration[async=true]:not(:has(TryStatement))
+                  </span>
+                  <div className="text-muted-foreground mt-2 border-t border-white/5 pt-2">
+                    // Flag unhandled async operations
+                  </div>
+                </div>
+              </div>
+            </CardContent>
+          </Card>
+
+          {/* System Advantages */}
+          <div className="grid grid-cols-1 content-start gap-4 sm:grid-cols-2">
+            <div className="border-primary/10 bg-card/30 hover:border-primary/40 border p-4 transition-colors">
+              <h4 className="text-foreground mb-2 flex items-center gap-2 font-mono text-sm font-bold">
+                <ShieldCheck className="text-primary h-4 w-4" />
+                SEC_COMPLIANCE
               </h4>
-              <ul className="text-muted-foreground space-y-1 text-sm">
-                <li>• Detect hardcoded secrets and credentials</li>
-                <li>• Find usage of deprecated security APIs</li>
-                <li>• Enforce authentication checks</li>
-                <li>• Validate input sanitization</li>
+              <ul className="text-muted-foreground space-y-1 font-mono text-xs">
+                <li>{">"} PCI-DSS Verification</li>
+                <li>{">"} HIPAA Data Controls</li>
+                <li>{">"} GDPR Proto-Checks</li>
               </ul>
             </div>
 
-            <div>
-              <h4 className="text-foreground mb-2 flex items-center gap-2 font-semibold">
+            <div className="border-primary/10 bg-card/30 hover:border-primary/40 border p-4 transition-colors">
+              <h4 className="text-foreground mb-2 flex items-center gap-2 font-mono text-sm font-bold">
                 <CheckCircle2 className="text-primary h-4 w-4" />
-                Best Practices
+                QA_STANDARDS
               </h4>
-              <ul className="text-muted-foreground space-y-1 text-sm">
-                <li>• Enforce naming conventions</li>
-                <li>• Require JSDoc comments</li>
-                <li>• Prevent console.log in production</li>
-                <li>• Enforce error handling patterns</li>
+              <ul className="text-muted-foreground space-y-1 font-mono text-xs">
+                <li>{">"} Naming Conventions</li>
+                <li>{">"} Doc-Block Requirements</li>
+                <li>{">"} No-Console Production</li>
               </ul>
             </div>
 
-            <div>
-              <h4 className="text-foreground mb-2 flex items-center gap-2 font-semibold">
-                <Building2 className="text-muted-foreground h-4 w-4" />
-                Compliance
+            <div className="border-primary/10 bg-card/30 hover:border-primary/40 border p-4 transition-colors">
+              <h4 className="text-foreground mb-2 flex items-center gap-2 font-mono text-sm font-bold">
+                <Gauge className="text-primary h-4 w-4" />
+                PERF_METRICS
               </h4>
-              <ul className="text-muted-foreground space-y-1 text-sm">
-                <li>• PCI-DSS requirements</li>
-                <li>• HIPAA compliance checks</li>
-                <li>• GDPR data handling rules</li>
-                <li>• SOC 2 security controls</li>
+              <ul className="text-muted-foreground space-y-1 font-mono text-xs">
+                <li>{">"} Memory Leak Detection</li>
+                <li>{">"} Complexity Analysis</li>
+                <li>{">"} Blocking Ops Check</li>
               </ul>
             </div>
 
-            <div>
-              <h4 className="text-foreground mb-2 flex items-center gap-2 font-semibold">
-                <Gauge className="h-4 w-4 text-amber-600 dark:text-amber-400" />
-                Performance
+            <div className="border-primary/10 bg-card/30 hover:border-primary/40 border p-4 transition-colors">
+              <h4 className="text-foreground mb-2 flex items-center gap-2 font-mono text-sm font-bold">
+                <Database className="text-primary h-4 w-4" />
+                KNOWLEDGE_BASE
               </h4>
-              <ul className="text-muted-foreground space-y-1 text-sm">
-                <li>• Detect inefficient algorithms</li>
-                <li>• Find memory leaks</li>
-                <li>• Identify blocking operations</li>
-                <li>• Catch infinite loops</li>
+              <ul className="text-muted-foreground space-y-1 font-mono text-xs">
+                <li>{">"} Institutional Memory</li>
+                <li>{">"} Auto-Onboarding</li>
+                <li>{">"} Pattern Library</li>
               </ul>
             </div>
           </div>
-        </CardContent>
-      </Card>
-    </div>
+        </div>
+      </div>
+    </section>
   );
 };
 

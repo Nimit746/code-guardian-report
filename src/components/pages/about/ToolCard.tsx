@@ -1,23 +1,11 @@
-import React, { useState } from "react";
-import {
-  Star,
-  Download,
-  TrendingUp,
-  Sparkles,
-  ChevronDown,
-  ChevronUp,
-  ExternalLink,
-  Shield,
-  Zap,
-} from "lucide-react";
-import { Card, CardContent, CardHeader, CardTitle } from "@/components/ui/card";
-import { Badge } from "@/components/ui/badge";
+import React from "react";
+import { Star, Download, Shield, Zap, Code2 } from "lucide-react";
 
 export interface Tool {
   name: string;
   language: string;
   type: string;
-  gradient: string;
+  gradient?: string; // Kept for interface compatibility but unused
   description: string;
   features: string[];
   rating: number;
@@ -33,239 +21,146 @@ interface ToolCardProps {
 
 export const ToolCard: React.FC<ToolCardProps> = ({
   tool,
+  index,
   viewMode = "grid",
 }) => {
-  const [isExpanded, setIsExpanded] = useState(false);
-  const [isHovered, setIsHovered] = useState(false);
-
   const getToolIcon = (type: string) => {
     if (type.toLowerCase().includes("security")) return Shield;
-    if (type.toLowerCase().includes("quality")) return Star;
+    if (type.toLowerCase().includes("quality")) return Code2;
     return Zap;
   };
 
   const ToolIcon = getToolIcon(tool.type);
+  const statusNumber = (index + 1).toString().padStart(2, "0");
 
   if (viewMode === "list") {
     return (
-      <Card
-        className="modern-card group hover-float-subtle relative cursor-pointer overflow-hidden transition-all duration-300"
-        onMouseEnter={() => setIsHovered(true)}
-        onMouseLeave={() => setIsHovered(false)}
-      >
-        <div
-          className={`h-1 bg-gradient-to-r ${tool.gradient} transition-all duration-300 group-hover:h-2`}
-        ></div>
-
-        {tool.comingSoon && (
-          <div className="absolute top-4 right-4 z-10">
-            <Badge className="animate-pulse border-0 bg-gradient-to-r from-purple-500 to-pink-500 text-white">
-              <Sparkles className="mr-1 h-3 w-3" />
-              Coming Soon
-            </Badge>
-          </div>
-        )}
-
-        <div className="p-6">
-          <div className="flex items-start gap-6">
-            {/* Icon and Basic Info */}
-            <div className="flex items-center gap-4">
-              <div
-                className={`rounded-xl bg-gradient-to-r p-3 ${tool.gradient} text-white shadow-lg transition-all duration-300 group-hover:scale-110 group-hover:rotate-3`}
-              >
-                <ToolIcon className="h-6 w-6" />
+      <div className="border-primary/20 bg-card/30 hover:border-primary/50 group relative overflow-hidden border transition-all duration-300">
+        <div className="text-muted-foreground absolute top-0 right-0 p-2 font-mono text-[10px]">
+          ID: M-{statusNumber}
+        </div>
+        <div className="flex flex-col gap-6 p-6 md:flex-row md:items-start">
+          <div className="flex-1">
+            <div className="mb-2 flex items-center gap-3">
+              <div className="border-primary/20 bg-primary/5 flex h-10 w-10 items-center justify-center border">
+                <ToolIcon className="text-primary h-5 w-5" />
               </div>
               <div>
-                <h4 className="text-foreground group-hover:text-primary text-xl font-bold transition-colors">
-                  {tool.name}
+                <h4 className="text-foreground font-mono text-lg font-bold">
+                  {tool.name.toUpperCase()}
                 </h4>
-                <div className="mt-1 flex items-center gap-2">
-                  <Badge variant="secondary" className="text-xs">
-                    {tool.language}
-                  </Badge>
-                  <Badge variant="outline" className="text-xs">
-                    {tool.type}
-                  </Badge>
+                <div className="text-muted-foreground flex items-center gap-2 text-xs">
+                  <span className="text-primary font-mono">
+                    TYPE: {tool.type.toUpperCase()}
+                  </span>
+                  <span>|</span>
+                  <span className="font-mono">LANG: {tool.language}</span>
                 </div>
               </div>
             </div>
 
-            {/* Stats */}
-            <div className="ml-auto flex items-center gap-6">
-              <div className="flex items-center gap-1 text-amber-500">
-                <Star className="h-4 w-4 fill-current" />
-                <span className="text-sm font-medium">{tool.rating}</span>
-              </div>
-              <div className="text-muted-foreground flex items-center gap-1">
-                <Download className="h-4 w-4" />
-                <span className="text-sm">{tool.downloads}</span>
-              </div>
-              <button
-                onClick={() => setIsExpanded(!isExpanded)}
-                className="hover:bg-muted rounded-lg p-2 transition-colors"
-              >
-                {isExpanded ? (
-                  <ChevronUp className="h-4 w-4" />
-                ) : (
-                  <ChevronDown className="h-4 w-4" />
-                )}
-              </button>
+            <p className="text-muted-foreground mb-4 max-w-3xl font-mono text-sm">
+              {">"} {tool.description}
+            </p>
+
+            <div className="flex flex-wrap gap-2">
+              {tool.features.slice(0, 4).map((feature, idx) => (
+                <div
+                  key={idx}
+                  className="bg-muted/10 border-primary/10 text-muted-foreground border px-2 py-1 font-mono text-[10px]"
+                >
+                  {feature}
+                </div>
+              ))}
             </div>
           </div>
 
-          {/* Description */}
-          <p className="text-muted-foreground mt-4 leading-relaxed">
-            {tool.description}
-          </p>
-
-          {/* Expandable Features */}
-          {isExpanded && (
-            <div className="animate-fade-in border-border mt-6 border-t pt-6">
-              <h5 className="text-foreground mb-3 text-sm font-semibold">
-                Key Features:
-              </h5>
-              <div className="grid grid-cols-2 gap-2">
-                {tool.features.map((feature, idx) => (
-                  <div
-                    key={idx}
-                    className="group/feature text-muted-foreground hover:text-foreground flex cursor-pointer items-start gap-2 text-sm transition-colors duration-200 dark:hover:text-slate-200"
-                  >
-                    <div
-                      className={`h-1.5 w-1.5 rounded-full bg-gradient-to-r ${tool.gradient} mt-2 flex-shrink-0 transition-transform group-hover/feature:scale-125`}
-                    ></div>
-                    <span className="leading-relaxed transition-transform duration-200 group-hover/feature:translate-x-1">
-                      {feature}
-                    </span>
-                  </div>
-                ))}
-              </div>
+          <div className="border-primary/10 flex flex-col items-end gap-2 border-t pt-4 md:border-t-0 md:pt-0">
+            <div className="flex items-center gap-2 font-mono text-xs">
+              <span className="text-muted-foreground">RATING:</span>
+              <span className="text-primary">{tool.rating}</span>
             </div>
-          )}
+            <div className="flex items-center gap-2 font-mono text-xs">
+              <span className="text-muted-foreground">INSTALLS:</span>
+              <span className="text-primary">{tool.downloads}</span>
+            </div>
+            {tool.comingSoon ? (
+              <div className="mt-2 border border-yellow-500/50 bg-yellow-500/10 px-3 py-1 font-mono text-xs text-yellow-500">
+                STATUS: PENDING
+              </div>
+            ) : (
+              <div className="mt-2 border border-green-500/50 bg-green-500/10 px-3 py-1 font-mono text-xs text-green-500">
+                STATUS: ACTIVE
+              </div>
+            )}
+          </div>
         </div>
-      </Card>
+      </div>
     );
   }
-  // Grid view (default)
+
+  // Grid view
   return (
-    <Card
-      className="group border-border/50 bg-card/80 hover:border-primary/50 relative cursor-pointer overflow-hidden border backdrop-blur-sm transition-all duration-500 hover:-translate-y-2 hover:scale-[1.02] hover:shadow-2xl hover:shadow-blue-500/10"
-      onMouseEnter={() => setIsHovered(true)}
-      onMouseLeave={() => setIsHovered(false)}
-    >
-      {/* Enhanced Gradient Top Border with Animation */}
-      <div
-        className={`h-1 bg-gradient-to-r ${tool.gradient} relative overflow-hidden transition-all duration-500 group-hover:h-4`}
-      >
-        <div
-          className={`absolute inset-0 bg-gradient-to-r ${tool.gradient} opacity-0 transition-opacity duration-500 group-hover:opacity-100`}
-        ></div>
-        <div className="absolute inset-0 -translate-x-full bg-gradient-to-r from-transparent via-white/30 to-transparent transition-transform duration-1000 group-hover:translate-x-full"></div>
-      </div>
+    <div className="group relative h-full">
+      {/* Decorative corner markers */}
+      <div className="border-primary/50 group-hover:border-primary absolute -top-px -left-px h-2 w-2 border-t border-l transition-all group-hover:w-full"></div>
+      <div className="border-primary/50 group-hover:border-primary absolute -top-px -right-px h-2 w-2 border-t border-r transition-all group-hover:h-full"></div>
+      <div className="border-primary/50 group-hover:border-primary absolute -bottom-px -left-px h-2 w-2 border-b border-l transition-all group-hover:h-full"></div>
+      <div className="border-primary/50 group-hover:border-primary absolute -right-px -bottom-px h-2 w-2 border-r border-b transition-all group-hover:w-full"></div>
 
-      {/* Coming Soon Badge */}
-      {tool.comingSoon && (
-        <div className="absolute top-6 right-6 z-10">
-          <Badge className="animate-pulse border-0 bg-gradient-to-r from-purple-500 to-pink-500 text-white shadow-lg transition-transform duration-300 hover:scale-110 hover:animate-none">
-            <Sparkles className="mr-1 h-3 w-3" />
-            Coming Soon
-          </Badge>
-        </div>
-      )}
-
-      <CardHeader className="p-6 pb-4">
-        <div className="mb-6 flex items-center justify-between">
-          <div
-            className={`relative rounded-2xl bg-gradient-to-r p-4 ${tool.gradient} overflow-hidden text-white shadow-xl transition-all duration-500 group-hover:scale-125 group-hover:rotate-6`}
-          >
-            <ToolIcon className="relative z-10 h-6 w-6" />
-            <div className="absolute inset-0 -translate-x-full bg-gradient-to-r from-white/0 via-white/20 to-white/0 transition-transform duration-700 group-hover:translate-x-full"></div>
-            {isHovered && (
-              <div className="bg-background/10 absolute inset-0 animate-pulse rounded-2xl"></div>
-            )}
+      <div className="border-primary/20 bg-card/30 hover:bg-primary/5 h-full border p-6 backdrop-blur-sm transition-all">
+        <div className="mb-6 flex justify-between">
+          <div className="border-primary/20 bg-primary/10 group-hover:border-primary/50 group-hover:bg-primary/20 flex h-12 w-12 items-center justify-center border transition-colors">
+            <ToolIcon className="text-primary h-6 w-6" />
           </div>
-          <div className="flex items-center gap-2 rounded-full bg-amber-50 px-3 py-2 transition-all duration-300 group-hover:scale-110 group-hover:bg-amber-100 dark:bg-amber-950/30 dark:group-hover:bg-amber-900/40">
-            <Star className="h-4 w-4 fill-amber-400 text-amber-400" />
-            <span className="text-sm font-bold text-amber-600 dark:text-amber-400">
-              {tool.rating}
-            </span>
+          <div className="text-muted-foreground font-mono text-xs">
+            MOD-{statusNumber}
           </div>
         </div>
 
-        <CardTitle className="text-foreground group-hover:text-primary mb-4 text-2xl leading-tight font-bold transition-all duration-300">
-          {tool.name}
-        </CardTitle>
-
-        <div className="mb-4 flex items-center gap-3">
-          <Badge
-            className={`bg-gradient-to-r px-3 py-1 text-sm font-medium ${tool.gradient} group- border-0 text-white shadow-md transition-all duration-300 group-hover:shadow-lg`}
-          >
-            {tool.language}
-          </Badge>
-          <Badge
-            variant="outline"
-            className="bg-card/80 group-hover:border-primary group-hover:bg-muted group-hover:text-primary px-3 py-1 text-sm font-medium backdrop-blur-sm transition-all duration-300"
-          >
-            {tool.type}
-          </Badge>
+        <div className="mb-4">
+          <h3 className="text-foreground mb-1 font-mono text-xl font-bold">
+            {tool.name.toUpperCase()}
+          </h3>
+          <div className="text-primary font-mono text-xs">
+            {tool.type.toUpperCase()}
+          </div>
         </div>
-      </CardHeader>
 
-      <CardContent className="space-y-6 p-6 pt-0">
-        <p className="text-muted-foreground group-hover:text-foreground/80 dark:group-hover:text-muted-foreground text-base leading-relaxed transition-colors duration-300">
-          {tool.description}
+        <p className="text-muted-foreground mb-6 h-20 overflow-hidden font-mono text-xs leading-relaxed">
+          {">"} {tool.description}
         </p>
 
-        <div className="space-y-4">
-          <h5 className="text-foreground flex items-center gap-2 text-sm font-bold">
+        <div className="border-primary/10 mb-6 space-y-2 border-t pt-4">
+          {tool.features.slice(0, 3).map((feature, idx) => (
             <div
-              className={`h-2 w-2 rounded-full bg-gradient-to-r ${tool.gradient}`}
-            ></div>
-            Key Features
-          </h5>
-          <div className="space-y-2">
-            {tool.features.slice(0, 4).map((feature, idx) => (
-              <div
-                key={idx}
-                className="group/feature text-muted-foreground hover:bg-muted hover:text-foreground/50 flex cursor-pointer items-start gap-3 rounded-lg p-2 text-sm transition-all duration-300 dark:hover:text-slate-200"
-              >
-                <div
-                  className={`h-2 w-2 rounded-full bg-gradient-to-r ${tool.gradient} mt-2 flex-shrink-0 transition-all duration-300 group-hover/feature:scale-150 group-hover/feature:shadow-lg`}
-                ></div>
-                <span className="leading-relaxed transition-all duration-300 group-hover/feature:translate-x-2 group-hover/feature:font-medium">
-                  {feature}
-                </span>
-              </div>
-            ))}
-            {tool.features.length > 4 && (
-              <div className="bg-muted text-muted-foreground mt-3 inline-block rounded-lg px-2 py-1 text-sm">
-                +{tool.features.length - 4} more features
-              </div>
-            )}
-          </div>
+              key={idx}
+              className="text-muted-foreground flex items-center gap-2 font-mono text-xs"
+            >
+              <div className="bg-primary/50 h-1 w-1 rounded-none"></div>
+              {feature}
+            </div>
+          ))}
         </div>
 
-        <div className="border-border flex items-center justify-between border-t pt-4 transition-all duration-300 group-hover:border-teal-300">
-          <div className="group/download bg-muted hover:bg-muted flex cursor-pointer items-center gap-2 rounded-full px-3 py-2 transition-all duration-300 dark:hover:bg-blue-950/30">
-            <Download className="text-muted-foreground group-hover/download:text-primary h-4 w-4 transition-all duration-300 group-hover/download:animate-bounce" />
-            <span className="text-muted-foreground group-hover/download:text-primary dark:group-hover/download:text-primary text-sm font-medium transition-all duration-300">
-              {tool.downloads}
+        <div className="border-primary/10 mt-auto flex items-center justify-between border-t pt-4 font-mono text-xs">
+          <div className="flex items-center gap-4">
+            <span className="text-muted-foreground flex items-center gap-1">
+              <Star className="h-3 w-3" /> {tool.rating}
+            </span>
+            <span className="text-muted-foreground flex items-center gap-1">
+              <Download className="h-3 w-3" /> {tool.downloads}
             </span>
           </div>
-          <div className="flex items-center gap-3">
-            <div className="group/trending flex cursor-pointer items-center gap-2 rounded-full bg-emerald-50 px-3 py-2 transition-all duration-300 hover:bg-emerald-100 dark:bg-emerald-950/30 dark:hover:bg-emerald-900/40">
-              <TrendingUp className="h-4 w-4 text-emerald-600 transition-all duration-300 group-hover/trending:scale-125 group-hover/trending:text-emerald-500" />
-              <span className="text-sm font-bold text-emerald-600 transition-all duration-300 group-hover/trending:text-emerald-500 dark:text-emerald-400">
-                Popular
-              </span>
-            </div>
-            {isHovered && (
-              <button className="animate-fade-in bg-primary hover:bg-primary/90 rounded-full p-2 text-white shadow-lg transition-all duration-300 hover:scale-110 hover:shadow-xl">
-                <ExternalLink className="h-4 w-4" />
-              </button>
-            )}
-          </div>
+          {tool.comingSoon ? (
+            <span className="animate-pulse text-yellow-500">
+              INITIALIZING...
+            </span>
+          ) : (
+            <span className="text-green-500">● ACTIVE</span>
+          )}
         </div>
-      </CardContent>
-    </Card>
+      </div>
+    </div>
   );
 };

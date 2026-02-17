@@ -12,7 +12,6 @@ export const HomeHero: React.FC<HomeHeroProps> = ({ onStartAnalysis }) => {
     <HeroSection
       title=""
       description=""
-      variant="gradient"
       className="section-glow border-border relative flex min-h-[80vh] flex-col items-center justify-center border-b border-dashed px-4 py-20 sm:px-6"
     >
       {/* Technical Grid Overlay */}

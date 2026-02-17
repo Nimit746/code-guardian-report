@@ -5,7 +5,6 @@ interface HeroSectionProps {
   subtitle?: string;
   description?: string;
   children?: React.ReactNode;
-  variant?: "default" | "minimal" | "gradient" | "ultra";
   className?: string;
   titleId?: string;
 }
@@ -16,36 +15,57 @@ export const HeroSection: React.FC<HeroSectionProps> = ({
   children,
   className = "",
   titleId = "hero-title",
-  variant = "minimal",
 }) => {
   return (
     <section
-      className={`relative overflow-hidden py-20 sm:py-28 md:py-32 lg:py-40 ${
-        variant === "minimal" ? "border-border/40 border-b" : ""
-      } ${className}`}
+      className={`border-primary/20 bg-background relative flex min-h-[50vh] flex-col justify-center overflow-hidden border-b-2 pt-20 pb-16 ${className}`}
       aria-labelledby={titleId}
     >
-      {variant === "gradient" && (
-        <div className="from-primary/5 via-background to-background dark:from-primary/10 absolute inset-0 -z-10 bg-[radial-gradient(ellipse_at_top,_var(--tw-gradient-stops))]" />
-      )}
+      {/* Technical Grid Background */}
+      <div
+        className="pointer-events-none absolute inset-0 opacity-[0.05]"
+        style={{
+          backgroundImage:
+            "linear-gradient(90deg, currentColor 1px, transparent 1px), linear-gradient(180deg, currentColor 1px, transparent 1px)",
+          backgroundSize: "20px 20px",
+        }}
+      />
 
-      <div className="relative z-10 container mx-auto px-4 sm:px-6 lg:px-8">
+      {/* Corner Accents */}
+      <div className="border-primary/40 absolute top-0 left-0 h-8 w-8 border-t-2 border-l-2" />
+      <div className="border-primary/40 absolute top-0 right-0 h-8 w-8 border-t-2 border-r-2" />
+      <div className="border-primary/40 absolute bottom-0 left-0 h-8 w-8 border-b-2 border-l-2" />
+      <div className="border-primary/40 absolute right-0 bottom-0 h-8 w-8 border-r-2 border-b-2" />
+
+      {/* Decorative vertical line */}
+      <div className="bg-border absolute top-0 bottom-0 left-[10%] hidden w-px lg:block" />
+      <div className="bg-border absolute top-0 right-[10%] bottom-0 hidden w-px lg:block" />
+
+      <div className="relative z-10 container mx-auto max-w-5xl px-4 text-center sm:px-6 lg:px-8">
+        <div className="bg-primary/10 border-primary/30 text-primary group relative mb-6 inline-block overflow-hidden border px-3 py-1 font-mono text-xs tracking-[0.2em] uppercase">
+          <span className="relative z-10">System_Access_Authorized</span>
+          <div className="bg-primary/20 absolute inset-0 -translate-x-full transform transition-transform duration-1000 ease-in-out group-hover:translate-x-full" />
+        </div>
+
         {title && (
           <h1
             id={titleId}
-            className="font-display text-center text-4xl leading-tight tracking-tight sm:text-5xl md:text-6xl"
+            className="mb-6 font-mono text-4xl font-bold tracking-tight uppercase sm:text-5xl md:text-6xl lg:text-7xl"
           >
+            <span className="text-primary/40 mb-2 block text-lg font-normal tracking-normal normal-case opacity-70 sm:text-xl">
+              Enterprise_Grade
+            </span>
             {title}
           </h1>
         )}
 
         {description && (
-          <p className="text-muted-foreground mx-auto mt-6 max-w-2xl text-center text-base leading-relaxed sm:text-lg">
+          <p className="text-muted-foreground border-primary/20 mx-auto mt-6 max-w-2xl border-l-2 pl-4 text-left font-mono text-sm leading-relaxed sm:text-base md:border-l-0 md:pl-0 md:text-center">
             {description}
           </p>
         )}
 
-        {children && <div className="mt-10 sm:mt-12">{children}</div>}
+        {children && <div className="mt-12 w-full">{children}</div>}
       </div>
     </section>
   );

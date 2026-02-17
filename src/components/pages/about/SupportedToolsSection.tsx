@@ -1,15 +1,6 @@
 import React, { useState } from "react";
 import { ToolCard, Tool } from "./ToolCard";
-import { Badge } from "@/components/ui/badge";
-import {
-  Filter,
-  Grid,
-  List,
-  Search,
-  Sparkles,
-  Zap,
-  TrendingUp,
-} from "lucide-react";
+import { Filter, Grid, List, Search, Activity, Cpu } from "lucide-react";
 
 interface SupportedToolsSectionProps {
   className?: string;
@@ -26,15 +17,14 @@ export const SupportedToolsSection: React.FC<SupportedToolsSectionProps> = ({
       name: "Bandit",
       language: "Python",
       type: "Security Scanner",
-      gradient: "from-red-500 to-pink-500",
+      gradient: "from-red-500 to-pink-500", // Legacy prop, kept for type compatibility
       description:
-        "Advanced Python security scanner that identifies common vulnerabilities, injection flaws, and security anti-patterns.",
+        "Advanced Python security scanner detecting common vulnerabilities and injection flaws.",
       features: [
         "SQL Injection Detection",
         "Hardcoded Secrets",
         "Insecure Randomness",
         "Shell Injection",
-        "Crypto Vulnerabilities",
       ],
       rating: 4.8,
       downloads: "2M+",
@@ -45,13 +35,12 @@ export const SupportedToolsSection: React.FC<SupportedToolsSectionProps> = ({
       type: "Quality & Security",
       gradient: "from-blue-500 to-indigo-500",
       description:
-        "Industry-standard linting tool with advanced security rules for modern JavaScript and TypeScript applications.",
+        "Industry-standard linting tool with advanced security rules for modern JS/TS apps.",
       features: [
         "Syntax Analysis",
         "Security Patterns",
         "Best Practices",
         "Type Safety",
-        "Custom Rules",
       ],
       rating: 4.9,
       downloads: "25M+",
@@ -62,13 +51,12 @@ export const SupportedToolsSection: React.FC<SupportedToolsSectionProps> = ({
       type: "Code Quality",
       gradient: "from-green-500 to-emerald-500",
       description:
-        "Comprehensive Python code analyzer that enforces coding standards and identifies potential issues.",
+        "Comprehensive Python code analyzer enforcing standards and identifying issues.",
       features: [
         "Code Complexity",
         "Naming Conventions",
         "Unused Variables",
         "Import Analysis",
-        "Refactoring Suggestions",
       ],
       rating: 4.7,
       downloads: "5M+",
@@ -79,13 +67,12 @@ export const SupportedToolsSection: React.FC<SupportedToolsSectionProps> = ({
       type: "Security & SAST",
       gradient: "from-purple-500 to-violet-500",
       description:
-        "Next-generation static analysis tool with custom rule engine for finding security vulnerabilities.",
+        "Next-generation static analysis with custom rule engine for finding vulnerabilities.",
       features: [
         "OWASP Top 10",
         "Custom Rules",
         "Multi-language",
         "CI/CD Integration",
-        "Supply Chain Security",
       ],
       rating: 4.6,
       downloads: "1M+",
@@ -96,13 +83,12 @@ export const SupportedToolsSection: React.FC<SupportedToolsSectionProps> = ({
       type: "Style & Convention",
       gradient: "from-yellow-500 to-orange-500",
       description:
-        "Unified Python style checker combining multiple tools for comprehensive code quality assessment.",
+        "Unified Python style checker combining multiple tools for comprehensive assessment.",
       features: [
         "PEP 8 Compliance",
         "Cyclomatic Complexity",
         "Import Validation",
         "Documentation",
-        "Plugin Ecosystem",
       ],
       rating: 4.5,
       downloads: "8M+",
@@ -113,13 +99,12 @@ export const SupportedToolsSection: React.FC<SupportedToolsSectionProps> = ({
       type: "Enterprise SAST",
       gradient: "from-teal-500 to-cyan-500",
       description:
-        "Enterprise-grade continuous code quality platform with advanced security vulnerability detection.",
+        "Enterprise-grade continuous code quality platform with advanced security detection.",
       features: [
         "Security Hotspots",
         "Quality Gates",
         "Technical Debt",
         "Coverage Analysis",
-        "Enterprise Integration",
       ],
       rating: 4.4,
       downloads: "500K+",
@@ -142,31 +127,31 @@ export const SupportedToolsSection: React.FC<SupportedToolsSectionProps> = ({
   });
 
   const filterOptions = [
-    { value: "all", label: "All Tools", count: supportedTools.length },
+    { value: "all", label: "ALL_SYSTEMS", count: supportedTools.length },
     {
       value: "security",
-      label: "Security",
+      label: "SECURITY_PROTOCOLS",
       count: supportedTools.filter((t) =>
         t.type.toLowerCase().includes("security")
       ).length,
     },
     {
       value: "python",
-      label: "Python",
+      label: "LANG:PYTHON",
       count: supportedTools.filter((t) =>
         t.language.toLowerCase().includes("python")
       ).length,
     },
     {
       value: "javascript",
-      label: "JavaScript",
+      label: "LANG:JS/TS",
       count: supportedTools.filter((t) =>
         t.language.toLowerCase().includes("javascript")
       ).length,
     },
     {
       value: "multi-language",
-      label: "Multi-language",
+      label: "MULTI_Target",
       count: supportedTools.filter((t) =>
         t.language.toLowerCase().includes("multi")
       ).length,
@@ -175,193 +160,155 @@ export const SupportedToolsSection: React.FC<SupportedToolsSectionProps> = ({
 
   return (
     <section
-      className={`relative py-8 sm:py-12 md:py-16 lg:py-20 xl:py-24 ${className} overflow-hidden`}
+      className={`relative overflow-hidden py-24 ${className}`}
       aria-labelledby="tools-title"
     >
-      {/* Background Effects */}
-      <div className="pointer-events-none absolute inset-0 bg-gradient-to-br from-blue-50/30 via-transparent to-purple-50/30 dark:from-blue-950/10 dark:to-purple-950/10"></div>
-      <div className="pointer-events-none absolute top-0 left-1/4 h-96 w-96 animate-pulse rounded-full bg-gradient-to-r from-blue-400/10 to-purple-400/10 blur-3xl"></div>
-      <div className="pointer-events-none absolute right-1/4 bottom-0 h-96 w-96 animate-pulse rounded-full bg-gradient-to-r from-purple-400/10 to-pink-400/10 blur-3xl delay-1000"></div>
+      {/* Background Grid */}
+      <div className="absolute inset-0 bg-[linear-gradient(to_right,#80808012_1px,transparent_1px),linear-gradient(to_bottom,#80808012_1px,transparent_1px)] bg-[size:24px_24px]"></div>
+      <div className="bg-background/90 absolute inset-0 [mask-image:radial-gradient(ellipse_60%_50%_at_50%_0%,#000_70%,transparent_100%)]"></div>
 
-      <div className="relative z-10">
-        <div className="mb-8 px-4 text-center sm:mb-12 sm:px-0 lg:mb-16">
-          <div className="group mb-6 inline-flex items-center gap-3 rounded-full border border-border bg-muted px-6 py-3 shadow-lg backdrop-blur-sm transition-all duration-300 hover:shadow-xl dark:border-border dark:from-blue-950/30 dark:to-indigo-950/30">
-            <div className="relative">
-              <div className="h-3 w-3 animate-pulse rounded-full bg-primary"></div>
-              <div className="absolute inset-0 h-3 w-3 animate-ping rounded-full bg-primary opacity-75"></div>
-            </div>
-            <Sparkles className="h-4 w-4 text-primary transition-transform duration-300 group-hover:rotate-12 dark:text-primary" />
-            <span className="text-sm font-semibold text-teal-600 transition-colors group-hover:text-blue-800 dark:text-teal-300 dark:group-hover:text-blue-200">
-              Powered by Industry Leaders
+      <div className="relative z-10 container mx-auto px-4">
+        <div className="mb-16 text-center">
+          <div className="mb-4 flex items-center justify-center gap-2">
+            <div className="bg-primary/20 h-px w-12"></div>
+            <span className="text-primary font-mono text-xs font-bold tracking-widest uppercase">
+              EXT_MODULES // INTEGRATION
             </span>
-            <Zap className="h-4 w-4 text-cyan-600 transition-transform duration-300 group-hover:-rotate-12 dark:text-cyan-400" />
+            <div className="bg-primary/20 h-px w-12"></div>
           </div>
 
           <h3
             id="tools-title"
-            className="animate-fade-in text-foreground mb-6 text-4xl font-bold sm:text-5xl lg:text-6xl"
+            className="text-foreground mb-6 text-3xl font-bold tracking-tight md:text-5xl"
           >
-            <span className="bg-gradient-to-r from-blue-600 via-purple-600 to-indigo-600 bg-clip-text text-transparent dark:from-blue-400 dark:via-purple-400 dark:to-indigo-400">
-              Industry-Leading
-            </span>
-            <br className="sm:hidden" />
-            <span className="relative inline-block">
-              <span className="bg-gradient-to-r from-purple-600 via-pink-600 to-blue-600 bg-clip-text text-transparent dark:from-purple-400 dark:via-pink-400 dark:to-blue-400">
-                Analysis Tools
-              </span>
-              <div className="absolute right-0 -bottom-2 left-0 h-1 animate-pulse rounded-full bg-gradient-to-r from-blue-500 via-purple-500 to-pink-500"></div>
-            </span>
+            INTEGRATED <span className="text-primary">SYSTEMS</span> REGISTRY
           </h3>
 
-          <p className="mx-auto mb-8 max-w-4xl text-lg leading-relaxed text-muted-foreground sm:text-xl">
-            We integrate with the most{" "}
-            <span className="font-semibold text-primary dark:text-primary">
-              trusted
-            </span>{" "}
-            and{" "}
-            <span className="font-semibold text-purple-600 dark:text-purple-400">
-              powerful
-            </span>{" "}
-            static analysis tools in the industry, providing comprehensive
-            security and quality analysis for your codebase.
+          <p className="text-muted-foreground mx-auto max-w-2xl font-mono text-lg">
+            {">"} Active scanning protocols. Synchronized with industry-standard
+            security engines.
           </p>
 
           {/* Stats Row */}
-          <div className="mb-8 flex flex-wrap justify-center gap-6 sm:gap-8">
-            <div className="flex items-center gap-2 rounded-full bg-white/80 px-4 py-2 shadow-md backdrop-blur-sm/80">
-              <div className="h-2 w-2 animate-pulse rounded-full bg-green-500"></div>
-              <span className="text-sm font-medium text-foreground/80">
-                {supportedTools.length}+ Tools
+          <div className="mt-8 flex flex-wrap justify-center gap-4 md:gap-8">
+            <div className="border-primary/20 bg-primary/5 flex items-center gap-2 border px-4 py-2 font-mono text-xs">
+              <div className="h-1.5 w-1.5 animate-pulse rounded-full bg-green-500"></div>
+              <span className="text-primary">
+                SYSTEMS_ONLINE: {supportedTools.length}
               </span>
             </div>
-            <div className="flex items-center gap-2 rounded-full bg-white/80 px-4 py-2 shadow-md backdrop-blur-sm/80">
-              <TrendingUp className="h-4 w-4 text-primary" />
-              <span className="text-sm font-medium text-foreground/80">
-                99.9% Uptime
-              </span>
+            <div className="border-primary/20 bg-primary/5 flex items-center gap-2 border px-4 py-2 font-mono text-xs">
+              <Activity className="text-primary h-3 w-3" />
+              <span className="text-primary">UPTIME: 99.9%</span>
             </div>
-            <div className="flex items-center gap-2 rounded-full bg-white/80 px-4 py-2 shadow-md backdrop-blur-sm/80">
-              <Zap className="h-4 w-4 text-muted-foreground" />
-              <span className="text-sm font-medium text-foreground/80">
-                Real-time Analysis
-              </span>
+            <div className="border-primary/20 bg-primary/5 flex items-center gap-2 border px-4 py-2 font-mono text-xs">
+              <Cpu className="text-primary h-3 w-3" />
+              <span className="text-primary">LATENCY: &lt;10ms</span>
             </div>
           </div>
         </div>
 
         {/* Enhanced Controls */}
-        <div className="mb-8 px-4 sm:px-0">
-          <div className="border-border/50 bg-card/60 mx-auto flex max-w-6xl flex-col items-center justify-between gap-6 rounded-2xl border p-6 shadow-xl backdrop-blur-md lg:flex-row">
+        <div className="mb-8">
+          <div className="border-primary/20 bg-card/30 mx-auto flex max-w-6xl flex-col items-center justify-between gap-6 border p-6 backdrop-blur-sm lg:flex-row">
             {/* Search Bar */}
-            <div className="group relative max-w-md flex-1">
-              <Search className="absolute top-1/2 left-4 h-5 w-5 -translate-y-1/2 transform text-muted-foreground transition-colors duration-200 group-focus-within:text-primary" />
+            <div className="relative w-full max-w-md flex-1">
+              <div className="text-muted-foreground absolute top-1/2 left-3 -translate-y-1/2 font-mono text-xs">
+                {">"} QUERY:
+              </div>
               <input
                 type="text"
-                placeholder="Search tools, features, or languages..."
                 value={searchTerm}
                 onChange={(e) => setSearchTerm(e.target.value)}
-                className="border-border/50 bg-card/80 placeholder:text-muted-foreground focus:bg-card w-full rounded-xl border py-4 pr-4 pl-12 text-sm shadow-sm backdrop-blur-sm transition-all duration-300 focus:border-primary focus:ring-2 focus:ring-primary"
+                className="border-primary/20 text-primary focus:border-primary focus:ring-primary h-10 w-full border bg-black/40 pl-20 font-mono text-xs focus:ring-1 focus:outline-none"
+                spellCheck={false}
               />
               {searchTerm && (
                 <button
                   onClick={() => setSearchTerm("")}
-                  className="absolute top-1/2 right-3 -translate-y-1/2 transform rounded-full p-1 transition-colors hover:bg-muted dark:hover:bg-slate-700"
+                  className="text-primary hover:text-primary/80 absolute top-1/2 right-3 -translate-y-1/2 p-1"
                 >
-                  <span className="text-muted-foreground hover:text-muted-foreground dark:hover:text-muted-foreground">
-                    ×
-                  </span>
+                  ×
                 </button>
               )}
             </div>
 
             {/* Filter Badges */}
-            <div className="flex flex-wrap items-center gap-3">
-              <div className="flex items-center gap-2 text-muted-foreground">
-                <Filter className="h-4 w-4" />
-                <span className="text-sm font-medium">Filter:</span>
+            <div className="flex flex-wrap items-center justify-center gap-2">
+              <div className="text-muted-foreground flex items-center gap-2">
+                <Filter className="h-3 w-3" />
+                <span className="font-mono text-xs font-bold uppercase">
+                  FILTER_BY:
+                </span>
               </div>
               {filterOptions.map((option) => (
-                <Badge
+                <button
                   key={option.value}
-                  variant={filter === option.value ? "default" : "outline"}
-                  className={`cursor-pointer px-4 py-2 font-medium transition-all duration-300  ${
-                    filter === option.value
-                      ? "border-0 bg-primary text-white shadow-lg hover:bg-primary/90 hover:shadow-xl"
-                      : "bg-card/80 backdrop-blur-sm hover:border-primary hover:bg-muted hover:text-teal-600"
-                  }`}
                   onClick={() => setFilter(option.value)}
+                  className={`border px-3 py-1 font-mono text-[10px] uppercase transition-all duration-300 ${
+                    filter === option.value
+                      ? "border-primary bg-primary/10 text-primary shadow-[0_0_10px_rgba(var(--primary),0.3)]"
+                      : "border-primary/20 text-muted-foreground hover:border-primary/50 hover:text-foreground bg-transparent"
+                  }`}
                 >
-                  {option.label}{" "}
-                  <span className="ml-1 opacity-75">({option.count})</span>
-                </Badge>
+                  {option.label}
+                  <span className="ml-1 opacity-50">[{option.count}]</span>
+                </button>
               ))}
             </div>
 
             {/* View Toggle */}
-            <div className="flex items-center gap-1 rounded-xl bg-muted/80 p-1 shadow-sm backdrop-blur-sm/80">
+            <div className="border-primary/20 flex items-center gap-1 border bg-black/40 p-1">
               <button
                 onClick={() => setViewMode("grid")}
-                className={`group rounded-lg p-3 transition-all duration-300 ${
+                className={`p-2 transition-all duration-300 ${
                   viewMode === "grid"
-                    ? "scale-105 bg-white text-primary shadow-md dark:bg-slate-700 dark:text-primary"
-                    : "text-muted-foreground hover:bg-white/50 hover:text-foreground/80 dark:hover:bg-slate-700/50 dark:hover:text-muted-foreground"
+                    ? "bg-primary text-primary-foreground"
+                    : "text-muted-foreground hover:text-foreground"
                 }`}
                 title="Grid View"
               >
-                <Grid className="h-4 w-4 transition-transform group-hover:scale-110" />
+                <Grid className="h-4 w-4" />
               </button>
               <button
                 onClick={() => setViewMode("list")}
-                className={`group rounded-lg p-3 transition-all duration-300 ${
+                className={`p-2 transition-all duration-300 ${
                   viewMode === "list"
-                    ? "scale-105 bg-white text-primary shadow-md dark:bg-slate-700 dark:text-primary"
-                    : "text-muted-foreground hover:bg-white/50 hover:text-foreground/80 dark:hover:bg-slate-700/50 dark:hover:text-muted-foreground"
+                    ? "bg-primary text-primary-foreground"
+                    : "text-muted-foreground hover:text-foreground"
                 }`}
                 title="List View"
               >
-                <List className="h-4 w-4 transition-transform group-hover:scale-110" />
+                <List className="h-4 w-4" />
               </button>
             </div>
           </div>
         </div>
 
         {/* Results Count */}
-        <div className="mb-8 px-4 text-center sm:px-0">
-          <div className="border-border from-muted/50 to-muted inline-flex items-center gap-2 rounded-full border bg-gradient-to-r px-4 py-2 shadow-sm">
-            <div className="h-2 w-2 animate-pulse rounded-full bg-gradient-to-r from-green-500 to-emerald-500"></div>
-            <p className="text-sm font-medium text-foreground/80">
-              Showing{" "}
-              <span className="font-bold text-primary dark:text-primary">
-                {filteredTools.length}
+        <div className="mb-8 text-center">
+          <div className="border-primary/20 bg-primary/5 inline-flex items-center gap-2 border px-4 py-1 font-mono text-xs">
+            <span className="bg-primary h-1.5 w-1.5 rounded-full"></span>
+            <span className="text-muted-foreground">
+              DISPLAYING RECORDS:{" "}
+              <span className="text-primary font-bold">
+                {filteredTools.length.toString().padStart(2, "0")}
               </span>{" "}
-              of <span className="font-bold">{supportedTools.length}</span>{" "}
-              tools
-              {searchTerm && (
-                <span className="ml-1">
-                  matching{" "}
-                  <span className="font-semibold text-purple-600 dark:text-purple-400">
-                    "{searchTerm}"
-                  </span>
-                </span>
-              )}
-            </p>
+              / {supportedTools.length.toString().padStart(2, "0")}
+            </span>
           </div>
         </div>
 
         {/* Tools Grid/List */}
         <div
-          className={`px-4 sm:px-0 ${
+          className={`${
             viewMode === "grid"
-              ? "grid grid-cols-1 gap-6 sm:grid-cols-2 sm:gap-8 lg:grid-cols-3 lg:gap-10"
-              : "space-y-6"
-          } transition-all duration-500`}
+              ? "grid grid-cols-1 gap-6 sm:grid-cols-2 lg:grid-cols-3"
+              : "space-y-4"
+          }`}
         >
           {filteredTools.map((tool, index) => (
-            <div
-              key={`${tool.name}-${index}`}
-              className="animate-fade-in"
-              style={{ animationDelay: `${index * 150}ms` }}
-            >
+            <div key={`${tool.name}-${index}`}>
               <ToolCard tool={tool} index={index} viewMode={viewMode} />
             </div>
           ))}
@@ -369,39 +316,25 @@ export const SupportedToolsSection: React.FC<SupportedToolsSectionProps> = ({
 
         {/* Enhanced Empty State */}
         {filteredTools.length === 0 && (
-          <div className="px-4 py-16 text-center">
-            <div className="relative mx-auto mb-8">
-              <div className="mx-auto flex h-24 w-24 items-center justify-center rounded-full bg-gradient-to-r from-slate-200 to-slate-300 shadow-lg dark:from-slate-700 dark:to-slate-600">
-                <Search className="h-12 w-12 text-muted-foreground" />
-              </div>
-              <div className="absolute -top-2 -right-2 flex h-8 w-8 animate-bounce items-center justify-center rounded-full bg-gradient-to-r from-red-400 to-pink-400">
-                <span className="text-sm font-bold text-white">0</span>
-              </div>
+          <div className="border-primary/20 bg-card/30 border border-dashed py-16 text-center backdrop-blur-sm">
+            <div className="border-primary/20 bg-primary/5 mx-auto mb-6 flex h-16 w-16 items-center justify-center border">
+              <Search className="text-muted-foreground h-8 w-8" />
             </div>
-            <h4 className="text-foreground mb-3 text-2xl font-bold">
-              No tools found
+            <h4 className="text-foreground mb-2 font-mono text-xl font-bold">
+              NO_RECORDS_FOUND
             </h4>
-            <p className="mx-auto mb-8 max-w-md text-lg text-muted-foreground">
-              We couldn't find any tools matching your criteria. Try adjusting
-              your search or filter settings.
+            <p className="text-muted-foreground mx-auto mb-6 max-w-md font-mono text-sm">
+              {">"} Query returned zero results. Adjust parameters.
             </p>
-            <div className="flex flex-col justify-center gap-4 sm:flex-row">
-              <button
-                onClick={() => {
-                  setSearchTerm("");
-                  setFilter("all");
-                }}
-                className="rounded-xl bg-primary px-6 py-3 font-semibold text-white shadow-lg transition-all duration-300 hover:bg-primary/90 hover:shadow-xl"
-              >
-                Clear all filters
-              </button>
-              <button
-                onClick={() => setSearchTerm("")}
-                className="border-border bg-card text-foreground hover:bg-muted rounded-xl border px-6 py-3 font-semibold transition-all duration-300"
-              >
-                Clear search only
-              </button>
-            </div>
+            <button
+              onClick={() => {
+                setSearchTerm("");
+                setFilter("all");
+              }}
+              className="bg-primary text-primary-foreground hover:bg-primary/90 px-6 py-2 font-mono text-xs font-bold uppercase transition-all"
+            >
+              RESET_QUERY_PARAMS
+            </button>
           </div>
         )}
       </div>

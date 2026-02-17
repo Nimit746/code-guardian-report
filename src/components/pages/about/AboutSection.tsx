@@ -34,7 +34,6 @@ export const AboutSection: React.FC = () => {
                 subtitle="Advanced Security Analysis Platform for Modern Development Teams"
                 description="Enterprise-grade static code analysis platform powered by artificial intelligence. Delivers comprehensive security assessments, vulnerability detection, and compliance reporting for mission-critical applications. Trusted by development teams worldwide for maintaining secure, high-quality codebases."
                 titleId="about-hero-title"
-                variant="gradient"
               >
                 <div className="space-y-8 sm:space-y-10">
                   <VersionInfo />
