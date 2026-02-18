@@ -56,6 +56,8 @@ const getContentSecurityPolicy = (nonce: string) => {
     "font-src": ["'self'", "data:", "https://fonts.gstatic.com"],
     "connect-src": [
       "'self'",
+      "https://api.github.com",
+      "https://*.github.com",
       "https://fonts.gstatic.com",
       "https://*.google.com",
       "https://*.firebaseio.com",

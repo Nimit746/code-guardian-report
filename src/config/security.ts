@@ -49,6 +49,8 @@ export const CSP_DIRECTIVES = {
   "font-src": ["'self'", "data:", "https://fonts.gstatic.com"],
   "connect-src": [
     "'self'",
+    "https://api.github.com",
+    "https://*.github.com",
     "https://*.firebaseio.com",
     "https://*.googleapis.com",
     "https://*.firebase.com",

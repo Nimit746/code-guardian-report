@@ -69,8 +69,11 @@ const nextConfig: NextConfig = {
     },
   },
 
-  // Turbopack configuration for Next.js 16+ (empty config to silence warnings)
-  turbopack: {},
+  // Turbopack configuration for Next.js 16+
+  // Set root to project directory to silence multiple lockfiles warning
+  turbopack: {
+    root: ".",
+  },
 
   // Configure image optimization
   images: {
@@ -211,6 +214,12 @@ const nextConfig: NextConfig = {
           {
             key: "X-Permitted-Cross-Domain-Policies",
             value: "none",
+          },
+          // Content Security Policy - Allow GitHub API access
+          {
+            key: "Content-Security-Policy",
+            value:
+              "default-src 'self'; script-src 'self' 'unsafe-inline' 'unsafe-eval' https://www.googletagmanager.com https://www.google-analytics.com https://apis.google.com https://vercel.live https://vitals.vercel-insights.com; style-src 'self' 'unsafe-inline' https://fonts.googleapis.com; img-src 'self' data: blob: https:; font-src 'self' data: https://fonts.gstatic.com; connect-src 'self' https://api.github.com https://*.github.com https://fonts.gstatic.com https://*.google.com https://*.firebaseio.com https://*.googleapis.com https://*.firebase.com https://*.google-analytics.com https://vercel.live https://vitals.vercel-insights.com wss://*.firebaseio.com; frame-src 'self' https://vercel.live https://*.firebaseapp.com https://*.firebase.com https://apis.google.com; worker-src 'self' blob:; manifest-src 'self'; frame-ancestors 'none'; base-uri 'self'; form-action 'self';",
           },
           // HSTS - Strict Transport Security
           ...(isProd
