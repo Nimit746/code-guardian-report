@@ -56,17 +56,40 @@ export const ContributorsSection = () => {
           REPO_NAME
         );
 
-        setStats({
+        const newStats = {
           stars: repoInfo.stars || 0,
           forks: repoInfo.forks || 0,
           contributors: contributorsList.length || 0,
-        });
+        };
 
+        setStats(newStats);
         setContributors(contributorsList);
+
+        // Cache the successful response
+        localStorage.setItem("github_repo_stats", JSON.stringify(newStats));
+        localStorage.setItem(
+          "github_contributors",
+          JSON.stringify(contributorsList)
+        );
       } catch (error) {
         console.error("Failed to fetch GitHub data:", error);
-        // Fallback data if API fails (rate limits etc)
-        setStats({ stars: 12, forks: 4, contributors: 2 });
+        // Try to load from local storage
+        try {
+          const cachedStats = localStorage.getItem("github_repo_stats");
+          const cachedContributors = localStorage.getItem(
+            "github_contributors"
+          );
+
+          if (cachedStats && cachedContributors) {
+            setStats(JSON.parse(cachedStats));
+            setContributors(JSON.parse(cachedContributors));
+          } else {
+            // Fallback data if API fails and no cache
+            setStats({ stars: 12, forks: 4, contributors: 2 });
+          }
+        } catch (_e) {
+          setStats({ stars: 12, forks: 4, contributors: 2 });
+        }
       } finally {
         setLoading(false);
       }

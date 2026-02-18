@@ -15,6 +15,7 @@ import {
   deleteDoc,
 } from "firebase/firestore";
 import { enhancedNotifications } from "@/utils/enhancedToastNotifications";
+import { localStorageWebhookAdapter } from "./localStorageWebhookAdapter";
 
 import { logger } from "@/utils/logger";
 export type WebhookProvider = "github" | "gitlab" | "bitbucket";
@@ -157,13 +158,27 @@ class WebhookManagerClass {
 
       return webhook;
     } catch (error) {
-      logger.error("Failed to create webhook:", error);
-      enhancedNotifications.error("Webhook Creation Failed", {
-        message: error instanceof Error ? error.message : "Unknown error",
-        category: "system",
-        priority: "high",
-      });
-      throw error;
+      logger.error(
+        "Failed to create webhook, falling back to local storage:",
+        error
+      );
+
+      try {
+        const webhook = await localStorageWebhookAdapter.createWebhook(config);
+        enhancedNotifications.success("Webhook Created (Local)", {
+          message: `Monitoring enabled for ${config.repositoryName} (offline mode)`,
+          category: "system",
+          priority: "normal",
+        });
+        return webhook;
+      } catch (_localError) {
+        enhancedNotifications.error("Webhook Creation Failed", {
+          message: error instanceof Error ? error.message : "Unknown error",
+          category: "system",
+          priority: "high",
+        });
+        throw error;
+      }
     }
   }
 
@@ -186,8 +201,11 @@ class WebhookManagerClass {
           }) as WebhookConfig
       );
     } catch (error) {
-      logger.error("Failed to get webhooks:", error);
-      return [];
+      logger.error(
+        "Failed to get webhooks, falling back to local storage:",
+        error
+      );
+      return localStorageWebhookAdapter.getWebhooks(userId);
     }
   }
 
@@ -210,12 +228,24 @@ class WebhookManagerClass {
         priority: "low",
       });
     } catch (error) {
-      logger.error("Failed to update webhook:", error);
-      enhancedNotifications.error("Webhook Update Failed", {
-        category: "system",
-        priority: "high",
-      });
-      throw error;
+      logger.error(
+        "Failed to update webhook, falling back to local storage:",
+        error
+      );
+
+      try {
+        await localStorageWebhookAdapter.updateWebhook(webhookId, updates);
+        enhancedNotifications.success("Webhook Updated (Local)", {
+          category: "system",
+          priority: "low",
+        });
+      } catch (_localError) {
+        enhancedNotifications.error("Webhook Update Failed", {
+          category: "system",
+          priority: "high",
+        });
+        throw error;
+      }
     }
   }
 
@@ -242,12 +272,24 @@ class WebhookManagerClass {
         priority: "low",
       });
     } catch (error) {
-      logger.error("Failed to delete webhook:", error);
-      enhancedNotifications.error("Webhook Deletion Failed", {
-        category: "system",
-        priority: "high",
-      });
-      throw error;
+      logger.error(
+        "Failed to delete webhook, falling back to local storage:",
+        error
+      );
+
+      try {
+        await localStorageWebhookAdapter.deleteWebhook(webhookId);
+        enhancedNotifications.success("Webhook Deleted (Local)", {
+          category: "system",
+          priority: "low",
+        });
+      } catch (_localError) {
+        enhancedNotifications.error("Webhook Deletion Failed", {
+          category: "system",
+          priority: "high",
+        });
+        throw error;
+      }
     }
   }
 
@@ -376,8 +418,11 @@ class WebhookManagerClass {
         id: docRef.id,
       };
     } catch (error) {
-      logger.error("Failed to create monitoring rule:", error);
-      throw error;
+      logger.error(
+        "Failed to create monitoring rule, falling back to local storage:",
+        error
+      );
+      return localStorageWebhookAdapter.createMonitoringRule(rule);
     }
   }
 
@@ -400,8 +445,11 @@ class WebhookManagerClass {
           }) as MonitoringRule
       );
     } catch (error) {
-      logger.error("Failed to get monitoring rules:", error);
-      return [];
+      logger.error(
+        "Failed to get monitoring rules, falling back to local storage:",
+        error
+      );
+      return localStorageWebhookAdapter.getMonitoringRules(webhookId);
     }
   }
 
@@ -520,11 +568,11 @@ class WebhookManagerClass {
         lastEvent,
       };
     } catch (error) {
-      logger.error("Failed to get webhook stats:", error);
-      return {
-        totalEvents: 0,
-        eventsByType: {},
-      };
+      logger.error(
+        "Failed to get webhook stats, falling back to local storage:",
+        error
+      );
+      return localStorageWebhookAdapter.getWebhookStats(webhookId);
     }
   }
 }

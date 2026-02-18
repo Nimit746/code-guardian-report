@@ -12,7 +12,6 @@ import { ConnectionStatus } from "@/components/common/ConnectionStatus";
 import { FirestoreStatus } from "@/components/firebase/FirestoreStatus";
 import { FirestoreHealthChecker } from "@/components/firebase/FirestoreHealthChecker";
 import { FirestoreErrorNotification } from "@/components/firebase/FirestoreErrorNotification";
-import { PWAInstallPrompt } from "@/components/pwa/PWAInstallPrompt";
 import { PWAUpdateNotification } from "@/components/pwa/PWAUpdateNotification";
 import { OfflineIndicator } from "@/components/pwa/OfflineIndicator";
 import { PWAMobileBanner } from "@/components/pwa/PWAMobileBanner";
@@ -54,7 +53,6 @@ export function Providers({ children }: ProvidersProps) {
                 <FirestoreStatus />
                 <FirestoreHealthChecker />
                 <FirestoreErrorNotification />
-                <PWAInstallPrompt />
                 <PWAUpdateNotification />
                 <OfflineIndicator />
                 <PWAMobileBanner />

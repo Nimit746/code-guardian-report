@@ -10,9 +10,10 @@ import {
 } from "firebase/firestore";
 import { db } from "@/lib/firebase";
 import { SecurityIssue, AnalysisResults } from "@/hooks/useAnalysis";
+import { localStorageGitHubAdapter } from "./localStorageGitHubAdapter";
 
 import { logger } from "@/utils/logger";
-interface Repository {
+export interface Repository {
   id: string;
   name: string;
   fullName: string;
@@ -27,7 +28,7 @@ interface Repository {
   forks: number;
 }
 
-interface AnalysisRecord {
+export interface AnalysisRecord {
   id: string;
   repositoryName: string;
   repositoryUrl: string;
@@ -39,13 +40,13 @@ interface AnalysisRecord {
   language: string;
 }
 
-interface SecurityTrend {
+export interface SecurityTrend {
   date: string;
   score: number;
   issues: number;
 }
 
-interface LanguageDistribution {
+export interface LanguageDistribution {
   language: string;
   count: number;
   percentage: number;
@@ -102,14 +103,17 @@ export class GitHubAnalysisStorageService {
         errorMessage.includes("insufficient permissions")
       ) {
         logger.debug(
-          "Firebase read requires authentication. Using offline mode with empty data."
+          "Firebase read requires authentication. Using offline mode."
         );
       } else {
-        logger.error("Error fetching repositories:", error);
+        logger.error(
+          "Error fetching repositories, falling back to local storage:",
+          error
+        );
       }
 
-      // Return empty array gracefully for offline/unauthenticated mode
-      return [];
+      // Fallback to local storage
+      return localStorageGitHubAdapter.getUserRepositories(userId);
     }
   }
 
@@ -158,14 +162,17 @@ export class GitHubAnalysisStorageService {
         errorMessage.includes("insufficient permissions")
       ) {
         logger.debug(
-          "Firebase read requires authentication. Using offline mode with empty data."
+          "Firebase read requires authentication. Using offline mode."
         );
       } else {
-        logger.error("Error fetching analysis history:", error);
+        logger.error(
+          "Error fetching analysis history, falling back to local storage:",
+          error
+        );
       }
 
-      // Return empty array gracefully for offline/unauthenticated mode
-      return [];
+      // Fallback to local storage
+      return localStorageGitHubAdapter.getAnalysisHistory(userId);
     }
   }
 
@@ -231,22 +238,11 @@ export class GitHubAnalysisStorageService {
         },
       };
     } catch (error) {
-      logger.error("Error fetching security trends:", error);
-      logger.warn("Using offline mode - Firebase unavailable.");
-      // Return empty data in production
-      if (process.env.NODE_ENV === "production") {
-        return {
-          trends: [],
-          stats: {
-            averageScore: 0,
-            totalIssues: 0,
-            criticalIssues: 0,
-            trend: "stable" as const,
-          },
-        };
-      }
-      // Only return mock data in development
-      return this.getMockSecurityTrends();
+      logger.error(
+        "Error fetching security trends, falling back to local storage:",
+        error
+      );
+      return localStorageGitHubAdapter.getSecurityTrends(userId);
     }
   }
 
@@ -318,22 +314,11 @@ export class GitHubAnalysisStorageService {
         },
       };
     } catch (error) {
-      logger.error("Error fetching activity analytics:", error);
-      logger.warn("Using offline mode - Firebase unavailable.");
-      // Return empty data in production
-      if (process.env.NODE_ENV === "production") {
-        return {
-          languageDistribution: [],
-          stats: {
-            totalAnalyses: 0,
-            averageDuration: 0,
-            mostAnalyzedRepo: "",
-            mostCommonLanguage: "",
-          },
-        };
-      }
-      // Only return mock data in development
-      return this.getMockActivityAnalytics();
+      logger.error(
+        "Error fetching activity analytics, falling back to local storage:",
+        error
+      );
+      return localStorageGitHubAdapter.getActivityAnalytics(userId);
     }
   }
 
@@ -392,9 +377,22 @@ export class GitHubAnalysisStorageService {
         },
         { merge: true }
       );
+
+      // Also store to local storage for offline access/backup
+      await localStorageGitHubAdapter.storeRepositoryAnalysis(
+        userId,
+        repositoryData
+      );
     } catch (error) {
-      logger.error("Error storing repository analysis:", error);
-      throw error;
+      logger.error(
+        "Error storing repository analysis, falling back to local storage:",
+        error
+      );
+      // Fallback to local storage
+      await localStorageGitHubAdapter.storeRepositoryAnalysis(
+        userId,
+        repositoryData
+      );
     }
   }
 
@@ -524,15 +522,14 @@ export class GitHubAnalysisStorageService {
         metrics: undefined,
       }));
     } catch (error) {
-      logger.error("Error fetching detailed analysis results:", error);
-
-      // Return empty array in production
-      if (process.env.NODE_ENV === "production") {
-        return [];
-      }
-
-      // Return mock data in development
-      return this.getMockDetailedResults();
+      logger.error(
+        "Error fetching detailed analysis results, falling back to local storage:",
+        error
+      );
+      return localStorageGitHubAdapter.getDetailedAnalysisResults(
+        userId,
+        repositoryName
+      );
     }
   }
 
@@ -597,162 +594,5 @@ export class GitHubAnalysisStorageService {
         issuesByCategory: {},
       };
     }
-  }
-
-  // Mock data for development with detailed issues
-  private getMockDetailedResults(): Array<{
-    repositoryName: string;
-    language: string;
-    issues: SecurityIssue[];
-    analyzedAt: Date;
-    metrics?: {
-      totalLines?: number;
-      totalFiles?: number;
-      codeComplexity?: number;
-      maintainabilityIndex?: number;
-      testCoverage?: number;
-      duplicatedLines?: number;
-    };
-  }> {
-    return [
-      {
-        repositoryName: "code-guardian",
-        language: "TypeScript",
-        issues: [
-          {
-            id: "mock-issue-1",
-            line: 45,
-            tool: "security-scanner",
-            type: "sql-injection",
-            category: "Injection",
-            message: "Potential SQL injection vulnerability detected",
-            severity: "High",
-            confidence: 85,
-            recommendation:
-              "Use parameterized queries instead of string concatenation",
-            remediation: {
-              description:
-                "Replace string concatenation with prepared statements",
-              effort: "Medium",
-              priority: 2,
-            },
-            filename: "src/database/queries.ts",
-            riskRating: "High",
-            impact: "Database compromise",
-            likelihood: "Medium",
-            cweId: "CWE-89",
-            owaspCategory: "A03:2021 – Injection",
-          },
-          {
-            id: "mock-issue-2",
-            line: 120,
-            tool: "security-scanner",
-            type: "xss",
-            category: "Cross-Site Scripting",
-            message: "Unescaped user input in template",
-            severity: "Medium",
-            confidence: 90,
-            recommendation: "Sanitize user input before rendering",
-            remediation: {
-              description:
-                "Use HTML escaping or a templating library with auto-escaping",
-              effort: "Low",
-              priority: 3,
-            },
-            filename: "src/components/UserProfile.tsx",
-            riskRating: "Medium",
-            impact: "Session hijacking",
-            likelihood: "Medium",
-            cweId: "CWE-79",
-            owaspCategory: "A03:2021 – Injection",
-          },
-        ],
-        analyzedAt: new Date(Date.now() - 86400000),
-        metrics: {
-          totalLines: 5000,
-          totalFiles: 45,
-          codeComplexity: 12,
-          maintainabilityIndex: 75,
-          testCoverage: 68,
-          duplicatedLines: 150,
-        },
-      },
-      {
-        repositoryName: "api-gateway",
-        language: "JavaScript",
-        issues: [
-          {
-            id: "mock-issue-3",
-            line: 78,
-            tool: "security-scanner",
-            type: "hardcoded-credentials",
-            category: "Sensitive Data Exposure",
-            message: "Hardcoded API key detected",
-            severity: "Critical",
-            confidence: 95,
-            recommendation: "Move secrets to environment variables",
-            remediation: {
-              description: "Use environment variables or a secrets manager",
-              effort: "Low",
-              priority: 1,
-            },
-            filename: "src/config/api.js",
-            riskRating: "Critical",
-            impact: "Credential theft",
-            likelihood: "High",
-            cweId: "CWE-798",
-            owaspCategory: "A02:2021 – Cryptographic Failures",
-          },
-        ],
-        analyzedAt: new Date(Date.now() - 172800000),
-        metrics: {
-          totalLines: 3200,
-          totalFiles: 28,
-          codeComplexity: 18,
-          maintainabilityIndex: 62,
-          testCoverage: 45,
-          duplicatedLines: 280,
-        },
-      },
-    ];
-  }
-
-  // Mock data methods for offline/fallback scenarios
-  private getMockSecurityTrends() {
-    return {
-      trends: [
-        {
-          date: new Date(Date.now() - 86400000).toISOString(),
-          score: 8.5,
-          issues: 3,
-        },
-        {
-          date: new Date(Date.now() - 172800000).toISOString(),
-          score: 7.2,
-          issues: 8,
-        },
-      ],
-      stats: {
-        averageScore: 7.85,
-        totalIssues: 11,
-        criticalIssues: 2,
-        trend: "up" as const,
-      },
-    };
-  }
-
-  private getMockActivityAnalytics() {
-    return {
-      languageDistribution: [
-        { language: "TypeScript", count: 1, percentage: 50 },
-        { language: "JavaScript", count: 1, percentage: 50 },
-      ],
-      stats: {
-        totalAnalyses: 2,
-        averageDuration: 54,
-        mostAnalyzedRepo: "code-guardian",
-        mostCommonLanguage: "TypeScript",
-      },
-    };
   }
 }
