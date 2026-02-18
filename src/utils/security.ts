@@ -54,6 +54,9 @@ export const CSP = {
       "generativelanguage.googleapis.com",
       "localhost",
       "127.0.0.1",
+      "api.github.com",
+      "raw.githubusercontent.com",
+      "codeload.github.com",
     ];
 
     try {
