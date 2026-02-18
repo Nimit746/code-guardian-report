@@ -12,6 +12,7 @@ const isProd = process.env.NODE_ENV === "production";
 
 const nextConfig: NextConfig = {
   // Enable React strict mode for better development experience
+  // Trigger new deployment for CSP update
   reactStrictMode: true,
 
   // Enable standalone output for Docker deployments
