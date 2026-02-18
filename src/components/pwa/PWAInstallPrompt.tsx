@@ -3,7 +3,7 @@
 import React from "react";
 import { Button } from "../ui/button";
 import { Card } from "../ui/card";
-import { Download, X, Smartphone, Monitor } from "lucide-react";
+import { Download, X } from "lucide-react";
 import { usePWA } from "../../hooks/usePWA";
 
 export function PWAInstallPrompt() {
@@ -35,17 +35,6 @@ export function PWAInstallPrompt() {
           <p className="mb-3 text-xs text-white/90">
             Get faster access and work offline with our app
           </p>
-
-          <div className="mb-3 flex items-center gap-2">
-            <div className="flex items-center gap-1 text-xs">
-              <Smartphone className="h-3 w-3" />
-              <span>Mobile</span>
-            </div>
-            <div className="flex items-center gap-1 text-xs">
-              <Monitor className="h-3 w-3" />
-              <span>Desktop</span>
-            </div>
-          </div>
 
           <div className="flex gap-2">
             <Button
