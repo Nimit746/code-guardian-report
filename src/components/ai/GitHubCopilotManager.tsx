@@ -309,7 +309,7 @@ export function GitHubCopilotManager() {
 
             <div className="space-y-6">
               <Select
-                value={modelSelection.selectedModelId}
+                value={modelSelection.selectedModelId ?? undefined}
                 onValueChange={handleModelSelect}
               >
                 <SelectTrigger className="h-12 w-full border-slate-700 bg-[#0F1629] text-slate-200">

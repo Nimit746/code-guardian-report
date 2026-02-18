@@ -258,7 +258,6 @@ export const AIKeyManager: React.FC = () => {
     key: "",
     name: "",
   });
-  const [_showKeys, setShowKeys] = useState<Record<string, boolean>>({});
   const [isAdding, setIsAdding] = useState(false);
   const [errors, setErrors] = useState<Record<string, string>>({});
   const [isSubmitting, setIsSubmitting] = useState(false);
@@ -336,10 +335,6 @@ export const AIKeyManager: React.FC = () => {
   const removeAPIKey = (id: string) => {
     const updatedKeys = apiKeys.filter((key) => key.id !== id);
     setApiKeys(updatedKeys);
-  };
-
-  const _toggleKeyVisibility = (id: string) => {
-    setShowKeys((prev) => ({ ...prev, [id]: !prev[id] }));
   };
 
   const getProviderInfo = (providerId: string) => {
