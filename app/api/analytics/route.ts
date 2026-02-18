@@ -69,9 +69,9 @@ export async function POST(request: NextRequest) {
 
 function handleSingleAnalytics(body: AnalyticsPayload, request: NextRequest) {
   // Validate required fields
-  if (!body.userId || !body.event) {
+  if (!body.event) {
     return NextResponse.json(
-      { error: "Missing required fields: userId and event are required" },
+      { error: "Missing required fields: event is required" },
       { status: 400 }
     );
   }
@@ -79,7 +79,7 @@ function handleSingleAnalytics(body: AnalyticsPayload, request: NextRequest) {
   // Create analytics record
   const analyticsRecord = {
     id: `analytics-${Date.now()}-${Math.random().toString(36).substr(2, 9)}`,
-    userId: body.userId,
+    userId: body.userId || "anonymous",
     event: body.event,
     properties: body.properties || {},
     sessionId: body.sessionId || null,
@@ -105,10 +105,10 @@ function handleBatchAnalytics(
   request: NextRequest
 ) {
   // Validate required fields
-  if (!body.userId || !body.events?.length) {
+  if (!body.events?.length) {
     return NextResponse.json(
       {
-        error: "Missing required fields: userId and events array are required",
+        error: "Missing required fields: events array are required",
       },
       { status: 400 }
     );
@@ -125,7 +125,7 @@ function handleBatchAnalytics(
   const batchId = `batch-${Date.now()}-${Math.random().toString(36).substr(2, 9)}`;
   const processedEvents = body.events.map((event, index) => ({
     id: `${batchId}-${index}`,
-    userId: body.userId,
+    userId: body.userId || "anonymous",
     event: event.event,
     properties: event.properties || {},
     sessionId: body.sessionId || null,
