@@ -10,6 +10,7 @@ import { ChangelogPageLayout } from "./ChangelogPageLayout";
 import { Tabs, TabsContent, TabsList, TabsTrigger } from "@/components/ui/tabs";
 import { Card, CardContent, CardHeader, CardTitle } from "@/components/ui/card";
 import { Badge } from "@/components/ui/badge";
+import { Button } from "@/components/ui/button";
 import {
   Loader2,
   Tag,
@@ -123,6 +124,11 @@ export default function ChangelogPageClient() {
   const [commits, setCommits] = useState<GitHubCommit[]>([]);
   const [loading, setLoading] = useState(true);
   const [activeTab, setActiveTab] = useState("releases");
+  const [visibleCommits, setVisibleCommits] = useState(20);
+
+  const handleShowMoreCommits = () => {
+    setVisibleCommits((prev) => prev + 20);
+  };
 
   useEffect(() => {
     const fetchData = async () => {
@@ -268,7 +274,7 @@ export default function ChangelogPageClient() {
           className="animate-in fade-in-50 slide-in-from-bottom-2 mt-0 duration-500"
         >
           <div className="border-border/40 relative ml-4 space-y-8 border-l pb-4">
-            {commits.map((commit, _index) => (
+            {commits.slice(0, visibleCommits).map((commit, _index) => (
               <div key={commit.sha} className="relative pl-8">
                 <div className="border-primary bg-background absolute top-1.5 -left-1.5 h-3 w-3 rounded-full border" />
                 <div className="flex flex-col gap-2">
@@ -309,6 +315,13 @@ export default function ChangelogPageClient() {
               </div>
             ))}
           </div>
+          {visibleCommits < commits.length && (
+            <div className="mt-8 flex justify-center">
+              <Button onClick={handleShowMoreCommits} variant="outline">
+                Show More Commits
+              </Button>
+            </div>
+          )}
         </TabsContent>
       </Tabs>
     </ChangelogPageLayout>
