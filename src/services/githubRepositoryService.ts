@@ -249,12 +249,13 @@ class GitHubRepositoryService {
    */
   private async fetchWithRetry(
     url: string,
+    options?: RequestInit,
     retries = 3,
     baseDelay = 1000
   ): Promise<Response> {
     for (let i = 0; i < retries; i++) {
       try {
-        const response = await fetch(url);
+        const response = await fetch(url, options);
 
         // Return if success or client error (except 429)
         if (response.ok || (response.status < 500 && response.status !== 429)) {
@@ -383,7 +384,42 @@ class GitHubRepositoryService {
   }
 
   /**
+   * Download repository via server-side proxy to avoid CORS issues
+   */
+  private async downloadViaProxy(
+    owner: string,
+    repo: string,
+    branch: string,
+    useArchive: boolean = false
+  ): Promise<Response> {
+    const proxyUrl = "/api/github/download";
+
+    const response = await fetch(proxyUrl, {
+      method: "POST",
+      headers: {
+        "Content-Type": "application/json",
+      },
+      body: JSON.stringify({
+        owner,
+        repo,
+        branch,
+        useArchive,
+      }),
+    });
+
+    if (!response.ok) {
+      const errorData = await response.json().catch(() => ({}));
+      throw new Error(
+        errorData.error || `Server proxy failed: ${response.statusText}`
+      );
+    }
+
+    return response;
+  }
+
+  /**
    * Download repository and create a zip file for analysis
+   * Uses server-side proxy to avoid CORS issues
    */
   async downloadRepositoryAsZip(
     owner: string,
@@ -392,81 +428,163 @@ class GitHubRepositoryService {
     onProgress?: (progress: number, message: string) => void
   ): Promise<File> {
     try {
-      onProgress?.(10, "Fetching repository information...");
+      onProgress?.(10, "Fetching repository archive...");
 
       // Validate repository exists
       await this.getRepositoryInfo(owner, repo);
 
-      onProgress?.(20, "Loading repository structure...");
+      onProgress?.(20, "Downloading via secure proxy...");
 
-      // Get file tree
-      const tree = await this.getRepositoryTree(owner, repo, branch);
+      // Try downloading via server-side proxy (avoids CORS issues)
+      let response: Response;
 
-      // Filter only code files
-      const codeFiles = tree.filter(
-        (item: any) => item.type === "blob" && this.shouldIncludeFile(item.path)
-      );
+      try {
+        // First try: Use GitHub API zipball via proxy
+        response = await this.downloadViaProxy(owner, repo, branch, false);
+        logger.info(`Successfully downloaded via API proxy`);
+      } catch (error) {
+        logger.warn(`API proxy failed: ${error}. Trying archive proxy...`);
 
-      if (codeFiles.length === 0) {
-        throw new Error("No code files found in repository");
+        try {
+          // Second try: Use public archive URL via proxy
+          response = await this.downloadViaProxy(owner, repo, branch, true);
+          logger.info(`Successfully downloaded via archive proxy`);
+        } catch (secondError) {
+          logger.error(
+            `Both proxy methods failed. API: ${error instanceof Error ? error.message : String(error)}, Archive: ${secondError instanceof Error ? secondError.message : String(secondError)}`
+          );
+
+          // Last resort: Try direct download (may fail due to CORS)
+          logger.warn("Attempting direct download as last resort...");
+          try {
+            const directUrl = `https://github.com/${owner}/${repo}/archive/refs/heads/${branch}.zip`;
+            response = await this.fetchWithRetry(directUrl, {}, 2, 1000);
+            logger.info("Direct download succeeded (unexpected but good!)");
+          } catch (thirdError) {
+            // All methods failed, throw comprehensive error
+            throw new Error(
+              `Failed to download repository '${owner}/${repo}' branch '${branch}'. ` +
+                `API proxy: ${error instanceof Error ? error.message : String(error)}. ` +
+                `Archive proxy: ${secondError instanceof Error ? secondError.message : String(secondError)}. ` +
+                `Direct download: ${thirdError instanceof Error ? thirdError.message : String(thirdError)}. ` +
+                `Please verify the repository exists and the branch name is correct.`
+            );
+          }
+        }
       }
 
-      onProgress?.(30, `Found ${codeFiles.length} code files. Downloading...`);
-
-      // Create zip file
-      const zip = new JSZip();
-      const totalFiles = codeFiles.length;
-      let downloadedFiles = 0;
-
-      // Download files in batches to avoid rate limiting
-      const batchSize = 5;
-      for (let i = 0; i < codeFiles.length; i += batchSize) {
-        const batch = codeFiles.slice(i, i + batchSize);
-
-        await Promise.all(
-          batch.map(async (file: any) => {
-            try {
-              const content = await this.getFileContent(
-                owner,
-                repo,
-                file.path,
-                branch
-              );
-              zip.file(file.path, content);
-              downloadedFiles++;
-
-              // Throttle progress updates: every 5 files or last file
-              if (downloadedFiles % 5 === 0 || downloadedFiles === totalFiles) {
-                const progress =
-                  30 + Math.floor((downloadedFiles / totalFiles) * 60);
-                onProgress?.(
-                  progress,
-                  `Downloaded ${downloadedFiles}/${totalFiles} files...`
-                );
-              }
-            } catch (error) {
-              logger.warn(`Failed to download ${file.path}:`, error);
-            }
-          })
+      if (!response.ok) {
+        throw new Error(
+          `Failed to download repository archive: ${response.statusText}`
         );
       }
 
-      onProgress?.(90, "Creating zip file...");
+      // Track download progress if possible
+      const contentLength = response.headers.get("content-length");
+      const total = contentLength ? parseInt(contentLength, 10) : 0;
+      let loaded = 0;
 
-      // Generate zip file
-      let lastZipProgress = 0;
-      const zipBlob = await zip.generateAsync({ type: "blob" }, (metadata) => {
-        const now = Date.now();
-        // Throttle zip progress updates
-        if (now - lastZipProgress > 100 || metadata.percent === 100) {
-          const progress = 90 + Math.floor(metadata.percent / 10);
-          onProgress?.(
-            progress,
-            `Compressing files... ${Math.floor(metadata.percent)}%`
-          );
-          lastZipProgress = now;
+      const reader = response.body?.getReader();
+      const chunks: BlobPart[] = [];
+
+      if (reader) {
+        while (true) {
+          const { done, value } = await reader.read();
+          if (done) break;
+
+          if (value) {
+            chunks.push(value);
+            loaded += value.length;
+
+            if (total > 0) {
+              const progress = 10 + Math.floor((loaded / total) * 40); // 10% to 50%
+              onProgress?.(progress, "Downloading repository...");
+            } else {
+              // If no content-length, just show indeterminate progress
+              onProgress?.(
+                30,
+                `Downloading repository... (${this.formatBytes(loaded)})`
+              );
+            }
+          }
         }
-      });
+      } else {
+        // Fallback if no reader available
+        const blob = await response.blob();
+        chunks.push(new Uint8Array(await blob.arrayBuffer()));
+      }
+
+      onProgress?.(50, "Processing repository archive...");
+
+      // Combine chunks into a single blob
+      const combinedBlob = new Blob(chunks);
+
+      // Load the zip file
+      const originalZip = await JSZip.loadAsync(combinedBlob);
+
+      onProgress?.(60, "Filtering code files...");
+
+      // Create a new zip containing only code files
+      const newZip = new JSZip();
+      let fileCount = 0;
+
+      // Get all files and filter them
+      const files = Object.keys(originalZip.files);
+      const totalFiles = files.length;
+      let processedFiles = 0;
+
+      for (const filePath of files) {
+        const file = originalZip.files[filePath];
+        processedFiles++;
+
+        // Skip directories
+        if (file.dir) continue;
+
+        // Skip non-code files
+        if (!this.shouldIncludeFile(filePath)) continue;
+
+        // Add to new zip
+        // We can copy the content directly without re-compressing immediately
+        // but JSZip will handle re-compression on generate
+        const content = await file.async("blob");
+
+        // Remove the top-level directory prefix that GitHub adds (e.g., "owner-repo-hash/")
+        // so the analysis sees a clean structure
+        const cleanPath = filePath.substring(filePath.indexOf("/") + 1);
+        if (cleanPath) {
+          newZip.file(cleanPath, content);
+          fileCount++;
+        }
+
+        if (processedFiles % 100 === 0) {
+          const progress = 60 + Math.floor((processedFiles / totalFiles) * 20); // 60% to 80%
+          onProgress?.(progress, "Filtering files...");
+        }
+      }
+
+      if (fileCount === 0) {
+        throw new Error("No code files found in repository");
+      }
+
+      onProgress?.(80, `Found ${fileCount} code files. Re-packaging...`);
+
+      // Generate new zip file
+      let lastZipProgress = 0;
+      const zipBlob = await newZip.generateAsync(
+        { type: "blob" },
+        (metadata) => {
+          const now = Date.now();
+          // Throttle zip progress updates
+          if (now - lastZipProgress > 100 || metadata.percent === 100) {
+            const progress = 80 + Math.floor(metadata.percent / 5); // 80% to 100%
+            onProgress?.(
+              progress,
+              `Compressing optimized archive... ${Math.floor(metadata.percent)}%`
+            );
+            lastZipProgress = now;
+          }
+        }
+      );
 
       onProgress?.(100, "Repository ready for analysis!");
 
