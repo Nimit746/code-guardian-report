@@ -53,6 +53,10 @@ export interface AnalysisProgress {
   estimatedTimeRemaining: number; // in seconds
   elapsedTime: number; // in seconds
   percentComplete: number;
+  currentFile: string | null; // Name of file currently being analyzed
+  filesProcessed: number; // Number of files analyzed so far
+  totalFiles: number; // Total number of files to analyze
+  filesRemaining: number; // Calculated remaining files
 }
 
 export const useFileUpload = ({
@@ -83,6 +87,10 @@ export const useFileUpload = ({
     estimatedTimeRemaining: 0,
     elapsedTime: 0,
     percentComplete: 0,
+    currentFile: null,
+    filesProcessed: 0,
+    totalFiles: 0,
+    filesRemaining: 0,
   });
   const analysisStartTime = useRef<number>(0);
   const estimatedTotalTime = useRef<number>(0);
@@ -130,6 +138,10 @@ export const useFileUpload = ({
       estimatedTimeRemaining: Math.round(totalTime),
       elapsedTime: 0,
       percentComplete: 2, // Start with small visible progress
+      currentFile: null,
+      filesProcessed: 0,
+      totalFiles: 0,
+      filesRemaining: 0,
     });
 
     let lastPhaseNumber = 1;
@@ -187,14 +199,15 @@ export const useFileUpload = ({
       // Progress percentage: ensure visible progress, cap at 95% until complete
       const percentComplete = Math.max(2, Math.min(95, progressRatio * 100));
 
-      setAnalysisProgress({
+      setAnalysisProgress((prev) => ({
+        ...prev,
         phase: currentPhase.name,
         phaseNumber,
         totalPhases: phases.length,
         estimatedTimeRemaining: Math.round(remaining),
         elapsedTime: Math.round(elapsed),
         percentComplete: Math.round(percentComplete),
-      });
+      }));
     }, 200);
   }, []);
 
@@ -245,7 +258,20 @@ export const useFileUpload = ({
         }
 
         try {
-          const analysisResults = await analysisEngine.analyzeCodebase(file);
+          const analysisResults = await analysisEngine.analyzeCodebase(
+            file,
+            (progressUpdate) => {
+              // Update file-level progress
+              setAnalysisProgress((prev) => ({
+                ...prev,
+                currentFile: progressUpdate.currentFile,
+                filesProcessed: progressUpdate.filesProcessed,
+                totalFiles: progressUpdate.totalFiles,
+                filesRemaining:
+                  progressUpdate.totalFiles - progressUpdate.filesProcessed,
+              }));
+            }
+          );
 
           // Check if cancelled after analysis
           if (signal.aborted) {
@@ -503,6 +529,10 @@ export const useFileUpload = ({
       estimatedTimeRemaining: 0,
       elapsedTime: 0,
       percentComplete: 0,
+      currentFile: null,
+      filesProcessed: 0,
+      totalFiles: 0,
+      filesRemaining: 0,
     });
   };
 
@@ -522,6 +552,10 @@ export const useFileUpload = ({
       estimatedTimeRemaining: 0,
       elapsedTime: 0,
       percentComplete: 0,
+      currentFile: null,
+      filesProcessed: 0,
+      totalFiles: 0,
+      filesRemaining: 0,
     });
   }, [stopProgressTracking]);
 

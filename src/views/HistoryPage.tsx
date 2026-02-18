@@ -9,15 +9,7 @@ import {
   CardTitle,
 } from "@/components/ui/card";
 import { Button } from "@/components/ui/button";
-import { Input } from "@/components/ui/input";
 import { Skeleton } from "@/components/ui/skeleton";
-import {
-  Select,
-  SelectContent,
-  SelectItem,
-  SelectTrigger,
-  SelectValue,
-} from "@/components/ui/select";
 import {
   Dialog,
   DialogContent,
@@ -28,7 +20,6 @@ import {
 } from "@/components/ui/dialog";
 import {
   History,
-  Filter,
   Download,
   Trash2,
   Eye,
@@ -38,11 +29,10 @@ import {
   Shield,
   User,
   Database,
-  Search,
-  X,
   AlertTriangle,
   Terminal,
 } from "lucide-react";
+import { AnalysisFilters } from "@/components/history/AnalysisFilters";
 import {
   firebaseAnalysisStorage,
   type FirebaseAnalysisData,
@@ -50,6 +40,7 @@ import {
 import { useAuth } from "@/lib/auth-context";
 import { useToast } from "@/hooks/use-toast";
 
+import { DetectionResult } from "../services/detection/languageDetectionService";
 import { logger } from "@/utils/logger";
 interface HistoryPageProps {
   onAnalysisSelect?: (analysis: FirebaseAnalysisData) => void;
@@ -76,6 +67,10 @@ export const HistoryPage = ({
   const [selectedSeverity, setSelectedSeverity] = useState<
     "all" | "critical" | "high" | "medium" | "low"
   >("all");
+  const [selectedLanguage, setSelectedLanguage] = useState("all");
+  const [dateRange, setDateRange] = useState({ from: "", to: "" });
+  const [sortBy, setSortBy] = useState("date");
+  const [sortOrder, setSortOrder] = useState<"asc" | "desc">("desc");
   const [analysisToDelete, setAnalysisToDelete] = useState<string | null>(null);
   const [isDeleteOpen, setIsDeleteOpen] = useState(false);
 
@@ -167,8 +162,17 @@ export const HistoryPage = ({
   }, [currentUser?.uid]);
 
   useEffect(() => {
-    filterHistory();
-  }, [analysisHistory, searchTerm, selectedTimeRange, selectedSeverity]);
+    filterAndSortHistory();
+  }, [
+    analysisHistory,
+    searchTerm,
+    selectedTimeRange,
+    selectedSeverity,
+    selectedLanguage,
+    dateRange,
+    sortBy,
+    sortOrder,
+  ]);
 
   const loadUserStats = async () => {
     if (!currentUser?.uid) return;
@@ -181,24 +185,45 @@ export const HistoryPage = ({
     }
   };
 
-  const filterHistory = () => {
+  const getAnalysisDate = (t: unknown): Date => {
+    type FireTimestamp = { toDate?: () => Date; seconds?: number };
+    const ts = t as FireTimestamp | Date | string | number | null | undefined;
+
+    if (ts && typeof (ts as FireTimestamp).toDate === "function") {
+      return (ts as FireTimestamp).toDate!();
+    } else if (ts && typeof (ts as FireTimestamp).seconds === "number") {
+      return new Date((ts as FireTimestamp).seconds! * 1000);
+    } else if (ts instanceof Date) {
+      return ts as Date;
+    } else if (typeof ts === "string" || typeof ts === "number") {
+      return new Date(ts);
+    } else {
+      return new Date();
+    }
+  };
+
+  const filterAndSortHistory = () => {
     let filtered = [...analysisHistory];
 
+    // 1. Search Filter
     if (searchTerm.trim()) {
+      const lowerSearch = searchTerm.toLowerCase();
       filtered = filtered.filter(
-        (analysis) =>
-          analysis.fileName.toLowerCase().includes(searchTerm.toLowerCase()) ||
-          analysis.tags?.some((tag) =>
-            tag.toLowerCase().includes(searchTerm.toLowerCase())
-          ) ||
+        (analysis: FirebaseAnalysisData) =>
+          analysis.fileName.toLowerCase().includes(lowerSearch) ||
+          analysis.tags?.some((tag) => tag.toLowerCase().includes(lowerSearch)) ||
           analysis.results.issues?.some(
             (issue) =>
-              issue.type.toLowerCase().includes(searchTerm.toLowerCase()) ||
-              issue.message?.toLowerCase().includes(searchTerm.toLowerCase())
-          )
+              issue.type.toLowerCase().includes(lowerSearch) ||
+              issue.message?.toLowerCase().includes(lowerSearch)
+          ) ||
+          (analysis.results.languageDetection as DetectionResult | undefined)?.primaryLanguage?.name
+            .toLowerCase()
+            .includes(lowerSearch)
       );
     }
 
+    // 2. Time Range Filter
     if (selectedTimeRange !== "all") {
       const now = new Date();
       const timeRanges = {
@@ -207,39 +232,71 @@ export const HistoryPage = ({
         year: 365 * 24 * 60 * 60 * 1000,
       } as const;
 
-      const cutoff = new Date(now.getTime() - timeRanges[selectedTimeRange]);
+      const cutoff = new Date(now.getTime() - timeRanges[selectedTimeRange as keyof typeof timeRanges]);
       filtered = filtered.filter((analysis) => {
-        type FireTimestamp = { toDate?: () => Date; seconds?: number };
-        const t = analysis.createdAt as
-          | FireTimestamp
-          | Date
-          | string
-          | number
-          | null
-          | undefined;
-        let analysisDate: Date;
-        if (t && typeof (t as FireTimestamp).toDate === "function") {
-          analysisDate = (t as FireTimestamp).toDate!();
-        } else if (t && typeof (t as FireTimestamp).seconds === "number") {
-          analysisDate = new Date((t as FireTimestamp).seconds! * 1000);
-        } else if (t instanceof Date) {
-          analysisDate = t as Date;
-        } else if (typeof t === "string" || typeof t === "number") {
-          analysisDate = new Date(t);
-        } else {
-          analysisDate = new Date();
-        }
+        const analysisDate = getAnalysisDate(analysis.createdAt);
         return analysisDate >= cutoff;
       });
     }
 
+    // 3. Custom Date Range Filter
+    if (dateRange.from || dateRange.to) {
+      filtered = filtered.filter((analysis) => {
+        const analysisDate = getAnalysisDate(analysis.createdAt);
+        if (dateRange.from && analysisDate < new Date(dateRange.from))
+          return false;
+        if (dateRange.to) {
+          const toDate = new Date(dateRange.to);
+          toDate.setHours(23, 59, 59, 999);
+          if (analysisDate > toDate) return false;
+        }
+        return true;
+      });
+    }
+
+    // 4. Severity Filter
     if (selectedSeverity !== "all") {
-      filtered = filtered.filter((analysis) =>
+      filtered = filtered.filter((analysis: FirebaseAnalysisData) =>
         analysis.results.issues?.some(
           (issue) => issue.severity.toLowerCase() === selectedSeverity
         )
       );
     }
+
+    // 5. Language Filter
+    if (selectedLanguage !== "all") {
+      filtered = filtered.filter(
+        (analysis: FirebaseAnalysisData) =>
+          (analysis.results.languageDetection as DetectionResult | undefined)?.primaryLanguage?.name.toLowerCase() ===
+          selectedLanguage.toLowerCase()
+      );
+    }
+
+    // 6. Sorting
+    filtered.sort((a, b) => {
+      let comparison = 0;
+
+      switch (sortBy) {
+        case "date":
+          comparison =
+            getAnalysisDate(b.createdAt).getTime() -
+            getAnalysisDate(a.createdAt).getTime();
+          break;
+        case "score":
+          comparison =
+            (b.results.summary?.securityScore || 0) -
+            (a.results.summary?.securityScore || 0);
+          break;
+        case "issues":
+          comparison =
+            (b.results.issues?.length || 0) - (a.results.issues?.length || 0);
+          break;
+        default:
+          comparison = 0;
+      }
+
+      return sortOrder === "desc" ? comparison : -comparison;
+    });
 
     setFilteredHistory(filtered);
   };
@@ -526,93 +583,71 @@ export const HistoryPage = ({
         <div className="rounded-lg border border-white/10 bg-black/40 p-4 shadow-sm backdrop-blur-sm sm:p-6">
           <div className="mb-5 flex items-center justify-between gap-3">
             <div className="flex items-center gap-3">
-              <Filter className="text-primary h-5 w-5" />
+              <Terminal className="text-primary h-5 w-5" />
               <span className="font-mono text-sm font-semibold tracking-wider text-white uppercase">
                 System Filters
               </span>
             </div>
-            {(searchTerm ||
-              selectedTimeRange !== "all" ||
-              selectedSeverity !== "all") && (
+            <Button
+              onClick={loadAnalysisHistory}
+              className="text-primary border-primary/20 hover:border-primary/50 h-8 border bg-white/5 px-3 font-mono text-xs shadow-[0_0_10px_-4px_rgba(16,185,129,0.2)] hover:bg-white/10"
+            >
+              <Terminal className="mr-2 h-3.5 w-3.5" />
+              REFRESH
+            </Button>
+          </div>
+
+          {/* Time Range quick filter */}
+          <div className="mb-4 flex flex-wrap gap-2">
+            {(["all", "week", "month", "year"] as const).map((range) => (
               <Button
+                key={range}
                 variant="ghost"
                 size="sm"
-                onClick={() => {
-                  setSearchTerm("");
-                  setSelectedTimeRange("all");
-                  setSelectedSeverity("all");
-                }}
-                className="h-8 font-mono text-xs text-slate-400 hover:bg-white/10 hover:text-white"
+                onClick={() => setSelectedTimeRange(range)}
+                className={`h-7 border font-mono text-xs uppercase ${selectedTimeRange === range
+                  ? "border-primary/50 bg-primary/10 text-primary"
+                  : "border-white/10 bg-black/20 text-slate-400 hover:bg-white/10 hover:text-white"
+                  }`}
               >
-                <X className="mr-2 h-3 w-3" />
-                RESET_FILTERS
+                {range === "all" ? "All Time" : range === "week" ? "Past Week" : range === "month" ? "Past Month" : "Past Year"}
               </Button>
-            )}
+            ))}
           </div>
-          <div className="grid grid-cols-1 gap-4 sm:grid-cols-2 lg:grid-cols-12">
-            <div className="relative lg:col-span-4">
-              <Search className="absolute top-1/2 left-3 h-4 w-4 -translate-y-1/2 text-slate-500" />
-              <Input
-                placeholder="Search logs..."
-                value={searchTerm}
-                onChange={(e) => setSearchTerm(e.target.value)}
-                className="focus:border-primary/50 focus:ring-primary/20 h-10 w-full border-white/10 bg-black/20 pl-9 text-slate-200 placeholder:text-slate-600"
-              />
-            </div>
 
-            <div className="lg:col-span-3">
-              <Select
-                value={selectedTimeRange}
-                onValueChange={(value) =>
-                  setSelectedTimeRange(
-                    value as "all" | "week" | "month" | "year"
-                  )
-                }
-              >
-                <SelectTrigger className="focus:border-primary/50 focus:ring-primary/20 h-10 border-white/10 bg-black/20 text-slate-200">
-                  <SelectValue placeholder="Time Range" />
-                </SelectTrigger>
-                <SelectContent className="border-white/10 bg-black/90 text-slate-200">
-                  <SelectItem value="all">All Time</SelectItem>
-                  <SelectItem value="week">Past Week</SelectItem>
-                  <SelectItem value="month">Past Month</SelectItem>
-                  <SelectItem value="year">Past Year</SelectItem>
-                </SelectContent>
-              </Select>
-            </div>
-
-            <div className="lg:col-span-3">
-              <Select
-                value={selectedSeverity}
-                onValueChange={(value) =>
-                  setSelectedSeverity(
-                    value as "all" | "critical" | "high" | "medium" | "low"
-                  )
-                }
-              >
-                <SelectTrigger className="focus:border-primary/50 focus:ring-primary/20 h-10 border-white/10 bg-black/20 text-slate-200">
-                  <SelectValue placeholder="Severity" />
-                </SelectTrigger>
-                <SelectContent className="border-white/10 bg-black/90 text-slate-200">
-                  <SelectItem value="all">All Severities</SelectItem>
-                  <SelectItem value="critical">Critical</SelectItem>
-                  <SelectItem value="high">High</SelectItem>
-                  <SelectItem value="medium">Medium</SelectItem>
-                  <SelectItem value="low">Low</SelectItem>
-                </SelectContent>
-              </Select>
-            </div>
-
-            <div className="lg:col-span-2">
-              <Button
-                onClick={loadAnalysisHistory}
-                className="text-primary border-primary/20 hover:border-primary/50 h-10 w-full border bg-white/5 shadow-[0_0_10px_-4px_rgba(16,185,129,0.2)] hover:bg-white/10"
-              >
-                <Terminal className="mr-2 h-4 w-4" />
-                REFRESH
-              </Button>
-            </div>
-          </div>
+          <AnalysisFilters
+            searchTerm={searchTerm}
+            onSearchChange={setSearchTerm}
+            selectedSeverity={selectedSeverity}
+            onSeverityChange={(val) =>
+              setSelectedSeverity(val as "all" | "critical" | "high" | "medium" | "low")
+            }
+            selectedLanguage={selectedLanguage}
+            onLanguageChange={setSelectedLanguage}
+            dateRange={dateRange}
+            onDateRangeChange={setDateRange}
+            sortBy={sortBy}
+            onSortByChange={setSortBy}
+            sortOrder={sortOrder}
+            onSortOrderChange={setSortOrder}
+            onClearFilters={() => {
+              setSearchTerm("");
+              setSelectedSeverity("all");
+              setSelectedLanguage("all");
+              setDateRange({ from: "", to: "" });
+              setSortBy("date");
+              setSortOrder("desc");
+            }}
+            availableLanguages={Array.from(new Set(
+              analysisHistory
+                .map(
+                  (a: FirebaseAnalysisData) =>
+                    (a.results.languageDetection as DetectionResult | undefined)
+                      ?.primaryLanguage?.name
+                )
+                .filter((lang: string | undefined): lang is string => typeof lang === "string" && lang.length > 0)
+            )) as string[]}
+          />
         </div>
 
         {/* Results List */}
@@ -675,11 +710,10 @@ export const HistoryPage = ({
                             {analysis.fileName}
                           </h3>
                           <span
-                            className={`rounded border px-2 py-0.5 text-[10px] font-bold tracking-wider uppercase ${
-                              analysis.syncStatus === "synced"
-                                ? "border-emerald-500/30 bg-emerald-500/10 text-emerald-400"
-                                : "border-amber-500/30 bg-amber-500/10 text-amber-400"
-                            }`}
+                            className={`rounded border px-2 py-0.5 text-[10px] font-bold tracking-wider uppercase ${analysis.syncStatus === "synced"
+                              ? "border-emerald-500/30 bg-emerald-500/10 text-emerald-400"
+                              : "border-amber-500/30 bg-amber-500/10 text-amber-400"
+                              }`}
                           >
                             {analysis.syncStatus}
                           </span>
@@ -743,14 +777,14 @@ export const HistoryPage = ({
                                   if (count === 0) return null;
 
                                   const severityStyles: Record<string, string> =
-                                    {
-                                      critical:
-                                        "border-red-500/30 bg-red-500/10 text-red-400",
-                                      high: "border-orange-500/30 bg-orange-500/10 text-orange-400",
-                                      medium:
-                                        "border-amber-500/30 bg-amber-500/10 text-amber-400",
-                                      low: "border-emerald-500/30 bg-emerald-500/10 text-emerald-400",
-                                    };
+                                  {
+                                    critical:
+                                      "border-red-500/30 bg-red-500/10 text-red-400",
+                                    high: "border-orange-500/30 bg-orange-500/10 text-orange-400",
+                                    medium:
+                                      "border-amber-500/30 bg-amber-500/10 text-amber-400",
+                                    low: "border-emerald-500/30 bg-emerald-500/10 text-emerald-400",
+                                  };
 
                                   return (
                                     <span
