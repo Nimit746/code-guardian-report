@@ -315,7 +315,7 @@ export function GitHubCopilotManager() {
                 <SelectTrigger className="h-12 w-full border-slate-700 bg-[#0F1629] text-slate-200">
                   <SelectValue placeholder="Select a model" />
                 </SelectTrigger>
-                <SelectContent className="border-slate-700 bg-[#0F1629] text-slate-200">
+                <SelectContent className="max-h-[300px] border-slate-700 bg-[#0F1629] text-slate-200">
                   {modelSelection.availableModels.map((model) => (
                     <SelectItem
                       key={model.id}
