@@ -146,22 +146,7 @@ class Logger {
   }
 
   private sendToErrorTracking(_entry: LogEntry): void {
-    // Production error tracking integration
-    // Uncomment and configure one of the following:
-    // Sentry Integration:
-    // if (typeof Sentry !== 'undefined') {
-    //   Sentry.captureException(new Error(_entry.message), {
-    //     extra: { ..._entry }
-    //   });
-    // }
-    // Vercel Analytics Error Tracking:
-    // This is automatically handled by @vercel/analytics
-    // Custom error endpoint:
-    // fetch('/api/errors', {
-    //   method: 'POST',
-    //   headers: { 'Content-Type': 'application/json' },
-    //   body: JSON.stringify(_entry)
-    // }).catch(() => {});
+    // Error tracking integration placeholder
   }
 
   /**
@@ -169,11 +154,6 @@ class Logger {
    */
   flush(): void {
     if (this.logBuffer.length === 0) return;
-
-    // In production, could send buffered logs to analytics
-    // const logs = [...this.logBuffer];
-    // this.logBuffer = [];
-    // fetch('/api/logs', { ... })
   }
 
   /**

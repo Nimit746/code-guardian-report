@@ -27,11 +27,6 @@ export const useErrorHandler = () => {
           ? `Failed to ${context.action}`
           : undefined,
       });
-
-      // In production, send to error tracking service
-      if (process.env.NODE_ENV === "production") {
-        // Example: Sentry.captureException(error, { contexts: { custom: context } });
-      }
     },
     []
   );

@@ -1,6 +1,7 @@
 import JSZip from "jszip";
 
 import { logger } from "@/utils/logger";
+import { repositoryCacheService } from "./storage/repositoryCacheService";
 export interface GitHubRepoInfo {
   owner: string;
   repo: string;
@@ -36,6 +37,7 @@ export interface GitHubUserInfo {
 class GitHubRepositoryService {
   private readonly baseUrl = "https://api.github.com";
   private readonly rawContentUrl = "https://raw.githubusercontent.com";
+  private cacheInitialized = false;
 
   /**
    * Parse GitHub URL to extract owner, repo, and branch
@@ -418,16 +420,54 @@ class GitHubRepositoryService {
   }
 
   /**
+   * Initialize client-side cache
+   */
+  private async initializeCache(): Promise<void> {
+    if (this.cacheInitialized) return;
+
+    try {
+      await repositoryCacheService.init();
+      this.cacheInitialized = true;
+      logger.info("Client-side repository cache initialized");
+    } catch (error) {
+      logger.warn(
+        "Failed to initialize cache, will proceed without caching:",
+        error
+      );
+      this.cacheInitialized = false;
+    }
+  }
+
+  /**
    * Download repository and create a zip file for analysis
    * Uses server-side proxy to avoid CORS issues
+   * Implements client-side caching for improved performance
    */
   async downloadRepositoryAsZip(
     owner: string,
     repo: string,
     branch: string = "main",
-    onProgress?: (progress: number, message: string) => void
+    onProgress?: (progress: number, message: string) => void,
+    bypassCache: boolean = false
   ): Promise<File> {
     try {
+      // Initialize cache if not already done
+      await this.initializeCache();
+
+      // Check client-side cache first
+      if (!bypassCache && this.cacheInitialized) {
+        onProgress?.(5, "Checking cache...");
+        const cached = await repositoryCacheService.get(owner, repo, branch);
+
+        if (cached) {
+          logger.info(`Using cached repository ${owner}/${repo}@${branch}`);
+          onProgress?.(100, "Loaded from cache!");
+
+          const fileName = `${owner}-${repo}-${branch}.zip`;
+          return new File([cached.data], fileName, { type: "application/zip" });
+        }
+      }
+
       onProgress?.(10, "Fetching repository archive...");
 
       // Validate repository exists
@@ -585,6 +625,21 @@ class GitHubRepositoryService {
           }
         }
       );
+
+      onProgress?.(95, "Repository ready for analysis!");
+
+      // Store in client-side cache for future use
+      if (this.cacheInitialized && !bypassCache) {
+        try {
+          await repositoryCacheService.set(owner, repo, branch, zipBlob);
+          logger.info(
+            `Cached repository ${owner}/${repo}@${branch} for future use`
+          );
+        } catch (cacheError) {
+          logger.warn("Failed to cache repository:", cacheError);
+          // Continue without caching
+        }
+      }
 
       onProgress?.(100, "Repository ready for analysis!");
 

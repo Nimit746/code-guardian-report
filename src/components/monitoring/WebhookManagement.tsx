@@ -22,8 +22,6 @@ import { Badge } from "@/components/ui/badge";
 import { Input } from "@/components/ui/input";
 import { Label } from "@/components/ui/label";
 import { Switch } from "@/components/ui/switch";
-// Tabs components reserved for future use
-// import { Tabs, TabsContent, TabsList, TabsTrigger } from "@/components/ui/tabs";
 import {
   Dialog,
   DialogContent,
@@ -172,7 +170,7 @@ const WebhookManagement: React.FC = () => {
         <Card>
           <CardContent className="pt-6">
             <div className="text-center">
-              <Webhook className="mx-auto mb-2 h-8 w-8 text-primary" />
+              <Webhook className="text-primary mx-auto mb-2 h-8 w-8" />
               <div className="text-3xl font-bold">{webhooks.length}</div>
               <div className="text-muted-foreground text-sm">
                 Active Webhooks

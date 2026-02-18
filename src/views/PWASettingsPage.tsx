@@ -1,6 +1,7 @@
 "use client";
 
 import { PWADashboard } from "../components/pwa/PWADashboard";
+import { RepositoryCacheManager } from "../components/github/RepositoryCacheManager";
 import { PageLayout } from "../components/layout/PageLayout";
 import { Home, Settings, Smartphone, ChevronRight } from "lucide-react";
 import { useNavigation } from "@/lib/navigation-context";
@@ -10,7 +11,7 @@ export function PWASettingsPage() {
   const { navigateTo } = useNavigation();
 
   return (
-    <div className="relative min-h-screen overflow-hidden bg-background">
+    <div className="bg-background relative min-h-screen overflow-hidden">
       <AnimatedBackground />
       <PageLayout>
         <div className="relative z-10 container mx-auto px-4 py-8">
@@ -48,7 +49,10 @@ export function PWASettingsPage() {
           </div>
 
           {}
-          <PWADashboard />
+          <div className="space-y-8">
+            <PWADashboard />
+            <RepositoryCacheManager />
+          </div>
         </div>
       </PageLayout>
     </div>
