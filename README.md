@@ -914,6 +914,7 @@ This will install all required dependencies including:
 - Development tools (ESLint, Prettier, testing frameworks)
 
 **Expected output:**
+
 ```
 added ~1250 packages in 2-3m
 (Actual package count and time may vary)
@@ -927,6 +928,7 @@ npm run dev
 ```
 
 **Expected output:**
+
 ```
 ▲ Next.js 16.1.5
 - Local:        http://localhost:3000
@@ -936,6 +938,7 @@ npm run dev
 🎉 **Success!** The application is now running at http://localhost:3000
 
 You can now:
+
 - Upload code files for analysis (drag & drop or file picker)
 - Analyze entire ZIP archives
 - View detailed security reports
@@ -963,6 +966,7 @@ cp .env.example .env.local
 ##### Option 2: Use Default Behavior
 
 Simply run `npm run dev` without any `.env.local` file. The app will:
+
 - Use mock Firebase services (no cloud features needed)
 - Run all code analysis locally in your browser
 - Work completely offline as a Progressive Web App
@@ -972,6 +976,7 @@ Simply run `npm run dev` without any `.env.local` file. The app will:
 **When to configure:** If you want to analyze GitHub repositories directly without cloning them.
 
 **Steps:**
+
 1. Go to GitHub Settings → Developer settings → OAuth Apps
 2. Click "New OAuth App"
 3. Configure:
@@ -1005,6 +1010,7 @@ GEMINI_API_KEY=AI...your_key_here
 ```
 
 **Get API keys:**
+
 - OpenAI: https://platform.openai.com/api-keys
 - Anthropic: https://console.anthropic.com/
 - Google Gemini: https://makersuite.google.com/app/apikey
@@ -1014,6 +1020,7 @@ GEMINI_API_KEY=AI...your_key_here
 **When to configure:** If you want cloud storage, authentication, and cross-device sync.
 
 **Steps:**
+
 1. Create a Firebase project at https://console.firebase.google.com/
 2. Go to Project Settings → General → Your apps
 3. Click "Add app" → Web (</>) icon
@@ -1030,6 +1037,7 @@ NEXT_PUBLIC_FIREBASE_APP_ID=1:123456789:web:abc123
 ```
 
 **Enable Firebase services (optional):**
+
 ```bash
 # Install Firebase CLI
 npm install -g firebase-tools
@@ -1080,6 +1088,7 @@ npm run dev:turbo
 ```
 
 **Access the application:**
+
 - **Local:** http://localhost:3000
 - **Network:** Will be displayed in terminal (e.g., http://192.168.1.100:3000)
 
@@ -1209,6 +1218,7 @@ PORT=3001 npm run start
 **Problem:** Permission denied when installing packages
 
 **Solution:**
+
 ```bash
 # On Linux/Mac - DO NOT use sudo with npm
 # Instead, fix npm permissions:
@@ -1228,6 +1238,7 @@ source ~/.bashrc
 **Problem:** `Error: listen EADDRINUSE: address already in use :::3000`
 
 **Solution:**
+
 ```bash
 # Option 1: Kill process using port 3000
 # On Mac/Linux:
@@ -1246,6 +1257,7 @@ PORT=3001 npm run dev
 **Problem:** `Module not found: Can't resolve 'package-name'`
 
 **Solution:**
+
 ```bash
 # Clean install dependencies
 rm -rf node_modules package-lock.json
@@ -1257,6 +1269,7 @@ npm install
 **Problem:** Type errors in terminal or IDE
 
 **Solution:**
+
 ```bash
 # Run type check to see all errors
 npm run type-check
@@ -1271,6 +1284,7 @@ npm run type-check
 **Problem:** White screen or error boundary in browser
 
 **Solution:**
+
 ```bash
 # 1. Check browser console for errors (F12)
 # 2. Clear Next.js cache
@@ -1290,6 +1304,7 @@ node --version  # Should be 22.x
 **Problem:** Firebase or GitHub integration shows errors
 
 **Solution:**
+
 ```bash
 # For Firebase - Check if all variables are set in .env.local
 # The app works without Firebase - it uses mock services in development
@@ -1305,6 +1320,7 @@ node --version  # Should be 22.x
 **Problem:** `FATAL ERROR: Reached heap limit Allocation failed`
 
 **Solution:**
+
 ```bash
 # Increase Node.js memory limit
 export NODE_OPTIONS="--max-old-space-size=4096"
@@ -1319,6 +1335,7 @@ npm run build
 **Problem:** Formatting or linting errors
 
 **Solution:**
+
 ```bash
 # Auto-fix most issues
 npm run lint:fix
@@ -5438,32 +5455,6 @@ Special thanks to all contributors who have helped make Code Guardian Report bet
 
 <h3 style="color: white; margin-bottom: 20px;">**Repository Statistics**</h3>
 
-  
-  
-  
-  
-  
-  
-  
-  
-  
-  
-  
-  
-  
-  
-  
-  
-  
-  
-  
-  
-  
-  
-  
-  
-  
-  
   <table style="margin: 0 auto;">
     <tr>
       <td align="center" style="padding: 15px;">
@@ -5510,7 +5501,7 @@ Special thanks to all contributors who have helped make Code Guardian Report bet
           <span style="background: rgba(255,255,255,0.2); padding: 2px 6px; border-radius: 8px; font-size: 10px; color: white; margin: 2px;">386 commits</span>
         </div>
       </td>
-    
+
 
       <td align="center" style="padding: 20px;">
         <img src="https://avatars.githubusercontent.com/u/65916846?v=4" width="100" height="100" style="border-radius: 50%; border: 4px solid white; box-shadow: 0 6px 16px rgba(0,0,0,0.4);"/>
@@ -5522,7 +5513,7 @@ Special thanks to all contributors who have helped make Code Guardian Report bet
           <span style="background: rgba(255,255,255,0.2); padding: 2px 6px; border-radius: 8px; font-size: 10px; color: white; margin: 2px;">44 commits</span>
         </div>
       </td>
-    
+
 
       <td align="center" style="padding: 20px;">
         <img src="https://avatars.githubusercontent.com/in/15368?v=4" width="100" height="100" style="border-radius: 50%; border: 4px solid white; box-shadow: 0 6px 16px rgba(0,0,0,0.4);"/>
@@ -5534,7 +5525,7 @@ Special thanks to all contributors who have helped make Code Guardian Report bet
           <span style="background: rgba(255,255,255,0.2); padding: 2px 6px; border-radius: 8px; font-size: 10px; color: white; margin: 2px;">31 commits</span>
         </div>
       </td>
-    
+
 
       <td align="center" style="padding: 20px;">
         <img src="https://avatars.githubusercontent.com/u/186174121?v=4" width="100" height="100" style="border-radius: 50%; border: 4px solid white; box-shadow: 0 6px 16px rgba(0,0,0,0.4);"/>
@@ -5546,8 +5537,9 @@ Special thanks to all contributors who have helped make Code Guardian Report bet
           <span style="background: rgba(255,255,255,0.2); padding: 2px 6px; border-radius: 8px; font-size: 10px; color: white; margin: 2px;">5 commits</span>
         </div>
       </td>
-    
+
     </tr>
+
 <tr>
 
       <td align="center" style="padding: 20px;">
@@ -5560,7 +5552,7 @@ Special thanks to all contributors who have helped make Code Guardian Report bet
           <span style="background: rgba(255,255,255,0.2); padding: 2px 6px; border-radius: 8px; font-size: 10px; color: white; margin: 2px;">4 commits</span>
         </div>
       </td>
-    
+
 
       <td align="center" style="padding: 20px;">
         <img src="https://avatars.githubusercontent.com/u/164482191?v=4" width="100" height="100" style="border-radius: 50%; border: 4px solid white; box-shadow: 0 6px 16px rgba(0,0,0,0.4);"/>
@@ -5572,7 +5564,7 @@ Special thanks to all contributors who have helped make Code Guardian Report bet
           <span style="background: rgba(255,255,255,0.2); padding: 2px 6px; border-radius: 8px; font-size: 10px; color: white; margin: 2px;">4 commits</span>
         </div>
       </td>
-    
+
 
       <td align="center" style="padding: 20px;">
         <img src="https://avatars.githubusercontent.com/u/176881379?v=4" width="100" height="100" style="border-radius: 50%; border: 4px solid white; box-shadow: 0 6px 16px rgba(0,0,0,0.4);"/>
@@ -5584,7 +5576,7 @@ Special thanks to all contributors who have helped make Code Guardian Report bet
           <span style="background: rgba(255,255,255,0.2); padding: 2px 6px; border-radius: 8px; font-size: 10px; color: white; margin: 2px;">3 commits</span>
         </div>
       </td>
-    
+
 
       <td align="center" style="padding: 20px;">
         <img src="https://avatars.githubusercontent.com/in/1143301?v=4" width="100" height="100" style="border-radius: 50%; border: 4px solid white; box-shadow: 0 6px 16px rgba(0,0,0,0.4);"/>
@@ -5596,7 +5588,7 @@ Special thanks to all contributors who have helped make Code Guardian Report bet
           <span style="background: rgba(255,255,255,0.2); padding: 2px 6px; border-radius: 8px; font-size: 10px; color: white; margin: 2px;">3 commits</span>
         </div>
       </td>
-    
+
     </tr>
 
 </table>
