@@ -46,6 +46,7 @@ const getContentSecurityPolicy = (nonce: string) => {
       "https://apis.google.com",
       "https://vercel.live",
       "https://vitals.vercel-insights.com",
+      "https://va.vercel-scripts.com",
     ],
     "style-src": [
       "'self'",
@@ -66,6 +67,7 @@ const getContentSecurityPolicy = (nonce: string) => {
       "https://*.google-analytics.com",
       "https://vercel.live",
       "https://vitals.vercel-insights.com",
+      "https://va.vercel-insights.com",
       "wss://*.firebaseio.com",
     ],
     "frame-src": [

@@ -24,6 +24,8 @@ interface ProvidersProps {
 }
 
 export function Providers({ children }: ProvidersProps) {
+  const isProd = process.env.NODE_ENV === "production";
+
   return (
     <ThemeProvider
       attribute="class"
@@ -58,8 +60,8 @@ export function Providers({ children }: ProvidersProps) {
                 <PWAMobileBanner />
                 {children}
                 <ScrollToTop />
-                <Analytics />
-                <SpeedInsights />
+                {isProd ? <Analytics /> : null}
+                {isProd ? <SpeedInsights /> : null}
               </SmoothScrollProvider>
             </TooltipProvider>
           </ErrorBoundary>
