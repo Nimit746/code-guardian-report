@@ -245,6 +245,46 @@ class GitHubRepositoryService {
   }
 
   /**
+   * Helper to fetch with retry logic
+   */
+  private async fetchWithRetry(
+    url: string,
+    retries = 3,
+    baseDelay = 1000
+  ): Promise<Response> {
+    for (let i = 0; i < retries; i++) {
+      try {
+        const response = await fetch(url);
+
+        // Return if success or client error (except 429)
+        if (response.ok || (response.status < 500 && response.status !== 429)) {
+          return response;
+        }
+
+        // Calculate delay for retry
+        const delay =
+          response.status === 429
+            ? 5000 * (i + 1) // Longer wait for rate limits
+            : baseDelay * Math.pow(2, i); // Exponential backoff for server errors
+
+        if (i < retries - 1) {
+          logger.warn(
+            `Fetch failed with status ${response.status}. Retrying in ${delay}ms...`
+          );
+          await new Promise((resolve) => setTimeout(resolve, delay));
+        }
+      } catch (error) {
+        if (i === retries - 1) throw error;
+
+        const delay = baseDelay * Math.pow(2, i);
+        logger.warn(`Fetch network error: ${error}. Retrying in ${delay}ms...`);
+        await new Promise((resolve) => setTimeout(resolve, delay));
+      }
+    }
+    throw new Error(`Failed to fetch ${url} after ${retries} retries`);
+  }
+
+  /**
    * Get file content from repository
    */
   async getFileContent(
@@ -254,9 +294,16 @@ class GitHubRepositoryService {
     branch: string = "main"
   ): Promise<string> {
     try {
-      const response = await fetch(
-        `${this.rawContentUrl}/${owner}/${repo}/${branch}/${path}`
-      );
+      // Properly encode URL components to handle special characters
+      const encodedOwner = encodeURIComponent(owner);
+      const encodedRepo = encodeURIComponent(repo);
+      // Branch and path segments should be encoded individually, preserving slashes
+      const encodedBranch = branch.split("/").map(encodeURIComponent).join("/");
+      const encodedPath = path.split("/").map(encodeURIComponent).join("/");
+
+      const url = `${this.rawContentUrl}/${encodedOwner}/${encodedRepo}/${encodedBranch}/${encodedPath}`;
+
+      const response = await this.fetchWithRetry(url);
 
       if (!response.ok) {
         throw new Error(`Failed to fetch file: ${response.statusText}`);
@@ -372,7 +419,7 @@ class GitHubRepositoryService {
       let downloadedFiles = 0;
 
       // Download files in batches to avoid rate limiting
-      const batchSize = 10;
+      const batchSize = 5;
       for (let i = 0; i < codeFiles.length; i += batchSize) {
         const batch = codeFiles.slice(i, i + batchSize);
 
